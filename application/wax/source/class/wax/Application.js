@@ -1,0 +1,202 @@
+/* ************************************************************************
+
+   Copyright:
+
+   License:
+
+   Authors:
+
+************************************************************************ */
+
+/**
+ * This is the main application class of your custom application "wax"
+ *
+ * @asset(wax/*)
+ */
+qx.Class.define("wax.Application",
+{
+  extend : qx.application.Standalone,
+
+
+
+  /*
+  *****************************************************************************
+     MEMBERS
+  *****************************************************************************
+  */
+
+  members :
+  {
+    _northBox : null,
+    
+    _westBox : null,
+    
+    /**
+     * This method contains the initial application code and gets called 
+     * during startup of the application
+     * 
+     * @lint ignoreDeprecated(alert)
+     */
+    main : function()
+    {
+      // Call super class
+      this.base(arguments);
+
+      // Enable logging in debug variant
+      if (qx.core.Environment.get("qx.debug"))
+      {
+        // support native logging capabilities, e.g. Firebug for Firefox
+        qx.log.appender.Native;
+        // support additional cross-browser console. Press F7 to toggle visibility
+        qx.log.appender.Console;
+      }
+
+      /*
+      -------------------------------------------------------------------------
+        Below is your actual application code...
+      -------------------------------------------------------------------------
+      */
+
+
+      // ==================================
+      // ========  SCAFFOLDING   ==========
+      // ==================================
+      
+      // Center Scroll area to fit all content
+      var scroll = new qx.ui.container.Scroll();
+      scroll.set({padding: 0, margin: 0, contentPadding: [0,0,0,0]});
+      
+      // West Scroll area to fit all menu items
+      var scrollwest = new qx.ui.container.Scroll();
+      scrollwest.set({width: 160, padding: 0, margin: 0, contentPadding: [0,0,0,0]});
+      
+      // approot is the application root
+      var approot = this.getRoot();
+      //approot.getContentElement().setStyle("touch-action", "none");
+      //document.body.style.TouchAction = "none";
+      // App's Dock 
+      var appcompdock = new qx.ui.container.Composite(new qx.ui.layout.Dock(0, 0)).set({backgroundColor: "transparent"});
+      // Dock's north canvas
+      var northhbox = this._northBox = new qx.ui.container.Composite(new qx.ui.layout.Canvas()).set({backgroundColor: "white", decorator : "topheader"});
+      // Dock east's VBox
+      var westbox = this._westBox = new qx.ui.container.Composite(new qx.ui.layout.VBox().set({spacing: 6})).set({backgroundColor: "white", padding: [10,10,10,10], decorator : "leftside"});
+      // Dock center's VBox
+      //var centerbox = new qx.ui.container.Composite(new qx.ui.layout.VBox().set({spacing: 10})).set({backgroundColor: "white", padding: [10,26]});
+      var centerbox = new qx.ui.container.Composite(new qx.ui.layout.Flow()).set({backgroundColor: "white", padding: [10,26]});
+      
+      var label1 = new qx.ui.basic.Label("GroupBox1").set({font: "control-header", decorator : "border-me"});
+      var label2 = new qx.ui.basic.Label("GroupBox2").set({font: "control-header", decorator : "border-me"});
+      var label3 = new qx.ui.basic.Label("GroupBox3").set({font: "control-header", decorator : "border-me"});
+      var label4 = new qx.ui.basic.Label("Table to List").set({font: "control-header", decorator : "border-me"});
+      centerbox.add(label1);
+      centerbox.add(label2);
+      centerbox.add(label3);
+      centerbox.add(label4);
+      
+      var menutogglebutton = new qx.ui.form.ToggleButton("Menu", "wax/test.png").set({padding: [2,4], allowGrowX: false, focusable: false, value: true});
+      
+      var menuimage = new qx.ui.basic.Image("wax/round-menu-24px.svg");
+      menuimage.setWidth(36);
+      menuimage.setHeight(36);
+      menuimage.setScale(true);
+      menuimage.setPadding(4);
+      var accountimage = new qx.ui.basic.Image("wax/round-account_circle-24px.svg");
+      accountimage.setWidth(36);
+      accountimage.setHeight(36);
+      accountimage.setScale(true);
+      accountimage.setPadding(4);
+      accountimage.setAlignX("right");
+
+      if (qx.core.Environment.get("device.type") == "mobile"){
+      	menutogglebutton.setValue(false);
+      	scrollwest.setVisibility("excluded");
+      }
+      	
+     /* menutogglebutton.addListener("changeValue", function(e) {
+        //this.debug("Checked: " + e.getData());
+        if (e.getData())
+        	scrollwest.setVisibility("visible");     	
+        else
+        	scrollwest.setVisibility("excluded");
+      }, this);*/
+
+      northhbox.add(menuimage, {left:0, top:0});
+      //northhbox.add(new qx.ui.basic.Label("wax app - its time"));
+      northhbox.add(accountimage, {right:0, top:0});
+           
+      appcompdock.add(northhbox, {edge:"north"});
+
+      // Add centerbox to center scroll area
+      scroll.add(centerbox);
+
+      // Left hand Widget list
+      var datawl = [
+      	{type: "header", label:"<b>Header</b>", bgcolor:"yellow", txtcolor:"black"},
+      	{type: "link", label:"Link 1"},
+      	{type: "link", label:"Link 2"},
+      	{type: "link", label:"Link 3"}
+      ];
+
+      // Populate westBox with content
+      var wllen = datawl.length;
+      for (var wl = 0; wl < wllen; wl++) {
+        var lbldatawl = new qx.ui.basic.Label(datawl[wl].label); 
+      	if (datawl[wl].type == "header")
+      		lbldatawl.set({anonymous: true, focusable: false, selectable: false, rich: true, backgroundColor: datawl[wl].bgcolor, textColor: datawl[wl].txtcolor});
+      	else
+      		lbldatawl.getContentElement().setAttribute("onclick", "location='#" + datawl[wl].label + "'");
+      	westbox.add(lbldatawl);
+      }
+     
+      scrollwest.add(westbox);
+
+      appcompdock.add(scrollwest, {edge:"west"});
+      
+      appcompdock.add(scroll, {edge:"center"});
+      
+      approot.add(appcompdock, {edge: 0});
+
+      // ====================================
+      // =======  MediaQuery code  ========== 
+      // ====================================
+
+      var fadeinleft = {duration: 500, timing: "ease", origin: "left top", keyFrames : {
+        0: {opacity: 0, left: "-160px", width : "0%"},
+        100: {opacity: 1, left: "0px", width : "100%"}
+        }};
+
+     var mq1 = new qx.bom.MediaQuery("screen and (min-width: 480px)");
+
+     mq1.on("change", function(e){
+       if(mq1.isMatching()){
+         //headertext.setValue("<h1>IsMatching</h1>");
+         scrollwest.setVisibility("visible"); 
+        // menutogglebutton.setValue(true);
+       }
+       else {
+         //headertext.setValue("<h1>NotMatching</h1>");
+         scrollwest.setVisibility("excluded");
+         //menutogglebutton.setValue(false); 
+       }
+     });
+     if (mq1.isMatching())
+       //headertext.setValue("<h1>IsMatching</h1>");
+       scrollwest.setVisibility("visible"); 
+       //menutogglebutton.setValue(true);
+     else
+       //headertext.setValue("<h1>NotMatching</h1>");
+       scrollwest.setVisibility("excluded"); 
+       //menutogglebutton.setValue(false);
+
+      /*scrollwest.addListener("appear", function(e) {
+        var domtable = scrollwest.getContentElement().getDomElement();
+        qx.bom.element.Animation.animate(domtable, fadeinleft);
+      }, this);*/
+
+      /*scrollwest.addListener("disappear", function(e) {
+        var domtable = scrollwest.getContentElement().getDomElement();
+        qx.bom.element.Animation.animateReverse(domtable, fadeinleft);
+      }, this);*/
+    }
+  }
+});
