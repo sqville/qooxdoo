@@ -80,18 +80,30 @@ qx.Class.define("wax.Application",
       var northhbox = this._northBox = new qx.ui.container.Composite(new qx.ui.layout.Canvas()).set({backgroundColor: "white", decorator : "topheader"});
       // Dock east's VBox
       var westbox = this._westBox = new qx.ui.container.Composite(new qx.ui.layout.VBox().set({spacing: 6})).set({backgroundColor: "white", padding: [10,10,10,10], decorator : "leftside"});
-      // Dock center's VBox
-      //var centerbox = new qx.ui.container.Composite(new qx.ui.layout.VBox().set({spacing: 10})).set({backgroundColor: "white", padding: [10,26]});
-      var centerbox = new qx.ui.container.Composite(new qx.ui.layout.Flow()).set({backgroundColor: "white", padding: [10,26]});
-      
+
+      // ========================  THE STACK  ======================================================
+      var centerbox = new qx.ui.container.Stack().set({backgroundColor: "white", padding: [10,26]});
+
+      // First page or form that is added to === THE STACK ===
+      var mainpage = new qx.ui.container.Composite(new qx.ui.layout.Flow());
       var label1 = new qx.ui.basic.Label("GroupBox1").set({font: "control-header", decorator : "border-me"});
       var label2 = new qx.ui.basic.Label("GroupBox2").set({font: "control-header", decorator : "border-me"});
       var label3 = new qx.ui.basic.Label("GroupBox3").set({font: "control-header", decorator : "border-me"});
       var label4 = new qx.ui.basic.Label("Table to List").set({font: "control-header", decorator : "border-me"});
-      centerbox.add(label1);
-      centerbox.add(label2);
-      centerbox.add(label3);
-      centerbox.add(label4);
+      mainpage.add(label1);
+      mainpage.add(label2);
+      mainpage.add(label3);
+      mainpage.add(label4);
+
+      // Second page or form that is added to === THE STACK ===
+      var secpage = new qx.ui.container.Composite(new qx.ui.layout.Flow());
+      var label5 = new qx.ui.basic.Label("Part of Second Page").set({font: "control-header", decorator : "border-me"});
+      secpage.add(label5);
+
+      // Third page or form that is added to === THE STACK ===
+      var terpage = new qx.ui.container.Composite(new qx.ui.layout.Flow());
+      var label6 = new qx.ui.basic.Label("Part of Third Page").set({font: "control-header", decorator : "border-me"});
+      terpage.add(label6);
       
       var menutogglebutton = new qx.ui.form.ToggleButton("Menu", "wax/test.png").set({padding: [2,4], allowGrowX: false, focusable: false, value: true});
       
@@ -125,6 +137,12 @@ qx.Class.define("wax.Application",
       northhbox.add(accountimage, {right:0, top:0});
            
       appcompdock.add(northhbox, {edge:"north"});
+      
+      // Add pages to === THE STACK ===
+      centerbox.add(mainpage);
+      centerbox.add(secpage);
+      centerbox.add(terpage);
+      centerbox.setSelection([mainpage]);
 
       // Add centerbox to center scroll area
       scroll.add(centerbox);
@@ -132,21 +150,44 @@ qx.Class.define("wax.Application",
       // Left hand Widget list
       var datawl = [
       	{type: "header", label:"<b>Header</b>", bgcolor:"yellow", txtcolor:"black"},
-      	{type: "link", label:"Link 1"},
-      	{type: "link", label:"Link 2"},
-      	{type: "link", label:"Link 3"}
+      	{type: "link", label:"Stack Page 1", linkpage: 0},
+      	{type: "link", label:"Stack Page 2", linkpage: 1},
+      	{type: "link", label:"Stack Page 3", linkpage: 2}
       ];
 
       // Populate westBox with content
-      var wllen = datawl.length;
+      /*var wllen = datawl.length;
       for (var wl = 0; wl < wllen; wl++) {
         var lbldatawl = new qx.ui.basic.Label(datawl[wl].label); 
-      	if (datawl[wl].type == "header")
+      	if (datawl[wl].type == "header") {
       		lbldatawl.set({anonymous: true, focusable: false, selectable: false, rich: true, backgroundColor: datawl[wl].bgcolor, textColor: datawl[wl].txtcolor});
-      	else
-      		lbldatawl.getContentElement().setAttribute("onclick", "location='#" + datawl[wl].label + "'");
+        }
+        else {
+          lbldatawl.setUserData("linkpage", datawl[wl].linkpage);
+          lbldatawl.addListener("click", function(e) {
+            centerbox.setSelection([centerbox.getChildren()[lbldatawl.getUserData("linkpage")]]);
+          }, this);
+        }
       	westbox.add(lbldatawl);
-      }
+      }*/
+
+      var lblleftnavheader = new qx.ui.basic.Label("<b>Header</b>").set({anonymous: true, focusable: false, selectable: false, rich: true, backgroundColor: "yellow", textColor: "black"});
+      westbox.add(lblleftnavheader);
+      var lblleftnav1 = new qx.ui.basic.Label("Stack Page 1");
+      lblleftnav1.addListener("click", function(e) {
+        centerbox.setSelection([mainpage]);
+      }, this);
+      westbox.add(lblleftnav1);
+      var lblleftnav2 = new qx.ui.basic.Label("Stack Page 2");
+      lblleftnav2.addListener("click", function(e) {
+        centerbox.setSelection([secpage]);
+      }, this);
+      westbox.add(lblleftnav2);
+      var lblleftnav3 = new qx.ui.basic.Label("Stack Page 3");
+      lblleftnav3.addListener("click", function(e) {
+        centerbox.setSelection([terpage]);
+      }, this);
+      westbox.add(lblleftnav3);
      
       scrollwest.add(westbox);
 
