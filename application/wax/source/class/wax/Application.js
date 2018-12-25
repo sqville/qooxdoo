@@ -173,22 +173,23 @@ qx.Class.define("wax.Application",
 
       var lblleftnavheader = new qx.ui.basic.Label("<b>Header</b>").set({anonymous: true, focusable: false, selectable: false, rich: true, backgroundColor: "yellow", textColor: "black"});
       westbox.add(lblleftnavheader);
-      var lblleftnav1 = new qx.ui.basic.Label("Stack Page 1");
+      var lblleftnav1 = new qx.ui.basic.Label("Stack Main Page");
       lblleftnav1.addListener("click", function(e) {
         centerbox.setSelection([mainpage]);
       }, this);
       westbox.add(lblleftnav1);
-      var lblleftnav2 = new qx.ui.basic.Label("Stack Page 2");
+      var lblleftnav2 = new qx.ui.basic.Label("Stack Second Page");
       lblleftnav2.addListener("click", function(e) {
         centerbox.setSelection([secpage]);
       }, this);
       westbox.add(lblleftnav2);
-      var lblleftnav3 = new qx.ui.basic.Label("Stack Page 3");
+      var lblleftnav3 = new qx.ui.basic.Label("Stack Third Page");
       lblleftnav3.addListener("click", function(e) {
         centerbox.setSelection([terpage]);
       }, this);
       westbox.add(lblleftnav3);
      
+
       scrollwest.add(westbox);
 
       appcompdock.add(scrollwest, {edge:"west"});
