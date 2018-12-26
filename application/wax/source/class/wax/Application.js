@@ -147,30 +147,8 @@ qx.Class.define("wax.Application",
       // Add centerbox to center scroll area
       scroll.add(centerbox);
 
-      // Left hand Widget list
-      var datawl = [
-      	{type: "header", label:"<b>Header</b>", bgcolor:"yellow", txtcolor:"black"},
-      	{type: "link", label:"Stack Page 1", linkpage: 0},
-      	{type: "link", label:"Stack Page 2", linkpage: 1},
-      	{type: "link", label:"Stack Page 3", linkpage: 2}
-      ];
 
       // Populate westBox with content
-      /*var wllen = datawl.length;
-      for (var wl = 0; wl < wllen; wl++) {
-        var lbldatawl = new qx.ui.basic.Label(datawl[wl].label); 
-      	if (datawl[wl].type == "header") {
-      		lbldatawl.set({anonymous: true, focusable: false, selectable: false, rich: true, backgroundColor: datawl[wl].bgcolor, textColor: datawl[wl].txtcolor});
-        }
-        else {
-          lbldatawl.setUserData("linkpage", datawl[wl].linkpage);
-          lbldatawl.addListener("click", function(e) {
-            centerbox.setSelection([centerbox.getChildren()[lbldatawl.getUserData("linkpage")]]);
-          }, this);
-        }
-      	westbox.add(lbldatawl);
-      }*/
-
       var lblleftnavheader = new qx.ui.basic.Label("<b>Header</b>").set({anonymous: true, focusable: false, selectable: false, rich: true, backgroundColor: "yellow", textColor: "black"});
       westbox.add(lblleftnavheader);
       var lblleftnav1 = new qx.ui.basic.Label("Stack Main Page");
