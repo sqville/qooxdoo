@@ -51,13 +51,7 @@ qx.Class.define("wax.Application",
         qx.log.appender.Console;
       }
 
-      /*
-      -------------------------------------------------------------------------
-        Below is your actual application code...
-      -------------------------------------------------------------------------
-      */
-
-
+  
       // ==================================
       // ========  SCAFFOLDING   ==========
       // ==================================
@@ -148,24 +142,33 @@ qx.Class.define("wax.Application",
       scroll.add(centerbox);
 
 
-      // Populate westBox with content
+      // Populate westBox with content - OLD
       var lblleftnavheader = new qx.ui.basic.Label("<b>Header</b>").set({anonymous: true, focusable: false, selectable: false, rich: true, backgroundColor: "yellow", textColor: "black"});
       westbox.add(lblleftnavheader);
-      var lblleftnav1 = new qx.ui.basic.Label("Stack Main Page");
-      lblleftnav1.addListener("click", function(e) {
-        centerbox.setSelection([mainpage]);
+      var tbtnMainPage = new qx.ui.form.ToggleButton("Stack Main Page");
+      tbtnMainPage.addListener("changeValue", function(e) {
+        if (e.getData()) {
+          centerbox.setSelection([mainpage]);
+        }
       }, this);
-      westbox.add(lblleftnav1);
-      var lblleftnav2 = new qx.ui.basic.Label("Stack Second Page");
-      lblleftnav2.addListener("click", function(e) {
-        centerbox.setSelection([secpage]);
+      westbox.add(tbtnMainPage);
+      var tbtnSecondPage = new qx.ui.form.ToggleButton("Stack Second Page");
+      tbtnSecondPage.addListener("changeValue", function(e) {
+        if (e.getData()) {
+          centerbox.setSelection([secpage]);
+        }
       }, this);
-      westbox.add(lblleftnav2);
-      var lblleftnav3 = new qx.ui.basic.Label("Stack Third Page");
-      lblleftnav3.addListener("click", function(e) {
-        centerbox.setSelection([terpage]);
+      westbox.add(tbtnSecondPage);
+      var tbtnThirdPage = new qx.ui.form.ToggleButton("Stack Third Page");
+      tbtnThirdPage.addListener("changeValue", function(e) {
+        if (e.getData()) {
+          centerbox.setSelection([terpage]);
+        }
       }, this);
-      westbox.add(lblleftnav3);
+      westbox.add(tbtnThirdPage);
+
+      var westboxbuttongroup = new qx.ui.form.RadioGroup();
+      westboxbuttongroup.add(tbtnMainPage, tbtnSecondPage, tbtnThirdPage);
      
 
       scrollwest.add(westbox);
@@ -185,7 +188,7 @@ qx.Class.define("wax.Application",
         100: {opacity: 1, left: "0px", width : "100%"}
         }};
 
-     var mq1 = new qx.bom.MediaQuery("screen and (min-width: 480px)");
+     var mq1 = new qx.bom.MediaQuery("screen and (min-width: 1024px)");
 
      mq1.on("change", function(e){
        if(mq1.isMatching()){
@@ -208,10 +211,10 @@ qx.Class.define("wax.Application",
        scrollwest.setVisibility("excluded"); 
        //menutogglebutton.setValue(false);
 
-      /*scrollwest.addListener("appear", function(e) {
+      scrollwest.addListener("appear", function(e) {
         var domtable = scrollwest.getContentElement().getDomElement();
         qx.bom.element.Animation.animate(domtable, fadeinleft);
-      }, this);*/
+      }, this);
 
       /*scrollwest.addListener("disappear", function(e) {
         var domtable = scrollwest.getContentElement().getDomElement();
