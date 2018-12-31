@@ -145,21 +145,28 @@ qx.Class.define("wax.Application",
       // Populate westBox with content - OLD
       var lblleftnavheader = new qx.ui.basic.Label("<b>Header</b>").set({anonymous: true, focusable: false, selectable: false, rich: true, backgroundColor: "yellow", textColor: "black"});
       westbox.add(lblleftnavheader);
-      var tbtnMainPage = new qx.ui.form.ToggleButton("Stack Main Page");
+      var tbtnMainPage = new wax.MenuButton("Stack Main Page");
       tbtnMainPage.addListener("changeValue", function(e) {
         if (e.getData()) {
           centerbox.setSelection([mainpage]);
         }
       }, this);
       westbox.add(tbtnMainPage);
-      var tbtnSecondPage = new qx.ui.form.ToggleButton("Stack Second Page");
+
+      var tbtnSecondPage = new wax.MenuButton("Stack Second Page");
       tbtnSecondPage.addListener("changeValue", function(e) {
         if (e.getData()) {
+          lblsubsecondpage.setVisibility("visible");
           centerbox.setSelection([secpage]);
+        } else {
+          lblsubsecondpage.setVisibility("excluded");
         }
       }, this);
+      var lblsubsecondpage = new qx.ui.basic.Label("SubSecondpage").set({visibility: "excluded"});
       westbox.add(tbtnSecondPage);
-      var tbtnThirdPage = new qx.ui.form.ToggleButton("Stack Third Page");
+      westbox.add(lblsubsecondpage);
+
+      var tbtnThirdPage = new wax.MenuButton("Stack Third Page");
       tbtnThirdPage.addListener("changeValue", function(e) {
         if (e.getData()) {
           centerbox.setSelection([terpage]);
