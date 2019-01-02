@@ -40,9 +40,25 @@ qx.Class.define("wax.MenuPopup",
 
     // Automatically add to application's root
     var root = this.getApplicationRoot();
-    //root.add(this);
 
     this.__blocker = new qx.ui.core.Blocker(root);
+    this.__blocker.getBlockerElement().activate();
+
+    var fadeinb = {duration: 300, timing: "ease", keyFrames : {
+      0: {opacity: 0},
+      100: {opacity: .08}
+      }};
+
+    this.setBlockerAnimation(fadeinb);
+
+    this.__blocker.addListener("blocked", function(e) {
+      if (domtable = this.__blocker.getBlockerElement().getDomElement()) {
+        qx.bom.element.Animation.animate(domtable, this.getBlockerAnimation());
+      }
+    }, this);
+
+    this.setAllowGrowY(true);
+
   },
 
   /*
@@ -54,20 +70,18 @@ qx.Class.define("wax.MenuPopup",
   properties :
   {
 
-    /** The hex value of the selected color. */
-    value :
-    {
-      nullable : true,
-      apply : "_applyValue",
-      event : "changeValue"
-    },
-
     /** Blocks the background if value is <code>true<code> */
     blockBackground :
     {
       check : "Boolean",
       themeable : true,
       init : true
+    },
+
+    blockerAnimation :
+    {
+      check : "Map",
+      themeable : true
     }
   },
 
@@ -82,15 +96,6 @@ qx.Class.define("wax.MenuPopup",
 
   members :
   {
-    // Property apply
-    _applyValue : function(value, old)
-    {
-      if (value === null)
-      {}
-      else
-      {}
-    },
-
     // overridden
     _applyVisibility : function(value, old)
     {

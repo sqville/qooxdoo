@@ -94,9 +94,8 @@ qx.Class.define("wax.Application",
       mainmenu.add(mainmenubutton3);
       mainmenubutton.setMenu(mainmenu);*/
       //create menu popup
-      var mainmenupopup = new wax.MenuPopup().set({padding: 10, blockerColor: "black", blockerOpacity: .08});
-      mainmenupopup.setLayout(new qx.ui.layout.VBox());
-      //mainmenupopup.add(new qx.ui.basic.Label("<b>MENUPOPUP</b>").set({anonymous: true, focusable: false, selectable: false, rich: true, backgroundColor: "yellow", textColor: "black"}));
+      var mainmenupopup = new wax.MenuPopup().set({marginBottom: 0, allowGrowY: true, padding: 10, blockerColor: "black", blockerOpacity: .08});
+      mainmenupopup.setLayout(new qx.ui.layout.VBox(6));
       mainmenubtnbutton.addListener("execute", function(e)
       {
         mainmenupopup.show();
@@ -141,8 +140,6 @@ qx.Class.define("wax.Application",
       var label6 = new qx.ui.basic.Label("Part of Third Page").set({font: "control-header", decorator : "border-me"});
       terpage.add(label6);
       
-      var menutogglebutton = new qx.ui.form.ToggleButton("Menu", "wax/test.png").set({padding: [2,4], allowGrowX: false, focusable: false, value: true});
-      
       var menuimage = new qx.ui.basic.Image("wax/round-menu-24px.svg");
       menuimage.setWidth(36);
       menuimage.setHeight(36);
@@ -154,24 +151,6 @@ qx.Class.define("wax.Application",
       accountimage.setScale(true);
       accountimage.setPadding(4);
       accountimage.setAlignX("right");
-
-      if (qx.core.Environment.get("device.type") == "mobile"){
-      	menutogglebutton.setValue(false);
-      	scrollwest.setVisibility("excluded");
-      }
-      	
-     /* menutogglebutton.addListener("changeValue", function(e) {
-        //this.debug("Checked: " + e.getData());
-        if (e.getData())
-        	scrollwest.setVisibility("visible");     	
-        else
-        	scrollwest.setVisibility("excluded");
-      }, this);*/
-
-     // northhbox.add(menuimage, {left:0, top:0});
-    // northhbox.add(accountimage, {right:0, top:0});
-           
-      appcompdock.add(northhbox, {edge:"north"});
       
       // Add pages to === THE STACK ===
       centerbox.add(mainpage);
@@ -179,10 +158,7 @@ qx.Class.define("wax.Application",
       centerbox.add(terpage);
       centerbox.setSelection([mainpage]);
 
-      // Add centerbox to center scroll area
-      scroll.add(centerbox);
-
-      // Populate westBox with content - OLD
+      // Populate westBox with content
       var lblleftnavheader = new qx.ui.basic.Label("<b>Header</b>").set({anonymous: true, focusable: false, selectable: false, rich: true, backgroundColor: "yellow", textColor: "black"});
       westbox.add(lblleftnavheader);
       var tbtnMainPage = new wax.MenuButton("Stack Main Page Button", "wax/test.png");
@@ -211,7 +187,7 @@ qx.Class.define("wax.Application",
       var mainmenubuttongroup = new qx.ui.form.RadioGroup();
       mainmenubuttongroup.add(tbtnmenuMainPage, tbtnmenuSecondPage, tbtnmenuThirdPage);
 
-
+      // Turn on all menu listeners
       tbtnMainPage.addListener("changeValue", function(e) {
         if (e.getData()) {
           centerbox.setSelection([mainpage]);
@@ -236,14 +212,38 @@ qx.Class.define("wax.Application",
         }
       }, this);
 
+      tbtnmenuMainPage.addListener("changeValue", function(e) {
+        if (e.getData()) {
+          centerbox.setSelection([mainpage]);
+          westboxbuttongroup.setSelection([tbtnMainPage]);
+          mainmenupopup.hide();
+        }
+      }, this);
+
+      tbtnmenuSecondPage.addListener("changeValue", function(e) {
+        if (e.getData()) {
+          centerbox.setSelection([secpage]);
+          westboxbuttongroup.setSelection([tbtnSecondPage]);
+          mainmenupopup.hide();
+        }
+      }, this);
+
       tbtnmenuThirdPage.addListener("changeValue", function(e) {
         if (e.getData()) {
           centerbox.setSelection([terpage]);
           westboxbuttongroup.setSelection([tbtnThirdPage]);
+          mainmenupopup.hide();
         }
       }, this);
 
+
+
+      // Add comps to scrolls, scrolls to the dock and the dock to the root  
       scrollwest.add(westbox);
+      
+      scroll.add(centerbox);
+      
+      appcompdock.add(northhbox, {edge:"north"});
 
       appcompdock.add(scrollwest, {edge:"west"});
       
@@ -251,13 +251,15 @@ qx.Class.define("wax.Application",
       
       approot.add(appcompdock, {edge: 0});
 
+
+
       // ====================================
       // =======  MediaQuery code  ========== 
       // ====================================
 
-      var fadeinleft = {duration: 500, timing: "ease", origin: "left top", keyFrames : {
-        0: {opacity: 0, left: "-160px", width : "0%"},
-        100: {opacity: 1, left: "0px", width : "100%"}
+      var fadeinleft = {duration: 300, timing: "ease-out", origin: "left top", keyFrames : {
+        0: {opacity: 0, left: "-160px"},
+        100: {opacity: 1, left: "0px"}
         }};
 
      var mq1 = new qx.bom.MediaQuery("screen and (min-width: 1024px)");
@@ -299,6 +301,27 @@ qx.Class.define("wax.Application",
         var domtable = scrollwest.getContentElement().getDomElement();
         qx.bom.element.Animation.animateReverse(domtable, fadeinleft);
       }, this);*/
+
+
+      // ====================================
+      // =====  Device Targetted code  ======
+      // ====================================
+
+      // MOBILE
+
+      if (qx.core.Environment.get("device.type") == "mobile"){
+      	scrollwest.setVisibility("excluded");
+      }
+
+
+      //***  CODE for applying popup fading in and out  ***//
+
+      mainmenupopup.addListener("appear", function(e) {
+        var domtable = mainmenupopup.getContentElement().getDomElement();
+        qx.bom.element.Animation.animate(domtable, fadeinleft);
+      }, this);
+
+
     }
   }
 });
