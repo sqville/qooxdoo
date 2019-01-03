@@ -27,6 +27,8 @@ qx.Class.define("wax.Application",
 
   members :
   {
+    _blocker : null,
+    
     _northBox : null,
     
     _westBox : null,
@@ -60,6 +62,9 @@ qx.Class.define("wax.Application",
       var approot = this.getRoot();
       //approot.getContentElement().setStyle("touch-action", "none");
       //document.body.style.TouchAction = "none";
+
+      // Automatically add to application's root
+      this._blocker = new qx.ui.core.Blocker(approot).set({color: "black", opacity: .08});
       
       // App's Dock 
       var appcompdock = new qx.ui.container.Composite(new qx.ui.layout.Dock(0, 0)).set({backgroundColor: "transparent"});
@@ -94,13 +99,22 @@ qx.Class.define("wax.Application",
       mainmenu.add(mainmenubutton3);
       mainmenubutton.setMenu(mainmenu);*/
       //create menu popup
-      var mainmenupopup = new wax.MenuPopup().set({marginBottom: 0, allowGrowY: true, padding: 10, blockerColor: "black", blockerOpacity: .08});
+      //var mainmenupopup = new wax.MenuPopup().set({allowGrowY: true, padding: 10});
+      var mainmenupopup = new qx.ui.popup.Popup().set({allowGrowY: true, padding: 10});
       mainmenupopup.setLayout(new qx.ui.layout.VBox(6));
       mainmenubtnbutton.addListener("execute", function(e)
       {
+        if (qx.core.Environment.get("browser.name") != "edge"){
+          this._blocker.blockContent(mainmenubtnbutton.getZIndex());
+        }
         mainmenupopup.show();
-      });
+      }, this);
+      mainmenupopup.addListener("disappear", function(e)
+      {
+        this._blocker.unblock();
+      }, this);
       mainmenupart.add(mainmenubtnbutton);
+      //mainmenupart.add(mainmenubutton);
 
       var profilepart = new qx.ui.toolbar.Part;
       var profilemenubutton = new qx.ui.toolbar.MenuButton("ProfileMenu", "wax/round-account_circle-24px.svg").set({show: "icon", showArrow: false});
@@ -159,17 +173,17 @@ qx.Class.define("wax.Application",
       centerbox.setSelection([mainpage]);
 
       // Populate westBox with content
-      var lblleftnavheader = new qx.ui.basic.Label("<b>Header</b>").set({anonymous: true, focusable: false, selectable: false, rich: true, backgroundColor: "yellow", textColor: "black"});
+      var lblleftnavheader = new qx.ui.basic.Label("<b>Header</b>").set({anonymous: true, focusable: false, selectable: false, rich: true, textColor: "black"});
       westbox.add(lblleftnavheader);
-      var tbtnMainPage = new wax.MenuButton("Stack Main Page Button", "wax/test.png");
+      var tbtnMainPage = new wax.MenuButton("Dashboard with Flow", "wax/test.png").set({center: false});
       westbox.add(tbtnMainPage);
 
-      var tbtnSecondPage = new wax.MenuButton("Stack Second Page Button", "wax/test.png");
-      var lblsubsecondpage = new qx.ui.basic.Label("SubSecondpage Button").set({visibility: "excluded"});
+      var tbtnSecondPage = new wax.MenuButton("Overview Page to Detail Pages", "wax/test.png").set({center: false});
+      var lblsubsecondpage = new qx.ui.basic.Label("Direct Link to a Detail Page").set({visibility: "excluded"});
       westbox.add(tbtnSecondPage);
       westbox.add(lblsubsecondpage);
 
-      var tbtnThirdPage = new wax.MenuButton("Stack Third Page Button", "wax/test.png");
+      var tbtnThirdPage = new wax.MenuButton("Table List Conversion", "wax/test.png").set({center: false});
       westbox.add(tbtnThirdPage);
 
       var westboxbuttongroup = new qx.ui.form.RadioGroup();
@@ -178,10 +192,13 @@ qx.Class.define("wax.Application",
       var lblmenuleftnavheader = lblleftnavheader.clone();
       var tbtnmenuMainPage = tbtnMainPage.clone();
       var tbtnmenuSecondPage = tbtnSecondPage.clone();
+      var lblmenusubsecondpage = lblsubsecondpage.clone();
+      lblmenusubsecondpage.setVisibility("visible");
       var tbtnmenuThirdPage = tbtnThirdPage.clone();
       mainmenupopup.add(lblmenuleftnavheader);
       mainmenupopup.add(tbtnmenuMainPage);
       mainmenupopup.add(tbtnmenuSecondPage);
+      mainmenupopup.add(lblmenusubsecondpage);
       mainmenupopup.add(tbtnmenuThirdPage);
 
       var mainmenubuttongroup = new qx.ui.form.RadioGroup();
@@ -257,8 +274,8 @@ qx.Class.define("wax.Application",
       // =======  MediaQuery code  ========== 
       // ====================================
 
-      var fadeinleft = {duration: 300, timing: "ease-out", origin: "left top", keyFrames : {
-        0: {opacity: 0, left: "-160px"},
+      var fadeinleft = {duration: 240, timing: "ease-out", origin: "left top", keyFrames : {
+        0: {opacity: 0, left: "-300px"},
         100: {opacity: 1, left: "0px"}
         }};
 
@@ -266,30 +283,21 @@ qx.Class.define("wax.Application",
 
      mq1.on("change", function(e){
        if(mq1.isMatching()){
-         //headertext.setValue("<h1>IsMatching</h1>");
          scrollwest.setVisibility("visible"); 
          mainmenupart.setVisibility("excluded");
-         //mainmenubutton
-        // menutogglebutton.setValue(true);
        }
        else {
-         //headertext.setValue("<h1>NotMatching</h1>");
          scrollwest.setVisibility("excluded");
          mainmenupart.setVisibility("visible");
-         //menutogglebutton.setValue(false); 
        }
      });
      if (mq1.isMatching()) {
-       //headertext.setValue("<h1>IsMatching</h1>");
        scrollwest.setVisibility("visible"); 
        mainmenupart.setVisibility("excluded");
-       //menutogglebutton.setValue(true);
      }
      else {
-       //headertext.setValue("<h1>NotMatching</h1>");
        scrollwest.setVisibility("excluded"); 
        mainmenupart.setVisibility("visible");
-       //menutogglebutton.setValue(false);
      }
 
       scrollwest.addListener("appear", function(e) {
@@ -319,6 +327,18 @@ qx.Class.define("wax.Application",
       mainmenupopup.addListener("appear", function(e) {
         var domtable = mainmenupopup.getContentElement().getDomElement();
         qx.bom.element.Animation.animate(domtable, fadeinleft);
+      }, this);
+
+
+      var fadeinb = {duration: 300, timing: "ease", keyFrames : {
+        0: {opacity: 0},
+        100: {opacity: .08}
+        }};
+
+      this._blocker.addListener("blocked", function(e) {
+        if (domtable = this._blocker.getBlockerElement().getDomElement()) {
+          qx.bom.element.Animation.animate(domtable, fadeinb);
+        }
       }, this);
 
 

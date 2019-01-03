@@ -1,20 +1,16 @@
 /* ************************************************************************
 
-   qooxdoo - the new era of web development
-
-   http://qooxdoo.org
+   
 
    Copyright:
-     2004-2008 1&1 Internet AG, Germany, http://www.1und1.de
+     
 
    License:
      MIT: https://opensource.org/licenses/MIT
      See the LICENSE file in the project's top-level directory for details.
 
    Authors:
-     * Sebastian Werner (wpbasti)
-     * Andreas Ecker (ecker)
-     * Jonathan Weiß (jonathan_rass)
+     * 
 
 
 ************************************************************************ */
@@ -39,10 +35,9 @@ qx.Class.define("wax.MenuPopup",
     this.base(arguments);
 
     // Automatically add to application's root
-    var root = this.getApplicationRoot();
+   /* var root = this.getApplicationRoot();
 
     this.__blocker = new qx.ui.core.Blocker(root);
-    this.__blocker.getBlockerElement().activate();
 
     var fadeinb = {duration: 300, timing: "ease", keyFrames : {
       0: {opacity: 0},
@@ -57,21 +52,30 @@ qx.Class.define("wax.MenuPopup",
       }
     }, this);
 
-    this.setAllowGrowY(true);
-
-  },
+    // Initialize properties
+    this.initVisibility();
+    this.initKeepFocus();
+    this.initKeepActive();*/
+  }
 
   /*
   *****************************************************************************
      PROPERTIES
   *****************************************************************************
   */
-
+/*
   properties :
   {
 
+    // overridden
+    visibility :
+    {
+      refine : true,
+      init : "excluded"
+    },
+    
     /** Blocks the background if value is <code>true<code> */
-    blockBackground :
+ /*   blockBackground :
     {
       check : "Boolean",
       themeable : true,
@@ -85,7 +89,7 @@ qx.Class.define("wax.MenuPopup",
     }
   },
 
-
+*/
 
 
   /*
@@ -93,35 +97,34 @@ qx.Class.define("wax.MenuPopup",
      MEMBERS
   *****************************************************************************
   */
-
+/*
   members :
   {
     // overridden
     _applyVisibility : function(value, old)
     {
       this.base(arguments, value, old);
-      this.__updateBlockerVisibility();
+      //this.__updateBlockerVisibility();
     },
-
-
+*/
     /**
      * Updates the blocker's visibility
      */
-    __updateBlockerVisibility : function()
+/*    __updateBlockerVisibility : function()
     {
       if (this.isVisible())
       {
         if (this.getBlockBackground()) {
           var zIndex = this.getZIndex();
-          this.blockContent(zIndex - 1);
+          this.__blocker.blockContent(zIndex - 1);
         }
       }
       else
       {
-        if (this.isBlocked()) {
-          this.unblock();
+        if (this.__blocker.isBlocked()) {
+          this.__blocker.unblock();
         }
       }
     }
-  }
+  }*/
 });
