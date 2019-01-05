@@ -43,3 +43,4 @@ npm-debug.log
 
 # New apps
 # Wax
+/application/wax/build/

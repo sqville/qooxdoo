@@ -52,6 +52,8 @@ qx.Class.define("wax.Application",
         // support additional cross-browser console. Press F7 to toggle visibility
         qx.log.appender.Console;
       }
+
+
       
       // >>> START of Base Scaffolding >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
       // >>> Base Scaffolding are objects common to all Wax - Franklin based apps  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -150,20 +152,32 @@ qx.Class.define("wax.Application",
         }
       }, this);
 
+
+
       // >>> Populate THE STACK >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
       // Four page stack EXAMPLE
        // Dashboard Page with Flow layout
        // Overview Page with links to a Detail Page
        // Table to List Page - shows how the Table Widget converts to a List Widget for smaller screens
       // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-      var dashboardpage = new qx.ui.container.Composite(new qx.ui.layout.Flow());
+      var dashboardpage = new qx.ui.container.Composite();
       var overviewpage = new qx.ui.container.Composite(new qx.ui.layout.Flow());
       var detailpage = new qx.ui.container.Composite(new qx.ui.layout.Flow());
       var tablelistpage = new qx.ui.container.Composite(new qx.ui.layout.Flow());
       
       // First page marker 
       var label1 = new qx.ui.basic.Label("Dashboard Page Marker").set({font: "control-header", decorator : "border-me"});
+      var dashboardflow = new qx.ui.layout.Flow().set({alignX: "center"});
+      dashboardpage.setLayout(dashboardflow);
       dashboardpage.add(label1);
+
+      var groupbox1 = new wax.GroupBox("First GroupBox for Wax", "wax/baseline-commute-24px.svg", true);
+      groupbox1.setLayout(new qx.ui.layout.VBox());
+      groupbox1.add(new qx.ui.form.CheckBox("Show debugging content"));
+      groupbox1.add(new qx.ui.form.CheckBox("Enable code completion"));
+      groupbox1.add(new qx.ui.form.CheckBox("Show debugging console"));
+      dashboardpage.add(groupbox1);
+
 
       // Second page marker  
       var label5 = new qx.ui.basic.Label("Overview Page Marker").set({font: "control-header", decorator : "border-me"});

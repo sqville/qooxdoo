@@ -14,6 +14,19 @@ qx.Theme.define("wax.theme.Appearance",
 
   appearances :
   {
+    "groupbox/legend" :
+    {
+      alias : "atom",
+
+      style : function(states)
+      {
+        return {
+          paddingRight : 35,
+          margin : 4
+        };
+      }
+    },
+    
     "westmainmenubutton" : "button",
     
     "westmainmenubutton/label" : {
