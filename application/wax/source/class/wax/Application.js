@@ -165,18 +165,29 @@ qx.Class.define("wax.Application",
       var detailpage = new qx.ui.container.Composite(new qx.ui.layout.Flow());
       var tablelistpage = new qx.ui.container.Composite(new qx.ui.layout.Flow());
       
+      //more structure
+      dashboardpage.setLayout(new qx.ui.layout.VBox(6).set({alignX: "left"}));
+      var dashboardsubpage1 = new qx.ui.container.Composite();
+      var dashboardflow = new qx.ui.layout.Flow().set({alignX: "center"});
+      dashboardsubpage1.setLayout(dashboardflow);
+      
+      
+      //dashboardpage.add(label1, {lineBreak: true});
+
+      // Controls
       // First page marker 
       var label1 = new qx.ui.basic.Label("Dashboard Page Marker").set({font: "control-header", decorator : "border-me"});
-      var dashboardflow = new qx.ui.layout.Flow().set({alignX: "center"});
-      dashboardpage.setLayout(dashboardflow);
-      dashboardpage.add(label1);
-
-      var groupbox1 = new wax.GroupBox("First GroupBox for Wax", "wax/baseline-commute-24px.svg", true);
+      // GroubBox
+      var groupbox1 = new wax.GroupBox("First GroupBox for Wax", "wax/baseline-commute-24px.svg", true, true);
       groupbox1.setLayout(new qx.ui.layout.VBox());
       groupbox1.add(new qx.ui.form.CheckBox("Show debugging content"));
       groupbox1.add(new qx.ui.form.CheckBox("Enable code completion"));
       groupbox1.add(new qx.ui.form.CheckBox("Show debugging console"));
-      dashboardpage.add(groupbox1);
+      
+      // Assemble
+      dashboardpage.add(label1);
+      dashboardsubpage1.add(groupbox1);
+      dashboardpage.add(dashboardsubpage1);
 
 
       // Second page marker  
@@ -203,7 +214,7 @@ qx.Class.define("wax.Application",
       // Create Menu Buttons that will navigate the user through THE STACK Pages 
       // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
       // Populate westBox with content
-      var lblleftnavheader = new qx.ui.basic.Label("<b>Header</b>").set({anonymous: true, focusable: false, selectable: false, rich: true, textColor: "black"});
+      var lblleftnavheader = new qx.ui.basic.Label("Header").set({alignX: "center", anonymous: true, focusable: false, selectable: false});
       westbox.add(lblleftnavheader);
       var tbtndashboardpage = new wax.MenuButton("Dashboard with Flow", "wax/test.png").set({center: false});
       westbox.add(tbtndashboardpage);

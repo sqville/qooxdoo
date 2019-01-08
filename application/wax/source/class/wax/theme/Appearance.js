@@ -26,6 +26,17 @@ qx.Theme.define("wax.theme.Appearance",
         };
       }
     },
+
+    "groupbox/open" :
+    {
+      include : "image",
+      style : function(states)
+      {
+        return {
+          source : states.opened ? "wax/baseline-expand_more-24px.svg" : "wax/baseline-expand_less-24px.svg"
+        };
+      }
+    },
     
     "westmainmenubutton" : "button",
     

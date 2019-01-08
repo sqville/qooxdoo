@@ -18,17 +18,19 @@ Authors:
 
 /**
 *
-*
+* @childControl open {qx.ui.tree.core.FolderOpenButton} button to open/close a subtree
 */
 
 qx.Class.define("wax.GroupBox", 
 {
   extend : qx.ui.groupbox.GroupBox,
 
-  construct : function(legend, icon, collapsable)
+  construct : function(legend, icon, collapsable, open)
   {
-    //this.setCollapsable(collapsable);
     this.base(arguments);
+
+    this._createChildControl("open");
+
     // Processing parameters
     if (legend != null) {
       this.setLegend(legend);
@@ -38,19 +40,15 @@ qx.Class.define("wax.GroupBox",
       this.setIcon(icon);
     }
 
-    // Processing parameters
-    if (collapsable) {
-      this.setCollapsable(true);
-      var control = new qx.ui.tree.core.FolderOpenButton().set({
-        alignY: "middle",
-        width: 18,
-        height: 18,
-        backgroundColor: "gray",
-        open : true
-      });
-      control.addListener("changeOpen", this._onChangeOpen, this);
-      this._add(control, {top: 8, right: 10});
+    if (collapsable != null) {
+      this.setCollapsable(collapsable);
     }
+
+    if (open != null) {
+      this.setOpen(open);
+    }
+
+    //this.initOpen();
   },
   /*
   *****************************************************************************
@@ -65,15 +63,10 @@ qx.Class.define("wax.GroupBox",
     {
       nullable : true,
       check : "Boolean",
-      init : false
+      init : false,
+      apply : "_applyCollapsable"
     },
 
-    collaps :
-    {
-      nullable : true,
-      check : "Boolean",
-      init : false
-    },
     /**
     * Whether the groupbox is opened.
     */
@@ -93,12 +86,18 @@ qx.Class.define("wax.GroupBox",
 
   members :
   {
-      
-  /**
-  * Event handler, which listens to open state changes of the open button
-  *
-  * @param e {qx.event.type.Data} The event object
-  */
+  
+    // property apply
+    _applyCollapsable : function(value, old)
+    {
+      this.getChildControl("open").setVisibility(value ? "visible" : "excluded");
+    },
+    
+    /**
+    * Event handler, which listens to open state changes of the open button
+    *
+    * @param e {qx.event.type.Data} The event object
+    */
     _onChangeOpen : function(e)
     {
       this.setOpen(e.getData());
@@ -107,11 +106,45 @@ qx.Class.define("wax.GroupBox",
     // property apply
     _applyOpen : function(value, old)
     {
-      if (this.hasChildren()) {
+      var open = this.getChildControl("open", true);
+      if (open) {
+        open.setOpen(value);
+      }
+      
+      if (value) 
+      {
+        this.addState("opened");
+      } else {
+        this.removeState("opened");
+      }
+      //if (this.hasChildren()) {
+      if (this.getCollapsable()) {
         this.getChildrenContainer().setVisibility(value ? "visible" : "excluded");
       }
+      //}
+    },
 
-      this.base(arguments, value, old);
+    // Overriden
+    _createChildControlImpl : function(id)
+    {
+      var control;
+
+      switch(id)
+      {
+        case "open":
+
+          control = new qx.ui.tree.core.FolderOpenButton().set({
+            alignY: "middle",
+            width: 18,
+            height: 18,
+            open: false
+          });
+          control.addListener("changeOpen", this._onChangeOpen, this);
+          this._add(control, {top: 4, right: 10});
+          break;
+      }
+
+      return control || this.base(arguments, id);
     }
   }
 });
