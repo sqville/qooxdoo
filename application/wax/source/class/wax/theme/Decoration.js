@@ -14,6 +14,32 @@ qx.Theme.define("wax.theme.Decoration",
 
   decorations :
   {
+
+    "groupbox-open" :
+    {
+      style :
+      {
+        widthRight : 14,
+        widthTop : 10,
+        borderImageMode: "horizontal",
+        borderImage : "wax/baseline-expand_less-24px.svg",
+        repeatX: "stretch",
+        backgroundPositionX: 50
+      }
+    },
+
+    "groupbox-closed" :
+    {
+      style :
+      {
+        widthRight : 14,
+        borderImageMode: "horizontal",
+        borderImage : "wax/baseline-expand_more-24px.svg",
+        repeatX: "stretch",
+        backgroundPositionX: 50
+      }
+    },
+    
     "border-me" :
     {
       style :

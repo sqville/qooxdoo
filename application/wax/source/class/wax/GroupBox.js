@@ -48,7 +48,8 @@ qx.Class.define("wax.GroupBox",
       this.setOpen(open);
     }
 
-    //this.initOpen();
+    this.initOpen();
+    this.initCollapsable();
   },
   /*
   *****************************************************************************
@@ -133,14 +134,18 @@ qx.Class.define("wax.GroupBox",
       {
         case "open":
 
-          control = new qx.ui.tree.core.FolderOpenButton().set({
+        var ctrllength = this.getWidth();
+ 
+        control = new qx.ui.tree.core.FolderOpenButton().set({
+            padding: 4,
+            alignX: "right",
             alignY: "middle",
-            width: 18,
-            height: 18,
+            allowStretchX: true,
+            allowStretchY: true,
             open: false
           });
           control.addListener("changeOpen", this._onChangeOpen, this);
-          this._add(control, {top: 4, right: 10});
+          this._add(control, { right: 0, width: "100%" });
           break;
       }
 

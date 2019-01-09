@@ -163,7 +163,7 @@ qx.Class.define("wax.Application",
       var dashboardpage = new qx.ui.container.Composite();
       var overviewpage = new qx.ui.container.Composite(new qx.ui.layout.Flow());
       var detailpage = new qx.ui.container.Composite(new qx.ui.layout.Flow());
-      var tablelistpage = new qx.ui.container.Composite(new qx.ui.layout.Flow());
+      var tablelistpage = new qx.ui.container.Composite();
       
       //more structure
       dashboardpage.setLayout(new qx.ui.layout.VBox(6).set({alignX: "left"}));
@@ -196,7 +196,15 @@ qx.Class.define("wax.Application",
 
       // Third page marker
       var label6 = new qx.ui.basic.Label("Table to List Page Marker").set({font: "control-header", decorator : "border-me"});
-      tablelistpage.add(label6);
+      var tablelistflow = new qx.ui.layout.Flow().set({alignY: "bottom"});
+      tablelistpage.setLayout(tablelistflow);
+      tablelistpage.add(label6, {lineBreak: true, stretch: true});
+      var tableliststack = new qx.ui.container.Stack().set({backgroundColor: "white", padding: 10});
+      var tablelisttable = this.__createTable();
+      var tablelistlist = this.__createList();
+      tableliststack.add(tablelisttable);
+      tableliststack.add(tablelistlist);
+      tablelistpage.add(tableliststack, {lineBreak: true, stretch: true});
       
       // Assemble - THE STACK 
       centerbox.add(dashboardpage);
@@ -347,6 +355,31 @@ qx.Class.define("wax.Application",
         mainmenupart.setVisibility("visible");
       }
 
+      var mq2 = new qx.bom.MediaQuery("screen and (min-width: 767px)");
+
+      mq2.on("change", function(e){
+        if(mq2.isMatching()){
+          tableliststack.setSelection([tablelisttable]);
+        }
+        else {
+          /*scrollwest.addListener("appear", function(e) {
+            var domtable = scrollwest.getContentElement().getDomElement();
+            qx.bom.element.Animation.animate(domtable, fadeinleft);
+          }, this);*/ 
+          tableliststack.setSelection([tablelistlist]);
+        }
+      });
+      if (mq2.isMatching()) {
+        tableliststack.setSelection([tablelisttable]);
+      }
+      else {
+        /*scrollwest.addListener("appear", function(e) {
+          var domtable = scrollwest.getContentElement().getDomElement();
+          qx.bom.element.Animation.animate(domtable, fadeinleft);
+        }, this);*/ 
+        tableliststack.setSelection([tablelistlist]);
+      }
+
   
       // ====================================
       // =====  Device Targetted code  ======
@@ -357,6 +390,105 @@ qx.Class.define("wax.Application",
       	scrollwest.setVisibility("excluded");
       }
 
+    },
+
+    __createTable : function()
+    { 
+      var rowData = [];
+      var now = new Date().getTime();
+      var date;
+      var dateRange = 400 * 24 * 60 * 60 * 1000; // 400 days
+      
+      date = new Date(now + Math.random() * dateRange - dateRange / 2);
+      rowData.push([ "Completed", "001007222", "Anthem WGS", date ]);
+      date = new Date(now + Math.random() * dateRange - dateRange / 2);
+      rowData.push([ "Completed", "002009333", "Anthem Modernization", date ]);
+      date = new Date(now + Math.random() * dateRange - dateRange / 2);
+      rowData.push([ "Completed", "003002777", "HCSC", date ]);
+      date = new Date(now + Math.random() * dateRange - dateRange / 2);
+      rowData.push([ "Completed", "004074555", "State of New Mexico", date ]);
+      date = new Date(now + Math.random() * dateRange - dateRange / 2);
+      rowData.push([ "In Progress", "005111888", "eLicensing Modernization", date ]);
+      date = new Date(now + Math.random() * dateRange - dateRange / 2);
+      rowData.push([ "In Progress", "006003662", "Guadalupe Mountains", date ]);
+
+      var tableModel = new qx.ui.table.model.Simple();
+      tableModel.setColumns([ "Status", "Item ID", "Project", "Date Submitted" ]);
+      tableModel.setData(rowData);
+      tableModel.setColumnEditable(1, false);
+      tableModel.setColumnEditable(2, false);
+      tableModel.setColumnSortable(3, false);
+      tableModel.setColumnSortable(4, false);
+
+      var table = new qx.ui.table.Table(tableModel);
+
+      table.set({
+        allowStretchY: true,
+        allowStretchX: true,
+        rowHeight: 30,
+        showCellFocusIndicator: false,
+        focusCellOnPointerMove : true,
+        forceLineHeight: true
+      });
+
+      table.getSelectionModel().setSelectionMode(qx.ui.table.selection.Model.MULTIPLE_INTERVAL_SELECTION);
+
+      //var tcm = table.getTableColumnModel();
+
+      //tcm.setDataCellRenderer(3, new qx.ui.table.cellrenderer.Boolean());
+      //tcm.setDataCellRenderer(4, new qx.ui.table.cellrenderer.Html());
+      //tcm.setColumnWidth(4,350);
+      //tcm.setHeaderCellRenderer(4, new qx.ui.table.headerrenderer.Icon("icon/18/image/filter-frames.png", "A date"));
+
+      return table;
+    },
+
+    __createList : function()
+    { 
+      var rowData = [];
+      var now = new Date().getTime();
+      var date;
+      var dateRange = 400 * 24 * 60 * 60 * 1000; // 400 days
+      
+      date = new Date(now + Math.random() * dateRange - dateRange / 2);
+      rowData.push([ "Completed", "001007222", "Anthem WGS", date ]);
+      date = new Date(now + Math.random() * dateRange - dateRange / 2);
+      rowData.push([ "Completed", "002009333", "Anthem Modernization", date ]);
+      date = new Date(now + Math.random() * dateRange - dateRange / 2);
+      rowData.push([ "Completed", "003002777", "HCSC", date ]);
+      date = new Date(now + Math.random() * dateRange - dateRange / 2);
+      rowData.push([ "Completed", "004074555", "State of New Mexico", date ]);
+      date = new Date(now + Math.random() * dateRange - dateRange / 2);
+      rowData.push([ "In Progress", "005111888", "eLicensing Modernization", date ]);
+      date = new Date(now + Math.random() * dateRange - dateRange / 2);
+      rowData.push([ "In Progress", "006003662", "Guadalupe Mountains", date ]);
+
+      var listvbox = new qx.ui.layout.VBox(8);
+      var listctrl = new qx.ui.container.Composite(listvbox);
+
+      var groupbox1 = new wax.GroupBox(rowData[0][2], "wax/round-check_circle_outline-24px.svg", true, false);
+      groupbox1.setLayout(new qx.ui.layout.VBox(4));
+      groupbox1.add(new qx.ui.basic.Label("<b>Status:</b> " + rowData[0][0]).set({rich: true}));
+      groupbox1.add(new qx.ui.basic.Label("<b>Item ID:</b> " + rowData[0][1]).set({rich: true}));
+      groupbox1.add(new qx.ui.basic.Label("<b>Date Submitted:</b> " + rowData[0][3]).set({rich: true}));
+
+      var groupbox2 = new wax.GroupBox(rowData[1][2], "wax/round-check_circle_outline-24px.svg", true, false);
+      groupbox2.setLayout(new qx.ui.layout.VBox(4));
+      groupbox2.add(new qx.ui.basic.Label("<b>Status:</b> " + rowData[1][0]).set({rich: true}));
+      groupbox2.add(new qx.ui.basic.Label("<b>Item ID:</b> " + rowData[1][1]).set({rich: true}));
+      groupbox2.add(new qx.ui.basic.Label("<b>Date Submitted:</b> " + rowData[1][3]).set({rich: true}));
+
+      var groupbox3 = new wax.GroupBox(rowData[4][2], "wax/round-sync-24px.svg", true, false);
+      groupbox3.setLayout(new qx.ui.layout.VBox(4));
+      groupbox3.add(new qx.ui.basic.Label("<b>Status:</b> " + rowData[4][0]).set({rich: true}));
+      groupbox3.add(new qx.ui.basic.Label("<b>Item ID:</b> " + rowData[4][1]).set({rich: true}));
+      groupbox3.add(new qx.ui.basic.Label("<b>Date Submitted:</b> " + rowData[4][3]).set({rich: true}));
+
+      listctrl.add(groupbox1);
+      listctrl.add(groupbox2);
+      listctrl.add(groupbox3);
+    
+      return listctrl;
     }
   }
 });

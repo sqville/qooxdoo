@@ -33,7 +33,9 @@ qx.Theme.define("wax.theme.Appearance",
       style : function(states)
       {
         return {
-          source : states.opened ? "wax/baseline-expand_more-24px.svg" : "wax/baseline-expand_less-24px.svg"
+          source : states.opened ? "wax/baseline-expand_less-24px.svg" : "wax/baseline-expand_more-24px.svg"
+          //source : "",
+          //decorator : states.opened ? "groupbox-open" : "groupbox-closed"
         };
       }
     },
