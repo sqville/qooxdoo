@@ -33,9 +33,8 @@ qx.Theme.define("wax.theme.Appearance",
       style : function(states)
       {
         return {
-          source : states.opened ? "wax/baseline-expand_less-24px.svg" : "wax/baseline-expand_more-24px.svg"
-          //source : "",
-          //decorator : states.opened ? "groupbox-open" : "groupbox-closed"
+          height: 30,
+          decorator : states.opened ? "groupbox-open" : "groupbox-closed"
         };
       }
     },

@@ -133,16 +133,10 @@ qx.Class.define("wax.GroupBox",
       switch(id)
       {
         case "open":
-
-        var ctrllength = this.getWidth();
  
         control = new qx.ui.tree.core.FolderOpenButton().set({
-            padding: 4,
-            alignX: "right",
-            alignY: "middle",
             allowStretchX: true,
-            allowStretchY: true,
-            open: false
+            allowStretchY: true
           });
           control.addListener("changeOpen", this._onChangeOpen, this);
           this._add(control, { right: 0, width: "100%" });
