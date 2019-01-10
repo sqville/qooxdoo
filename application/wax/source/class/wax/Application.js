@@ -147,6 +147,7 @@ qx.Class.define("wax.Application",
         }};
 
       this._blocker.addListener("blocked", function(e) {
+        var domtable;
         if (domtable = this._blocker.getBlockerElement().getDomElement()) {
           qx.bom.element.Animation.animate(domtable, fadeinb);
         }
@@ -189,7 +190,7 @@ qx.Class.define("wax.Application",
       groupbox3.setLayout(new qx.ui.layout.VBox());
 
       var groupbox4 = new wax.GroupBox("Forth GroupBox for Wax - Flow within a Flow", "wax/local_dining-24px.svg", true, true);
-      groupbox4flow = new qx.ui.layout.Flow(6,6,"left");
+      var groupbox4flow = new qx.ui.layout.Flow(6,6,"left");
       groupbox4.setLayout(groupbox4flow);
       groupbox4.set({allowShrinkX: true, allowShrinkY: true, allowGrowX: true, allowGrowY: true}); 
       groupbox4.add(new qx.ui.basic.Image("wax/bar_chart-24px.svg").set({scale: true, width: 242, height: 242}));
