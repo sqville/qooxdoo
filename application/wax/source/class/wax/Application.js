@@ -62,17 +62,24 @@ qx.Class.define("wax.Application",
       // App's Root
       var approot = this.getRoot();
       //approot.getContentElement().setStyle("touch-action", "none");
-      //document.body.style.TouchAction = "none";
+      document.documentElement.style.overscrollbehavior = "none";
+      document.body.style.overscrollbehavior = "none";
+      //document.getElementsByTagName( 'html' )[0].setStyle("overscroll-behavior", "none");
+      approot.getContentElement().setStyle("overscroll-behavior", "none");
+      approot.getContentElement().setStyle("position", "fixed");
 
       // Add a Blocker to the application's root for the Main Menu Popup
       this._blocker = new qx.ui.core.Blocker(approot).set({color: "black", opacity: .08});
       
       // App's main Container (Composite) with Dock Layout 
       var appcompdock = new qx.ui.container.Composite(new qx.ui.layout.Dock(0, 0)).set({backgroundColor: "transparent"});
+      appcompdock.getContentElement().setStyle("position", "fixed");
+      appcompdock.getContentElement().setStyle("overscroll-behavior", "none");
       
       // Dock's North section (Canvas)
       var northhbox = this._northBox = new qx.ui.container.Composite(new qx.ui.layout.Canvas()).set({backgroundColor: "white", decorator : "topheader"});
-      
+      northhbox.getContentElement().setStyle("position", "fixed");
+
       // Dock's West section (VBox)
       var westbox = this._westBox = new qx.ui.container.Composite(new qx.ui.layout.VBox(6)).set({backgroundColor: "white", padding: [10,10,10,10], decorator : "leftside"});
 
