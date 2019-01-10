@@ -68,13 +68,14 @@ qx.Class.define("wax.Application",
       approot.getContentElement().setStyle("overscroll-behavior", "none");
       approot.getContentElement().setStyle("position", "fixed");
 
+
       // Add a Blocker to the application's root for the Main Menu Popup
       this._blocker = new qx.ui.core.Blocker(approot).set({color: "black", opacity: .08});
       
       // App's main Container (Composite) with Dock Layout 
       var appcompdock = new qx.ui.container.Composite(new qx.ui.layout.Dock(0, 0)).set({backgroundColor: "transparent"});
-      appcompdock.getContentElement().setStyle("position", "fixed");
-      appcompdock.getContentElement().setStyle("overscroll-behavior", "none");
+      //appcompdock.getContentElement().setStyle("position", "fixed");
+      //appcompdock.getContentElement().setStyle("overscroll-behavior", "none");
       
       // Dock's North section (Canvas)
       var northhbox = this._northBox = new qx.ui.container.Composite(new qx.ui.layout.Canvas()).set({backgroundColor: "white", decorator : "topheader"});
@@ -423,7 +424,18 @@ qx.Class.define("wax.Application",
 
       // mobile
       if (qx.core.Environment.get("device.type") == "mobile"){
-      	scrollwest.setVisibility("excluded");
+        scrollwest.setVisibility("excluded");
+        
+        // Prevent pull down refresh on Chrome iOS
+        qx.event.Registration.addListener(window, "touchmove", function(e){
+          var lastY = 0;
+          var pageY = e.changedTouches[0];
+          var scrollY = window.pageYOffset || window.scrollTop || 0;
+          if (pageY > lastY && scrollY === 0) {
+            e.preventDefault();
+          }
+          lastY = pageY;
+        }, this);
       }
 
     },
