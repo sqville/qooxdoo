@@ -15,11 +15,12 @@ qx.Theme.define("wax.theme.Decoration",
   decorations :
   {
 
-    "groupbox-open-right" :
+    "tablelist-list" :
     {
       style :
       {
-        backgroundPositionX: "right"
+        width : 1,
+        color : "gray"
       }
     },
     
@@ -27,7 +28,6 @@ qx.Theme.define("wax.theme.Decoration",
     {
       style :
       {
-        //backgroundImage: "wax/round_sync_black_24dp.png", 
         backgroundImage: "wax/baseline-expand_less-24px.svg",
         backgroundRepeat: "no-repeat",
         backgroundPositionX: "right",
@@ -39,7 +39,6 @@ qx.Theme.define("wax.theme.Decoration",
     {
       style :
       {
-        //backgroundImage: "wax/test.png",
         backgroundImage: "wax/baseline-expand_more-24px.svg",
         backgroundRepeat: "no-repeat",
         backgroundPositionX: "right",

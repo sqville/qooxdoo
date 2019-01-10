@@ -74,7 +74,7 @@ qx.Class.define("wax.Application",
       var northhbox = this._northBox = new qx.ui.container.Composite(new qx.ui.layout.Canvas()).set({backgroundColor: "white", decorator : "topheader"});
       
       // Dock's West section (VBox)
-      var westbox = this._westBox = new qx.ui.container.Composite(new qx.ui.layout.VBox().set({spacing: 6})).set({backgroundColor: "white", padding: [10,10,10,10], decorator : "leftside"});
+      var westbox = this._westBox = new qx.ui.container.Composite(new qx.ui.layout.VBox(6)).set({backgroundColor: "white", padding: [10,10,10,10], decorator : "leftside"});
 
       // Dock's Center section (Stack) === THE STACK ===
       var centerbox = new qx.ui.container.Stack().set({backgroundColor: "white", padding: [10,26]});
@@ -168,7 +168,7 @@ qx.Class.define("wax.Application",
       //more structure
       dashboardpage.setLayout(new qx.ui.layout.VBox(6).set({alignX: "left"}));
       var dashboardsubpage1 = new qx.ui.container.Composite();
-      var dashboardflow = new qx.ui.layout.Flow().set({alignX: "center"});
+      var dashboardflow = new qx.ui.layout.Flow(16,20,"left");
       dashboardsubpage1.setLayout(dashboardflow);
       
       
@@ -178,15 +178,43 @@ qx.Class.define("wax.Application",
       // First page marker 
       var label1 = new qx.ui.basic.Label("Dashboard Page Marker").set({font: "control-header", decorator : "border-me"});
       // GroubBox
-      var groupbox1 = new wax.GroupBox("First GroupBox for Wax", "wax/baseline-commute-24px.svg", true, true);
+      var groupbox1 = new wax.GroupBox("First GroupBox for Wax", "wax/baseline-directions_subway-24px.svg", true, true);
       groupbox1.setLayout(new qx.ui.layout.VBox());
-      groupbox1.add(new qx.ui.form.CheckBox("Show debugging content"));
-      groupbox1.add(new qx.ui.form.CheckBox("Enable code completion"));
-      groupbox1.add(new qx.ui.form.CheckBox("Show debugging console"));
+      var piechartimage = new qx.ui.basic.Image("wax/pie_chart-24px.svg").set({scale: true, width: 312, height: 312});
+
+      var groupbox2 = new wax.GroupBox("Second GroupBox for Wax", "wax/local_airport-24px.svg", true, true);
+      groupbox2.setLayout(new qx.ui.layout.VBox());
+
+      var groupbox3 = new wax.GroupBox("Third GroupBox for Wax - with linebreak", "wax/commute-24px.svg", true, true);
+      groupbox3.setLayout(new qx.ui.layout.VBox());
+
+      var groupbox4 = new wax.GroupBox("Forth GroupBox for Wax - Flow within a Flow", "wax/local_dining-24px.svg", true, true);
+      groupbox4flow = new qx.ui.layout.Flow(6,6,"left");
+      groupbox4.setLayout(groupbox4flow);
+      groupbox4.set({allowShrinkX: true, allowShrinkY: true, allowGrowX: true, allowGrowY: true}); 
+      groupbox4.add(new qx.ui.basic.Image("wax/bar_chart-24px.svg").set({scale: true, width: 242, height: 242}));
+      groupbox4.add(new qx.ui.basic.Image("wax/bar_chart-24px.1.svg").set({scale: true, width: 242, height: 242}));
+      groupbox4.add(new qx.ui.basic.Image("wax/bar_chart-24px.2.svg").set({scale: true, width: 242, height: 242}));
+      groupbox4.add(new qx.ui.basic.Atom("<em>Year over year growth shows how the market favored the bold</em>","wax/bolt-24px.svg").set({rich: true, width: 200, height: 142}));
+
+      var barchartimage = new qx.ui.basic.Image("wax/view_compact-24px.svg").set({scale: true, width: 312, height: 312});
+      var bubblechartimage = new qx.ui.basic.Image("wax/bubble_chart-24px.svg").set({scale: true, width: 312, height: 312});
+      
+      groupbox1.add(piechartimage);
+      groupbox1.add(new qx.ui.basic.Label("<b>Results:</b> Half of the pie is divided").set({rich: true}));
+      groupbox2.add(barchartimage);
+      groupbox2.add(new qx.ui.basic.Label("<b>Overview:</b> Room will be configured in this manner").set({rich: true}));
+      groupbox3.add(bubblechartimage);
+      groupbox3.add(new qx.ui.basic.Label("<b>Insight:</b> Indicators suggest we go with <span style='color:red;'><b>Red</b></span>").set({rich: true}));
+
       
       // Assemble
       dashboardpage.add(label1);
       dashboardsubpage1.add(groupbox1);
+      dashboardsubpage1.add(groupbox2);
+      dashboardsubpage1.add(groupbox3, {lineBreak: true});
+      dashboardsubpage1.add(groupbox4);
+      
       dashboardpage.add(dashboardsubpage1);
 
 
@@ -196,10 +224,10 @@ qx.Class.define("wax.Application",
 
       // Third page marker
       var label6 = new qx.ui.basic.Label("Table to List Page Marker").set({font: "control-header", decorator : "border-me"});
-      var tablelistflow = new qx.ui.layout.Flow().set({alignY: "bottom"});
+      var tablelistflow = new qx.ui.layout.Flow().set({alignY: "bottom", alignX: "left"});
       tablelistpage.setLayout(tablelistflow);
       tablelistpage.add(label6, {lineBreak: true, stretch: true});
-      var tableliststack = new qx.ui.container.Stack().set({backgroundColor: "white", padding: 10});
+      var tableliststack = new qx.ui.container.Stack().set({backgroundColor: "white", paddingTop: 10});
       var tablelisttable = this.__createTable();
       var tablelistlist = this.__createList();
       tableliststack.add(tablelisttable);
@@ -222,8 +250,8 @@ qx.Class.define("wax.Application",
       // Create Menu Buttons that will navigate the user through THE STACK Pages 
       // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
       // Populate westBox with content
-      var lblleftnavheader = new qx.ui.basic.Label("Header").set({alignX: "center", anonymous: true, focusable: false, selectable: false});
-      westbox.add(lblleftnavheader);
+      var atmleftnavheader = new qx.ui.basic.Atom("Header Atom", "wax/round-account_circle-24px.svg").set({appearance: "header-atom", anonymous: true, focusable: false, selectable: false });
+      westbox.add(atmleftnavheader);
       var tbtndashboardpage = new wax.MenuButton("Dashboard with Flow", "wax/test.png").set({center: false});
       westbox.add(tbtndashboardpage);
 
@@ -239,7 +267,7 @@ qx.Class.define("wax.Application",
       westboxbuttongroup.add(tbtndashboardpage, tbtnSecondPage, tbtnThirdPage);
       
       // CLONE the above controls
-      var lblmenuleftnavheader = lblleftnavheader.clone();
+      var lblmenuleftnavheader = atmleftnavheader.clone();
       var tbtnmenudashboardpage = tbtndashboardpage.clone();
       var tbtnmenuSecondPage = tbtnSecondPage.clone();
       var lblmenusubsecondpage = lblsubsecondpage.clone();
@@ -394,31 +422,16 @@ qx.Class.define("wax.Application",
 
     __createTable : function()
     { 
-      var rowData = [];
-      var now = new Date().getTime();
-      var date;
-      var dateRange = 400 * 24 * 60 * 60 * 1000; // 400 days
-      
-      date = new Date(now + Math.random() * dateRange - dateRange / 2);
-      rowData.push([ "Completed", "001007222", "Anthem WGS", date ]);
-      date = new Date(now + Math.random() * dateRange - dateRange / 2);
-      rowData.push([ "Completed", "002009333", "Anthem Modernization", date ]);
-      date = new Date(now + Math.random() * dateRange - dateRange / 2);
-      rowData.push([ "Completed", "003002777", "HCSC", date ]);
-      date = new Date(now + Math.random() * dateRange - dateRange / 2);
-      rowData.push([ "Completed", "004074555", "State of New Mexico", date ]);
-      date = new Date(now + Math.random() * dateRange - dateRange / 2);
-      rowData.push([ "In Progress", "005111888", "eLicensing Modernization", date ]);
-      date = new Date(now + Math.random() * dateRange - dateRange / 2);
-      rowData.push([ "In Progress", "006003662", "Guadalupe Mountains", date ]);
+      var rowData = this.__createrowData();
 
       var tableModel = new qx.ui.table.model.Simple();
-      tableModel.setColumns([ "Status", "Item ID", "Project", "Date Submitted" ]);
+      tableModel.setColumns([ "", "Status", "Item ID", "Project", "Date Submitted" ]);
       tableModel.setData(rowData);
       tableModel.setColumnEditable(1, false);
       tableModel.setColumnEditable(2, false);
       tableModel.setColumnSortable(3, false);
       tableModel.setColumnSortable(4, false);
+      tableModel.setColumnSortable(5, false);
 
       var table = new qx.ui.table.Table(tableModel);
 
@@ -431,9 +444,17 @@ qx.Class.define("wax.Application",
         forceLineHeight: true
       });
 
+      var imgrenderer = new qx.ui.table.cellrenderer.Image(24,24);
+      table.getTableColumnModel().setDataCellRenderer(0, imgrenderer);
+
       table.getSelectionModel().setSelectionMode(qx.ui.table.selection.Model.MULTIPLE_INTERVAL_SELECTION);
 
-      //var tcm = table.getTableColumnModel();
+      var tcm = table.getTableColumnModel();
+      tcm.setColumnWidth(0,40);
+      tcm.setColumnWidth(1,95);
+      tcm.setColumnWidth(2,100);
+      tcm.setColumnWidth(3,215);
+      tcm.setColumnWidth(4,130);
 
       //tcm.setDataCellRenderer(3, new qx.ui.table.cellrenderer.Boolean());
       //tcm.setDataCellRenderer(4, new qx.ui.table.cellrenderer.Html());
@@ -445,50 +466,45 @@ qx.Class.define("wax.Application",
 
     __createList : function()
     { 
+      var rowData = this.__createrowData();
+
+      var listvbox = new qx.ui.layout.VBox(4, null, "separator-vertical");
+      var listctrl = new qx.ui.container.Composite(listvbox);
+
+      for (var i in rowData) {
+        var groupbox1 = new wax.GroupBox(rowData[i][3], rowData[i][0], true, false);
+        groupbox1.setLayout(new qx.ui.layout.VBox(4));
+        groupbox1.add(new qx.ui.basic.Label("<b>Status:</b> " + rowData[i][1]).set({rich: true}));
+        groupbox1.add(new qx.ui.basic.Label("<b>Item ID:</b> " + rowData[i][2]).set({rich: true}));
+        groupbox1.add(new qx.ui.basic.Label("<b>Date Submitted:</b> " + rowData[i][4]).set({rich: true}));
+
+        listctrl.add(groupbox1);
+      }
+    
+      return listctrl;
+    },
+
+    __createrowData : function()
+    {
       var rowData = [];
       var now = new Date().getTime();
       var date;
       var dateRange = 400 * 24 * 60 * 60 * 1000; // 400 days
       
       date = new Date(now + Math.random() * dateRange - dateRange / 2);
-      rowData.push([ "Completed", "001007222", "Anthem WGS", date ]);
+      rowData.push([ "wax/round-check_circle_outline-24px.svg", "Completed", "001007222", "Anthem WGS", date ]);
       date = new Date(now + Math.random() * dateRange - dateRange / 2);
-      rowData.push([ "Completed", "002009333", "Anthem Modernization", date ]);
+      rowData.push([ "wax/round-check_circle_outline-24px.svg", "Completed", "002009333", "Anthem Modernization", date ]);
       date = new Date(now + Math.random() * dateRange - dateRange / 2);
-      rowData.push([ "Completed", "003002777", "HCSC", date ]);
+      rowData.push([ "wax/round-check_circle_outline-24px.svg", "Completed", "003002777", "HCSC", date ]);
       date = new Date(now + Math.random() * dateRange - dateRange / 2);
-      rowData.push([ "Completed", "004074555", "State of New Mexico", date ]);
+      rowData.push([ "wax/round-check_circle_outline-24px.svg", "Completed", "004074555", "State of New Mexico", date ]);
       date = new Date(now + Math.random() * dateRange - dateRange / 2);
-      rowData.push([ "In Progress", "005111888", "eLicensing Modernization", date ]);
+      rowData.push([ "wax/round-sync-24px.svg", "In Progress", "005111888", "eLicensing Modernization", date ]);
       date = new Date(now + Math.random() * dateRange - dateRange / 2);
-      rowData.push([ "In Progress", "006003662", "Guadalupe Mountains", date ]);
+      rowData.push([ "wax/round-sync-24px.svg", "In Progress", "006003662", "Guadalupe Mountains", date ]);
 
-      var listvbox = new qx.ui.layout.VBox(8);
-      var listctrl = new qx.ui.container.Composite(listvbox);
-
-      var groupbox1 = new wax.GroupBox(rowData[0][2], "wax/round-check_circle_outline-24px.svg", true, false);
-      groupbox1.setLayout(new qx.ui.layout.VBox(4));
-      groupbox1.add(new qx.ui.basic.Label("<b>Status:</b> " + rowData[0][0]).set({rich: true}));
-      groupbox1.add(new qx.ui.basic.Label("<b>Item ID:</b> " + rowData[0][1]).set({rich: true}));
-      groupbox1.add(new qx.ui.basic.Label("<b>Date Submitted:</b> " + rowData[0][3]).set({rich: true}));
-
-      var groupbox2 = new wax.GroupBox(rowData[1][2], "wax/round-check_circle_outline-24px.svg", true, false);
-      groupbox2.setLayout(new qx.ui.layout.VBox(4));
-      groupbox2.add(new qx.ui.basic.Label("<b>Status:</b> " + rowData[1][0]).set({rich: true}));
-      groupbox2.add(new qx.ui.basic.Label("<b>Item ID:</b> " + rowData[1][1]).set({rich: true}));
-      groupbox2.add(new qx.ui.basic.Label("<b>Date Submitted:</b> " + rowData[1][3]).set({rich: true}));
-
-      var groupbox3 = new wax.GroupBox(rowData[4][2], "wax/round-sync-24px.svg", true, false);
-      groupbox3.setLayout(new qx.ui.layout.VBox(4));
-      groupbox3.add(new qx.ui.basic.Label("<b>Status:</b> " + rowData[4][0]).set({rich: true}));
-      groupbox3.add(new qx.ui.basic.Label("<b>Item ID:</b> " + rowData[4][1]).set({rich: true}));
-      groupbox3.add(new qx.ui.basic.Label("<b>Date Submitted:</b> " + rowData[4][3]).set({rich: true}));
-
-      listctrl.add(groupbox1);
-      listctrl.add(groupbox2);
-      listctrl.add(groupbox3);
-    
-      return listctrl;
+      return rowData;
     }
   }
 });

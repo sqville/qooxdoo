@@ -14,6 +14,33 @@ qx.Theme.define("wax.theme.Appearance",
 
   appearances :
   {
+    "header-atom" :
+    {
+      alias : "atom",
+
+      style : function(states)
+      {
+        return {
+          iconPosition: "top", 
+          center: true
+        }
+      }
+    },
+
+    "header-atom/icon" :
+    {
+      include : "image",
+
+      style : function(states)
+      {
+        return {
+          scale: true,
+          width: 56,
+          height: 56
+        }
+      }
+    },
+    
     "groupbox/legend" :
     {
       alias : "atom",
