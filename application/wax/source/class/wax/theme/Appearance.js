@@ -65,28 +65,85 @@ qx.Theme.define("wax.theme.Appearance",
         };
       }
     },
-    
-    "westmainmenubutton" : "button",
-    
-    "westmainmenubutton/label" : {
-      include : "label",
 
-      style : function() {
-        return {
-          alignX: "left"
-        };
-      }
-    },
+    /*
+    ---------------------------------------------------------------------------
+      wax.MENUBUTTON
+    ---------------------------------------------------------------------------
+    */
+   "mainmenubutton-frame" :
+   {
+     alias : "atom",
 
-    "westmainmenubutton/icon" : {
-      include : "icon",
+     style : function(states)
+     {
+       var decorator = "mainmenubutton-box";
+       var padding = [3, 8];
 
-      style : function() {
+       if (!states.disabled) {
+         if (states.hovered && !states.pressed && !states.checked) {
+           decorator = "mainmenubutton-box-hovered";
+           padding = [3,8,3,5];
+         } /*else if (states.hovered && (states.pressed || states.checked)) {
+           decorator = "mainmenubutton-box-pressed-hovered";
+         }*/ else if (states.pressed || states.checked) {
+           decorator = "mainmenubutton-box-pressed";
+           padding = [3,8,3,5];
+         }
+       }
+
+       return {
+         decorator : decorator,
+         padding : padding,
+         cursor: states.disabled ? undefined : "pointer",
+         minWidth: 5,
+         minHeight: 5
+       };
+     }
+   },
+
+   "mainmenubutton-frame/label" : {
+     alias : "atom/label",
+
+     style : function(states)
+     {
+       return {
+         textColor : states.disabled ? "text-disabled" : undefined
+       };
+     }
+   },
+
+   "mainmenubutton" :
+   {
+     alias : "mainmenubutton-frame",
+     include : "mainmenubutton-frame",
+
+     style : function(states)
+     {
+       return {
+         center : false
+       };
+     }
+   },
+
+   "mainmenubutton/icon" : {
+    include : "icon",
+
+    style : function() {
         return {
           alignX: "left",
           marginLeft: -20
         };
       }
+    },
+
+    "submenubutton" : {
+     style : function(states)
+     {
+       return {
+         textColor : states.hovered ? "black" : "gray"
+       };
+     }
     }
   }
 });

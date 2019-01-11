@@ -50,6 +50,8 @@ qx.Class.define("wax.GroupBox",
 
     this.initOpen();
     this.initCollapsable();
+
+    this.set({ allowStretchX: [true, true], allowStretchY: [true, true] });
   },
   /*
   *****************************************************************************

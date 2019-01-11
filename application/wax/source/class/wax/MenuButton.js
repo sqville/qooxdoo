@@ -52,7 +52,7 @@ qx.Class.define("wax.MenuButton",
     appearance :
     {
       refine : true,
-      init : "button"
+      init : "mainmenubutton"
     },
 
     // overridden

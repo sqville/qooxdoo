@@ -79,7 +79,7 @@ qx.Class.define("wax.Application",
       //northhbox.getContentElement().setStyle("position", "fixed");
 
       // Dock's West section (VBox)
-      var westbox = this._westBox = new qx.ui.container.Composite(new qx.ui.layout.VBox(6)).set({backgroundColor: "white", padding: [10,10,10,10], decorator : "leftside"});
+      var westbox = this._westBox = new qx.ui.container.Composite(new qx.ui.layout.VBox(0)).set({backgroundColor: "white", padding: [10,10,10,10], decorator : "leftside"});
 
       // Dock's Center section (Stack) === THE STACK ===
       var centerbox = new qx.ui.container.Stack().set({backgroundColor: "white", padding: [10,26]});
@@ -105,7 +105,7 @@ qx.Class.define("wax.Application",
       
       // Main Menu Popup (VBox)
       var mainmenupopup = new qx.ui.popup.Popup().set({allowGrowY: true, padding: 10});
-      mainmenupopup.setLayout(new qx.ui.layout.VBox(6));
+      mainmenupopup.setLayout(new qx.ui.layout.VBox(0));
 
       // Profile Menu
       var profilemenu = new qx.ui.menu.Menu();
@@ -195,13 +195,13 @@ qx.Class.define("wax.Application",
       groupbox3.setLayout(new qx.ui.layout.VBox());
 
       var groupbox4 = new wax.GroupBox("Forth GroupBox for Wax - Flow within a Flow", "wax/local_dining-24px.svg", true, true);
-      var groupbox4flow = new qx.ui.layout.Flow(6,6,"left");
+      var groupbox4flow = new qx.ui.layout.Flow(6,6,"center");
       groupbox4.setLayout(groupbox4flow);
       groupbox4.set({allowShrinkX: true, allowShrinkY: true, allowGrowX: true, allowGrowY: true}); 
       groupbox4.add(new qx.ui.basic.Image("wax/bar_chart-24px.svg").set({scale: true, width: 242, height: 242}));
       groupbox4.add(new qx.ui.basic.Image("wax/bar_chart-24px.1.svg").set({scale: true, width: 242, height: 242}));
       groupbox4.add(new qx.ui.basic.Image("wax/bar_chart-24px.2.svg").set({scale: true, width: 242, height: 242}));
-      groupbox4.add(new qx.ui.basic.Atom("<em>Year over year growth shows how the market favored the bold</em>","wax/bolt-24px.svg").set({rich: true, width: 200, height: 142}));
+      groupbox4.add(new qx.ui.basic.Atom("Year over year growth shows how the market favored the bold","wax/bolt-24px.svg").set({rich: true, width: 200, height: 142}));
 
       var barchartimage = new qx.ui.basic.Image("wax/view_compact-24px.svg").set({scale: true, width: 312, height: 312});
       var bubblechartimage = new qx.ui.basic.Image("wax/bubble_chart-24px.svg").set({scale: true, width: 312, height: 312});
@@ -219,7 +219,7 @@ qx.Class.define("wax.Application",
       dashboardsubpage1.add(groupbox1);
       dashboardsubpage1.add(groupbox2);
       dashboardsubpage1.add(groupbox3, {lineBreak: true});
-      dashboardsubpage1.add(groupbox4);
+      dashboardsubpage1.add(groupbox4, {lineBreak: true, stretch: true});
       
       dashboardpage.add(dashboardsubpage1);
 
@@ -232,15 +232,18 @@ qx.Class.define("wax.Application",
 
       // Third page marker
       var label6 = new qx.ui.basic.Label("Table to List Page Marker").set({font: "control-header", decorator : "border-me"});
-      var tablelistflow = new qx.ui.layout.Flow().set({alignY: "bottom", alignX: "left"});
-      tablelistpage.setLayout(tablelistflow);
-      tablelistpage.add(label6, {lineBreak: true, stretch: true});
-      var tableliststack = new qx.ui.container.Stack().set({backgroundColor: "white", paddingTop: 10});
+      //var tablelistflow = new qx.ui.layout.Flow().set({alignY: "bottom", alignX: "left"});
+      var tablelistvbox = new qx.ui.layout.VBox();
+      //tablelistpage.set({backgroundColor: "yellow"});
+      //tablelistpage.setLayout(tablelistflow);
+      tablelistpage.setLayout(tablelistvbox);
+      tablelistpage.add(label6);
+      var tableliststack = new qx.ui.container.Stack().set({ paddingTop: 10, allowGrowY: true});
       var tablelisttable = this.__createTable();
       var tablelistlist = this.__createList();
       tableliststack.add(tablelisttable);
       tableliststack.add(tablelistlist);
-      tablelistpage.add(tableliststack, {lineBreak: true, stretch: true});
+      tablelistpage.add(tableliststack, {flex: 1});
       
       // Assemble - THE STACK 
       centerbox.add(dashboardpage);
@@ -260,15 +263,16 @@ qx.Class.define("wax.Application",
       // Populate westBox with content
       var atmleftnavheader = new qx.ui.basic.Atom("Header Atom", "wax/round-account_circle-24px.svg").set({appearance: "header-atom", anonymous: true, focusable: false, selectable: false });
       westbox.add(atmleftnavheader);
-      var tbtndashboardpage = new wax.MenuButton("Dashboard with Flow", "wax/test.png").set({center: false});
+      var tbtndashboardpage = new wax.MenuButton("Dashboard with Flow", "wax/test.png");
       westbox.add(tbtndashboardpage);
 
-      var tbtnSecondPage = new wax.MenuButton("Overview Page to Detail Pages", "wax/test.png").set({center: false});
-      var lblsubsecondpage = new qx.ui.basic.Label("Direct Link to a Detail Page").set({visibility: "excluded"});
+      var tbtnSecondPage = new wax.MenuButton("Overview Page to Detail Pages", "wax/test.png");
+      var lblsubsecondpage = new qx.ui.basic.Label("Direct Link to a Detail Page").set({ appearance: "submenubutton", allowGrowX: true, padding: [10,4,10,42,], visibility: "excluded", decorator : "mainmenubutton-box-pressed" });
+      lblsubsecondpage.addState("hovered");
       westbox.add(tbtnSecondPage);
       westbox.add(lblsubsecondpage);
 
-      var tbtnThirdPage = new wax.MenuButton("Table List Conversion", "wax/test.png").set({center: false});
+      var tbtnThirdPage = new wax.MenuButton("Table List Conversion", "wax/test.png");
       westbox.add(tbtnThirdPage);
 
       var westboxbuttongroup = new qx.ui.form.RadioGroup();
