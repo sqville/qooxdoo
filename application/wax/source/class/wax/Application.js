@@ -62,12 +62,9 @@ qx.Class.define("wax.Application",
       // App's Root
       var approot = this.getRoot();
       //approot.getContentElement().setStyle("touch-action", "none");
-      document.documentElement.style.overscrollbehavior = "none";
-      document.body.style.overscrollbehavior = "none";
+      //document.documentElement.style.overscrollbehavior = "none, none";
+      //var docele = document.documentElement;
       //document.getElementsByTagName( 'html' )[0].setStyle("overscroll-behavior", "none");
-      approot.getContentElement().setStyle("overscroll-behavior", "none");
-      approot.getContentElement().setStyle("position", "fixed");
-
 
       // Add a Blocker to the application's root for the Main Menu Popup
       this._blocker = new qx.ui.core.Blocker(approot).set({color: "black", opacity: .08});
@@ -79,7 +76,7 @@ qx.Class.define("wax.Application",
       
       // Dock's North section (Canvas)
       var northhbox = this._northBox = new qx.ui.container.Composite(new qx.ui.layout.Canvas()).set({backgroundColor: "white", decorator : "topheader"});
-      northhbox.getContentElement().setStyle("position", "fixed");
+      //northhbox.getContentElement().setStyle("position", "fixed");
 
       // Dock's West section (VBox)
       var westbox = this._westBox = new qx.ui.container.Composite(new qx.ui.layout.VBox(6)).set({backgroundColor: "white", padding: [10,10,10,10], decorator : "leftside"});
@@ -229,7 +226,9 @@ qx.Class.define("wax.Application",
 
       // Second page marker  
       var label5 = new qx.ui.basic.Label("Overview Page Marker").set({font: "control-header", decorator : "border-me"});
-      overviewpage.add(label5);
+      var labelenv = new qx.ui.basic.Label("device.name=" + qx.core.Environment.get("device.name") + "<br>device.type=" + qx.core.Environment.get("device.type") + "<br>browser.name=" + qx.core.Environment.get("browser.name") + "<br>browser.version=" + qx.core.Environment.get("browser.version") + "<br>os.name=" + qx.core.Environment.get("os.name") + "<br>engine.name=" + qx.core.Environment.get("engine.name") + "<br>os.version=" + qx.core.Environment.get("os.version") + "<br>phonegap=" + qx.core.Environment.get("phonegap")).set({rich: true});
+      overviewpage.add(label5, {lineBreak: true});
+      overviewpage.add(labelenv);
 
       // Third page marker
       var label6 = new qx.ui.basic.Label("Table to List Page Marker").set({font: "control-header", decorator : "border-me"});
@@ -421,13 +420,40 @@ qx.Class.define("wax.Application",
       // ====================================
       // =====  Device Targetted code  ======
       // ====================================
+     
 
       // mobile
       if (qx.core.Environment.get("device.type") == "mobile"){
+        
+        // No need for the west scroll area (main menu) in mobile
         scrollwest.setVisibility("excluded");
+
+        // This addresses the scroll bouncing in: 
+        //  - Chrome for Android
+        var dsktopstylsheet = qx.ui.style.Stylesheet.getInstance();
+        dsktopstylsheet.addRule("html", "overscroll-behavior : none none;");
+        dsktopstylsheet.addRule("body", "overscroll-behavior : none none;");
+
+
+        // Set the body tag's position to prevent scroll bouncing (and pull down refresh) in:
+        //  - Safari for iOS
+        //      - Edge for iOS (same as above browser now)
+        //  - FireFox for iOS
+        document.body.style.position = "fixed";
+
+        // TODO *Need solution to address scroll bouncing in:
+        //   - Chrome for iOS
+
+        // App still bounces in Landscape; Locking screen to portrait where API is available
+        // https://developer.mozilla.org/en-US/docs/Web/API/Screen/lockOrientation
+        screen.lockOrientationUniversal = screen.lockOrientation || screen.mozLockOrientation || screen.msLockOrientation;
+        screen.lockOrientationUniversal("portrait");
+
+        // Fix approot's position
+        //approot.getContentElement().setStyle("position", "fixed");
         
         // Prevent pull down refresh on Chrome iOS
-        qx.event.Registration.addListener(window, "touchmove", function(e){
+       /* qx.event.Registration.addListener(window, "touchmove", function(e){
           var lastY = 0;
           var pageY = e.changedTouches[0];
           var scrollY = window.pageYOffset || window.scrollTop || 0;
@@ -435,7 +461,7 @@ qx.Class.define("wax.Application",
             e.preventDefault();
           }
           lastY = pageY;
-        }, this);
+        }, this);*/
       }
 
     },
