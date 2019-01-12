@@ -61,22 +61,15 @@ qx.Class.define("wax.Application",
 
       // App's Root
       var approot = this.getRoot();
-      //approot.getContentElement().setStyle("touch-action", "none");
-      //document.documentElement.style.overscrollbehavior = "none, none";
-      //var docele = document.documentElement;
-      //document.getElementsByTagName( 'html' )[0].setStyle("overscroll-behavior", "none");
 
       // Add a Blocker to the application's root for the Main Menu Popup
       this._blocker = new qx.ui.core.Blocker(approot).set({color: "black", opacity: .08});
       
       // App's main Container (Composite) with Dock Layout 
       var appcompdock = new qx.ui.container.Composite(new qx.ui.layout.Dock(0, 0)).set({backgroundColor: "transparent"});
-      //appcompdock.getContentElement().setStyle("position", "fixed");
-      //appcompdock.getContentElement().setStyle("overscroll-behavior", "none");
       
       // Dock's North section (Canvas)
       var northhbox = this._northBox = new qx.ui.container.Composite(new qx.ui.layout.Canvas()).set({backgroundColor: "white", decorator : "topheader"});
-      //northhbox.getContentElement().setStyle("position", "fixed");
 
       // Dock's West section (VBox)
       var westbox = this._westBox = new qx.ui.container.Composite(new qx.ui.layout.VBox(0)).set({backgroundColor: "white", padding: [10,10,10,10], decorator : "leftside"});
@@ -176,9 +169,7 @@ qx.Class.define("wax.Application",
       var dashboardsubpage1 = new qx.ui.container.Composite();
       var dashboardflow = new qx.ui.layout.Flow(16,20,"left");
       dashboardsubpage1.setLayout(dashboardflow);
-      
-      
-      //dashboardpage.add(label1, {lineBreak: true});
+
 
       // Controls
       // First page marker 
