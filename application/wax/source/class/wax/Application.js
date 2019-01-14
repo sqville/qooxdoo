@@ -72,7 +72,7 @@ qx.Class.define("wax.Application",
       var northhbox = this._northBox = new qx.ui.container.Composite(new qx.ui.layout.Canvas()).set({backgroundColor: "white", decorator : "topheader"});
 
       // Dock's West section (VBox)
-      var westbox = this._westBox = new qx.ui.container.Composite(new qx.ui.layout.VBox(0)).set({backgroundColor: "white", padding: [10,10,10,10], decorator : "leftside"});
+      var westbox = this._westBox = new qx.ui.container.Composite(new qx.ui.layout.VBox(0)).set({backgroundColor: "white", padding: [10,0,10,0], decorator : "leftside"});
 
       // Dock's Center section (Stack) === THE STACK ===
       var centerbox = new qx.ui.container.Stack().set({backgroundColor: "white", padding: [10,26]});
@@ -160,7 +160,7 @@ qx.Class.define("wax.Application",
        // Table to List Page - shows how the Table Widget converts to a List Widget for smaller screens
       // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
       var dashboardpage = new qx.ui.container.Composite();
-      var overviewpage = new qx.ui.container.Composite(new qx.ui.layout.Flow());
+      var overviewpage = new qx.ui.container.Composite(new qx.ui.layout.Flow(20,20, "center"));
       var detailpage = new qx.ui.container.Composite(new qx.ui.layout.Flow());
       var tablelistpage = new qx.ui.container.Composite();
       
@@ -177,7 +177,7 @@ qx.Class.define("wax.Application",
       // GroubBox
       var groupbox1 = new wax.GroupBox("First GroupBox for Wax", "wax/baseline-directions_subway-24px.svg", true, true);
       groupbox1.setLayout(new qx.ui.layout.VBox());
-      var piechartimage = new qx.ui.basic.Image("wax/pie_chart-24px.svg").set({scale: true, width: 312, height: 312});
+      var piechartimage = new qx.ui.basic.Image("wax/pie_chart-24px.svg").set({scale: true, width: 272, height: 272});
 
       var groupbox2 = new wax.GroupBox("Second GroupBox for Wax", "wax/local_airport-24px.svg", true, true);
       groupbox2.setLayout(new qx.ui.layout.VBox());
@@ -189,9 +189,9 @@ qx.Class.define("wax.Application",
       var groupbox4flow = new qx.ui.layout.Flow(6,6,"center");
       groupbox4.setLayout(groupbox4flow);
       groupbox4.set({allowShrinkX: true, allowShrinkY: true, allowGrowX: true, allowGrowY: true}); 
-      groupbox4.add(new qx.ui.basic.Image("wax/bar_chart-24px.svg").set({scale: true, width: 242, height: 242}));
-      groupbox4.add(new qx.ui.basic.Image("wax/bar_chart-24px.1.svg").set({scale: true, width: 242, height: 242}));
-      groupbox4.add(new qx.ui.basic.Image("wax/bar_chart-24px.2.svg").set({scale: true, width: 242, height: 242}));
+      groupbox4.add(new qx.ui.basic.Image("wax/bar_chart-24px.svg").set({scale: true, width: 222, height: 222}));
+      groupbox4.add(new qx.ui.basic.Image("wax/bar_chart-24px.1.svg").set({scale: true, width: 222, height: 222}));
+      groupbox4.add(new qx.ui.basic.Image("wax/bar_chart-24px.2.svg").set({scale: true, width: 222, height: 222}));
       groupbox4.add(new qx.ui.basic.Atom("Year over year growth shows how the market favored the bold","wax/bolt-24px.svg").set({rich: true, width: 200, height: 142}));
 
       var barchartimage = new qx.ui.basic.Image("wax/view_compact-24px.svg").set({scale: true, width: 312, height: 312});
@@ -199,8 +199,10 @@ qx.Class.define("wax.Application",
       
       groupbox1.add(piechartimage);
       groupbox1.add(new qx.ui.basic.Label("<b>Results:</b> Half of the pie is divided").set({rich: true}));
-      groupbox2.add(barchartimage);
-      groupbox2.add(new qx.ui.basic.Label("<b>Overview:</b> Room will be configured in this manner").set({rich: true}));
+      var labelenv = new qx.ui.basic.Label("device.name=" + qx.core.Environment.get("device.name") + "<br>device.type=" + qx.core.Environment.get("device.type") + "<br>browser.name=" + qx.core.Environment.get("browser.name") + "<br>browser.version=" + qx.core.Environment.get("browser.version") + "<br>os.name=" + qx.core.Environment.get("os.name") + "<br>engine.name=" + qx.core.Environment.get("engine.name") + "<br>os.version=" + qx.core.Environment.get("os.version") + "<br>phonegap=" + qx.core.Environment.get("phonegap")).set({rich: true});
+      groupbox2.add(labelenv);
+      //groupbox2.add(barchartimage);
+      //groupbox2.add(new qx.ui.basic.Label("<b>Overview:</b> Room will be configured in this manner").set({rich: true}));
       groupbox3.add(bubblechartimage);
       groupbox3.add(new qx.ui.basic.Label("<b>Insight:</b> Indicators suggest we go with <span style='color:red;'><b>Red</b></span>").set({rich: true}));
 
@@ -217,9 +219,19 @@ qx.Class.define("wax.Application",
 
       // Second page marker  
       var label5 = new qx.ui.basic.Label("Overview Page Marker").set({font: "control-header", decorator : "border-me"});
-      var labelenv = new qx.ui.basic.Label("device.name=" + qx.core.Environment.get("device.name") + "<br>device.type=" + qx.core.Environment.get("device.type") + "<br>browser.name=" + qx.core.Environment.get("browser.name") + "<br>browser.version=" + qx.core.Environment.get("browser.version") + "<br>os.name=" + qx.core.Environment.get("os.name") + "<br>engine.name=" + qx.core.Environment.get("engine.name") + "<br>os.version=" + qx.core.Environment.get("os.version") + "<br>phonegap=" + qx.core.Environment.get("phonegap")).set({rich: true});
+      
       overviewpage.add(label5, {lineBreak: true});
-      overviewpage.add(labelenv);
+      //overviewpage.add(labelenv);
+      var secpagegroupbox1 = new wax.GroupBox("Do This","", true, true).set({appearance: "groupbox-connected", minWidth: 400});
+      secpagegroupbox1.getChildControl("open", true).setMarginRight(20);
+      secpagegroupbox1.setLayout(new qx.ui.layout.VBox());
+      secpagegroupbox1.add(labelenv.clone());
+      overviewpage.add(secpagegroupbox1);
+      var secpagegroupbox2 = new wax.GroupBox("Do That","", true, true).set({appearance: "groupbox-connected", minWidth: 400});
+      secpagegroupbox2.getChildControl("open", true).setMarginRight(20);
+      secpagegroupbox2.setLayout(new qx.ui.layout.VBox());
+      secpagegroupbox2.add(labelenv.clone());
+      overviewpage.add(secpagegroupbox2);
 
       // Third page marker
       var label6 = new qx.ui.basic.Label("Table to List Page Marker").set({font: "control-header", decorator : "border-me"});
@@ -254,16 +266,15 @@ qx.Class.define("wax.Application",
       // Populate westBox with content
       var atmleftnavheader = new qx.ui.basic.Atom("Header Atom", "wax/round-account_circle-24px.svg").set({appearance: "header-atom", anonymous: true, focusable: false, selectable: false });
       westbox.add(atmleftnavheader);
-      var tbtndashboardpage = new wax.MenuButton("Dashboard with Flow", "wax/test.png");
+      var tbtndashboardpage = new wax.MenuButton("Dashboard", "wax/test.png");
       westbox.add(tbtndashboardpage);
 
-      var tbtnSecondPage = new wax.MenuButton("Overview Page to Detail Pages", "wax/test.png");
-      var lblsubsecondpage = new qx.ui.basic.Label("Direct Link to a Detail Page").set({ appearance: "submenubutton", allowGrowX: true, padding: [10,4,10,42,], visibility: "excluded", decorator : "mainmenubutton-box-pressed" });
-      lblsubsecondpage.addState("hovered");
+      var tbtnSecondPage = new wax.MenuButton("Overview", "wax/test.png");
+      var btnSubSecondpage = new qx.ui.form.Button("Do This").set({ appearance: "submenubutton", allowGrowX: true, padding: [10,4,14,42,], visibility: "excluded"});
       westbox.add(tbtnSecondPage);
-      westbox.add(lblsubsecondpage);
+      westbox.add(btnSubSecondpage);
 
-      var tbtnThirdPage = new wax.MenuButton("Table List Conversion", "wax/test.png");
+      var tbtnThirdPage = new wax.MenuButton("List of Items", "wax/test.png");
       westbox.add(tbtnThirdPage);
 
       var westboxbuttongroup = new qx.ui.form.RadioGroup();
@@ -273,7 +284,7 @@ qx.Class.define("wax.Application",
       var lblmenuleftnavheader = atmleftnavheader.clone();
       var tbtnmenudashboardpage = tbtndashboardpage.clone();
       var tbtnmenuSecondPage = tbtnSecondPage.clone();
-      var lblmenusubsecondpage = lblsubsecondpage.clone();
+      var lblmenusubsecondpage = btnSubSecondpage.clone();
       lblmenusubsecondpage.setVisibility("visible");
       var tbtnmenuThirdPage = tbtnThirdPage.clone();
       // Add the clones to the Main Menu Popup
@@ -311,11 +322,11 @@ qx.Class.define("wax.Application",
 
       tbtnSecondPage.addListener("changeValue", function(e) {
         if (e.getData()) {
-          lblsubsecondpage.setVisibility("visible");
+          btnSubSecondpage.setVisibility("visible");
           centerbox.setSelection([overviewpage]);
           mainmenubuttongroup.setSelection([tbtnmenuSecondPage]);
         } else {
-          lblsubsecondpage.setVisibility("excluded");
+          btnSubSecondpage.setVisibility("excluded");
         }
       }, this);
 

@@ -45,6 +45,27 @@ qx.Theme.define("wax.theme.Decoration",
         backgroundPositionY: "center"
       }
     },
+
+    "white-box" :
+    {
+      style :
+      {
+        width: 1,
+        color: "white-box-border",
+        radius: 3
+      }
+    },
+
+    "connected-top-box" :
+    {
+    	include : "white-box",
+    	
+    	style :
+	    {
+	      width: [1,0,0,0],
+	      radius: [ 0, 0, 0, 0 ]
+	    }
+    },
     
     "border-me" :
     {
@@ -97,10 +118,11 @@ qx.Theme.define("wax.theme.Decoration",
 
      style :
      {
-      width : [0,0,0,3],
+      width : [0,0,0,5],
       radius : [1,0,0,1],
-      color : ["button-box-bright-pressed","button-box-bright-pressed","button-box-bright-pressed","blue"], 
-      backgroundColor : "#E5E7E9"
+      color : ["button-box-bright-pressed","button-box-bright-pressed","button-box-bright-pressed","blue"],
+      backgroundColor : "white" 
+      //backgroundColor : "#E5E7E9"
      }
    },
 
@@ -121,7 +143,8 @@ qx.Theme.define("wax.theme.Decoration",
      style :
      {
       color : ["button-box-bright-pressed","button-box-bright-pressed","button-box-bright-pressed","#E5E7E9"],
-       backgroundColor : "#F2F3F4"
+      backgroundColor : "white"
+      //backgroundColor : "#F2F3F4"
      }
    }
   }

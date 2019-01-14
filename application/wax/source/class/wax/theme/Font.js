@@ -22,11 +22,28 @@ qx.Theme.define("wax.theme.Font",
       lineHeight: 1.5
     },
 
+    "default-bold" :
+    {
+      include : "default",
+      bold : true
+    },
+
+    "mainmenubutton" :
+    {
+      include : "default",
+      size : 16
+    },
+
+    "headeratom" :
+    {
+      include : "default-bold",
+      size : 16
+    },
+
     "control-header" :
     {
     	include : "default",
-    	size : 24,
-    	bold : true
+    	size : 24
     }
   }
 });

@@ -14,5 +14,8 @@ qx.Theme.define("wax.theme.Color",
 
   colors :
   {
+    // overriden
+    "table-row-background-selected" : "#A9A9A9",
+    "table-row-background-focused-selected" : "#A9A9A9"
   }
 });

@@ -141,7 +141,7 @@ qx.Class.define("wax.GroupBox",
             allowStretchY: [true, true]
           });
           control.addListener("changeOpen", this._onChangeOpen, this);
-          this._add(control, { right: 0, width: "100%" });
+          this._add(control, { right: 4, width: "100%" });
           break;
       }
 
