@@ -152,8 +152,7 @@ qx.Theme.define("wax.theme.Appearance",
          minWidth: 5,
          minHeight: 5,
          textColor: textcolor,
-         font : "mainmenubutton",
-         minWidth : 220
+         font : "mainmenubutton"
        };
      }
    },
@@ -177,7 +176,8 @@ qx.Theme.define("wax.theme.Appearance",
      style : function(states)
      {
        return {
-         center : false
+         center : false,
+         minWidth : 220
        };
      }
    },
