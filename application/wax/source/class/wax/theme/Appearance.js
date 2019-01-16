@@ -187,8 +187,7 @@ qx.Theme.define("wax.theme.Appearance",
 
     style : function() {
         return {
-          alignX: "left",
-          marginLeft: -20
+          alignX: "left"
         };
       }
     },

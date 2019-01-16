@@ -75,7 +75,7 @@ qx.Class.define("wax.Application",
       var westbox = this._westBox = new qx.ui.container.Composite(new qx.ui.layout.VBox(0)).set({backgroundColor: "white", padding: [10,0,10,0], decorator : "leftside"});
 
       // Dock's Center section (Stack) === THE STACK ===
-      var centerbox = new qx.ui.container.Stack().set({backgroundColor: "white", padding: [10,26]});
+      var centerbox = new qx.ui.container.Stack().set({backgroundColor: "white", padding: 0});
 
       // West Scroll area to fit all menu items
       var scrollwest = new qx.ui.container.Scroll();
@@ -159,10 +159,10 @@ qx.Class.define("wax.Application",
        // Overview Page with links to a Detail Page
        // Table to List Page - shows how the Table Widget converts to a List Widget for smaller screens
       // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-      var dashboardpage = new qx.ui.container.Composite();
+      var dashboardpage = new qx.ui.container.Composite().set({padding: 10});
       var overviewpage = new qx.ui.container.Composite(new qx.ui.layout.Flow(20,20, "center"));
       var detailpage = new qx.ui.container.Composite(new qx.ui.layout.Flow());
-      var tablelistpage = new qx.ui.container.Composite();
+      var tablelistpage = new qx.ui.container.Composite().set({padding: 10});
       
       //more structure
       dashboardpage.setLayout(new qx.ui.layout.VBox(6).set({alignX: "left"}));
@@ -224,7 +224,7 @@ qx.Class.define("wax.Application",
       //overviewpage.add(labelenv);
       var secpagegroupbox1 = new wax.GroupBox("Do This","", true, true).set({appearance: "groupbox-connected", minWidth: 400});
       secpagegroupbox1.getChildControl("open", true).setMarginRight(20);
-      secpagegroupbox1.setLayout(new qx.ui.layout.VBox());
+      secpagegroupbox1.setLayout(new qx.ui.layout.Flow(4,4,"left"));
       secpagegroupbox1.add(labelenv.clone());
       overviewpage.add(secpagegroupbox1);
       var secpagegroupbox2 = new wax.GroupBox("Do That","", true, true).set({appearance: "groupbox-connected", minWidth: 400});
@@ -382,6 +382,7 @@ qx.Class.define("wax.Application",
           }, this); 
           scrollwest.setVisibility("excluded");
           mainmenupart.setVisibility("visible");
+          // overviewpage.setLayout(new qx.ui.layout.VBox());
         }
       });
       if (mq1.isMatching()) {
