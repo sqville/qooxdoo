@@ -82,7 +82,7 @@ qx.Theme.define("wax.theme.Decoration",
       style :
       {
         width : [0,0,1,0],
-        color : "gray",
+        color : "#F0F0F0",
         style : "solid"
       }
     },
@@ -91,7 +91,7 @@ qx.Theme.define("wax.theme.Decoration",
     {
       style :
       {
-        width : [0,1,0,0],
+        width : [0,0,0,0],
         color : "gray",
         style : "solid"
       }

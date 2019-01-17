@@ -23,7 +23,7 @@ qx.Theme.define("wax.theme.Appearance",
         return {
           iconPosition: "top", 
           center: true,
-          padding: [20,6],
+          padding: [10, 6, 20, 6],
           font : "headeratom"
         }
       }
@@ -198,7 +198,8 @@ qx.Theme.define("wax.theme.Appearance",
        return {
         cursor: states.disabled ? undefined : "pointer",
         textColor : states.hovered ? "black" : "#505050",
-        font : "mainmenubutton"
+        font : "mainmenubutton",
+        decorator: "mainmenubutton-box-pressed"
        };
      }
     }

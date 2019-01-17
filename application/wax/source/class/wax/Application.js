@@ -86,7 +86,7 @@ qx.Class.define("wax.Application",
       scroll.set({padding: 0, margin: 0, contentPadding: [0,0,0,0]});
 
       // === North Toolbar, Parts and Buttons ===
-      var northtoolbar = new qx.ui.toolbar.ToolBar();
+      var northtoolbar = new qx.ui.toolbar.ToolBar().set({backgroundColor: "white"});
       var mainmenupart = new qx.ui.toolbar.Part(); //Top-Left of the screen 
       var profilepart = new qx.ui.toolbar.Part(); // Top-Right of the screen
 
@@ -159,10 +159,10 @@ qx.Class.define("wax.Application",
        // Overview Page with links to a Detail Page
        // Table to List Page - shows how the Table Widget converts to a List Widget for smaller screens
       // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-      var dashboardpage = new qx.ui.container.Composite().set({padding: 10});
-      var overviewpage = new qx.ui.container.Composite(new qx.ui.layout.Flow(20,20, "center"));
+      var dashboardpage = new qx.ui.container.Composite().set({padding: 20});
+      var overviewpage = new qx.ui.container.Composite(new qx.ui.layout.VBox(10)).set({padding: 20});
       var detailpage = new qx.ui.container.Composite(new qx.ui.layout.Flow());
-      var tablelistpage = new qx.ui.container.Composite().set({padding: 10});
+      var tablelistpage = new qx.ui.container.Composite().set({padding: 20});
       
       //more structure
       dashboardpage.setLayout(new qx.ui.layout.VBox(6).set({alignX: "left"}));
@@ -173,7 +173,7 @@ qx.Class.define("wax.Application",
 
       // Controls
       // First page marker 
-      var label1 = new qx.ui.basic.Label("Dashboard Page Marker").set({font: "control-header", decorator : "border-me"});
+      var label1 = new qx.ui.basic.Label("Dashboard Page Header").set({font: "control-header"});
       // GroubBox
       var groupbox1 = new wax.GroupBox("First GroupBox for Wax", "wax/baseline-directions_subway-24px.svg", true, true);
       groupbox1.setLayout(new qx.ui.layout.VBox());
@@ -218,23 +218,28 @@ qx.Class.define("wax.Application",
 
 
       // Second page marker  
-      var label5 = new qx.ui.basic.Label("Overview Page Marker").set({font: "control-header", decorator : "border-me"});
+      var label5 = new qx.ui.basic.Label("Overview Page Header").set({font: "control-header"});
+      var secmidsection = new qx.ui.container.Composite(new qx.ui.layout.HBox(20));
       
-      overviewpage.add(label5, {lineBreak: true});
+      overviewpage.add(label5);
       //overviewpage.add(labelenv);
-      var secpagegroupbox1 = new wax.GroupBox("Do This","", true, true).set({appearance: "groupbox-connected", minWidth: 400});
+      var secpagegroupbox1 = new wax.GroupBox("Do This","", true, true).set({allowStretchX: [true, true], allowStretchY: [false, false], appearance: "groupbox-connected", minWidth: 340});
       secpagegroupbox1.getChildControl("open", true).setMarginRight(20);
-      secpagegroupbox1.setLayout(new qx.ui.layout.Flow(4,4,"left"));
+      secpagegroupbox1.setLayout(new qx.ui.layout.VBox());
       secpagegroupbox1.add(labelenv.clone());
-      overviewpage.add(secpagegroupbox1);
-      var secpagegroupbox2 = new wax.GroupBox("Do That","", true, true).set({appearance: "groupbox-connected", minWidth: 400});
+      //overviewpage.add(secpagegroupbox1);
+      var secpagegroupbox2 = new wax.GroupBox("Do That","", true, true).set({allowStretchX: [true, true], allowStretchY: [false, false], appearance: "groupbox-connected", minWidth: 340});
       secpagegroupbox2.getChildControl("open", true).setMarginRight(20);
       secpagegroupbox2.setLayout(new qx.ui.layout.VBox());
       secpagegroupbox2.add(labelenv.clone());
-      overviewpage.add(secpagegroupbox2);
+      
+      secmidsection.add(secpagegroupbox1, {width: "50%", flex: 1});
+      secmidsection.add(secpagegroupbox2, {width: "50%", flex: 1});
+      
+      overviewpage.add(secmidsection);
 
       // Third page marker
-      var label6 = new qx.ui.basic.Label("Table to List Page Marker").set({font: "control-header", decorator : "border-me"});
+      var label6 = new qx.ui.basic.Label("Table to List Page Header").set({font: "control-header"});
       //var tablelistflow = new qx.ui.layout.Flow().set({alignY: "bottom", alignX: "left"});
       var tablelistvbox = new qx.ui.layout.VBox();
       //tablelistpage.set({backgroundColor: "yellow"});
@@ -270,9 +275,11 @@ qx.Class.define("wax.Application",
       westbox.add(tbtndashboardpage);
 
       var tbtnSecondPage = new wax.MenuButton("Overview", "wax/test.png");
-      var btnSubSecondpage = new qx.ui.form.Button("Do This").set({ appearance: "submenubutton", allowGrowX: true, padding: [10,4,14,42,], visibility: "excluded"});
+      var btnSubSecondpage = new qx.ui.form.Button("Do This").set({ appearance: "submenubutton", allowGrowX: true, padding: [10,4,14,47,], visibility: "excluded"});
+      var btnSubSecondpage2 = new qx.ui.form.Button("Do That").set({ appearance: "submenubutton", allowGrowX: true, padding: [10,4,14,47,], visibility: "excluded"});
       westbox.add(tbtnSecondPage);
       westbox.add(btnSubSecondpage);
+      westbox.add(btnSubSecondpage2);
 
       var tbtnThirdPage = new wax.MenuButton("List of Items", "wax/test.png");
       westbox.add(tbtnThirdPage);
@@ -284,14 +291,17 @@ qx.Class.define("wax.Application",
       var lblmenuleftnavheader = atmleftnavheader.clone();
       var tbtnmenudashboardpage = tbtndashboardpage.clone();
       var tbtnmenuSecondPage = tbtnSecondPage.clone();
-      var lblmenusubsecondpage = btnSubSecondpage.clone();
-      lblmenusubsecondpage.setVisibility("visible");
+      var btnsubmenusubsecondpage = btnSubSecondpage.clone();
+      var btnsubmenusubsecondpage2 = btnSubSecondpage2.clone();
+      btnsubmenusubsecondpage.set({visibility: "visible", decorator: "mainmenubutton-box"});
+      btnsubmenusubsecondpage2.set({visibility: "visible", decorator: "mainmenubutton-box"});
       var tbtnmenuThirdPage = tbtnThirdPage.clone();
       // Add the clones to the Main Menu Popup
       mainmenupopup.add(lblmenuleftnavheader);
       mainmenupopup.add(tbtnmenudashboardpage);
       mainmenupopup.add(tbtnmenuSecondPage);
-      mainmenupopup.add(lblmenusubsecondpage);
+      mainmenupopup.add(btnsubmenusubsecondpage);
+      mainmenupopup.add(btnsubmenusubsecondpage2);
       mainmenupopup.add(tbtnmenuThirdPage);
       // Assign all the clones their own RadioGroup
       var mainmenubuttongroup = new qx.ui.form.RadioGroup();
@@ -323,10 +333,14 @@ qx.Class.define("wax.Application",
       tbtnSecondPage.addListener("changeValue", function(e) {
         if (e.getData()) {
           btnSubSecondpage.setVisibility("visible");
+          btnSubSecondpage2.setVisibility("visible");
           centerbox.setSelection([overviewpage]);
           mainmenubuttongroup.setSelection([tbtnmenuSecondPage]);
+          btnsubmenusubsecondpage.set({ decorator: "mainmenubutton-box-pressed" });
+          btnsubmenusubsecondpage2.set({ decorator: "mainmenubutton-box-pressed" });
         } else {
           btnSubSecondpage.setVisibility("excluded");
+          btnSubSecondpage2.setVisibility("excluded");
         }
       }, this);
 
@@ -337,10 +351,13 @@ qx.Class.define("wax.Application",
         }
       }, this);
 
+      // Popup menu buttons
       tbtnmenudashboardpage.addListener("changeValue", function(e) {
         if (e.getData()) {
           centerbox.setSelection([dashboardpage]);
           westboxbuttongroup.setSelection([tbtndashboardpage]);
+          btnsubmenusubsecondpage.set({ decorator: "mainmenubutton-box" });
+          btnsubmenusubsecondpage2.set({ decorator: "mainmenubutton-box" });
           mainmenupopup.hide();
         }
       }, this);
@@ -349,6 +366,11 @@ qx.Class.define("wax.Application",
         if (e.getData()) {
           centerbox.setSelection([overviewpage]);
           westboxbuttongroup.setSelection([tbtnSecondPage]);
+          btnsubmenusubsecondpage.set({ decorator: "mainmenubutton-box-pressed" });
+          btnsubmenusubsecondpage2.set({ decorator: "mainmenubutton-box-pressed" });
+
+          dashboardpage.setVisibility("excluded");
+
           mainmenupopup.hide();
         }
       }, this);
@@ -357,6 +379,11 @@ qx.Class.define("wax.Application",
         if (e.getData()) {
           centerbox.setSelection([tablelistpage]);
           westboxbuttongroup.setSelection([tbtnThirdPage]);
+          btnsubmenusubsecondpage.set({ decorator: "mainmenubutton-box" });
+          btnsubmenusubsecondpage2.set({ decorator: "mainmenubutton-box" });
+
+          dashboardpage.setVisibility("excluded");
+
           mainmenupopup.hide();
         }
       }, this);
@@ -382,7 +409,6 @@ qx.Class.define("wax.Application",
           }, this); 
           scrollwest.setVisibility("excluded");
           mainmenupart.setVisibility("visible");
-          // overviewpage.setLayout(new qx.ui.layout.VBox());
         }
       });
       if (mq1.isMatching()) {
@@ -403,23 +429,17 @@ qx.Class.define("wax.Application",
       mq2.on("change", function(e){
         if(mq2.isMatching()){
           tableliststack.setSelection([tablelisttable]);
+          secmidsection.setLayout(new qx.ui.layout.HBox(20));
         }
         else {
-          /*scrollwest.addListener("appear", function(e) {
-            var domtable = scrollwest.getContentElement().getDomElement();
-            qx.bom.element.Animation.animate(domtable, fadeinleft);
-          }, this);*/ 
           tableliststack.setSelection([tablelistlist]);
+          secmidsection.setLayout(new qx.ui.layout.VBox(4));
         }
       });
       if (mq2.isMatching()) {
         tableliststack.setSelection([tablelisttable]);
       }
       else {
-        /*scrollwest.addListener("appear", function(e) {
-          var domtable = scrollwest.getContentElement().getDomElement();
-          qx.bom.element.Animation.animate(domtable, fadeinleft);
-        }, this);*/ 
         tableliststack.setSelection([tablelistlist]);
       }
 
@@ -482,8 +502,7 @@ qx.Class.define("wax.Application",
       tableModel.setData(rowData);
       tableModel.setColumnEditable(1, false);
       tableModel.setColumnEditable(2, false);
-      tableModel.setColumnSortable(3, false);
-      tableModel.setColumnSortable(4, false);
+      tableModel.setColumnSortable(0, false);
       tableModel.setColumnSortable(5, false);
 
       var table = new qx.ui.table.Table(tableModel);
