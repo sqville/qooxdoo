@@ -160,7 +160,7 @@ qx.Class.define("wax.Application",
        // Table to List Page - shows how the Table Widget converts to a List Widget for smaller screens
       // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
       var dashboardpage = new qx.ui.container.Composite().set({padding: 20});
-      var overviewpage = new qx.ui.container.Composite(new qx.ui.layout.VBox(10)).set({padding: 20});
+      var overviewpage = new qx.ui.container.Composite(new qx.ui.layout.VBox(20)).set({padding: 20});
       var detailpage = new qx.ui.container.Composite(new qx.ui.layout.Flow());
       var tablelistpage = new qx.ui.container.Composite().set({padding: 20});
       
@@ -226,7 +226,14 @@ qx.Class.define("wax.Application",
       var secpagegroupbox1 = new wax.GroupBox("Do This","", true, true).set({allowStretchX: [true, true], allowStretchY: [false, false], appearance: "groupbox-connected", minWidth: 340});
       secpagegroupbox1.getChildControl("open", true).setMarginRight(20);
       secpagegroupbox1.setLayout(new qx.ui.layout.VBox());
-      secpagegroupbox1.add(labelenv.clone());
+      
+      var secpagegroupbox1contentbox = new qx.ui.container.Composite(new qx.ui.layout.HBox(4)).set({alignY: "middle"});
+      secpagegroupbox1contentbox.add(new qx.ui.basic.Label("If you would like to do this. Adding more so text will wrap as screen shrinks").set({alignY: "middle", textAlign: "left", rich: true, wrap: true}), {flex: 1});
+      secpagegroupbox1contentbox.add(new qx.ui.core.Spacer(30, 20), {flex: 1});
+      secpagegroupbox1contentbox.add(new qx.ui.form.Button("Do This").set({width: 165, height: 40, maxHeight: 40, alignX: "right", alignY: "middle"}));
+      secpagegroupbox1.add(secpagegroupbox1contentbox);
+
+      //secpagegroupbox1.add(labelenv.clone());
       //overviewpage.add(secpagegroupbox1);
       var secpagegroupbox2 = new wax.GroupBox("Do That","", true, true).set({allowStretchX: [true, true], allowStretchY: [false, false], appearance: "groupbox-connected", minWidth: 340});
       secpagegroupbox2.getChildControl("open", true).setMarginRight(20);
@@ -235,8 +242,14 @@ qx.Class.define("wax.Application",
       
       secmidsection.add(secpagegroupbox1, {width: "50%", flex: 1});
       secmidsection.add(secpagegroupbox2, {width: "50%", flex: 1});
+
+      var secpagegroupbox3 = new wax.GroupBox("All That You Did","", true, true).set({allowStretchX: [true, true], allowStretchY: [false, false], appearance: "groupbox-connected", minWidth: 340});
+      secpagegroupbox3.getChildControl("open", true).setMarginRight(20);
+      secpagegroupbox3.setLayout(new qx.ui.layout.VBox());
+      secpagegroupbox3.add(labelenv.clone());
       
       overviewpage.add(secmidsection);
+      overviewpage.add(secpagegroupbox3);
 
       // Third page marker
       var label6 = new qx.ui.basic.Label("Table to List Page Header").set({font: "control-header"});
@@ -336,8 +349,8 @@ qx.Class.define("wax.Application",
           btnSubSecondpage2.setVisibility("visible");
           centerbox.setSelection([overviewpage]);
           mainmenubuttongroup.setSelection([tbtnmenuSecondPage]);
-          btnsubmenusubsecondpage.set({ decorator: "mainmenubutton-box-pressed" });
-          btnsubmenusubsecondpage2.set({ decorator: "mainmenubutton-box-pressed" });
+          btnsubmenusubsecondpage.set({ decorator: "mainmenubutton-box-pressed"});
+          btnsubmenusubsecondpage2.set({ decorator: "mainmenubutton-box-pressed"});
         } else {
           btnSubSecondpage.setVisibility("excluded");
           btnSubSecondpage2.setVisibility("excluded");
@@ -433,14 +446,16 @@ qx.Class.define("wax.Application",
         }
         else {
           tableliststack.setSelection([tablelistlist]);
-          secmidsection.setLayout(new qx.ui.layout.VBox(4));
+          secmidsection.setLayout(new qx.ui.layout.VBox(20));
         }
       });
       if (mq2.isMatching()) {
         tableliststack.setSelection([tablelisttable]);
+        secmidsection.setLayout(new qx.ui.layout.HBox(20));
       }
       else {
         tableliststack.setSelection([tablelistlist]);
+        secmidsection.setLayout(new qx.ui.layout.VBox(20));
       }
 
   

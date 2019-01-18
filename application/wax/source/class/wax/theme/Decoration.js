@@ -122,7 +122,6 @@ qx.Theme.define("wax.theme.Decoration",
       radius : [1,0,0,1],
       color : ["button-box-bright-pressed","button-box-bright-pressed","button-box-bright-pressed","blue"],
       backgroundColor : "white" 
-      //backgroundColor : "#E5E7E9"
      }
    },
 
@@ -144,7 +143,6 @@ qx.Theme.define("wax.theme.Decoration",
      {
       color : ["button-box-bright-pressed","button-box-bright-pressed","button-box-bright-pressed","#E5E7E9"],
       backgroundColor : "white"
-      //backgroundColor : "#F2F3F4"
      }
    }
   }
