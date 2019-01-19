@@ -25,7 +25,7 @@ qx.Class.define("wax.GroupBox",
 {
   extend : qx.ui.groupbox.GroupBox,
 
-  construct : function(legend, icon, collapsable, open)
+  construct : function(legend, icon, collapsable, open, scale)
   {
     this.base(arguments);
 
@@ -38,6 +38,9 @@ qx.Class.define("wax.GroupBox",
 
     if (icon != null) {
       this.setIcon(icon);
+      if (scale !== undefined) {
+        this.getChildControl("legend").getChildControl("icon").set({ scale : scale });
+      }
     }
 
     if (collapsable != null) {

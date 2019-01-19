@@ -15,6 +15,17 @@ qx.Theme.define("wax.theme.Decoration",
   decorations :
   {
 
+    "nobgimg" :
+    {
+      style :
+      {
+        backgroundImage: "",
+        backgroundRepeat: "no-repeat",
+        backgroundPositionX: "right",
+        backgroundPositionY: "center"
+      }
+    },
+    
     "tablelist-list" :
     {
       style :
@@ -82,7 +93,7 @@ qx.Theme.define("wax.theme.Decoration",
       style :
       {
         width : [0,0,1,0],
-        color : "#F0F0F0",
+        color : "white-box-border",
         style : "solid"
       }
     },

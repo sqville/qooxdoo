@@ -36,10 +36,19 @@ qx.Theme.define("wax.theme.Appearance",
       style : function(states)
       {
         return {
-          scale: true,
           width: 56,
           height: 56
         }
+      }
+    },
+
+    "groupbox/legend/icon" :
+    {
+      style : function() {
+        return {
+          width: 32,
+          height: 32
+        };
       }
     },
     
@@ -73,7 +82,8 @@ qx.Theme.define("wax.theme.Appearance",
       style : function(states)
       {
         return {
-          decorator  : "white-box"
+          decorator  : "white-box",
+          contentPadding: 10
         };
       }
     },
@@ -183,11 +193,12 @@ qx.Theme.define("wax.theme.Appearance",
    },
 
    "mainmenubutton/icon" : {
-    include : "icon",
 
     style : function() {
         return {
-          alignX: "left"
+          scale: true,
+          width: 32,
+          height: 32
         };
       }
     },
