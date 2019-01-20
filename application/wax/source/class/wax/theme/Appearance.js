@@ -93,7 +93,7 @@ qx.Theme.define("wax.theme.Appearance",
       style : function(states)
       {
         return {
-          font: "control-header",
+          font: "area-header",
           paddingTop: 8,
           paddingBottom: 8,
           paddingLeft: 12
@@ -138,20 +138,24 @@ qx.Theme.define("wax.theme.Appearance",
      style : function(states)
      {
        var decorator = "mainmenubutton-box";
-       var padding = [12, 6, 12, 15];
-       var textcolor = "#606060";
+       var padding = [12, 6, 12, 19];
+       //var textcolor = "#606060";
+       var textcolor = "black";
+       var opacity = .75;
 
        if (!states.disabled) {
          if (states.hovered && !states.pressed && !states.checked) {
            decorator = "mainmenubutton-box-hovered";
-           padding = [12,6,12,10];
+           padding = [12,6,12,14];
            textcolor = "black";
+           opacity = 1;
          } /*else if (states.hovered && (states.pressed || states.checked)) {
            decorator = "mainmenubutton-box-pressed-hovered";
          }*/ else if (states.pressed || states.checked) {
            decorator = "mainmenubutton-box-pressed";
-           padding = [12,6,12,10];
+           padding = [12,6,12,14];
            textcolor = "black";
+           opacity = 1;
          }
        }
 
@@ -162,7 +166,8 @@ qx.Theme.define("wax.theme.Appearance",
          minWidth: 5,
          minHeight: 5,
          textColor: textcolor,
-         font : "mainmenubutton"
+         font : "mainmenubutton",
+         opacity : opacity
        };
      }
    },
@@ -187,7 +192,8 @@ qx.Theme.define("wax.theme.Appearance",
      {
        return {
          center : false,
-         minWidth : 220
+         minWidth : 220,
+         gap : 14
        };
      }
    },
@@ -213,6 +219,66 @@ qx.Theme.define("wax.theme.Appearance",
         decorator: "mainmenubutton-box-pressed"
        };
      }
+    },
+
+
+    /*
+    ---------------------------------------------------------------------------
+      WINDOW
+    ---------------------------------------------------------------------------
+    */
+
+    "wax-window" : {
+      alias : "window",
+
+      include: "window",
+
+      style : function(states)
+      {
+        return {
+         showMaximize : false,
+         showMinimize : false
+        };
+      }
+    },
+    
+    "wax-window/title" : {
+      alias : "window/title",
+
+      style : function(states)
+      {
+        return {
+         textColor : "black",
+         font : "control-header"
+        };
+      }
+     },
+
+     "wax-window/captionbar" : {
+      include : "window/captionbar",
+      
+      style : function(states)
+      {
+        return {
+         decorator : "window-captionbar-default"
+        };
+      }
+     },
+
+     "wax-window/close-button" :
+    {
+      alias : "button",
+
+      style : function(states)
+      {
+        return {
+          marginLeft : 2,
+          icon : states.hovered ? "wax/close-red-24px.svg" : "wax/close-24px.svg",
+          padding : [ 1, 2 ],
+          cursor : states.disabled ? undefined : "pointer"
+        };
+      }
     }
+
   }
 });

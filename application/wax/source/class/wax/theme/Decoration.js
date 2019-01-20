@@ -152,8 +152,16 @@ qx.Theme.define("wax.theme.Decoration",
 
      style :
      {
-      color : ["button-box-bright-pressed","button-box-bright-pressed","button-box-bright-pressed","#E5E7E9"],
+      color : ["button-box-bright-pressed","button-box-bright-pressed","button-box-bright-pressed","#E8E8E8"],
       backgroundColor : "white"
+     }
+   },
+
+   "window-captionbar-default" :
+   {
+     style :
+     {
+      width: 0
      }
    }
   }

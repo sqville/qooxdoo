@@ -43,7 +43,13 @@ qx.Theme.define("wax.theme.Font",
     "control-header" :
     {
     	include : "default",
-    	size : 24
+    	size : 32
+    },
+
+    "area-header" :
+    {
+      include : "default",
+      size : 21
     }
   }
 });

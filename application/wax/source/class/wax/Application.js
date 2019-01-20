@@ -101,8 +101,9 @@ qx.Class.define("wax.Application",
       mainmenupopup.setLayout(new qx.ui.layout.VBox(0));
 
       // Profile Menu
-      var profilemenu = new qx.ui.menu.Menu();
-      var profilemenubutton1 = new qx.ui.menu.Button("Stack Profile Page Button", "wax/test.png");
+      var profilemenu = new qx.ui.menu.Menu().set({spacingX: 12});
+      var profilemenubutton1 = new qx.ui.menu.Button("Edit my profile", "wax/edit-24px.svg").set({padding: 10});
+      var profilemenubutton2 = new qx.ui.menu.Button("Log out", "wax/exit_to_app-24px.svg").set({padding: 10});
       
       // Add Main Menu Popup Listeners
       mainmenubtnbutton.addListener("execute", function(e)
@@ -126,6 +127,7 @@ qx.Class.define("wax.Application",
       approot.add(appcompdock, {edge: 0});
       mainmenupart.add(mainmenubtnbutton);
       profilemenu.add(profilemenubutton1);
+      profilemenu.add(profilemenubutton2);
       profilemenubutton.setMenu(profilemenu);
       profilepart.add(profilemenubutton);
       northtoolbar.add(mainmenupart);
@@ -312,8 +314,8 @@ qx.Class.define("wax.Application",
       westbox.add(tbtndashboardpage);
 
       var tbtnSecondPage = new wax.MenuButton("Overview", "wax/assignment_returned-24px.svg", true);
-      var btnSubSecondpage = new qx.ui.form.Button("Do This").set({ appearance: "submenubutton", allowGrowX: true, padding: [10,4,14,47,], visibility: "excluded"});
-      var btnSubSecondpage2 = new qx.ui.form.Button("Do That").set({ appearance: "submenubutton", allowGrowX: true, padding: [10,4,14,47,], visibility: "excluded"});
+      var btnSubSecondpage = new qx.ui.form.Button("Do This").set({ appearance: "submenubutton", allowGrowX: true, padding: [10,4,14,60], visibility: "excluded"});
+      var btnSubSecondpage2 = new qx.ui.form.Button("Do That").set({ appearance: "submenubutton", allowGrowX: true, padding: [10,4,14,60], visibility: "excluded"});
       westbox.add(tbtnSecondPage);
       westbox.add(btnSubSecondpage);
       westbox.add(btnSubSecondpage2);
@@ -331,16 +333,20 @@ qx.Class.define("wax.Application",
       westboxbuttongroup.add(tbtndashboardpage, tbtnSecondPage, tbtnThirdPage);
       
       // CLONE the above controls
-      var lblmenuleftnavheader = atmleftnavheader.clone();
+      var atmmenuleftnavheader = atmleftnavheader.clone();
+      atmmenuleftnavheader.getChildControl("icon").set({ scale : true });
       var tbtnmenudashboardpage = tbtndashboardpage.clone();
+      tbtnmenudashboardpage.getChildControl("icon").set({ scale : true });
       var tbtnmenuSecondPage = tbtnSecondPage.clone();
+      tbtnmenuSecondPage.getChildControl("icon").set({ scale : true });
       var btnsubmenusubsecondpage = btnSubSecondpage.clone();
+      btnsubmenusubsecondpage.getChildControl("icon").set({ scale : true });
       var btnsubmenusubsecondpage2 = btnSubSecondpage2.clone();
       btnsubmenusubsecondpage.set({visibility: "visible", decorator: "mainmenubutton-box"});
       btnsubmenusubsecondpage2.set({visibility: "visible", decorator: "mainmenubutton-box"});
       var tbtnmenuThirdPage = tbtnThirdPage.clone();
       // Add the clones to the Main Menu Popup
-      mainmenupopup.add(lblmenuleftnavheader);
+      mainmenupopup.add(atmmenuleftnavheader);
       mainmenupopup.add(tbtnmenudashboardpage);
       mainmenupopup.add(tbtnmenuSecondPage);
       mainmenupopup.add(btnsubmenusubsecondpage);
@@ -547,16 +553,6 @@ qx.Class.define("wax.Application",
         // Fix approot's position
         //approot.getContentElement().setStyle("position", "fixed");
         
-        // Prevent pull down refresh on Chrome iOS
-       /* qx.event.Registration.addListener(window, "touchmove", function(e){
-          var lastY = 0;
-          var pageY = e.changedTouches[0];
-          var scrollY = window.pageYOffset || window.scrollTop || 0;
-          if (pageY > lastY && scrollY === 0) {
-            e.preventDefault();
-          }
-          lastY = pageY;
-        }, this);*/
       }
 
     },
@@ -581,7 +577,7 @@ qx.Class.define("wax.Application",
       container.add(new qx.ui.basic.Label("Header03").set({font: "default-bold"}), {row: 0, column: 2});
       container.add(new qx.ui.basic.Label("Header04").set({font: "default-bold"}), {row: 0, column: 3});
       container.add(new qx.ui.basic.Label("Header05").set({font: "default-bold"}), {row: 0, column: 4});
-      container.add(new qx.ui.basic.Label("Header06").set({font: "default-bold"}), {row: 0, column: 5});
+      container.add(new qx.ui.basic.Label("Revoke").set({font: "default-bold"}), {row: 0, column: 5});
 
       // Table Row 01
       container.add(new qx.ui.basic.Label("Did This"), {row: 1, column: 0});
@@ -589,7 +585,7 @@ qx.Class.define("wax.Application",
       container.add(new qx.ui.basic.Label("Row01Column03"), {row: 1, column: 2});
       container.add(new qx.ui.basic.Label("Row01Column04"), {row: 1, column: 3});
       container.add(new qx.ui.basic.Label("Row01Column05"), {row: 1, column: 4});
-      container.add(new qx.ui.basic.Label("Row01Column06"), {row: 1, column: 5});
+      container.add(new qx.ui.basic.Image("wax/cancel-24px.svg").set({opacity : .3}), {row: 1, column: 5});
 
       // Table Row 02
       container.add(new qx.ui.basic.Label("Did That"), {row: 2, column: 0});
@@ -597,7 +593,7 @@ qx.Class.define("wax.Application",
       container.add(new qx.ui.basic.Label("Row02Column03"), {row: 2, column: 2});
       container.add(new qx.ui.basic.Label("Row02Column04"), {row: 2, column: 3});
       container.add(new qx.ui.basic.Label("Row02Column05"), {row: 2, column: 4});
-      container.add(new qx.ui.basic.Label("Row02Column06"), {row: 2, column: 5});
+      container.add(new qx.ui.basic.Image("wax/cancel-24px.svg").set({opacity : .3}), {row: 2, column: 5});
 
       return container;
     },
@@ -691,7 +687,7 @@ qx.Class.define("wax.Application",
     __createDetailWindow : function()
     {
       // Create the Window
-      var win = new qx.ui.window.Window("Generic Window").set({modal: true, movable: false});
+      var win = new qx.ui.window.Window("Generic Window").set({ appearance: "wax-window", allowMaximize : false, allowMinimize : false, modal: true, movable: false });
       win.setLayout(new qx.ui.layout.VBox(10));
       win.setShowStatusbar(true);
       win.setStatus("Generic Message"); 
