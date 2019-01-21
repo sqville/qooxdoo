@@ -34,6 +34,12 @@ qx.Theme.define("wax.theme.Font",
       size : 16
     },
 
+    "mainmenuindicator" :
+    {
+      include : "default-bold",
+      size : 14
+    },
+
     "headeratom" :
     {
       include : "default-bold",

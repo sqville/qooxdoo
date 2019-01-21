@@ -209,6 +209,19 @@ qx.Theme.define("wax.theme.Appearance",
       }
     },
 
+    "mainmenuindicator" : {
+      style : function() {
+        return {
+          backgroundColor : "gray",
+          textColor : "white",
+          height : 24,
+          padding: [2,6,2,6],
+          decorator : "mainmenuindicator",
+          font : "mainmenuindicator"
+        };
+      }
+    },
+
     "submenubutton" : {
      style : function(states)
      {

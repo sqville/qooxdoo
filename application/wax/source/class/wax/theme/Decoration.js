@@ -102,8 +102,8 @@ qx.Theme.define("wax.theme.Decoration",
     {
       style :
       {
-        width : [0,0,0,0],
-        color : "gray",
+        width : [0,1,0,0],
+        color : "white-box-border",
         style : "solid"
       }
     },
@@ -154,6 +154,14 @@ qx.Theme.define("wax.theme.Decoration",
      {
       color : ["button-box-bright-pressed","button-box-bright-pressed","button-box-bright-pressed","#E8E8E8"],
       backgroundColor : "white"
+     }
+   },
+
+   "mainmenuindicator" :
+   {
+    style :
+     {
+      radius: 3
      }
    },
 

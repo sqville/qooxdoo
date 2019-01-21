@@ -29,16 +29,22 @@ qx.Class.define("wax.MenuButton",
   *****************************************************************************
   */
 
-  construct : function(label, icon, scale)
+  construct : function(label, icon, scale, indicator)
   {
     this.base(arguments, label);
 
     if (icon !== undefined) {
       this.setIcon(icon);
+
+      if (scale !== undefined) {
+        this.getChildControl("icon").set({ scale : scale });
+      }
     }
-    
-    if (scale !== undefined) {
-      this.getChildControl("icon").set({ scale : scale });
+
+    if (indicator !== undefined) {
+      var control = new qx.ui.basic.Label(indicator).set({alignX: "right", appearance : "mainmenuindicator"});
+      this._add(new qx.ui.core.Spacer(30, 1));
+      this._add(control);
     }
     
   },

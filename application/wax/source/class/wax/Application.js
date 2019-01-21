@@ -163,7 +163,7 @@ qx.Class.define("wax.Application",
       // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
       var dashboardpage = new qx.ui.container.Composite().set({padding: 20});
       var overviewpage = new qx.ui.container.Composite(new qx.ui.layout.VBox(20)).set({padding: 20});
-      var detailpage = new qx.ui.container.Composite(new qx.ui.layout.Flow());
+      var gallerypage = new qx.ui.container.Composite(new qx.ui.layout.Flow()).set({padding: 20});
       var tablelistpage = new qx.ui.container.Composite().set({padding: 20});
       
       //more structure
@@ -290,12 +290,16 @@ qx.Class.define("wax.Application",
       tableliststack.add(tablelisttable);
       tableliststack.add(tablelistlist);
       tablelistpage.add(tableliststack, {flex: 1});
+
+      // Gallery page marker 
+      var lblGalleryHeader = new qx.ui.basic.Label("Gallery Page Header").set({font: "control-header"});
+      gallerypage.add(lblGalleryHeader);
       
       // Assemble - THE STACK 
       centerbox.add(dashboardpage);
       centerbox.add(overviewpage);
-      centerbox.add(detailpage);
       centerbox.add(tablelistpage);
+      centerbox.add(gallerypage);
 
       // Show the default page
       centerbox.setSelection([dashboardpage]);
@@ -329,8 +333,11 @@ qx.Class.define("wax.Application",
       var tbtnThirdPage = new wax.MenuButton("List of Items", "wax/view_list-24px.svg", true);
       westbox.add(tbtnThirdPage);
 
+      var tbtnGalleryPage = new wax.MenuButton("Gallery", "wax/camera-24px.svg", true, "16" );
+      westbox.add(tbtnGalleryPage);
+
       var westboxbuttongroup = new qx.ui.form.RadioGroup();
-      westboxbuttongroup.add(tbtndashboardpage, tbtnSecondPage, tbtnThirdPage);
+      westboxbuttongroup.add(tbtndashboardpage, tbtnSecondPage, tbtnThirdPage, tbtnGalleryPage);
       
       // CLONE the above controls
       var atmmenuleftnavheader = atmleftnavheader.clone();
@@ -345,6 +352,8 @@ qx.Class.define("wax.Application",
       btnsubmenusubsecondpage.set({visibility: "visible", decorator: "mainmenubutton-box"});
       btnsubmenusubsecondpage2.set({visibility: "visible", decorator: "mainmenubutton-box"});
       var tbtnmenuThirdPage = tbtnThirdPage.clone();
+      tbtnmenuThirdPage.getChildControl("icon").set({ scale : true });
+      var tbtnmenuGalleryPage = tbtnGalleryPage.clone();
       // Add the clones to the Main Menu Popup
       mainmenupopup.add(atmmenuleftnavheader);
       mainmenupopup.add(tbtnmenudashboardpage);
@@ -352,6 +361,7 @@ qx.Class.define("wax.Application",
       mainmenupopup.add(btnsubmenusubsecondpage);
       mainmenupopup.add(btnsubmenusubsecondpage2);
       mainmenupopup.add(tbtnmenuThirdPage);
+      mainmenupopup.add(tbtnmenuGalleryPage);
 
       btnsubmenusubsecondpage.addListener("execute", function(e) {
         mainmenupopup.hide();
@@ -362,7 +372,7 @@ qx.Class.define("wax.Application",
 
       // Assign all the clones their own RadioGroup
       var mainmenubuttongroup = new qx.ui.form.RadioGroup();
-      mainmenubuttongroup.add(tbtnmenudashboardpage, tbtnmenuSecondPage, tbtnmenuThirdPage);
+      mainmenubuttongroup.add(tbtnmenudashboardpage, tbtnmenuSecondPage, tbtnmenuThirdPage, tbtnmenuGalleryPage);
       
       //***  CODE for applying popup fading in and out  ***//
       var fadeinleft = {duration: 300, timing: "ease-out", origin: "left top", keyFrames : {
@@ -408,6 +418,13 @@ qx.Class.define("wax.Application",
         }
       }, this);
 
+      tbtnGalleryPage.addListener("changeValue", function(e) {
+        if (e.getData()) {
+          centerbox.setSelection([gallerypage]);
+          mainmenubuttongroup.setSelection([tbtnmenuGalleryPage]);
+        }
+      }, this);
+
       // Popup menu buttons
       tbtnmenudashboardpage.addListener("changeValue", function(e) {
         if (e.getData()) {
@@ -436,6 +453,19 @@ qx.Class.define("wax.Application",
         if (e.getData()) {
           centerbox.setSelection([tablelistpage]);
           westboxbuttongroup.setSelection([tbtnThirdPage]);
+          btnsubmenusubsecondpage.set({ decorator: "mainmenubutton-box" });
+          btnsubmenusubsecondpage2.set({ decorator: "mainmenubutton-box" });
+
+          dashboardpage.setVisibility("excluded");
+
+          mainmenupopup.hide();
+        }
+      }, this);
+
+      tbtnmenuGalleryPage.addListener("changeValue", function(e) {
+        if (e.getData()) {
+          centerbox.setSelection([gallerypage]);
+          westboxbuttongroup.setSelection([tbtnGalleryPage]);
           btnsubmenusubsecondpage.set({ decorator: "mainmenubutton-box" });
           btnsubmenusubsecondpage2.set({ decorator: "mainmenubutton-box" });
 
