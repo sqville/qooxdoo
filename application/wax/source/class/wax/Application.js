@@ -52,8 +52,6 @@ qx.Class.define("wax.Application",
         // support additional cross-browser console. Press F7 to toggle visibility
         qx.log.appender.Console;
       }
-
-
       
       // >>> START of Base Scaffolding >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
       // >>> Base Scaffolding are objects common to all Wax - Franklin based apps  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -230,17 +228,40 @@ qx.Class.define("wax.Application",
       secpagegroupbox1.getChildControl("open", true).setMarginRight(20);
       secpagegroupbox1.setLayout(new qx.ui.layout.VBox());
       var secpagegroupbox1contentbox = new qx.ui.container.Composite(new qx.ui.layout.HBox(4)).set({alignY: "middle"});
-      secpagegroupbox1contentbox.add(new qx.ui.basic.Label("If you would like to do this. Adding more so text will wrap as screen shrinks").set({alignY: "middle", textAlign: "left", rich: true, wrap: true}), {flex: 1});
+      secpagegroupbox1contentbox.add(new qx.ui.basic.Label("If you would like to do this. This opens a modal window <b>with</b> a blocker box behind it. Adding more so text will wrap as screen shrinks").set({alignY: "middle", textAlign: "left", rich: true, wrap: true}), {flex: 1});
       secpagegroupbox1contentbox.add(new qx.ui.core.Spacer(30, 20), {flex: 1});
       var btnDoThis = new qx.ui.form.Button("Do This").set({width: 165, height: 40, maxHeight: 40, alignX: "right", alignY: "middle"});
       secpagegroupbox1contentbox.add(btnDoThis);
       secpagegroupbox1.add(secpagegroupbox1contentbox);
       var winDoThis = this.__createDetailWindow();
-      winDoThis.set({caption: "Do This", status: "Looks like your Doing This"});
-      winDoThis.add(new qx.ui.basic.Image("wax/Roxarama-Guy.png"));
-      var btnClosewin = new qx.ui.form.Button("Close Window");
+      winDoThis.set({caption: "Do This", status: "Modal window with a blocker", width: 660, contentPadding: 20});
+      //winDoThis.add(new qx.ui.basic.Image("wax/Roxarama-Guy.png"));
+      //var wincontrolFlow = qx.ui.container.Composite(new qx.ui.layout.Flow(6,6,"left"));
+      winDoThis.add(new qx.ui.basic.Label("<b>Action Name:</b>").set({rich: true}));
+      winDoThis.add(new qx.ui.basic.Label(winDoThis.getCaption()).set({marginBottom:18}));
+      winDoThis.add(new qx.ui.basic.Label("<b>Summary:</b>").set({rich: true}));
+      winDoThis.add(new qx.ui.form.TextField().set({placeholder: "placeholder text", marginBottom:18}));
+      winDoThis.add(new qx.ui.basic.Label("<b>Password:</b>").set({rich: true}));
+      winDoThis.add(new qx.ui.form.PasswordField().set({placeholder: "Enter password to validate that it is you", marginBottom:18, maxWidth: 260}));
+      var winselectbox01 = new qx.ui.form.SelectBox().set({marginBottom:18, maxWidth: 260});
+      winselectbox01.add(new qx.ui.form.ListItem("New"));
+      winselectbox01.add(new qx.ui.form.ListItem("In Progress"));
+      winselectbox01.add(new qx.ui.form.ListItem("Complete"));
+      winselectbox01.add(new qx.ui.form.ListItem("Revoked"));
+      winDoThis.add(new qx.ui.basic.Label("<b>Status:</b>").set({rich: true}));
+      winDoThis.add(winselectbox01);
+      winDoThis.add(new qx.ui.basic.Label("<b>Date:</b>").set({rich: true, width: 175}));
+      winDoThis.add(new qx.ui.form.DateField().set({marginBottom:18, maxWidth: 260}));
+      winDoThis.add(new qx.ui.basic.Label("<b>Notes:</b>").set({rich: true}));
+      winDoThis.add(new qx.ui.form.TextArea());
+
+      var btnUpdatewin = new qx.ui.form.Button("Submit");
+      var btnClosewin = new qx.ui.form.Button("Cancel");
       winDoThis.add(new qx.ui.core.Spacer(30, 20), {flex: 1});
-      winDoThis.add(btnClosewin);
+      var buttonHBox = new qx.ui.container.Composite(new qx.ui.layout.HBox(10));
+      buttonHBox.add(btnUpdatewin, {flex: 1});
+      buttonHBox.add(btnClosewin, {flex: 1});
+      winDoThis.add(buttonHBox);
       btnDoThis.addListener("execute", function(e) {
         winDoThis.restore();
         winDoThis.center();
@@ -249,6 +270,13 @@ qx.Class.define("wax.Application",
       btnClosewin.addListener("execute", function(e) {
         winDoThis.close();
       });
+
+      winDoThis.addListener("appear", function(e) {
+        this._blocker.block();
+      }, this);
+      winDoThis.addListener("disappear", function(e) {
+        this._blocker.unblock();
+      }, this);
       
 
       // Do That code
@@ -256,11 +284,33 @@ qx.Class.define("wax.Application",
       secpagegroupbox2.getChildControl("open", true).setMarginRight(20);
       secpagegroupbox2.setLayout(new qx.ui.layout.VBox(20));
       var secpagegroupbox2contentbox = new qx.ui.container.Composite(new qx.ui.layout.HBox(4)).set({alignY: "middle"});
-      secpagegroupbox2contentbox.add(new qx.ui.basic.Label("If you would like to do that. Adding more so text will wrap as screen shrinks").set({alignY: "middle", textAlign: "left", rich: true, wrap: true}), {flex: 1});
+      secpagegroupbox2contentbox.add(new qx.ui.basic.Label("If you would like to do that. That opens a modal window <b>without</b> a blocker box behind it Adding more so text will wrap as screen shrinks").set({alignY: "middle", textAlign: "left", rich: true, wrap: true}), {flex: 1});
       secpagegroupbox2contentbox.add(new qx.ui.core.Spacer(30, 20), {flex: 1});
-      secpagegroupbox2contentbox.add(new qx.ui.form.Button("Do That").set({width: 165, height: 40, maxHeight: 40, alignX: "right", alignY: "middle"}));
+      var btnDoThat = new qx.ui.form.Button("Do That").set({width: 165, height: 40, maxHeight: 40, alignX: "right", alignY: "middle"});
+      secpagegroupbox2contentbox.add(btnDoThat);
       secpagegroupbox2.add(secpagegroupbox2contentbox);
       secpagegroupbox2.add(new qx.ui.basic.Atom("Warning message about doing that.","wax/warning-24px.svg"));
+
+      var winDoThat = this.__createDetailWindow();
+      winDoThat.set({caption: "Do That", status: "Modal window without a blocker"});
+      winDoThat.add(new qx.ui.basic.Image("wax/Roxarama-Guy.png"));
+      var btnClosewinThat = new qx.ui.form.Button("Close Window");
+      winDoThat.add(new qx.ui.core.Spacer(30, 20), {flex: 1});
+      winDoThat.add(btnClosewinThat);
+      btnDoThat.addListener("execute", function(e) {
+        winDoThat.restore();
+        winDoThat.center();
+        winDoThat.show();
+      }, this);
+      btnClosewinThat.addListener("execute", function(e) {
+        winDoThat.close();
+      }, this);
+
+      approot.addListener("resize", function(e){
+        //console.log("within resize of approot");
+        winDoThis.center();
+        winDoThat.center();
+      }, this);
       
       secmidsection.add(secpagegroupbox1, {width: "50%", flex: 1});
       secmidsection.add(secpagegroupbox2, {width: "50%", flex: 1});
@@ -496,6 +546,7 @@ qx.Class.define("wax.Application",
           }, this); 
           scrollwest.setVisibility("excluded");
           mainmenupart.setVisibility("visible");
+          winDoThat.center();
         }
       });
       if (mq1.isMatching()) {
@@ -717,10 +768,11 @@ qx.Class.define("wax.Application",
     __createDetailWindow : function()
     {
       // Create the Window
-      var win = new qx.ui.window.Window("Generic Window").set({ appearance: "wax-window", allowMaximize : false, allowMinimize : false, modal: true, movable: false });
-      win.setLayout(new qx.ui.layout.VBox(10));
+      var win = new qx.ui.window.Window("Generic Window").set({ appearance: "wax-window", allowMaximize : false, allowMinimize : false, modal: true, movable: true });
+      win.setLayout(new qx.ui.layout.VBox(4));
       win.setShowStatusbar(true);
       win.setStatus("Generic Message"); 
+      win.getChildControl("title").set({padding: [10,0,0,10]});
 
       return win;
     }
