@@ -291,6 +291,84 @@ qx.Theme.define("wax.theme.Appearance",
           cursor : states.disabled ? undefined : "pointer"
         };
       }
+    },
+
+    /*
+    ---------------------------------------------------------------------------
+    PROGRESSBAR
+    ---------------------------------------------------------------------------
+    */
+
+   "progressbar":
+    {
+      style: function(states) {
+        return {
+          decorator: "progressbar",
+          padding: 0,
+          backgroundColor: "progressbar-base",
+          width : 200,
+          height : 20
+        };
+      }
+    },
+    
+    "progressbar-trans":
+    {
+      include: "progressbar",
+      style: function(states) {
+        return {
+          decorator: "progressbar-trans",
+          backgroundColor: "transparent"
+        };
+      }
+    },
+
+    "progressbar/progress":
+    {
+      style: function(states) {
+        return {
+          backgroundColor: "progressbar-gray"
+        };
+      }
+    },
+
+
+    /*
+    ---------------------------------------------------------------------------
+      wax.UPLOAD
+    ---------------------------------------------------------------------------
+    */
+   
+   "upload" : {
+    style : function(states)
+     {
+       return {
+         decorator : "upload-area"
+       };
+     }
+  },
+  
+  "upload/progressbar" : "progressbar-trans",
+  
+  "upload/progressbar/progress":
+   {
+     style: function(states) {
+       return {
+         backgroundColor: "progressbar-gray"
+       };
+     }
+   },
+
+   "upload/message/icon" : {
+    style : function(states)
+     {
+       return {
+         scale : true,
+         width : 88,
+         height : 88,
+         opacity : .35
+       };
+     }
     }
 
   }

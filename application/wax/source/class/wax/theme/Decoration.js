@@ -171,6 +171,57 @@ qx.Theme.define("wax.theme.Decoration",
      {
       width: 0
      }
+   },
+
+    /*
+    ---------------------------------------------------------------------------
+      PROGRESSBAR
+    ---------------------------------------------------------------------------
+    */
+
+   "progressbar" :
+   {
+     style:
+     {
+       backgroundColor: "#FFF",
+       radius : 0,
+       width: 0,
+       color: "border-separator"
+     }
+   },
+   
+   "progressbar-trans" :
+   {
+       radius : 0,
+       width: 0
+   },
+
+
+   /*
+    ---------------------------------------------------------------------------
+      UPLOAD
+    ---------------------------------------------------------------------------
+    */
+   "upload-area" :
+   {
+     style :
+     {
+       width : 1,
+       radius : 3,
+       style : "dashed",
+       color : "gray"
+     }
+   },
+   
+   "upload-area-dragover" :
+   {
+    include: "upload-area",
+     
+     style :
+     {
+       style : "solid",
+       color : "orange"
+     }
    }
   }
 });

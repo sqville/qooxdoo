@@ -161,7 +161,7 @@ qx.Class.define("wax.Application",
       // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
       var dashboardpage = new qx.ui.container.Composite().set({padding: 20});
       var overviewpage = new qx.ui.container.Composite(new qx.ui.layout.VBox(20)).set({padding: 20});
-      var gallerypage = new qx.ui.container.Composite(new qx.ui.layout.Flow()).set({padding: 20});
+      var gallerypage = new qx.ui.container.Composite(new qx.ui.layout.VBox(20)).set({padding: 20});
       var tablelistpage = new qx.ui.container.Composite().set({padding: 20});
       
       //more structure
@@ -344,6 +344,30 @@ qx.Class.define("wax.Application",
       // Gallery page marker 
       var lblGalleryHeader = new qx.ui.basic.Label("Gallery Page Header").set({font: "control-header"});
       gallerypage.add(lblGalleryHeader);
+      // Upload control
+      var ctrlUpload = new wax.Upload("Drag n drop, or", "Browse", null);
+      ctrlUpload.set({
+      	height: 150,
+      	spacing: 20,
+        center: true,
+        demo : true
+      });
+      ctrlUpload.getChildControl("message").set({ icon: "wax/cloud_upload-24px.svg", iconPosition: "top", gap: 0});
+      gallerypage.add(ctrlUpload);
+      var uploaddemorestore = new qx.ui.form.Button("Restore").set({allowGrowX: false});
+      uploaddemorestore.addListener("execute", function(){	
+      	var progressbar = ctrlUpload.getChildControl("progressbar", true);
+      	progressbar.setValue(0);
+      }, this);
+      var uploadprogress = new qx.ui.form.Button("+ 10%").set({allowGrowX: false});
+      uploadprogress.addListener("execute", function(){	
+      	var progressbar = ctrlUpload.getChildControl("progressbar", true);
+      	progressbar.setValue(progressbar.getValue()+10);
+      }, this);
+      var upldhbox = new qx.ui.container.Composite(new qx.ui.layout.HBox());
+      upldhbox.add(uploaddemorestore);
+      upldhbox.add(uploadprogress);
+      gallerypage.add(upldhbox);
       
       // Assemble - THE STACK 
       centerbox.add(dashboardpage);
