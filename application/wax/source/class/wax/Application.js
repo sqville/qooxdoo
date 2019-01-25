@@ -368,6 +368,11 @@ qx.Class.define("wax.Application",
       upldhbox.add(uploaddemorestore);
       upldhbox.add(uploadprogress);
       gallerypage.add(upldhbox);
+      var btnCopy = new qx.ui.form.Button("Electron Copy Test");
+      var txtPaste = new qx.ui.form.TextField().set({ minWidth: 300, placeholder: "Paste copied text here"});
+      var electronhbox = new qx.ui.container.Composite(new qx.ui.layout.HBox(8));
+      electronhbox.add(btnCopy);
+      electronhbox.add(txtPaste);
       
       // Assemble - THE STACK 
       centerbox.add(dashboardpage);
@@ -660,6 +665,26 @@ qx.Class.define("wax.Application",
         
       }
 
+      // electron
+      //if (qx.core.Environment.get("device.type") == "desktop" && qx.core.Environment.get("runtime.name") == "node.js"){
+      if (this.__isElectron()) {
+
+        // Add electron test controls
+        gallerypage.add(electronhbox);
+        
+        const {clipboard} = require('electron')
+
+        btnCopy.addListener("execute", function(){	
+          if (!txtPaste.getValue())
+          {
+            txtPaste.setValue("");
+          }
+          txtPaste.setPlaceholder("Copied! Paste here to see");
+          clipboard.writeText("Electron Demo!!");
+        }, this);
+
+      }
+
     },
 
     __createGridTable : function()
@@ -799,6 +824,31 @@ qx.Class.define("wax.Application",
       win.getChildControl("title").set({padding: [10,0,0,10]});
 
       return win;
+    },
+
+    /**
+     * Electron JS detection
+     * https://github.com/cheton/is-electron
+     */
+    
+    __isElectron : function() 
+    {
+      // Renderer process
+      if (typeof window !== 'undefined' && typeof window.process === 'object' && window.process.type === 'renderer') {
+          return true;
+      }
+  
+      // Main process
+      if (typeof process !== 'undefined' && typeof process.versions === 'object' && !!process.versions.electron) {
+          return true;
+      }
+  
+      // Detect the user agent when the `nodeIntegration` option is set to true
+      if (typeof navigator === 'object' && typeof navigator.userAgent === 'string' && navigator.userAgent.indexOf('Electron') >= 0) {
+          return true;
+      }
+  
+      return false;
     }
   }
 });

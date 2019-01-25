@@ -3,17 +3,17 @@
   {
     "name" : "wax",
 
-    "summary" : "Custom Application",
-    "description" : "This is a skeleton for a custom application with qooxdoo.",
+    "summary" : "Wax application, Franklin configuration",
+    "description" : "This is to show how a single qooxdoo project can support multiple platforms (Web apps, mobile web apps, hybride mobile apps, and desktop apps) and use cases (Simple to large, complex app configurations).",
     
-    "homepage" : "http://some.homepage.url/",
+    "homepage" : "http://sqville.com/",
 
     "license" : "SomeLicense",
     "authors" : 
     [
       {
-        "name" : "First Author (uid)",
-        "email" : "first.author@some.domain"
+        "name" : "Chris Eskew (sqville)",
+        "email" : "chris.eskew@sqville.com"
       }
     ],
 
