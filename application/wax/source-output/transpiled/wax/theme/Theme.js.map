@@ -1,0 +1,32 @@
+{
+  "version": 3,
+  "sources": [
+    "C:\\Users\\sqville\\Documents\\Qooxdoo\\qooxdoo-forked\\qooxdoo\\application\\wax\\source\\class\\wax\\theme\\Theme.js"
+  ],
+  "names": [
+    "qx",
+    "Bootstrap",
+    "executePendingDefers",
+    "$$dbClassInfo",
+    "Theme",
+    "define",
+    "meta",
+    "color",
+    "wax",
+    "theme",
+    "Color",
+    "decoration",
+    "Decoration",
+    "font",
+    "Font",
+    "icon",
+    "Tango",
+    "appearance",
+    "Appearance"
+  ],
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;AAAAA,MAAGC,SAAH,CAAaC,oBAAb,CAAkCC,aAAlC,EAUAH,GAAGI,KAAH,CAASC,MAAT,CAAgB,iBAAhB,EACA;AACEC,YACA;AACEC,gBAAQC,IAAIC,KAAJ,CAAUC,KADpB;AAEEC,qBAAaH,IAAIC,KAAJ,CAAUG,UAFzB;AAGEC,eAAOL,IAAIC,KAAJ,CAAUK,IAHnB;AAIEC,eAAOf,GAAGS,KAAH,CAASM,IAAT,CAAcC,KAJvB;AAKEC,qBAAaT,IAAIC,KAAJ,CAAUS;AALzB;AAFF,IADA,C;AAVAV,OAAIC,KAAJ,CAAUL,KAAV,CAAgBD,aAAhB,GAAgCA,aAAhC",
+  "file": "Theme.js",
+  "sourcesContent": [
+    "/* ************************************************************************\r\n\r\n   Copyright:\r\n\r\n   License:\r\n\r\n   Authors:\r\n\r\n************************************************************************ */\r\n\r\nqx.Theme.define(\"wax.theme.Theme\",\r\n{\r\n  meta :\r\n  {\r\n    color : wax.theme.Color,\r\n    decoration : wax.theme.Decoration,\r\n    font : wax.theme.Font,\r\n    icon : qx.theme.icon.Tango,\r\n    appearance : wax.theme.Appearance\r\n  }\r\n});"
+  ]
+}

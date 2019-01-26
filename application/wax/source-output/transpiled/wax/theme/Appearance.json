@@ -1,0 +1,31 @@
+{
+  "className": "wax.theme.Appearance",
+  "packageName": "wax.theme",
+  "name": "Appearance",
+  "superClass": "qx.theme.indigo.Appearance",
+  "interfaces": [],
+  "mixins": [],
+  "functionName": null,
+  "clazz": {
+    "location": {
+      "start": {
+        "line": 11,
+        "column": 0
+      },
+      "end": {
+        "line": 375,
+        "column": 3
+      }
+    },
+    "jsdoc": {
+      "@description": [
+        {
+          "name": "@description",
+          "body": "***********************************************************************\n\nCopyright:\n\nLicense:\n\nAuthors:\n\n***********************************************************************"
+        }
+      ]
+    }
+  },
+  "type": "theme",
+  "descendants": []
+}

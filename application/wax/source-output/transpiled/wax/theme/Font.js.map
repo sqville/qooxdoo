@@ -1,0 +1,31 @@
+{
+  "version": 3,
+  "sources": [
+    "C:\\Users\\sqville\\Documents\\Qooxdoo\\qooxdoo-forked\\qooxdoo\\application\\wax\\source\\class\\wax\\theme\\Font.js"
+  ],
+  "names": [
+    "qx",
+    "Bootstrap",
+    "executePendingDefers",
+    "$$dbClassInfo",
+    "Theme",
+    "define",
+    "extend",
+    "theme",
+    "indigo",
+    "Font",
+    "fonts",
+    "size",
+    "family",
+    "color",
+    "lineHeight",
+    "include",
+    "bold",
+    "wax"
+  ],
+  "mappings": ";;;;;;;;;;;;AAAAA,KAAGC,SAAH,CAAaC,oBAAb,CAAkCC,aAAlC,EAUAH,GAAGI,KAAH,CAASC,MAAT,CAAgB,gBAAhB,EACA;AACEC,YAASN,GAAGO,KAAH,CAASC,MAAT,CAAgBC,IAD3B;;AAGEC,WACA;AACE,iBACA;AACEC,cAAO,EADT;AAEEC,gBAAS,CAAC,MAAD,EAAS,gBAAT,EAA2B,OAA3B,EAAoC,WAApC,EAAiD,YAAjD,CAFX;AAGEC,eAAQ,MAHV;AAIEC,oBAAY;AAJd,OAFF;;AASE,sBACA;AACEC,iBAAU,SADZ;AAEEC,cAAO;AAFT,OAVF;;AAeE,wBACA;AACED,iBAAU,SADZ;AAEEJ,cAAO;AAFT,OAhBF;;AAqBE,2BACA;AACEI,iBAAU,cADZ;AAEEJ,cAAO;AAFT,OAtBF;;AA2BE,oBACA;AACEI,iBAAU,cADZ;AAEEJ,cAAO;AAFT,OA5BF;;AAiCE,wBACA;AACCI,iBAAU,SADX;AAECJ,cAAO;AAFR,OAlCF;;AAuCE,qBACA;AACEI,iBAAU,SADZ;AAEEJ,cAAO;AAFT;AAxCF;AAJF,GADA,C;AAVAM,MAAIV,KAAJ,CAAUE,IAAV,CAAeN,aAAf,GAA+BA,aAA/B",
+  "file": "Font.js",
+  "sourcesContent": [
+    "/* ************************************************************************\r\n\r\n   Copyright:\r\n\r\n   License:\r\n\r\n   Authors:\r\n\r\n************************************************************************ */\r\n\r\nqx.Theme.define(\"wax.theme.Font\",\r\n{\r\n  extend : qx.theme.indigo.Font,\r\n\r\n  fonts :\r\n  {\r\n    \"default\" :\r\n    {\r\n      size : 14,\r\n      family : [\"Lato\", \"Helvetica Neue\", \"arial\", \"Helvetica\", \"sans-serif\"],\r\n      color : \"text\",\r\n      lineHeight: 1.5\r\n    },\r\n\r\n    \"default-bold\" :\r\n    {\r\n      include : \"default\",\r\n      bold : true\r\n    },\r\n\r\n    \"mainmenubutton\" :\r\n    {\r\n      include : \"default\",\r\n      size : 16\r\n    },\r\n\r\n    \"mainmenuindicator\" :\r\n    {\r\n      include : \"default-bold\",\r\n      size : 14\r\n    },\r\n\r\n    \"headeratom\" :\r\n    {\r\n      include : \"default-bold\",\r\n      size : 16\r\n    },\r\n\r\n    \"control-header\" :\r\n    {\r\n    \tinclude : \"default\",\r\n    \tsize : 32\r\n    },\r\n\r\n    \"area-header\" :\r\n    {\r\n      include : \"default\",\r\n      size : 21\r\n    }\r\n  }\r\n});"
+  ]
+}

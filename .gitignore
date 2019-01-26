@@ -44,4 +44,4 @@ npm-debug.log
 # New apps
 # Wax
 /application/wax/build/
-/application/wax/source/node_modules/
+/application/wax/node_modules/

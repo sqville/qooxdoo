@@ -1,0 +1,23 @@
+{
+  "name": "wax-franklin",
+  "version": "0.6.0",
+  "description": "A minimal electron-qooxdoo-wax application",
+  "main": "source/main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://github.com/electron/electron-quick-start",
+  "keywords": [
+    "Electron",
+    "qooxdoo",
+    "qooxdoo skeleton",
+    "wax",
+    "wax-franklin",
+    "sqville"
+  ],
+  "author": "SQville",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^4.0.2"
+  }
+}

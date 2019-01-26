@@ -1,0 +1,48 @@
+{
+  "version": 3,
+  "sources": [
+    "C:\\Users\\sqville\\Documents\\Qooxdoo\\qooxdoo-forked\\qooxdoo\\application\\wax\\source\\class\\wax\\MenuButton.js"
+  ],
+  "names": [
+    "qx",
+    "Bootstrap",
+    "executePendingDefers",
+    "$$dbClassInfo",
+    "Class",
+    "define",
+    "extend",
+    "ui",
+    "form",
+    "RadioButton",
+    "implement",
+    "IRadioItem",
+    "construct",
+    "label",
+    "icon",
+    "scale",
+    "indicator",
+    "undefined",
+    "setIcon",
+    "getChildControl",
+    "set",
+    "control",
+    "basic",
+    "Label",
+    "alignX",
+    "appearance",
+    "_add",
+    "core",
+    "Spacer",
+    "properties",
+    "refine",
+    "init",
+    "allowGrowX",
+    "wax",
+    "MenuButton"
+  ],
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;AAAAA,KAAGC,SAAH,CAAaC,oBAAb,CAAkCC,aAAlC,EAmBAH,GAAGI,KAAH,CAASC,MAAT,CAAgB,gBAAhB,EACA;AACEC,YAASN,GAAGO,EAAH,CAAMC,IAAN,CAAWC,WADtB;AAEEC,eAAYV,GAAGO,EAAH,CAAMC,IAAN,CAAWG,UAFzB;;AAKE;;;;;;AAMAC,eAAY,mBAASC,KAAT,EAAgBC,IAAhB,EAAsBC,KAAtB,EAA6BC,SAA7B,EACZ;AACE,oDAAqBH,KAArB;;AAEA,UAAIC,SAASG,SAAb,EAAwB;AACtB,aAAKC,OAAL,CAAaJ,IAAb;;AAEA,YAAIC,UAAUE,SAAd,EAAyB;AACvB,eAAKE,eAAL,CAAqB,MAArB,EAA6BC,GAA7B,CAAiC,EAAEL,OAAQA,KAAV,EAAjC;AACD;AACF;;AAED,UAAIC,cAAcC,SAAlB,EAA6B;AAC3B,YAAII,UAAU,IAAIrB,GAAGO,EAAH,CAAMe,KAAN,CAAYC,KAAhB,CAAsBP,SAAtB,EAAiCI,GAAjC,CAAqC,EAACI,QAAQ,OAAT,EAAkBC,YAAa,mBAA/B,EAArC,CAAd;AACA,aAAKC,IAAL,CAAU,IAAI1B,GAAGO,EAAH,CAAMoB,IAAN,CAAWC,MAAf,CAAsB,EAAtB,EAA0B,CAA1B,CAAV;AACA,aAAKF,IAAL,CAAUL,OAAV;AACD;AAEF,KA7BH;;AAgCE;;;;;;AAMAQ,gBACA;;AAEE;AACAJ,kBACA;AACEK,gBAAS,IADX;AAEEC,cAAO;AAFT,OAJF;;AASE;AACAC,kBACA;AACEF,gBAAS,IADX;AAEEC,cAAO;AAFT;;AAXF;AAvCF,GADA,C;AAnBAE,MAAIC,UAAJ,CAAe/B,aAAf,GAA+BA,aAA/B",
+  "file": "MenuButton.js",
+  "sourcesContent": [
+    "/* ************************************************************************\r\n\r\n   http://sqville.com\r\n\r\n   Copyright:\r\n     \r\n\r\n   License:\r\n     MIT: https://opensource.org/licenses/MIT\r\n     See the LICENSE file in the project's top-level directory for details.\r\n\r\n   Authors:\r\n     * \r\n\r\n************************************************************************ */\r\n\r\n/**\r\n *\r\n */\r\nqx.Class.define(\"wax.MenuButton\",\r\n{\r\n  extend : qx.ui.form.RadioButton,\r\n  implement : qx.ui.form.IRadioItem,\r\n\r\n\r\n  /*\r\n  *****************************************************************************\r\n     CONSTRUCTOR\r\n  *****************************************************************************\r\n  */\r\n\r\n  construct : function(label, icon, scale, indicator)\r\n  {\r\n    this.base(arguments, label);\r\n\r\n    if (icon !== undefined) {\r\n      this.setIcon(icon);\r\n\r\n      if (scale !== undefined) {\r\n        this.getChildControl(\"icon\").set({ scale : scale });\r\n      }\r\n    }\r\n\r\n    if (indicator !== undefined) {\r\n      var control = new qx.ui.basic.Label(indicator).set({alignX: \"right\", appearance : \"mainmenuindicator\"});\r\n      this._add(new qx.ui.core.Spacer(30, 1));\r\n      this._add(control);\r\n    }\r\n    \r\n  },\r\n\r\n\r\n  /*\r\n  *****************************************************************************\r\n     PROPERTIES\r\n  *****************************************************************************\r\n  */\r\n\r\n  properties :\r\n  {\r\n\r\n    // overridden\r\n    appearance :\r\n    {\r\n      refine : true,\r\n      init : \"mainmenubutton\"\r\n    },\r\n\r\n    // overridden\r\n    allowGrowX :\r\n    {\r\n      refine : true,\r\n      init : true\r\n    }\r\n\r\n  }\r\n});\r\n"
+  ]
+}
