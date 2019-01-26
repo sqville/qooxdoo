@@ -173,7 +173,7 @@ qx.Class.define("wax.Application",
 
       // Controls
       // First page marker 
-      var label1 = new qx.ui.basic.Label("Dashboard Page Header").set({font: "control-header"});
+      var label1 = new qx.ui.basic.Label("Dashbo Page Header").set({font: "control-header"});
       // GroubBox
       var groupbox1 = new wax.GroupBox("First GroupBox for Wax", "wax/baseline-directions_subway-24px.svg", true, true, true);
       groupbox1.setLayout(new qx.ui.layout.VBox());
