@@ -43,8 +43,8 @@ npm-debug.log
 
 # New apps
 # Wax
-/application/wax/build/
-/application/wax/node_modules/
-/application/wax/phonegap_wax/
-/application/wax/source-output/
-/application/wax/build-output/
+application/wax/build/
+application/wax/node_modules/
+application/wax/phonegap_wax/
+application/wax/source-output/
+application/wax/build-output/

@@ -1,7 +1,0 @@
-{
-  "compiler": "0.2.27",
-  "libraries": {
-    "wax": "master",
-    "qx": "6.0.0-alpha-20181116-263f2cc9"
-  }
-}
