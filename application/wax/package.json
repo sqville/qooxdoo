@@ -19,5 +19,8 @@
   "license": "MIT",
   "devDependencies": {
     "electron": "^4.0.2"
+  },
+  "dependencies": {
+    "nvm": "0.0.4"
   }
 }
