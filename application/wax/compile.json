@@ -7,9 +7,13 @@
     {
       "type": "build",
       "outputPath": "build-output"
+    },
+    {
+      "type": "build",
+      "outputPath": "phonegap_wax/www"
     }
   ],
-  "defaultTarget": "build",
+  "defaultTarget": "source",
   "locales": ["en"],
 
   "applications": [

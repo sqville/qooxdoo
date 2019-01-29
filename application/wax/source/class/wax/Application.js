@@ -672,7 +672,7 @@ qx.Class.define("wax.Application",
         // Add electron test controls
         gallerypage.add(electronhbox);
         
-        const {clipboard} = require('electron')
+        //const {clipboard} = require('electron')
 
         btnCopy.addListener("execute", function(){	
           if (!txtPaste.getValue())
@@ -680,7 +680,7 @@ qx.Class.define("wax.Application",
             txtPaste.setValue("");
           }
           txtPaste.setPlaceholder("Copied! Paste here to see");
-          clipboard.writeText("Electron Demo!!");
+         // clipboard.writeText("Electron Demo!!");
         }, this);
 
       }
