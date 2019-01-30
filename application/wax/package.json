@@ -21,6 +21,7 @@
     "electron": "^4.0.2"
   },
   "dependencies": {
+    "npm": "^6.7.0",
     "nvm": "0.0.4"
   }
 }
