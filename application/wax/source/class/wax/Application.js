@@ -75,6 +75,11 @@ qx.Class.define("wax.Application",
       // Dock's Center section (Stack) === THE STACK ===
       var centerbox = new qx.ui.container.Stack().set({backgroundColor: "white", padding: 0});
 
+      // phonegap
+      //if (qx.core.Environment.get("phonegap")) {
+        var southbox = new qx.ui.container.Composite(new qx.ui.layout.HBox(0)).set({padding: [0,4,0,4], decorator: "bottombar"});
+      //}
+
       // West Scroll area to fit all menu items
       var scrollwest = new qx.ui.container.Scroll();
       scrollwest.set({padding: 0, margin: 0, contentPadding: [0,0,0,0]});
@@ -134,6 +139,9 @@ qx.Class.define("wax.Application",
       northhbox.add(northtoolbar, {left: 0, right: 0});
       // Scaffolding has been created and assembled
 
+      // phonegap
+      appcompdock.add(southbox, {edge: "south"});
+
       // <<< END of Base Scaffolding <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
       // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
       // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -173,7 +181,7 @@ qx.Class.define("wax.Application",
 
       // Controls
       // First page marker 
-      var label1 = new qx.ui.basic.Label("Dashbo Page Header").set({font: "control-header"});
+      var label1 = new qx.ui.basic.Label("Dashboard Page Header").set({font: "control-header"});
       // GroubBox
       var groupbox1 = new wax.GroupBox("First GroupBox for Wax", "wax/baseline-directions_subway-24px.svg", true, true, true);
       groupbox1.setLayout(new qx.ui.layout.VBox());
@@ -665,6 +673,14 @@ qx.Class.define("wax.Application",
         
       }
 
+      // phonegap
+      if (qx.core.Environment.get("phonegap")) {
+        
+        // build out south bar
+        
+
+      }
+
       // electron
       //if (qx.core.Environment.get("device.type") == "desktop" && qx.core.Environment.get("runtime.name") == "node.js"){
       if (this.__isElectron()) {
@@ -672,7 +688,7 @@ qx.Class.define("wax.Application",
         // Add electron test controls
         gallerypage.add(electronhbox);
         
-        //const {clipboard} = require('electron')
+        const {clipboard} = require('electron')
 
         btnCopy.addListener("execute", function(){	
           if (!txtPaste.getValue())
@@ -680,7 +696,7 @@ qx.Class.define("wax.Application",
             txtPaste.setValue("");
           }
           txtPaste.setPlaceholder("Copied! Paste here to see");
-         // clipboard.writeText("Electron Demo!!");
+          clipboard.writeText("Electron Demo!!");
         }, this);
 
       }

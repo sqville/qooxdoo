@@ -108,6 +108,16 @@ qx.Theme.define("wax.theme.Decoration",
       }
     },
 
+    "bottombar" :
+    {
+      style :
+      {
+        width : [1,0,0,0],
+        color : "white-box-border",
+        style : "solid"
+      }
+    },
+
     /*
     ---------------------------------------------------------------------------
       BUTTON
