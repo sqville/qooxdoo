@@ -234,6 +234,78 @@ qx.Theme.define("wax.theme.Appearance",
      }
     },
 
+    /*
+    ---------------------------------------------------------------------------
+      wax.MENUBUTTON - "hym" = hybrid moble (i.e. phonegap or cordova)
+    ---------------------------------------------------------------------------
+    */
+
+   "mainmenubutton-frame-hym" :
+   {
+     alias : "atom",
+
+     style : function(states)
+     {
+       var decorator = "mainmenubutton-box";
+       var padding = [4,2,4,2];
+       var textcolor = "black";
+       var opacity = .55;
+
+       if (!states.disabled) {
+         if (states.hovered && !states.pressed && !states.checked) {
+           //decorator = "mainmenubutton-box-hovered";
+           //padding = [12,6,12,14];
+           textcolor = "black";
+           opacity = 1;
+         } /*else if (states.hovered && (states.pressed || states.checked)) {
+           decorator = "mainmenubutton-box-pressed-hovered";
+         }*/ else if (states.pressed || states.checked) {
+           //decorator = "mainmenubutton-box-pressed";
+           //padding = [12,6,12,14];
+           textcolor = "blue";
+           opacity = 1;
+         }
+       }
+
+       return {
+         decorator : decorator,
+         padding : padding,
+         cursor: states.disabled ? undefined : "pointer",
+         minWidth: 5,
+         minHeight: 5,
+         textColor: textcolor,
+         font : "mainmenubutton-hym",
+         opacity : opacity
+       };
+     }
+   },
+
+   "mainmenubutton-frame-hym/label" : {
+     alias : "atom/label",
+
+     style : function(states)
+     {
+       return {
+         textColor : states.disabled ? "text-disabled" : undefined
+       };
+     }
+   },
+
+   "mainmenubutton-hym" :
+   {
+     alias : "mainmenubutton-frame-hym",
+     include : "mainmenubutton-frame-hym",
+
+     style : function(states)
+     {
+       return {
+         center : true,
+         gap : 2
+       };
+     }
+   },
+
+
 
     /*
     ---------------------------------------------------------------------------

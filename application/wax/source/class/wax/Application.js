@@ -77,7 +77,7 @@ qx.Class.define("wax.Application",
 
       // phonegap
       //if (qx.core.Environment.get("phonegap")) {
-        var southbox = new qx.ui.container.Composite(new qx.ui.layout.HBox(0)).set({padding: [0,4,0,4], decorator: "bottombar"});
+        var southbox = new qx.ui.container.Composite(new qx.ui.layout.HBox(4)).set({alignY: "middle", padding: [0,4,0,4], decorator: "bottombar"});
       //}
 
       // West Scroll area to fit all menu items
@@ -474,6 +474,24 @@ qx.Class.define("wax.Application",
 
       // <<< END of Main Menu and Main Menu Popup <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     
+      // >>> Populate the PhonGap Main Menu  content >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+      // Create Menu Buttons that will navigate the user through THE STACK Pages 
+      // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+      // Populate southbox with content
+      var tbtndashboardpagehym = new wax.MenuButton("Dashboard", "wax/dashboard-24px.svg", true ).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
+      var tbtnoverviewpagehym = new wax.MenuButton("Overview", "wax/assignment_returned-24px.svg", true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
+      var tbtnlistofitemspagehym = new wax.MenuButton("List of Items", "wax/view_list-24px.svg", true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
+      var tbtngallerypagehym = new wax.MenuButton("Gallery", "wax/camera-24px.svg", true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
+      var tbtnmenuhym = new wax.MenuButton("Menu", "wax/round-menu-24px.svg", true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
+      southbox.add(tbtndashboardpagehym, {flex: 1});
+      southbox.add(tbtnoverviewpagehym, {flex: 1});
+      southbox.add(tbtnlistofitemspagehym, {flex: 1});
+      southbox.add(tbtngallerypagehym, {flex: 1});
+      southbox.add(tbtnmenuhym, {flex: 1});
+
+      // Assign all the clones their own RadioGroup
+      var mainmenubuttongrouphym = new qx.ui.form.RadioGroup();
+      mainmenubuttongrouphym.add(tbtndashboardpagehym, tbtnoverviewpagehym, tbtnlistofitemspagehym, tbtngallerypagehym, tbtnmenuhym);
 
       // >>> Wire all the Main Menu Buttons to THE STACK Pages (via Listeners) >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
       // Turn on all wax.MenuButton listeners

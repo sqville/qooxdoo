@@ -34,6 +34,13 @@ qx.Theme.define("wax.theme.Font",
       size : 16
     },
 
+    "mainmenubutton-hym" :
+    {
+      include : "default-bold",
+      size : 10,
+      lineHeight: 1.2
+    },
+
     "mainmenuindicator" :
     {
       include : "default-bold",
