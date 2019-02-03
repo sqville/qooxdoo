@@ -207,7 +207,7 @@ qx.Class.define("wax.Application",
       
       groupbox1.add(piechartimage);
       groupbox1.add(new qx.ui.basic.Label("<b>Results:</b> Half of the pie is divided").set({rich: true}));
-      var labelenv = new qx.ui.basic.Label("device.name=" + qx.core.Environment.get("device.name") + "<br>device.type=" + qx.core.Environment.get("device.type") + "<br>browser.name=" + qx.core.Environment.get("browser.name") + "<br>browser.version=" + qx.core.Environment.get("browser.version") + "<br>os.name=" + qx.core.Environment.get("os.name") + "<br>os.version=" + qx.core.Environment.get("os.version") + "<br>engine.name=" + qx.core.Environment.get("engine.name") + "<br>phonegap=" + qx.core.Environment.get("phonegap") + "<br>runtime.name=" + qx.core.Environment.get("runtime.name")).set({rich: true});
+      var labelenv = new qx.ui.basic.Label("device.name=" + qx.core.Environment.get("device.name") + "<br>device.type=" + qx.core.Environment.get("device.type") + "<br>browser.name=" + qx.core.Environment.get("browser.name") + "<br>browser.version=" + qx.core.Environment.get("browser.version") + "<br>os.name=" + qx.core.Environment.get("os.name") + "<br>os.version=" + qx.core.Environment.get("os.version") + "<br>engine.name=" + qx.core.Environment.get("engine.name") + "<br>phonegap=" + qx.core.Environment.get("phonegap") + "<br>phonegap.notification=" + qx.core.Environment.get("phonegap.notification") + "<br>runtime.name=" + qx.core.Environment.get("runtime.name")).set({rich: true});
       groupbox2.add(labelenv);
       //groupbox2.add(barchartimage);
       //groupbox2.add(new qx.ui.basic.Label("<b>Overview:</b> Room will be configured in this manner").set({rich: true}));
@@ -474,7 +474,7 @@ qx.Class.define("wax.Application",
 
       // <<< END of Main Menu and Main Menu Popup <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     
-      // >>> Populate the PhonGap Main Menu  content >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+      // >>> Populate the Hybrid Mobile (hym) Main Menu  content >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
       // Create Menu Buttons that will navigate the user through THE STACK Pages 
       // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
       // Populate southbox with content
@@ -492,6 +492,9 @@ qx.Class.define("wax.Application",
       // Assign all the clones their own RadioGroup
       var mainmenubuttongrouphym = new qx.ui.form.RadioGroup();
       mainmenubuttongrouphym.add(tbtndashboardpagehym, tbtnoverviewpagehym, tbtnlistofitemspagehym, tbtngallerypagehym, tbtnmenuhym);
+
+      // <<< END of Hybrid Mobil (hym) Main Menu and Main Menu Popup <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
 
       // >>> Wire all the Main Menu Buttons to THE STACK Pages (via Listeners) >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
       // Turn on all wax.MenuButton listeners
@@ -579,6 +582,32 @@ qx.Class.define("wax.Application",
           mainmenupopup.hide();
         }
       }, this);
+
+      // if Hybrid Mobile
+      tbtndashboardpagehym.addListener("changeValue", function(e) {
+        if (e.getData()) {
+          centerbox.setSelection([dashboardpage]);
+        }
+      }, this);
+
+      tbtnoverviewpagehym.addListener("changeValue", function(e) {
+        if (e.getData()) {
+          centerbox.setSelection([overviewpage]);
+        }
+      }, this);
+
+      tbtnlistofitemspagehym.addListener("changeValue", function(e) {
+        if (e.getData()) {
+          centerbox.setSelection([tablelistpage]);
+        }
+      }, this);
+
+      tbtngallerypagehym.addListener("changeValue", function(e) {
+        if (e.getData()) {
+          centerbox.setSelection([gallerypage]);
+        }
+      }, this);
+
 
       // <<< END of Wiring <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
@@ -706,7 +735,7 @@ qx.Class.define("wax.Application",
         // Add electron test controls
         gallerypage.add(electronhbox);
         
-        const {clipboard} = require('electron')
+        //const {clipboard} = require('electron')
 
         btnCopy.addListener("execute", function(){	
           if (!txtPaste.getValue())
@@ -714,7 +743,7 @@ qx.Class.define("wax.Application",
             txtPaste.setValue("");
           }
           txtPaste.setPlaceholder("Copied! Paste here to see");
-          clipboard.writeText("Electron Demo!!");
+          //clipboard.writeText("Electron Demo!!");
         }, this);
 
       }
