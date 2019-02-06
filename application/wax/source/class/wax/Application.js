@@ -140,7 +140,9 @@ qx.Class.define("wax.Application",
       // Scaffolding has been created and assembled
 
       // phonegap
-      appcompdock.add(southbox, {edge: "south"});
+      if (qx.core.Environment.get("phonegap")) {
+        appcompdock.add(southbox, {edge: "south"});
+      }
 
       // <<< END of Base Scaffolding <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
       // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
