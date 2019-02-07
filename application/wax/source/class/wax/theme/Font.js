@@ -63,6 +63,13 @@ qx.Theme.define("wax.theme.Font",
     {
       include : "default",
       size : 21
+    },
+
+    "hym-app-header" :
+    {
+      include : "default",
+      bold : true,
+      size : 16
     }
   }
 });

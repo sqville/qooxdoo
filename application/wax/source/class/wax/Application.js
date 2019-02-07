@@ -134,6 +134,11 @@ qx.Class.define("wax.Application",
       profilemenubutton.setMenu(profilemenu);
       profilepart.add(profilemenubutton);
       northtoolbar.add(mainmenupart);
+      if (qx.core.Environment.get("phonegap")) {
+        var atmlogocurrentpage = new qx.ui.basic.Atom("Wax","wax/wax_logo-24px.svg").set({font: "hym-app-header", gap: 6});
+        northtoolbar.addSpacer();
+        northtoolbar.add(atmlogocurrentpage);
+      }
       northtoolbar.addSpacer();
       northtoolbar.add(profilepart);
       northhbox.add(northtoolbar, {left: 0, right: 0});
@@ -589,24 +594,28 @@ qx.Class.define("wax.Application",
       tbtndashboardpagehym.addListener("changeValue", function(e) {
         if (e.getData()) {
           centerbox.setSelection([dashboardpage]);
+          atmlogocurrentpage.set({show: "both", label:"Wax"});
         }
       }, this);
 
       tbtnoverviewpagehym.addListener("changeValue", function(e) {
         if (e.getData()) {
           centerbox.setSelection([overviewpage]);
+          atmlogocurrentpage.set({show: "label", label:"Overview"});
         }
       }, this);
 
       tbtnlistofitemspagehym.addListener("changeValue", function(e) {
         if (e.getData()) {
           centerbox.setSelection([tablelistpage]);
+          atmlogocurrentpage.set({show: "label", label:"Table List"});
         }
       }, this);
 
       tbtngallerypagehym.addListener("changeValue", function(e) {
         if (e.getData()) {
           centerbox.setSelection([gallerypage]);
+          atmlogocurrentpage.set({show: "label", label:"Gallery"});
         }
       }, this);
 
