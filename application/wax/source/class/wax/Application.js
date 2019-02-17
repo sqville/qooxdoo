@@ -107,6 +107,12 @@ qx.Class.define("wax.Application",
       var profilemenu = new qx.ui.menu.Menu().set({spacingX: 12});
       var profilemenubutton1 = new qx.ui.menu.Button("Edit my profile", "wax/edit-24px.svg").set({padding: 10});
       var profilemenubutton2 = new qx.ui.menu.Button("Log out", "wax/exit_to_app-24px.svg").set({padding: 10});
+
+      // Search Button (hybrid mobile)
+      var btnsearchbutton = new qx.ui.toolbar.Button("Search", "wax/baseline-search-24px.svg").set({show: "icon"});
+
+      // Back Button (hybrid mobile)
+      var btnbackbutton = new qx.ui.toolbar.Button("Back", "wax/baseline-chevron_left-24px.svg").set({show: "icon"});
       
       // Add Main Menu Popup Listeners
       mainmenubtnbutton.addListener("execute", function(e)
@@ -128,16 +134,19 @@ qx.Class.define("wax.Application",
       appcompdock.add(scrollwest, {edge:"west"});
       appcompdock.add(scroll, {edge:"center"});
       approot.add(appcompdock, {edge: 0});
-      mainmenupart.add(mainmenubtnbutton);
       profilemenu.add(profilemenubutton1);
       profilemenu.add(profilemenubutton2);
       profilemenubutton.setMenu(profilemenu);
-      profilepart.add(profilemenubutton);
       northtoolbar.add(mainmenupart);
       if (qx.core.Environment.get("phonegap")) {
         var atmlogocurrentpage = new qx.ui.basic.Atom("Wax","wax/wax_logo-24px.svg").set({font: "hym-app-header", gap: 6});
         northtoolbar.addSpacer();
         northtoolbar.add(atmlogocurrentpage);
+        mainmenupart.add(btnbackbutton);    
+        profilepart.add(btnsearchbutton);
+      } else {
+        mainmenupart.add(mainmenubtnbutton);
+        profilepart.add(profilemenubutton);
       }
       northtoolbar.addSpacer();
       northtoolbar.add(profilepart);
