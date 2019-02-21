@@ -96,17 +96,18 @@ qx.Class.define("wax.Application",
       // Top-Left Button
       var mainmenubtnbutton = new qx.ui.toolbar.Button("MainMenu", "wax/round-menu-24px.svg").set({show: "icon"});
 
-      // Top-Right MenuButton - TODO: Change to toolbar button
+      // Top-Right MenuButton
       var profilemenubutton = new qx.ui.toolbar.MenuButton("ProfileMenu", "wax/round-account_circle-24px.svg").set({show: "icon", showArrow: false});
       
       // Main Menu Popup (VBox)
       var mainmenupopup = new qx.ui.popup.Popup().set({allowGrowY: true, padding: 10});
       mainmenupopup.setLayout(new qx.ui.layout.VBox(0));
 
-      // Profile Menu
+      // Profile and Settings Menu and Menu Buttons
       var profilemenu = new qx.ui.menu.Menu().set({spacingX: 12});
       var profilemenubutton1 = new qx.ui.menu.Button("Edit my profile", "wax/edit-24px.svg").set({padding: 10});
-      var profilemenubutton2 = new qx.ui.menu.Button("Log out", "wax/exit_to_app-24px.svg").set({padding: 10});
+      var settingsmenubutton = new qx.ui.menu.Button("Settings", "wax/outline-settings-24px.svg").set({padding: 10});
+      var logoutmenubutton = new qx.ui.menu.Button("Log out", "wax/exit_to_app-24px.svg").set({padding: 10});
 
       // Search Button (hybrid mobile)
       var btnsearchbutton = new qx.ui.toolbar.Button("Search", "wax/baseline-search-24px.svg").set({show: "icon"});
@@ -135,7 +136,8 @@ qx.Class.define("wax.Application",
       appcompdock.add(scroll, {edge:"center"});
       approot.add(appcompdock, {edge: 0});
       profilemenu.add(profilemenubutton1);
-      profilemenu.add(profilemenubutton2);
+      profilemenu.add(settingsmenubutton);
+      profilemenu.add(logoutmenubutton);
       profilemenubutton.setMenu(profilemenu);
       northtoolbar.add(mainmenupart);
       if (qx.core.Environment.get("phonegap")) {
