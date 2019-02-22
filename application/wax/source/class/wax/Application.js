@@ -87,7 +87,8 @@ qx.Class.define("wax.Application",
       // Center Scroll area to fit all content
       var scroll = new qx.ui.container.Scroll();
       //var scroll = new qx.ui.core.scroll.NativeScrollBar("vertical");
-      scroll.set({padding: 0, margin: 0, contentPadding: [0,0,0,0], dragScrollSlowDownFactor: 0});
+      scroll.set({padding: 0, margin: 0, contentPadding: [0,0,0,0]});
+      scroll.setDragScrollSlowDownFactor(0);
       //scroll.set({padding: 0, margin: 0});
 
       // === North Toolbar, Parts and Buttons ===

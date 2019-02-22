@@ -67,7 +67,7 @@ qx.Mixin.define("qx.ui.core.MDragDropScrolling",
     /** The factor for slowing down the scrolling. */
     dragScrollSlowDownFactor :
     {
-      check : "Float",
+      check : "Number",
       init : 0.1
     }
   },
