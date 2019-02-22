@@ -88,7 +88,7 @@ qx.Class.define("wax.Application",
       var scroll = new qx.ui.container.Scroll();
       //var scroll = new qx.ui.core.scroll.NativeScrollBar("vertical");
       scroll.set({padding: 0, margin: 0, contentPadding: [0,0,0,0]});
-      scroll.setDragScrollSlowDownFactor(0);
+      //scroll.setDragScrollSlowDownFactor(0);
       //scroll.set({padding: 0, margin: 0});
 
       // === North Toolbar, Parts and Buttons ===
@@ -204,17 +204,17 @@ qx.Class.define("wax.Application",
       // First page marker 
       var label1 = new qx.ui.basic.Label("Dashboard Page Header").set({font: "control-header"});
       // GroubBox
-      var groupbox1 = new wax.GroupBox("First GroupBox for Wax", "wax/baseline-directions_subway-24px.svg", true, true, true);
+      var groupbox1 = new wax.GroupBox("First GroupBox for Wax", "wax/baseline-directions_subway-24px.svg", true, true, false);
       groupbox1.setLayout(new qx.ui.layout.VBox());
       var piechartimage = new qx.ui.basic.Image("wax/pie_chart-24px.svg").set({scale: true, width: 272, height: 272});
 
-      var groupbox2 = new wax.GroupBox("Second GroupBox for Wax", "wax/local_airport-24px.svg", true, true, true);
+      var groupbox2 = new wax.GroupBox("Second GroupBox for Wax", "wax/local_airport-24px.svg", true, true, false);
       groupbox2.setLayout(new qx.ui.layout.VBox());
 
-      var groupbox3 = new wax.GroupBox("Third GroupBox for Wax - with linebreak", "wax/commute-24px.svg", true, true, true);
+      var groupbox3 = new wax.GroupBox("Third GroupBox for Wax - with linebreak", "wax/commute-24px.svg", true, true, false);
       groupbox3.setLayout(new qx.ui.layout.VBox());
 
-      var groupbox4 = new wax.GroupBox("Forth GroupBox for Wax - Flow within a Flow", "wax/local_dining-24px.svg", true, true, true);
+      var groupbox4 = new wax.GroupBox("Forth GroupBox for Wax - Flow within a Flow", "wax/local_dining-24px.svg", true, true, false);
       var groupbox4flow = new qx.ui.layout.Flow(6,6,"center");
       groupbox4.setLayout(groupbox4flow);
       groupbox4.set({allowShrinkX: true, allowShrinkY: true, allowGrowX: true, allowGrowY: true}); 
@@ -269,9 +269,9 @@ qx.Class.define("wax.Application",
       winDoThis.add(new qx.ui.basic.Label("<b>Action Name:</b>").set({rich: true}));
       winDoThis.add(new qx.ui.basic.Label(winDoThis.getCaption()).set({marginBottom:18}));
       winDoThis.add(new qx.ui.basic.Label("<b>Summary:</b>").set({rich: true}));
-      winDoThis.add(new qx.ui.form.TextField().set({placeholder: "placeholder text", marginBottom:18}));
-      winDoThis.add(new qx.ui.basic.Label("<b>Password:</b>").set({rich: true}));
-      winDoThis.add(new qx.ui.form.PasswordField().set({placeholder: "Enter password to validate that it is you", marginBottom:18, maxWidth: 260}));
+      winDoThis.add(new qx.ui.form.TextField().set({placeholder: "Action summary", marginBottom:18}));
+      winDoThis.add(new qx.ui.basic.Label("<b>Details:</b>").set({rich: true}));
+      winDoThis.add(new qx.ui.form.TextArea().set({placeholder: "Action details"}));
       var winselectbox01 = new qx.ui.form.SelectBox().set({marginBottom:18, maxWidth: 260});
       winselectbox01.add(new qx.ui.form.ListItem("New"));
       winselectbox01.add(new qx.ui.form.ListItem("In Progress"));
@@ -356,7 +356,7 @@ qx.Class.define("wax.Application",
       overviewpage.add(secpagegroupbox3);
 
       // Third page marker
-      var label6 = new qx.ui.basic.Label("Table to List Page Header").set({font: "control-header"});
+      var label6 = new qx.ui.basic.Label("Table List Page Header").set({font: "control-header"});
       //var tablelistflow = new qx.ui.layout.Flow().set({alignY: "bottom", alignX: "left"});
       var tablelistvbox = new qx.ui.layout.VBox();
       //tablelistpage.set({backgroundColor: "yellow"});
@@ -370,38 +370,86 @@ qx.Class.define("wax.Application",
       tableliststack.add(tablelistlist);
       tablelistpage.add(tableliststack, {flex: 1});
 
-      // Gallery page marker 
+      // Gallery Page
       var lblGalleryHeader = new qx.ui.basic.Label("Gallery Page Header").set({font: "control-header"});
       gallerypage.add(lblGalleryHeader);
-      // Upload control
-      var ctrlUpload = new wax.Upload("Drag n drop, or", "Browse", null);
-      ctrlUpload.set({
-      	height: 150,
-      	spacing: 20,
-        center: true,
-        demo : true
-      });
-      ctrlUpload.getChildControl("message").set({ icon: "wax/cloud_upload-24px.svg", iconPosition: "top", gap: 0});
-      gallerypage.add(ctrlUpload);
-      var uploaddemorestore = new qx.ui.form.Button("Restore").set({allowGrowX: false});
-      uploaddemorestore.addListener("execute", function(){	
-      	var progressbar = ctrlUpload.getChildControl("progressbar", true);
-      	progressbar.setValue(0);
-      }, this);
-      var uploadprogress = new qx.ui.form.Button("+ 10%").set({allowGrowX: false});
-      uploadprogress.addListener("execute", function(){	
-      	var progressbar = ctrlUpload.getChildControl("progressbar", true);
-      	progressbar.setValue(progressbar.getValue()+10);
-      }, this);
-      var upldhbox = new qx.ui.container.Composite(new qx.ui.layout.HBox());
-      upldhbox.add(uploaddemorestore);
-      upldhbox.add(uploadprogress);
-      gallerypage.add(upldhbox);
-      var btnCopy = new qx.ui.form.Button("Electron Copy Test");
-      var txtPaste = new qx.ui.form.TextField().set({ minWidth: 300, placeholder: "Paste copied text here"});
-      var electronhbox = new qx.ui.container.Composite(new qx.ui.layout.HBox(8));
-      electronhbox.add(btnCopy);
-      electronhbox.add(txtPaste);
+      
+      // Gallery Upload control - desktop only
+      if (qx.core.Environment.get("device.type") == "desktop"){
+        var ctrlUpload = new wax.Upload("Drag and drop, or", "Browse", null);
+        ctrlUpload.set({
+          height: 120,
+          spacing: 20,
+          center: true,
+          demo : true
+        });
+        ctrlUpload.getChildControl("message").set({ icon: "wax/cloud_upload-24px.svg", iconPosition: "top", gap: 0});
+        gallerypage.add(ctrlUpload);
+        var uploaddemorestore = new qx.ui.form.Button("Restore").set({allowGrowX: false});
+        uploaddemorestore.addListener("execute", function(){	
+          var progressbar = ctrlUpload.getChildControl("progressbar", true);
+          progressbar.setValue(0);
+        }, this);
+        var uploadprogress = new qx.ui.form.Button("+ 10%").set({allowGrowX: false});
+        uploadprogress.addListener("execute", function(){	
+          var progressbar = ctrlUpload.getChildControl("progressbar", true);
+          progressbar.setValue(progressbar.getValue()+10);
+        }, this);
+        var upldhbox = new qx.ui.container.Composite(new qx.ui.layout.HBox());
+        upldhbox.add(uploaddemorestore);
+        upldhbox.add(uploadprogress);
+        //gallerypage.add(upldhbox);
+
+        /*var btnCopy = new qx.ui.form.Button("Electron Copy Test");
+        var txtPaste = new qx.ui.form.TextField().set({ minWidth: 300, placeholder: "Paste copied text here"});
+        var electronhbox = new qx.ui.container.Composite(new qx.ui.layout.HBox(8));
+        electronhbox.add(btnCopy);
+        electronhbox.add(txtPaste);*/
+      };
+
+      // Add Flow of image objects - images are from "resource/wax/gallery" folder
+      var gallaryimageflow = new qx.ui.layout.Flow(6,6,"left");
+      var gallerygroupboxcars = new wax.GroupBox("Cars", "wax/commute-24px.svg", true, true, false);
+      gallerygroupboxcars.setLayout(gallaryimageflow);
+      gallerygroupboxcars.set({allowShrinkX: true, allowShrinkY: true, allowGrowX: true, allowGrowY: true}); 
+      gallerygroupboxcars.add(new qx.ui.basic.Image("wax/gallery/Yellow_Car2.jpg").set({scale: true, width: 420, height: 280}));
+      gallerygroupboxcars.add(new qx.ui.basic.Image("wax/gallery/Flame_Car2.jpg").set({scale: true, width: 420, height: 280}));
+      
+      var gallerygroupboxtrain = new wax.GroupBox("Trains", "wax/baseline-directions_subway-24px.svg", true, true, false);
+      gallerygroupboxtrain.setLayout(new qx.ui.layout.Flow(6,6,"left"));
+      gallerygroupboxtrain.set({allowShrinkX: true, allowShrinkY: true, allowGrowX: true, allowGrowY: true}); 
+      gallerygroupboxtrain.add(new qx.ui.basic.Image("wax/gallery/Deep_Train_Bridge_Sky.JPG").set({scale: true, width: 420, height: 280}));
+      gallerygroupboxtrain.add(new qx.ui.basic.Image("wax/gallery/Top_Train_Bridge.JPG").set({scale: true, width: 420, height: 280}));
+      gallerygroupboxtrain.add(new qx.ui.basic.Image("wax/gallery/Train_Bridge_Close.JPG").set({scale: true, width: 420, height: 280}));
+      gallerygroupboxtrain.add(new qx.ui.basic.Image("wax/gallery/Train_Bridge_Close2.JPG").set({scale: true, width: 420, height: 280}));
+      gallerygroupboxtrain.add(new qx.ui.basic.Image("wax/gallery/Deep_Train_Bridge.jpg").set({scale: true, width: 280, height: 420}));
+
+      var gallerygroupboxfood = new wax.GroupBox("Food", "wax/local_dining-24px.svg", true, true, false);
+      gallerygroupboxfood.setLayout(new qx.ui.layout.Flow(6,6,"left"));
+      gallerygroupboxfood.set({allowShrinkX: true, allowShrinkY: true, allowGrowX: true, allowGrowY: true}); 
+      gallerygroupboxfood.add(new qx.ui.basic.Image("wax/gallery/Vegies2.jpg").set({scale: true, width: 420, height: 280}));
+
+      var gallerygroupboxart = new wax.GroupBox("Hand drawn", null, true, true, false);
+      gallerygroupboxart.setLayout(new qx.ui.layout.Flow(6,6,"left"));
+      gallerygroupboxart.set({allowShrinkX: true, allowShrinkY: true, allowGrowX: true, allowGrowY: true}); 
+      gallerygroupboxart.add(new qx.ui.basic.Image("wax/gallery/Crowd_Pressure.png").set({scale: true, width: 420, height: 280}));
+      gallerygroupboxart.add(new qx.ui.basic.Image("wax/gallery/Normal_Dude.png").set({scale: true, width: 420, height: 350}));
+      gallerygroupboxart.add(new qx.ui.basic.Image("wax/gallery/RoxArms.jpg").set({scale: true}));
+      gallerygroupboxart.add(new qx.ui.basic.Image("wax/gallery/Santa_Color-Orig.JPG").set({scale: true, width: 420, height: 306}));
+      gallerygroupboxart.add(new qx.ui.basic.Image("wax/gallery/holiday_cheer.JPG").set({scale: true, width: 420, height: 392}));
+      gallerygroupboxart.add(new qx.ui.basic.Image("wax/Roxarama-Guy.png").set({scale: true}));
+
+      var gallerygroupboxvideo = new wax.GroupBox("Videos", null, true, true, false);
+      gallerygroupboxvideo.setLayout(new qx.ui.layout.Flow(6,6,"left"));
+      gallerygroupboxvideo.set({allowShrinkX: true, allowShrinkY: true, allowGrowX: true, allowGrowY: true}); 
+      gallerygroupboxvideo.add(new qx.ui.basic.Image("wax/gallery/movie1.jpg").set({scale: true}));
+    
+      
+      gallerypage.add(gallerygroupboxcars);
+      gallerypage.add(gallerygroupboxtrain);
+      gallerypage.add(gallerygroupboxfood);
+      gallerypage.add(gallerygroupboxart);
+      gallerypage.add(gallerygroupboxvideo);
       
       // Assemble - THE STACK 
       centerbox.add(dashboardpage);
@@ -434,6 +482,9 @@ qx.Class.define("wax.Application",
 
       btnSubSecondpage.addListener("execute", function(e) {
         winDoThis.restore();
+        if (qx.core.Environment.get("device.type") == "mobile") {
+          winDoThis.maximize();
+        }
         winDoThis.center();
         winDoThis.show();
       });
@@ -441,7 +492,7 @@ qx.Class.define("wax.Application",
       var tbtnThirdPage = new wax.MenuButton("List of Items", "wax/view_list-24px.svg", true);
       westbox.add(tbtnThirdPage);
 
-      var tbtnGalleryPage = new wax.MenuButton("Gallery", "wax/camera-24px.svg", true, "16" );
+      var tbtnGalleryPage = new wax.MenuButton("Gallery", "wax/camera-24px.svg", true, "14" );
       westbox.add(tbtnGalleryPage);
 
       var westboxbuttongroup = new qx.ui.form.RadioGroup();
@@ -758,18 +809,18 @@ qx.Class.define("wax.Application",
       if (this.__isElectron()) {
 
         // Add electron test controls
-        gallerypage.add(electronhbox);
+        //gallerypage.add(electronhbox);
         
         //const {clipboard} = require('electron')
 
-        btnCopy.addListener("execute", function(){	
+        /*btnCopy.addListener("execute", function(){	
           if (!txtPaste.getValue())
           {
             txtPaste.setValue("");
           }
-          txtPaste.setPlaceholder("Copied! Paste here to see");
+          txtPaste.setPlaceholder("Copied! Paste here to see");*/
           //clipboard.writeText("Electron Demo!!");
-        }, this);
+        //}, this);
 
       }
 
