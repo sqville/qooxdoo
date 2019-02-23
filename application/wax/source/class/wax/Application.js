@@ -144,10 +144,10 @@ qx.Class.define("wax.Application",
       profilemenubutton.setMenu(profilemenu);
       northtoolbar.add(mainmenupart);
       if (qx.core.Environment.get("phonegap")) {
-        var atmlogocurrentpage = new qx.ui.basic.Atom("Wax","wax/wax_logo-24px.svg").set({font: "hym-app-header", gap: 6});
+        var atmlogocurrentpage = new qx.ui.basic.Atom("Wax","wax/wax_logo-24px.svg").set({font: "hym-app-header", gap: 6, paddingLeft: 30});
         northtoolbar.addSpacer();
         northtoolbar.add(atmlogocurrentpage);
-        mainmenupart.add(btnbackbutton);    
+        //mainmenupart.add(btnbackbutton);    
         profilepart.add(btnsearchbutton);
       } else {
         mainmenupart.add(mainmenubtnbutton);
@@ -956,7 +956,7 @@ qx.Class.define("wax.Application",
     __createDetailWindow : function()
     {
       // Create the Window
-      var win = new qx.ui.window.Window("Generic Window").set({ appearance: "wax-window", allowMaximize : false, allowMinimize : false, modal: true, movable: true });
+      var win = new qx.ui.window.Window("Generic Window").set({ appearance: "wax-window", allowMaximize : true, allowMinimize : false, modal: true, movable: true });
       win.setLayout(new qx.ui.layout.VBox(4));
       win.setShowStatusbar(true);
       win.setStatus("Generic Message"); 

@@ -68,6 +68,7 @@ qx.Theme.define("wax.theme.Font",
     "hym-app-header" :
     {
       include : "default",
+      family : ["-apple-system", "BlinkMacSystemFont", "Helvetica Neue", "arial", "Helvetica", "sans-serif"],
       bold : true,
       size : 16
     }
