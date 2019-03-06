@@ -91,6 +91,13 @@
       {
         "qx.nativeScrollBars" : true
       }
+    },
+    "build" :
+    {
+      "environment" :
+      {
+        "qx.nativeScrollBars" : true
+      }
     }
   }
 }

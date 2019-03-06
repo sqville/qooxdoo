@@ -144,7 +144,7 @@ qx.Class.define("wax.Application",
       profilemenubutton.setMenu(profilemenu);
       northtoolbar.add(mainmenupart);
       if (qx.core.Environment.get("phonegap")) {
-        var atmlogocurrentpage = new qx.ui.basic.Atom("Wax","wax/wax_logo-24px.svg").set({font: "hym-app-header", gap: 6, paddingLeft: 30});
+        var atmlogocurrentpage = new qx.ui.basic.Atom("Wax","wax/wax_logo-24px.svg").set({font: "hym-app-header", gap: 6, paddingLeft: 35});
         northtoolbar.addSpacer();
         northtoolbar.add(atmlogocurrentpage);
         //mainmenupart.add(btnbackbutton);    
