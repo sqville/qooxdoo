@@ -85,5 +85,12 @@
       }
     }
     */
+    "source" :
+    {
+      "environment" :
+      {
+        "qx.nativeScrollBars" : true
+      }
+    }
   }
 }
