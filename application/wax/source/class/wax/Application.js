@@ -293,6 +293,9 @@ qx.Class.define("wax.Application",
       winDoThis.add(buttonHBox);
       btnDoThis.addListener("execute", function(e) {
         winDoThis.restore();
+        if (qx.core.Environment.get("device.type") == "mobile") {
+          winDoThis.maximize();
+        }
         winDoThis.center();
         winDoThis.show();
       });
@@ -450,6 +453,20 @@ qx.Class.define("wax.Application",
       gallerypage.add(gallerygroupboxfood);
       gallerypage.add(gallerygroupboxart);
       gallerypage.add(gallerygroupboxvideo);
+
+      // Menu Page for phonegap only
+      if (qx.core.Environment.get("phonegap")) {
+        var menupage = new qx.ui.container.Composite(new qx.ui.layout.VBox(10, null, "separator-vertical")).set({padding: [60, 0, 0, 0]});
+        var btnProfile = new wax.MenuButton("Profile", "wax/edit-24px.svg", false);
+        var btnSettings = new wax.MenuButton("Settings", "wax/outline-settings-24px.svg", false);
+        //var btnSupport = new wax.MenuButton("Support", "wax/assignment_returned-24px.svg", false);
+        var btnLogout = new wax.MenuButton("Logout", "wax/exit_to_app-24px.svg", false);
+        menupage.add(btnProfile);
+        menupage.add(btnSettings);
+        menupage.add(btnLogout);
+        centerbox.add(menupage);
+      }
+
       
       // Assemble - THE STACK 
       centerbox.add(dashboardpage);
@@ -482,9 +499,9 @@ qx.Class.define("wax.Application",
 
       btnSubSecondpage.addListener("execute", function(e) {
         winDoThis.restore();
-        if (qx.core.Environment.get("device.type") == "mobile") {
+        //if (qx.core.Environment.get("phonegap")) {
           winDoThis.maximize();
-        }
+        //}
         winDoThis.center();
         winDoThis.show();
       });
@@ -681,6 +698,13 @@ qx.Class.define("wax.Application",
         if (e.getData()) {
           centerbox.setSelection([gallerypage]);
           atmlogocurrentpage.set({show: "label", label:"Gallery"});
+        }
+      }, this);
+
+      tbtnmenuhym.addListener("changeValue", function(e) {
+        if (e.getData()) {
+          centerbox.setSelection([menupage]);
+          atmlogocurrentpage.set({show: "label", label:"Menu"});
         }
       }, this);
 

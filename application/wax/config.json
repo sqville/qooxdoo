@@ -97,6 +97,13 @@
       "environment" :
       {
         "qx.nativeScrollBars" : true
+      },
+
+      "copy-files" :
+      {
+        "files" : ["wax.js"],
+        "source" : "build/script/",
+        "target" : "phonegap_wax/www/script/"
       }
     }
   }
