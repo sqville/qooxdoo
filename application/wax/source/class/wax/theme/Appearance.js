@@ -305,6 +305,17 @@ qx.Theme.define("wax.theme.Appearance",
      }
    },
 
+   "hym-page-button" :
+   {
+    style : function(states)
+    {
+      return {
+        center : false,
+        gap : 12,
+        padding : [8,8,8,20]
+      };
+    }
+   },
 
 
     /*
