@@ -202,7 +202,7 @@ qx.Class.define("wax.Application",
 
       // Controls
       // First page marker 
-      var label1 = new qx.ui.basic.Label("Dashboard Page Header").set({font: "control-header"});
+      var label1 = new qx.ui.basic.Label("My Default Dashboard").set({font: "control-header"});
       // GroubBox
       var groupbox1 = new wax.GroupBox("First GroupBox for Wax", "wax/baseline-directions_subway-24px.svg", true, true, false);
       groupbox1.setLayout(new qx.ui.layout.VBox());
@@ -247,7 +247,7 @@ qx.Class.define("wax.Application",
 
 
       // Second page marker  
-      var label5 = new qx.ui.basic.Label("Overview Page Header").set({font: "control-header"});
+      var label5 = new qx.ui.basic.Label("Actions").set({font: "control-header"});
       var secmidsection = new qx.ui.container.Composite(new qx.ui.layout.HBox(20));
       
       overviewpage.add(label5);
@@ -359,7 +359,7 @@ qx.Class.define("wax.Application",
       overviewpage.add(secpagegroupbox3);
 
       // Third page marker
-      var label6 = new qx.ui.basic.Label("Table List Page Header").set({font: "control-header"});
+      var label6 = new qx.ui.basic.Label("List of Items").set({font: "control-header"});
       //var tablelistflow = new qx.ui.layout.Flow().set({alignY: "bottom", alignX: "left"});
       var tablelistvbox = new qx.ui.layout.VBox();
       //tablelistpage.set({backgroundColor: "yellow"});
@@ -374,7 +374,7 @@ qx.Class.define("wax.Application",
       tablelistpage.add(tableliststack, {flex: 1});
 
       // Gallery Page
-      var lblGalleryHeader = new qx.ui.basic.Label("Gallery Page Header").set({font: "control-header"});
+      var lblGalleryHeader = new qx.ui.basic.Label("My Default Gallery").set({font: "control-header"});
       gallerypage.add(lblGalleryHeader);
       
       // Gallery Upload control - desktop only
@@ -485,13 +485,13 @@ qx.Class.define("wax.Application",
       // Create Menu Buttons that will navigate the user through THE STACK Pages 
       // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
       // Populate westBox with content
-      var atmleftnavheader = new qx.ui.basic.Atom("Header Atom", "wax/round-account_circle-24px.svg").set({appearance: "header-atom", anonymous: true, focusable: false, selectable: false });
+      var atmleftnavheader = new qx.ui.basic.Atom("Hello, Admin", "wax/round-account_circle-24px.svg").set({appearance: "header-atom", anonymous: true, focusable: false, selectable: false });
       atmleftnavheader.getChildControl("icon").set({ scale : true });
       westbox.add(atmleftnavheader);
-      var tbtndashboardpage = new wax.MenuButton("Dashboard", "wax/dashboard-24px.svg", true );
+      var tbtndashboardpage = new wax.MenuButton("Dashboards", "wax/dashboard-24px.svg", true );
       westbox.add(tbtndashboardpage);
 
-      var tbtnSecondPage = new wax.MenuButton("Overview", "wax/assignment_returned-24px.svg", true);
+      var tbtnSecondPage = new wax.MenuButton("Actions", "wax/assignment_returned-24px.svg", true);
       var btnSubSecondpage = new qx.ui.form.Button("Do This").set({ appearance: "submenubutton", allowGrowX: true, padding: [10,4,14,60], visibility: "excluded"});
       var btnSubSecondpage2 = new qx.ui.form.Button("Do That").set({ appearance: "submenubutton", allowGrowX: true, padding: [10,4,14,60], visibility: "excluded"});
       westbox.add(tbtnSecondPage);
@@ -568,8 +568,8 @@ qx.Class.define("wax.Application",
       // Create Menu Buttons that will navigate the user through THE STACK Pages 
       // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
       // Populate southbox with content
-      var tbtndashboardpagehym = new wax.MenuButton("Dashboard", "wax/dashboard-24px.svg", true ).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
-      var tbtnoverviewpagehym = new wax.MenuButton("Overview", "wax/assignment_returned-24px.svg", true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
+      var tbtndashboardpagehym = new wax.MenuButton("Dashboards", "wax/dashboard-24px.svg", true ).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
+      var tbtnoverviewpagehym = new wax.MenuButton("Actions", "wax/assignment_returned-24px.svg", true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
       var tbtnlistofitemspagehym = new wax.MenuButton("List of Items", "wax/view_list-24px.svg", true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
       var tbtngallerypagehym = new wax.MenuButton("Gallery", "wax/camera-24px.svg", true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
       var tbtnmenuhym = new wax.MenuButton("Menu", "wax/round-menu-24px.svg", true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
@@ -684,7 +684,7 @@ qx.Class.define("wax.Application",
       tbtnoverviewpagehym.addListener("changeValue", function(e) {
         if (e.getData()) {
           centerbox.setSelection([overviewpage]);
-          atmlogocurrentpage.set({show: "label", label:"Overview"});
+          atmlogocurrentpage.set({show: "label", label:"Actions"});
         }
       }, this);
 
