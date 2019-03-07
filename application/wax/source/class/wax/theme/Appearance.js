@@ -312,7 +312,8 @@ qx.Theme.define("wax.theme.Appearance",
       return {
         center : false,
         gap : 12,
-        padding : [8,8,8,20]
+        padding : [8,20,8,20],
+        decorator : "page-button-right"
       };
     }
    },

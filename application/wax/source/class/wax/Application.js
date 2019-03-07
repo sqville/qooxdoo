@@ -455,9 +455,10 @@ qx.Class.define("wax.Application",
       gallerypage.add(gallerygroupboxvideo);
 
       // Menu Page for phonegap only
-      if (qx.core.Environment.get("phonegap")) {
+      //if (qx.core.Environment.get("phonegap")) {
         var menupage = new qx.ui.container.Composite(new qx.ui.layout.VBox(10, null, "separator-vertical")).set({padding: [60, 0, 0, 0]});
         var btnProfile = new qx.ui.form.Button("Profile", "wax/edit-24px.svg").set({appearance : "hym-page-button"});
+        //btnProfile.getLayoutParent().add(new qx.ui.core.Spacer());
         var btnSettings = new qx.ui.form.Button("Settings", "wax/outline-settings-24px.svg").set({appearance : "hym-page-button"});
         //var btnSupport = new wax.MenuButton("Support", "wax/assignment_returned-24px.svg", false);
         var btnLogout = new qx.ui.form.Button("Logout", "wax/exit_to_app-24px.svg").set({appearance : "hym-page-button"});
@@ -465,7 +466,7 @@ qx.Class.define("wax.Application",
         menupage.add(btnSettings);
         menupage.add(btnLogout);
         centerbox.add(menupage);
-      }
+      //}
 
       
       // Assemble - THE STACK 

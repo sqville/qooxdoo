@@ -57,6 +57,17 @@ qx.Theme.define("wax.theme.Decoration",
       }
     },
 
+    "page-button-right" :
+    {
+      style :
+      {
+        backgroundImage: "wax/chevron_right-24px.svg",
+        backgroundRepeat: "no-repeat",
+        backgroundPositionX: "right",
+        backgroundPositionY: "center"
+      }
+    },
+
     "white-box" :
     {
       style :
