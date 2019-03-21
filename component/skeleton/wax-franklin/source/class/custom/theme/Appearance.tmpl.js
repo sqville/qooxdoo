@@ -8,7 +8,7 @@
 
 ************************************************************************ */
 
-qx.Theme.define("wax.theme.Appearance",
+qx.Theme.define("${Namespace}.theme.Appearance",
 {
   extend : qx.theme.indigo.Appearance,
 
@@ -370,22 +370,9 @@ qx.Theme.define("wax.theme.Appearance",
       {
         return {
           marginLeft : 2,
-          icon : states.hovered ? "wax/close-red-24px.svg" : "wax/close-24px.svg",
+          icon : states.hovered ? "${NamespacePath}/close-red-24px.svg" : "${NamespacePath}/close-24px.svg",
           padding : [ 1, 2 ],
           cursor : states.disabled ? undefined : "pointer"
-        };
-      }
-    },
-
-    "wax-window/close-button/icon" :
-    {
-      alias : "image",
-
-      style : function(states)
-      {
-        return {
-          width : 24,
-          height : 24
         };
       }
     },

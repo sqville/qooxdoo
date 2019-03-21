@@ -49,3 +49,5 @@ application/wax/phonegap_wax/
 application/wax/source-output/
 application/wax/build-output/
 application/wax/source/node_modules/
+application/zartan/
+component/inspector/
