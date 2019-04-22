@@ -12,6 +12,11 @@
  * This is the main application class of your custom application "wax"
  *
  * @asset(wax/*)
+ * @ignore(module.exports)
+ * @ignore(process.*)
+ * @ignore(clipboard)
+ * @ignore({clipboard})
+ * @ignore(require)
  */
 qx.Class.define("wax.Application",
 {
@@ -403,11 +408,11 @@ qx.Class.define("wax.Application",
         upldhbox.add(uploadprogress);
         //gallerypage.add(upldhbox);
 
-        /*var btnCopy = new qx.ui.form.Button("Electron Copy Test");
+        var btnCopy = new qx.ui.form.Button("Electron Copy Test");
         var txtPaste = new qx.ui.form.TextField().set({ minWidth: 300, placeholder: "Paste copied text here"});
         var electronhbox = new qx.ui.container.Composite(new qx.ui.layout.HBox(8));
         electronhbox.add(btnCopy);
-        electronhbox.add(txtPaste);*/
+        electronhbox.add(txtPaste);
       };
 
       // Add Flow of image objects - images are from "resource/wax/gallery" folder
@@ -834,20 +839,30 @@ qx.Class.define("wax.Application",
       if (this.__isElectron()) {
 
         // Add electron test controls
-        //gallerypage.add(electronhbox);
+        gallerypage.add(electronhbox);
         
         //const {clipboard} = require('electron')
+        var clipboard = require('electron');
 
-        /*btnCopy.addListener("execute", function(){	
+        btnCopy.addListener("execute", function(){	
           if (!txtPaste.getValue())
           {
             txtPaste.setValue("");
           }
-          txtPaste.setPlaceholder("Copied! Paste here to see");*/
-          //clipboard.writeText("Electron Demo!!");
-        //}, this);
+          txtPaste.setPlaceholder("Copied! Paste here to see");
+          clipboard.writeText("Electron Demo!!");
+        }, this);
 
       }
+
+      // ====================================
+      // =====  Module Export code  =========
+      // ====================================
+      
+      if (qx.core.Environment.get("runtime.name") == "node.js"){
+        module.exports(this);
+      }
+
 
     },
 

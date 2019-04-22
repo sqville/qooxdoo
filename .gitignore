@@ -46,6 +46,7 @@ npm-debug.log
 application/wax/build/
 application/wax/node_modules/
 application/wax/phonegap_wax/
+application/wax/rn_wax/node_modules/
 application/wax/source-output/
 application/wax/build-output/
 application/wax/source/node_modules/
