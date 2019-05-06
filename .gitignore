@@ -50,5 +50,6 @@ application/wax/rn_wax/node_modules/
 application/wax/source-output/
 application/wax/build-output/
 application/wax/source/node_modules/
-application/zartan/
+application/zartan/compiled/
+application/waxserver/
 component/inspector/

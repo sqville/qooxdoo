@@ -9,17 +9,11 @@
 ************************************************************************ */
 
 /**
- * This is the main application class of your custom application "wax"
+ * This is the main application class of your custom application
  *
- * @asset(wax/*)
- * @ignore(module.exports)
- * @ignore(process.*)
- * @ignore(clipboard)
- * @ignore({clipboard})
- * @ignore(require)
- * @ignore(screen.*)
+ * @asset(zartan/*)
  */
-qx.Class.define("wax.Application",
+qx.Class.define("zartan.Application",
 {
   extend : qx.application.Standalone,
 
@@ -103,10 +97,12 @@ qx.Class.define("wax.Application",
       var profilepart = new qx.ui.toolbar.Part(); // Top-Right of the screen
 
       // Top-Left Button
-      var mainmenubtnbutton = new qx.ui.toolbar.Button("MainMenu", "wax/round-menu-24px.svg").set({show: "icon"});
+      var mainmenubtnbutton = new qx.ui.toolbar.Button("MainMenu", "zartan/round-menu-24px.svg").set({show: "icon"});
+      mainmenubtnbutton.getChildControl("icon").set({ width: 24, height: 24 });
 
       // Top-Right MenuButton
-      var profilemenubutton = new qx.ui.toolbar.MenuButton("ProfileMenu", "wax/round-account_circle-24px.svg").set({show: "icon", showArrow: false});
+      var profilemenubutton = new qx.ui.toolbar.MenuButton("ProfileMenu", "zartan/round-account_circle-24px.svg").set({show: "icon", showArrow: false});
+      profilemenubutton.getChildControl("icon").set({ width: 24, height: 24 });
       
       // Main Menu Popup (VBox)
       var mainmenupopup = new qx.ui.popup.Popup().set({allowGrowY: true, padding: 10});
@@ -114,15 +110,18 @@ qx.Class.define("wax.Application",
 
       // Profile and Settings Menu and Menu Buttons
       var profilemenu = new qx.ui.menu.Menu().set({spacingX: 12});
-      var profilemenubutton1 = new qx.ui.menu.Button("Edit my profile", "wax/edit-24px.svg").set({padding: 10});
-      var settingsmenubutton = new qx.ui.menu.Button("Settings", "wax/outline-settings-24px.svg").set({padding: 10});
-      var logoutmenubutton = new qx.ui.menu.Button("Log out", "wax/exit_to_app-24px.svg").set({padding: 10});
+      var profilemenubutton1 = new qx.ui.menu.Button("Edit my profile", "zartan/edit-24px.svg").set({padding: 10});
+      profilemenubutton1.getChildControl("icon").set({ width: 24, height: 24 });
+      var settingsmenubutton = new qx.ui.menu.Button("Settings", "zartan/outline-settings-24px.svg").set({padding: 10});
+      settingsmenubutton.getChildControl("icon").set({ width: 24, height: 24 });
+      var logoutmenubutton = new qx.ui.menu.Button("Log out", "zartan/exit_to_app-24px.svg").set({padding: 10});
+      logoutmenubutton.getChildControl("icon").set({ width: 24, height: 24 });
 
       // Search Button (hybrid mobile)
-      var btnsearchbutton = new qx.ui.toolbar.Button("Search", "wax/baseline-search-24px.svg").set({show: "icon"});
+      var btnsearchbutton = new qx.ui.toolbar.Button("Search", "zartan/baseline-search-24px.svg").set({show: "icon"});
 
       // Back Button (hybrid mobile)
-      var btnbackbutton = new qx.ui.toolbar.Button("Back", "wax/baseline-chevron_left-24px.svg").set({show: "icon"});
+      var btnbackbutton = new qx.ui.toolbar.Button("Back", "zartan/baseline-chevron_left-24px.svg").set({show: "icon"});
       
       // Add Main Menu Popup Listeners
       mainmenubtnbutton.addListener("execute", function(e)
@@ -150,7 +149,7 @@ qx.Class.define("wax.Application",
       profilemenubutton.setMenu(profilemenu);
       northtoolbar.add(mainmenupart);
       if (qx.core.Environment.get("phonegap")) {
-        var atmlogocurrentpage = new qx.ui.basic.Atom("Wax","wax/wax_logo-24px.svg").set({font: "hym-app-header", gap: 6, paddingLeft: 35});
+        var atmlogocurrentpage = new qx.ui.basic.Atom("zartan","zartan/wax_logo-24px.svg").set({font: "hym-app-header", gap: 6, paddingLeft: 35});
         northtoolbar.addSpacer();
         northtoolbar.add(atmlogocurrentpage);
         //mainmenupart.add(btnbackbutton);    
@@ -210,27 +209,27 @@ qx.Class.define("wax.Application",
       // First page marker 
       var label1 = new qx.ui.basic.Label("My Default Dashboard").set({font: "control-header"});
       // GroubBox
-      var groupbox1 = new wax.GroupBox("First GroupBox for Wax", "wax/baseline-directions_subway-24px.svg", true, true, false);
+      var groupbox1 = new zartan.GroupBox("First GroupBox", "zartan/baseline-directions_subway-24px.svg", true, true, false);
       groupbox1.setLayout(new qx.ui.layout.VBox());
-      var piechartimage = new qx.ui.basic.Image("wax/pie_chart-24px.svg").set({scale: true, width: 272, height: 272});
+      var piechartimage = new qx.ui.basic.Image("zartan/pie_chart-24px.svg").set({scale: true, width: 272, height: 272});
 
-      var groupbox2 = new wax.GroupBox("Second GroupBox for Wax", "wax/local_airport-24px.svg", true, true, false);
+      var groupbox2 = new zartan.GroupBox("Second GroupBox", "zartan/local_airport-24px.svg", true, true, false);
       groupbox2.setLayout(new qx.ui.layout.VBox());
 
-      var groupbox3 = new wax.GroupBox("Third GroupBox for Wax - with linebreak", "wax/commute-24px.svg", true, true, false);
+      var groupbox3 = new zartan.GroupBox("Third GroupBox - with linebreak", "zartan/commute-24px.svg", true, true, false);
       groupbox3.setLayout(new qx.ui.layout.VBox());
 
-      var groupbox4 = new wax.GroupBox("Forth GroupBox for Wax - Flow within a Flow", "wax/local_dining-24px.svg", true, true, false);
+      var groupbox4 = new zartan.GroupBox("Forth GroupBox - Flow within a Flow", "zartan/local_dining-24px.svg", true, true, false);
       var groupbox4flow = new qx.ui.layout.Flow(6,6,"center");
       groupbox4.setLayout(groupbox4flow);
       groupbox4.set({allowShrinkX: true, allowShrinkY: true, allowGrowX: true, allowGrowY: true}); 
-      groupbox4.add(new qx.ui.basic.Image("wax/bar_chart-24px.svg").set({scale: true, width: 222, height: 222}));
-      groupbox4.add(new qx.ui.basic.Image("wax/bar_chart-24px.1.svg").set({scale: true, width: 222, height: 222}));
-      groupbox4.add(new qx.ui.basic.Image("wax/bar_chart-24px.2.svg").set({scale: true, width: 222, height: 222}));
-      groupbox4.add(new qx.ui.basic.Atom("Year over year growth shows how the market favored the bold","wax/bolt-24px.svg").set({rich: true, width: 200, height: 142}));
+      groupbox4.add(new qx.ui.basic.Image("zartan/bar_chart-24px.svg").set({scale: true, width: 222, height: 222}));
+      groupbox4.add(new qx.ui.basic.Image("zartan/bar_chart-24px.1.svg").set({scale: true, width: 222, height: 222}));
+      groupbox4.add(new qx.ui.basic.Image("zartan/bar_chart-24px.2.svg").set({scale: true, width: 222, height: 222}));
+      groupbox4.add(new qx.ui.basic.Atom("Year over year growth shows how the market favored the bold","zartan/bolt-24px.svg").set({rich: true, width: 200, height: 142}));
 
-      var barchartimage = new qx.ui.basic.Image("wax/view_compact-24px.svg").set({scale: true, width: 312, height: 312});
-      var bubblechartimage = new qx.ui.basic.Image("wax/bubble_chart-24px.svg").set({scale: true, width: 312, height: 312});
+      var barchartimage = new qx.ui.basic.Image("zartan/view_compact-24px.svg").set({scale: true, width: 312, height: 312});
+      var bubblechartimage = new qx.ui.basic.Image("zartan/bubble_chart-24px.svg").set({scale: true, width: 312, height: 312});
       
       groupbox1.add(piechartimage);
       groupbox1.add(new qx.ui.basic.Label("<b>Results:</b> Half of the pie is divided").set({rich: true}));
@@ -259,7 +258,7 @@ qx.Class.define("wax.Application",
       overviewpage.add(label5);
       
       // Do This code
-      var secpagegroupbox1 = new wax.GroupBox("Do This","", true, true).set({allowStretchX: [true, true], allowStretchY: [false, false], appearance: "groupbox-connected", minWidth: 340});
+      var secpagegroupbox1 = new zartan.GroupBox("Do This","", true, true).set({allowStretchX: [true, true], allowStretchY: [false, false], appearance: "groupbox-connected", minWidth: 340});
       secpagegroupbox1.getChildControl("open", true).setMarginRight(20);
       secpagegroupbox1.setLayout(new qx.ui.layout.VBox());
       var secpagegroupbox1contentbox = new qx.ui.container.Composite(new qx.ui.layout.HBox(4)).set({alignY: "middle"});
@@ -270,7 +269,7 @@ qx.Class.define("wax.Application",
       secpagegroupbox1.add(secpagegroupbox1contentbox);
       var winDoThis = this.__createDetailWindow();
       winDoThis.set({caption: "Do This", status: "Modal window with a blocker", width: 660, contentPadding: 20});
-      //winDoThis.add(new qx.ui.basic.Image("wax/Roxarama-Guy.png"));
+      //winDoThis.add(new qx.ui.basic.Image("zartan/Roxarama-Guy.png"));
       //var wincontrolFlow = qx.ui.container.Composite(new qx.ui.layout.Flow(6,6,"left"));
       winDoThis.add(new qx.ui.basic.Label("<b>Action Name:</b>").set({rich: true}));
       winDoThis.add(new qx.ui.basic.Label(winDoThis.getCaption()).set({marginBottom:18}));
@@ -318,7 +317,7 @@ qx.Class.define("wax.Application",
       
 
       // Do That code
-      var secpagegroupbox2 = new wax.GroupBox("Do That","", true, true).set({allowStretchX: [true, true], allowStretchY: [false, false], appearance: "groupbox-connected", minWidth: 340});
+      var secpagegroupbox2 = new zartan.GroupBox("Do That","", true, true).set({allowStretchX: [true, true], allowStretchY: [false, false], appearance: "groupbox-connected", minWidth: 340});
       secpagegroupbox2.getChildControl("open", true).setMarginRight(20);
       secpagegroupbox2.setLayout(new qx.ui.layout.VBox(20));
       var secpagegroupbox2contentbox = new qx.ui.container.Composite(new qx.ui.layout.HBox(4)).set({alignY: "middle"});
@@ -327,11 +326,11 @@ qx.Class.define("wax.Application",
       var btnDoThat = new qx.ui.form.Button("Do That").set({width: 165, height: 40, maxHeight: 40, alignX: "right", alignY: "middle"});
       secpagegroupbox2contentbox.add(btnDoThat);
       secpagegroupbox2.add(secpagegroupbox2contentbox);
-      secpagegroupbox2.add(new qx.ui.basic.Atom("Warning message about doing that.","wax/warning-24px.svg"));
+      secpagegroupbox2.add(new qx.ui.basic.Atom("Warning message about doing that.","zartan/warning-24px.svg"));
 
       var winDoThat = this.__createDetailWindow();
       winDoThat.set({caption: "Do That", status: "Modal window without a blocker"});
-      winDoThat.add(new qx.ui.basic.Image("wax/Roxarama-Guy.png"));
+      winDoThat.add(new qx.ui.basic.Image("zartan/Roxarama-Guy.png"));
       var btnClosewinThat = new qx.ui.form.Button("Close Window");
       winDoThat.add(new qx.ui.core.Spacer(30, 20), {flex: 1});
       winDoThat.add(btnClosewinThat);
@@ -354,7 +353,7 @@ qx.Class.define("wax.Application",
       secmidsection.add(secpagegroupbox2, {width: "50%", flex: 1});
 
       // All that you did code
-      var secpagegroupbox3 = new wax.GroupBox("All That You Did","", true, true).set({allowStretchX: [true, true], allowStretchY: [false, false], appearance: "groupbox-connected", minWidth: 340});
+      var secpagegroupbox3 = new zartan.GroupBox("All That You Did","", true, true).set({allowStretchX: [true, true], allowStretchY: [false, false], appearance: "groupbox-connected", minWidth: 340});
       secpagegroupbox3.getChildControl("open", true).setMarginRight(20);
       secpagegroupbox3.setLayout(new qx.ui.layout.VBox(20));
       secpagegroupbox3.add(new qx.ui.basic.Label("Here's a list of all that you did. The table below is just a simple grid rather than a qooxdoo table control. Versatility is the key. There are multiple options for every use case. Adding more so text will wrap as screen shrinks").set({alignY: "middle", textAlign: "left", rich: true, wrap: true}), {flex: 1});
@@ -385,14 +384,14 @@ qx.Class.define("wax.Application",
       
       // Gallery Upload control - desktop only
       if (qx.core.Environment.get("device.type") == "desktop"){
-        var ctrlUpload = new wax.Upload("Drag and drop, or", "Browse", null);
+        var ctrlUpload = new zartan.Upload("Drag and drop, or", "Browse", null);
         ctrlUpload.set({
           height: 120,
           spacing: 20,
           center: true,
           demo : true
         });
-        ctrlUpload.getChildControl("message").set({ icon: "wax/cloud_upload-24px.svg", iconPosition: "top", gap: 0});
+        ctrlUpload.getChildControl("message").set({ icon: "zartan/cloud_upload-24px.svg", iconPosition: "top", gap: 0});
         gallerypage.add(ctrlUpload);
         var uploaddemorestore = new qx.ui.form.Button("Restore").set({allowGrowX: false});
         uploaddemorestore.addListener("execute", function(){	
@@ -409,49 +408,49 @@ qx.Class.define("wax.Application",
         upldhbox.add(uploadprogress);
         //gallerypage.add(upldhbox);
 
-        var btnCopy = new qx.ui.form.Button("Electron Copy Test");
+        /*var btnCopy = new qx.ui.form.Button("Electron Copy Test");
         var txtPaste = new qx.ui.form.TextField().set({ minWidth: 300, placeholder: "Paste copied text here"});
         var electronhbox = new qx.ui.container.Composite(new qx.ui.layout.HBox(8));
         electronhbox.add(btnCopy);
-        electronhbox.add(txtPaste);
+        electronhbox.add(txtPaste);*/
       };
 
-      // Add Flow of image objects - images are from "resource/wax/gallery" folder
+      // Add Flow of image objects - images are from "resource/zartan/gallery" folder
       var gallaryimageflow = new qx.ui.layout.Flow(6,6,"left");
-      var gallerygroupboxcars = new wax.GroupBox("Cars", "wax/commute-24px.svg", true, true, false);
+      var gallerygroupboxcars = new zartan.GroupBox("Cars", "zartan/commute-24px.svg", true, true, false);
       gallerygroupboxcars.setLayout(gallaryimageflow);
       gallerygroupboxcars.set({allowShrinkX: true, allowShrinkY: true, allowGrowX: true, allowGrowY: true}); 
-      gallerygroupboxcars.add(new qx.ui.basic.Image("wax/gallery/Yellow_Car2.jpg").set({scale: true, width: 420, height: 280}));
-      gallerygroupboxcars.add(new qx.ui.basic.Image("wax/gallery/Flame_Car2.jpg").set({scale: true, width: 420, height: 280}));
+      gallerygroupboxcars.add(new qx.ui.basic.Image("zartan/gallery/Yellow_Car2.jpg").set({scale: true, width: 420, height: 280}));
+      gallerygroupboxcars.add(new qx.ui.basic.Image("zartan/gallery/Flame_Car2.jpg").set({scale: true, width: 420, height: 280}));
       
-      var gallerygroupboxtrain = new wax.GroupBox("Trains", "wax/baseline-directions_subway-24px.svg", true, true, false);
+      var gallerygroupboxtrain = new zartan.GroupBox("Trains", "zartan/baseline-directions_subway-24px.svg", true, true, false);
       gallerygroupboxtrain.setLayout(new qx.ui.layout.Flow(6,6,"left"));
       gallerygroupboxtrain.set({allowShrinkX: true, allowShrinkY: true, allowGrowX: true, allowGrowY: true}); 
-      gallerygroupboxtrain.add(new qx.ui.basic.Image("wax/gallery/Deep_Train_Bridge_Sky.JPG").set({scale: true, width: 420, height: 280}));
-      gallerygroupboxtrain.add(new qx.ui.basic.Image("wax/gallery/Top_Train_Bridge.JPG").set({scale: true, width: 420, height: 280}));
-      gallerygroupboxtrain.add(new qx.ui.basic.Image("wax/gallery/Train_Bridge_Close.JPG").set({scale: true, width: 420, height: 280}));
-      gallerygroupboxtrain.add(new qx.ui.basic.Image("wax/gallery/Train_Bridge_Close2.JPG").set({scale: true, width: 420, height: 280}));
-      gallerygroupboxtrain.add(new qx.ui.basic.Image("wax/gallery/Deep_Train_Bridge.jpg").set({scale: true, width: 280, height: 420}));
+      gallerygroupboxtrain.add(new qx.ui.basic.Image("zartan/gallery/Deep_Train_Bridge_Sky.JPG").set({scale: true, width: 420, height: 280}));
+      gallerygroupboxtrain.add(new qx.ui.basic.Image("zartan/gallery/Top_Train_Bridge.JPG").set({scale: true, width: 420, height: 280}));
+      gallerygroupboxtrain.add(new qx.ui.basic.Image("zartan/gallery/Train_Bridge_Close.JPG").set({scale: true, width: 420, height: 280}));
+      gallerygroupboxtrain.add(new qx.ui.basic.Image("zartan/gallery/Train_Bridge_Close2.JPG").set({scale: true, width: 420, height: 280}));
+      gallerygroupboxtrain.add(new qx.ui.basic.Image("zartan/gallery/Deep_Train_Bridge.jpg").set({scale: true, width: 280, height: 420}));
 
-      var gallerygroupboxfood = new wax.GroupBox("Food", "wax/local_dining-24px.svg", true, true, false);
+      var gallerygroupboxfood = new zartan.GroupBox("Food", "zartan/local_dining-24px.svg", true, true, false);
       gallerygroupboxfood.setLayout(new qx.ui.layout.Flow(6,6,"left"));
       gallerygroupboxfood.set({allowShrinkX: true, allowShrinkY: true, allowGrowX: true, allowGrowY: true}); 
-      gallerygroupboxfood.add(new qx.ui.basic.Image("wax/gallery/Vegies2.jpg").set({scale: true, width: 420, height: 280}));
+      gallerygroupboxfood.add(new qx.ui.basic.Image("zartan/gallery/Vegies2.jpg").set({scale: true, width: 420, height: 280}));
 
-      var gallerygroupboxart = new wax.GroupBox("Hand drawn", null, true, true, false);
+      var gallerygroupboxart = new zartan.GroupBox("Hand drawn", null, true, true, false);
       gallerygroupboxart.setLayout(new qx.ui.layout.Flow(6,6,"left"));
       gallerygroupboxart.set({allowShrinkX: true, allowShrinkY: true, allowGrowX: true, allowGrowY: true}); 
-      gallerygroupboxart.add(new qx.ui.basic.Image("wax/gallery/Crowd_Pressure.png").set({scale: true, width: 420, height: 280}));
-      gallerygroupboxart.add(new qx.ui.basic.Image("wax/gallery/Normal_Dude.png").set({scale: true, width: 420, height: 350}));
-      gallerygroupboxart.add(new qx.ui.basic.Image("wax/gallery/RoxArms.jpg").set({scale: true}));
-      gallerygroupboxart.add(new qx.ui.basic.Image("wax/gallery/Santa_Color-Orig.JPG").set({scale: true, width: 420, height: 306}));
-      gallerygroupboxart.add(new qx.ui.basic.Image("wax/gallery/holiday_cheer.JPG").set({scale: true, width: 420, height: 392}));
-      gallerygroupboxart.add(new qx.ui.basic.Image("wax/Roxarama-Guy.png").set({scale: true}));
+      gallerygroupboxart.add(new qx.ui.basic.Image("zartan/gallery/Crowd_Pressure.png").set({scale: true, width: 420, height: 280}));
+      gallerygroupboxart.add(new qx.ui.basic.Image("zartan/gallery/Normal_Dude.png").set({scale: true, width: 420, height: 350}));
+      gallerygroupboxart.add(new qx.ui.basic.Image("zartan/gallery/RoxArms.jpg").set({scale: true}));
+      gallerygroupboxart.add(new qx.ui.basic.Image("zartan/gallery/Santa_Color-Orig.JPG").set({scale: true, width: 420, height: 306}));
+      gallerygroupboxart.add(new qx.ui.basic.Image("zartan/gallery/holiday_cheer.JPG").set({scale: true, width: 420, height: 392}));
+      gallerygroupboxart.add(new qx.ui.basic.Image("zartan/Roxarama-Guy.png").set({scale: true}));
 
-      var gallerygroupboxvideo = new wax.GroupBox("Videos", null, true, true, false);
+      var gallerygroupboxvideo = new zartan.GroupBox("Videos", null, true, true, false);
       gallerygroupboxvideo.setLayout(new qx.ui.layout.Flow(6,6,"left"));
       gallerygroupboxvideo.set({allowShrinkX: true, allowShrinkY: true, allowGrowX: true, allowGrowY: true}); 
-      gallerygroupboxvideo.add(new qx.ui.basic.Image("wax/gallery/movie1.jpg").set({scale: true}));
+      gallerygroupboxvideo.add(new qx.ui.basic.Image("zartan/gallery/movie1.jpg").set({scale: true}));
     
       
       gallerypage.add(gallerygroupboxcars);
@@ -463,11 +462,11 @@ qx.Class.define("wax.Application",
       // Menu Page for phonegap only
       //if (qx.core.Environment.get("phonegap")) {
         var menupage = new qx.ui.container.Composite(new qx.ui.layout.VBox(10, null, "separator-vertical")).set({padding: [60, 0, 0, 0]});
-        var btnProfile = new qx.ui.form.Button("Profile", "wax/edit-24px.svg").set({appearance : "hym-page-button"});
+        var btnProfile = new qx.ui.form.Button("Profile", "zartan/edit-24px.svg").set({appearance : "hym-page-button"});
         //btnProfile.getLayoutParent().add(new qx.ui.core.Spacer());
-        var btnSettings = new qx.ui.form.Button("Settings", "wax/outline-settings-24px.svg").set({appearance : "hym-page-button"});
-        //var btnSupport = new wax.MenuButton("Support", "wax/assignment_returned-24px.svg", false);
-        var btnLogout = new qx.ui.form.Button("Logout", "wax/exit_to_app-24px.svg").set({appearance : "hym-page-button"});
+        var btnSettings = new qx.ui.form.Button("Settings", "zartan/outline-settings-24px.svg").set({appearance : "hym-page-button"});
+        //var btnSupport = new zartan.MenuButton("Support", "zartan/assignment_returned-24px.svg", false);
+        var btnLogout = new qx.ui.form.Button("Logout", "zartan/exit_to_app-24px.svg").set({appearance : "hym-page-button"});
         menupage.add(btnProfile);
         menupage.add(btnSettings);
         menupage.add(btnLogout);
@@ -486,22 +485,18 @@ qx.Class.define("wax.Application",
 
       // <<< END of THE STACK <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-
-      // Business Data - GET IT
-      //const Busdata = require('./BusData.js');  FAILED - qxcompiler hates require
-      //const busdata = new Cat();
       
       // >>> Populate the Main Menu and Popup Main Menu with content >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
       // Create Menu Buttons that will navigate the user through THE STACK Pages 
       // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
       // Populate westBox with content
-      var atmleftnavheader = new qx.ui.basic.Atom("Hello, Admin", "wax/round-account_circle-24px.svg").set({appearance: "header-atom", anonymous: true, focusable: false, selectable: false });
+      var atmleftnavheader = new qx.ui.basic.Atom("Hello, Admin", "zartan/round-account_circle-24px.svg").set({appearance: "header-atom", anonymous: true, focusable: false, selectable: false });
       atmleftnavheader.getChildControl("icon").set({ scale : true });
       westbox.add(atmleftnavheader);
-      var tbtndashboardpage = new wax.MenuButton("Dashboards", "wax/dashboard-24px.svg", true );
+      var tbtndashboardpage = new zartan.MenuButton("Dashboards", "zartan/dashboard-24px.svg", true );
       westbox.add(tbtndashboardpage);
 
-      var tbtnSecondPage = new wax.MenuButton("Actions", "wax/assignment_returned-24px.svg", true);
+      var tbtnSecondPage = new zartan.MenuButton("Actions", "zartan/assignment_returned-24px.svg", true);
       var btnSubSecondpage = new qx.ui.form.Button("Do This").set({ appearance: "submenubutton", allowGrowX: true, padding: [10,4,14,60], visibility: "excluded"});
       var btnSubSecondpage2 = new qx.ui.form.Button("Do That").set({ appearance: "submenubutton", allowGrowX: true, padding: [10,4,14,60], visibility: "excluded"});
       westbox.add(tbtnSecondPage);
@@ -517,10 +512,10 @@ qx.Class.define("wax.Application",
         winDoThis.show();
       });
 
-      var tbtnThirdPage = new wax.MenuButton("List of Items", "wax/view_list-24px.svg", true);
+      var tbtnThirdPage = new zartan.MenuButton("List of Items", "zartan/view_list-24px.svg", true);
       westbox.add(tbtnThirdPage);
 
-      var tbtnGalleryPage = new wax.MenuButton("Gallery", "wax/camera-24px.svg", true, "14" );
+      var tbtnGalleryPage = new zartan.MenuButton("Gallery", "zartan/camera-24px.svg", true, "14" );
       westbox.add(tbtnGalleryPage);
 
       var westboxbuttongroup = new qx.ui.form.RadioGroup();
@@ -578,11 +573,11 @@ qx.Class.define("wax.Application",
       // Create Menu Buttons that will navigate the user through THE STACK Pages 
       // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
       // Populate southbox with content
-      var tbtndashboardpagehym = new wax.MenuButton("Dashboards", "wax/dashboard-24px.svg", true ).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
-      var tbtnoverviewpagehym = new wax.MenuButton("Actions", "wax/assignment_returned-24px.svg", true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
-      var tbtnlistofitemspagehym = new wax.MenuButton("List of Items", "wax/view_list-24px.svg", true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
-      var tbtngallerypagehym = new wax.MenuButton("Gallery", "wax/camera-24px.svg", true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
-      var tbtnmenuhym = new wax.MenuButton("Menu", "wax/round-menu-24px.svg", true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
+      var tbtndashboardpagehym = new zartan.MenuButton("Dashboards", "zartan/dashboard-24px.svg", true ).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
+      var tbtnoverviewpagehym = new zartan.MenuButton("Actions", "zartan/assignment_returned-24px.svg", true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
+      var tbtnlistofitemspagehym = new zartan.MenuButton("List of Items", "zartan/view_list-24px.svg", true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
+      var tbtngallerypagehym = new zartan.MenuButton("Gallery", "zartan/camera-24px.svg", true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
+      var tbtnmenuhym = new zartan.MenuButton("Menu", "zartan/round-menu-24px.svg", true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
       southbox.add(tbtndashboardpagehym, {flex: 1});
       southbox.add(tbtnoverviewpagehym, {flex: 1});
       southbox.add(tbtnlistofitemspagehym, {flex: 1});
@@ -597,7 +592,7 @@ qx.Class.define("wax.Application",
 
 
       // >>> Wire all the Main Menu Buttons to THE STACK Pages (via Listeners) >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-      // Turn on all wax.MenuButton listeners
+      // Turn on all MenuButton listeners
       tbtndashboardpage.addListener("changeValue", function(e) {
         if (e.getData()) {
           centerbox.setSelection([dashboardpage]);
@@ -687,7 +682,7 @@ qx.Class.define("wax.Application",
       tbtndashboardpagehym.addListener("changeValue", function(e) {
         if (e.getData()) {
           centerbox.setSelection([dashboardpage]);
-          atmlogocurrentpage.set({show: "both", label:"Wax"});
+          atmlogocurrentpage.set({show: "both", label:"${namespace]"});
         }
       }, this);
 
@@ -844,30 +839,20 @@ qx.Class.define("wax.Application",
       if (this.__isElectron()) {
 
         // Add electron test controls
-        gallerypage.add(electronhbox);
+        //gallerypage.add(electronhbox);
         
-        const {clipboard} = require('electron')
-        //var clipboard = require('electron');
+        //const {clipboard} = require('electron')
 
-        btnCopy.addListener("execute", function(){	
+        /*btnCopy.addListener("execute", function(){	
           if (!txtPaste.getValue())
           {
             txtPaste.setValue("");
           }
-          txtPaste.setPlaceholder("Copied! Paste here to see");
-          clipboard.writeText("Electron Demo!!");
-        }, this);
+          txtPaste.setPlaceholder("Copied! Paste here to see");*/
+          //clipboard.writeText("Electron Demo!!");
+        //}, this);
 
       }
-
-      // ====================================
-      // =====  Module Export code  =========
-      // ====================================
-      
-      if (qx.core.Environment.get("runtime.name") == "node.js"){
-        module.exports(this);
-      }
-
 
     },
 
@@ -899,7 +884,7 @@ qx.Class.define("wax.Application",
       container.add(new qx.ui.basic.Label("Row01Column03"), {row: 1, column: 2});
       container.add(new qx.ui.basic.Label("Row01Column04"), {row: 1, column: 3});
       container.add(new qx.ui.basic.Label("Row01Column05"), {row: 1, column: 4});
-      container.add(new qx.ui.basic.Image("wax/cancel-24px.svg").set({opacity : .3}), {row: 1, column: 5});
+      container.add(new qx.ui.basic.Image("zartan/cancel-24px.svg").set({opacity : .3, width: 24, height: 24}), {row: 1, column: 5});
 
       // Table Row 02
       container.add(new qx.ui.basic.Label("Did That"), {row: 2, column: 0});
@@ -907,7 +892,7 @@ qx.Class.define("wax.Application",
       container.add(new qx.ui.basic.Label("Row02Column03"), {row: 2, column: 2});
       container.add(new qx.ui.basic.Label("Row02Column04"), {row: 2, column: 3});
       container.add(new qx.ui.basic.Label("Row02Column05"), {row: 2, column: 4});
-      container.add(new qx.ui.basic.Image("wax/cancel-24px.svg").set({opacity : .3}), {row: 2, column: 5});
+      container.add(new qx.ui.basic.Image("zartan/cancel-24px.svg").set({opacity : .3, width: 24, height: 24}), {row: 2, column: 5});
 
       return container;
     },
@@ -963,7 +948,7 @@ qx.Class.define("wax.Application",
       var listctrl = new qx.ui.container.Composite(listvbox);
 
       for (var i in rowData) {
-        var groupbox1 = new wax.GroupBox(rowData[i][3], rowData[i][0], true, false);
+        var groupbox1 = new zartan.GroupBox(rowData[i][3], rowData[i][0], true, false);
         groupbox1.setLayout(new qx.ui.layout.VBox(4));
         groupbox1.add(new qx.ui.basic.Label("<b>Status:</b> " + rowData[i][1]).set({rich: true}));
         groupbox1.add(new qx.ui.basic.Label("<b>Item ID:</b> " + rowData[i][2]).set({rich: true}));
@@ -983,17 +968,17 @@ qx.Class.define("wax.Application",
       var dateRange = 400 * 24 * 60 * 60 * 1000; // 400 days
       
       date = new Date(now + Math.random() * dateRange - dateRange / 2);
-      rowData.push([ "wax/round-check_circle_outline-24px.svg", "Completed", "001007222", "This Core", date ]);
+      rowData.push([ "zartan/round-check_circle_outline-24px.svg", "Completed", "001007222", "This Core", date ]);
       date = new Date(now + Math.random() * dateRange - dateRange / 2);
-      rowData.push([ "wax/round-check_circle_outline-24px.svg", "Completed", "002009333", "That Core", date ]);
+      rowData.push([ "zartan/round-check_circle_outline-24px.svg", "Completed", "002009333", "That Core", date ]);
       date = new Date(now + Math.random() * dateRange - dateRange / 2);
-      rowData.push([ "wax/round-check_circle_outline-24px.svg", "Completed", "003002777", "DTDT", date ]);
+      rowData.push([ "zartan/round-check_circle_outline-24px.svg", "Completed", "003002777", "DTDT", date ]);
       date = new Date(now + Math.random() * dateRange - dateRange / 2);
-      rowData.push([ "wax/round-check_circle_outline-24px.svg", "Completed", "004074555", "eThis Modernization", date ]);
+      rowData.push([ "zartan/round-check_circle_outline-24px.svg", "Completed", "004074555", "eThis Modernization", date ]);
       date = new Date(now + Math.random() * dateRange - dateRange / 2);
-      rowData.push([ "wax/round-sync-24px.svg", "In Progress", "005111888", "eThat Modernization", date ]);
+      rowData.push([ "zartan/round-sync-24px.svg", "In Progress", "005111888", "eThat Modernization", date ]);
       date = new Date(now + Math.random() * dateRange - dateRange / 2);
-      rowData.push([ "wax/round-sync-24px.svg", "In Progress", "006003662", "eThis eThat Integration", date ]);
+      rowData.push([ "zartan/round-sync-24px.svg", "In Progress", "006003662", "eThis eThat Integration", date ]);
 
       return rowData;
     },
