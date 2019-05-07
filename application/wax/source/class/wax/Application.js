@@ -81,9 +81,9 @@ qx.Class.define("wax.Application",
       // Dock's Center section (Stack) === THE STACK ===
       var centerbox = new qx.ui.container.Stack().set({backgroundColor: "white", padding: 0});
 
-      // phonegap
+      // phone/phonegap
       //if (qx.core.Environment.get("phonegap")) {
-        var southbox = new qx.ui.container.Composite(new qx.ui.layout.HBox(4)).set({alignY: "middle", padding: [0,4,0,4], decorator: "bottombar"});
+      var southbox = new qx.ui.container.Composite(new qx.ui.layout.HBox(4)).set({alignY: "middle", padding: [0,4,0,4], decorator: "bottombar"});
       //}
 
       // West Scroll area to fit all menu items
@@ -92,10 +92,7 @@ qx.Class.define("wax.Application",
 
       // Center Scroll area to fit all content
       var scroll = new qx.ui.container.Scroll();
-      //var scroll = new qx.ui.core.scroll.NativeScrollBar("vertical");
       scroll.set({padding: 0, margin: 0, contentPadding: [0,0,0,0]});
-      //scroll.setDragScrollSlowDownFactor(0);
-      //scroll.set({padding: 0, margin: 0});
 
       // === North Toolbar, Parts and Buttons ===
       var northtoolbar = new qx.ui.toolbar.ToolBar().set({backgroundColor: "white"});
@@ -114,9 +111,9 @@ qx.Class.define("wax.Application",
 
       // Profile and Settings Menu and Menu Buttons
       var profilemenu = new qx.ui.menu.Menu().set({spacingX: 12});
-      var profilemenubutton1 = new qx.ui.menu.Button("Edit my profile", "wax/edit-24px.svg").set({padding: 10});
-      var settingsmenubutton = new qx.ui.menu.Button("Settings", "wax/outline-settings-24px.svg").set({padding: 10});
-      var logoutmenubutton = new qx.ui.menu.Button("Log out", "wax/exit_to_app-24px.svg").set({padding: 10});
+      var profilemenubutton1 = new qx.ui.menu.Button("Menu item", "wax/test-image.svg").set({padding: 10});
+      var settingsmenubutton = new qx.ui.menu.Button("Menu item", "wax/test-image.svg").set({padding: 10});
+      var logoutmenubutton = new qx.ui.menu.Button("Menu item", "wax/test-image.svg").set({padding: 10});
 
       // Search Button (hybrid mobile)
       var btnsearchbutton = new qx.ui.toolbar.Button("Search", "wax/baseline-search-24px.svg").set({show: "icon"});
@@ -365,7 +362,7 @@ qx.Class.define("wax.Application",
       overviewpage.add(secpagegroupbox3);
 
       // Third page marker
-      var label6 = new qx.ui.basic.Label("List of Items").set({font: "control-header"});
+      var label6 = new qx.ui.basic.Label("Menu item 03").set({font: "control-header"});
       //var tablelistflow = new qx.ui.layout.Flow().set({alignY: "bottom", alignX: "left"});
       var tablelistvbox = new qx.ui.layout.VBox();
       //tablelistpage.set({backgroundColor: "yellow"});
@@ -484,29 +481,24 @@ qx.Class.define("wax.Application",
       // Show the default page
       centerbox.setSelection([dashboardpage]);
 
-      // <<< END of THE STACK <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
-
-      // Business Data - GET IT
-      //const Busdata = require('./BusData.js');  FAILED - qxcompiler hates require
-      //const busdata = new Cat();
+      // <<< END of THE STACK <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
       
-      // >>> Populate the Main Menu and Popup Main Menu with content >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+      // >>> Populate the Main Menu and Popup Main Menu with content >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
       // Create Menu Buttons that will navigate the user through THE STACK Pages 
       // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
       // Populate westBox with content
-      var atmleftnavheader = new qx.ui.basic.Atom("Hello, Admin", "wax/round-account_circle-24px.svg").set({appearance: "header-atom", anonymous: true, focusable: false, selectable: false });
+      var atmleftnavheader = new qx.ui.basic.Atom("Username", "wax/round-account_circle-24px.svg").set({appearance: "header-atom", anonymous: true, focusable: false, selectable: false });
       atmleftnavheader.getChildControl("icon").set({ scale : true });
       westbox.add(atmleftnavheader);
-      var tbtndashboardpage = new wax.MenuButton("Dashboards", "wax/dashboard-24px.svg", true );
+      var tbtndashboardpage = new wax.MenuButton("Menu item 01", "wax/test-image.svg", true );
       westbox.add(tbtndashboardpage);
 
-      var tbtnSecondPage = new wax.MenuButton("Actions", "wax/assignment_returned-24px.svg", true);
+      var tbtnSecondPage = new wax.MenuButton("Menu item 02", "wax/test-image.svg", true);
       var btnSubSecondpage = new qx.ui.form.Button("Do This").set({ appearance: "submenubutton", allowGrowX: true, padding: [10,4,14,60], visibility: "excluded"});
       var btnSubSecondpage2 = new qx.ui.form.Button("Do That").set({ appearance: "submenubutton", allowGrowX: true, padding: [10,4,14,60], visibility: "excluded"});
       westbox.add(tbtnSecondPage);
-      westbox.add(btnSubSecondpage);
-      westbox.add(btnSubSecondpage2);
+      //westbox.add(btnSubSecondpage);
+      //westbox.add(btnSubSecondpage2);
 
       btnSubSecondpage.addListener("execute", function(e) {
         winDoThis.restore();
@@ -517,7 +509,7 @@ qx.Class.define("wax.Application",
         winDoThis.show();
       });
 
-      var tbtnThirdPage = new wax.MenuButton("List of Items", "wax/view_list-24px.svg", true);
+      var tbtnThirdPage = new wax.MenuButton("Menu item 03", "wax/test-image.svg", true);
       westbox.add(tbtnThirdPage);
 
       var tbtnGalleryPage = new wax.MenuButton("Gallery", "wax/camera-24px.svg", true, "14" );
@@ -578,9 +570,9 @@ qx.Class.define("wax.Application",
       // Create Menu Buttons that will navigate the user through THE STACK Pages 
       // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
       // Populate southbox with content
-      var tbtndashboardpagehym = new wax.MenuButton("Dashboards", "wax/dashboard-24px.svg", true ).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
-      var tbtnoverviewpagehym = new wax.MenuButton("Actions", "wax/assignment_returned-24px.svg", true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
-      var tbtnlistofitemspagehym = new wax.MenuButton("List of Items", "wax/view_list-24px.svg", true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
+      var tbtndashboardpagehym = new wax.MenuButton("Menu item 01", "wax/test-image.svg", true ).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
+      var tbtnoverviewpagehym = new wax.MenuButton("Menu item 02", "wax/test-image.svg", true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
+      var tbtnlistofitemspagehym = new wax.MenuButton("List of Items", "wax/test-image.svg", true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
       var tbtngallerypagehym = new wax.MenuButton("Gallery", "wax/camera-24px.svg", true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
       var tbtnmenuhym = new wax.MenuButton("Menu", "wax/round-menu-24px.svg", true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
       southbox.add(tbtndashboardpagehym, {flex: 1});
@@ -846,7 +838,7 @@ qx.Class.define("wax.Application",
         // Add electron test controls
         gallerypage.add(electronhbox);
         
-        const {clipboard} = require('electron')
+        //const {clipboard} = require('electron')
         //var clipboard = require('electron');
 
         btnCopy.addListener("execute", function(){	
@@ -855,7 +847,7 @@ qx.Class.define("wax.Application",
             txtPaste.setValue("");
           }
           txtPaste.setPlaceholder("Copied! Paste here to see");
-          clipboard.writeText("Electron Demo!!");
+          //clipboard.writeText("Electron Demo!!");
         }, this);
 
       }
