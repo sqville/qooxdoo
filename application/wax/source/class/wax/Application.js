@@ -205,7 +205,7 @@ qx.Class.define("wax.Application",
 
       // Controls
       // First page marker 
-      var label1 = new qx.ui.basic.Label("My Default Dashboard").set({font: "control-header"});
+      var label1 = new qx.ui.basic.Label("Main Page 01").set({font: "control-header"});
       // GroubBox
       var groupbox1 = new wax.GroupBox("First GroupBox for Wax", "wax/baseline-directions_subway-24px.svg", true, true, false);
       groupbox1.setLayout(new qx.ui.layout.VBox());
@@ -241,16 +241,16 @@ qx.Class.define("wax.Application",
       
       // Assemble
       dashboardpage.add(label1);
-      dashboardsubpage1.add(groupbox1);
-      dashboardsubpage1.add(groupbox2);
-      dashboardsubpage1.add(groupbox3, {lineBreak: true});
-      dashboardsubpage1.add(groupbox4, {lineBreak: true, stretch: true});
+      //dashboardsubpage1.add(groupbox1);
+      //dashboardsubpage1.add(groupbox2);
+     // dashboardsubpage1.add(groupbox3, {lineBreak: true});
+      //dashboardsubpage1.add(groupbox4, {lineBreak: true, stretch: true});
       
       dashboardpage.add(dashboardsubpage1);
 
 
       // Second page marker  
-      var label5 = new qx.ui.basic.Label("Actions").set({font: "control-header"});
+      var label5 = new qx.ui.basic.Label("Main Page 02").set({font: "control-header"});
       var secmidsection = new qx.ui.container.Composite(new qx.ui.layout.HBox(20));
       
       overviewpage.add(label5);
@@ -362,7 +362,7 @@ qx.Class.define("wax.Application",
       overviewpage.add(secpagegroupbox3);
 
       // Third page marker
-      var label6 = new qx.ui.basic.Label("Menu item 03").set({font: "control-header"});
+      var label6 = new qx.ui.basic.Label("Main Page 03").set({font: "control-header"});
       //var tablelistflow = new qx.ui.layout.Flow().set({alignY: "bottom", alignX: "left"});
       var tablelistvbox = new qx.ui.layout.VBox();
       //tablelistpage.set({backgroundColor: "yellow"});
@@ -374,7 +374,7 @@ qx.Class.define("wax.Application",
       var tablelistlist = this.__createList();
       tableliststack.add(tablelisttable);
       tableliststack.add(tablelistlist);
-      tablelistpage.add(tableliststack, {flex: 1});
+     // tablelistpage.add(tableliststack, {flex: 1});
 
       // Gallery Page
       var lblGalleryHeader = new qx.ui.basic.Label("My Default Gallery").set({font: "control-header"});
@@ -390,7 +390,7 @@ qx.Class.define("wax.Application",
           demo : true
         });
         ctrlUpload.getChildControl("message").set({ icon: "wax/cloud_upload-24px.svg", iconPosition: "top", gap: 0});
-        gallerypage.add(ctrlUpload);
+        //gallerypage.add(ctrlUpload);
         var uploaddemorestore = new qx.ui.form.Button("Restore").set({allowGrowX: false});
         uploaddemorestore.addListener("execute", function(){	
           var progressbar = ctrlUpload.getChildControl("progressbar", true);
@@ -451,11 +451,11 @@ qx.Class.define("wax.Application",
       gallerygroupboxvideo.add(new qx.ui.basic.Image("wax/gallery/movie1.jpg").set({scale: true}));
     
       
-      gallerypage.add(gallerygroupboxcars);
+      /*gallerypage.add(gallerygroupboxcars);
       gallerypage.add(gallerygroupboxtrain);
       gallerypage.add(gallerygroupboxfood);
       gallerypage.add(gallerygroupboxart);
-      gallerypage.add(gallerygroupboxvideo);
+      gallerypage.add(gallerygroupboxvideo);*/
 
       // Menu Page for phonegap only
       //if (qx.core.Environment.get("phonegap")) {
@@ -476,7 +476,7 @@ qx.Class.define("wax.Application",
       centerbox.add(dashboardpage);
       centerbox.add(overviewpage);
       centerbox.add(tablelistpage);
-      centerbox.add(gallerypage);
+      //centerbox.add(gallerypage);
 
       // Show the default page
       centerbox.setSelection([dashboardpage]);
@@ -494,16 +494,16 @@ qx.Class.define("wax.Application",
       westbox.add(tbtndashboardpage);
 
       var tbtnSecondPage = new wax.MenuButton("Menu item 02", "wax/test-image.svg", true);
-      var btnSubSecondpage = new qx.ui.form.Button("Do This").set({ appearance: "submenubutton", allowGrowX: true, padding: [10,4,14,60], visibility: "excluded"});
-      var btnSubSecondpage2 = new qx.ui.form.Button("Do That").set({ appearance: "submenubutton", allowGrowX: true, padding: [10,4,14,60], visibility: "excluded"});
+      var btnSubSecondpage = new qx.ui.form.Button("Subitem 01").set({ appearance: "submenubutton", allowGrowX: true, padding: [10,4,14,60], visibility: "excluded"});
+      var btnSubSecondpage2 = new qx.ui.form.Button("Subitem 02").set({ appearance: "submenubutton", allowGrowX: true, padding: [10,4,14,60], visibility: "excluded"});
       westbox.add(tbtnSecondPage);
-      //westbox.add(btnSubSecondpage);
-      //westbox.add(btnSubSecondpage2);
+      westbox.add(btnSubSecondpage);
+      westbox.add(btnSubSecondpage2);
 
       btnSubSecondpage.addListener("execute", function(e) {
         winDoThis.restore();
         //if (qx.core.Environment.get("phonegap")) {
-          winDoThis.maximize();
+          //winDoThis.maximize();
         //}
         winDoThis.center();
         winDoThis.show();
@@ -513,7 +513,7 @@ qx.Class.define("wax.Application",
       westbox.add(tbtnThirdPage);
 
       var tbtnGalleryPage = new wax.MenuButton("Gallery", "wax/camera-24px.svg", true, "14" );
-      westbox.add(tbtnGalleryPage);
+     // westbox.add(tbtnGalleryPage);
 
       var westboxbuttongroup = new qx.ui.form.RadioGroup();
       westboxbuttongroup.add(tbtndashboardpage, tbtnSecondPage, tbtnThirdPage, tbtnGalleryPage);
@@ -540,7 +540,7 @@ qx.Class.define("wax.Application",
       mainmenupopup.add(btnsubmenusubsecondpage);
       mainmenupopup.add(btnsubmenusubsecondpage2);
       mainmenupopup.add(tbtnmenuThirdPage);
-      mainmenupopup.add(tbtnmenuGalleryPage);
+      //mainmenupopup.add(tbtnmenuGalleryPage);
 
       btnsubmenusubsecondpage.addListener("execute", function(e) {
         mainmenupopup.hide();
@@ -573,17 +573,17 @@ qx.Class.define("wax.Application",
       var tbtndashboardpagehym = new wax.MenuButton("Menu item 01", "wax/test-image.svg", true ).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
       var tbtnoverviewpagehym = new wax.MenuButton("Menu item 02", "wax/test-image.svg", true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
       var tbtnlistofitemspagehym = new wax.MenuButton("List of Items", "wax/test-image.svg", true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
-      var tbtngallerypagehym = new wax.MenuButton("Gallery", "wax/camera-24px.svg", true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
+      //var tbtngallerypagehym = new wax.MenuButton("Gallery", "wax/camera-24px.svg", true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
       var tbtnmenuhym = new wax.MenuButton("Menu", "wax/round-menu-24px.svg", true).set({appearance: "mainmenubutton-hym", iconPosition: "top"});
       southbox.add(tbtndashboardpagehym, {flex: 1});
       southbox.add(tbtnoverviewpagehym, {flex: 1});
       southbox.add(tbtnlistofitemspagehym, {flex: 1});
-      southbox.add(tbtngallerypagehym, {flex: 1});
+      //southbox.add(tbtngallerypagehym, {flex: 1});
       southbox.add(tbtnmenuhym, {flex: 1});
 
       // Assign all the clones their own RadioGroup
       var mainmenubuttongrouphym = new qx.ui.form.RadioGroup();
-      mainmenubuttongrouphym.add(tbtndashboardpagehym, tbtnoverviewpagehym, tbtnlistofitemspagehym, tbtngallerypagehym, tbtnmenuhym);
+      mainmenubuttongrouphym.add(tbtndashboardpagehym, tbtnoverviewpagehym, tbtnlistofitemspagehym, tbtnmenuhym);
 
       // <<< END of Hybrid Mobil (hym) Main Menu and Main Menu Popup <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
@@ -694,13 +694,6 @@ qx.Class.define("wax.Application",
         if (e.getData()) {
           centerbox.setSelection([tablelistpage]);
           atmlogocurrentpage.set({show: "label", label:"Table List"});
-        }
-      }, this);
-
-      tbtngallerypagehym.addListener("changeValue", function(e) {
-        if (e.getData()) {
-          centerbox.setSelection([gallerypage]);
-          atmlogocurrentpage.set({show: "label", label:"Gallery"});
         }
       }, this);
 
