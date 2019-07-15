@@ -1,0 +1,36 @@
+{
+  "info" : 
+  {
+    "name" : "sqvdiagram",
+
+    "summary" : "",
+    "description" : "",
+    
+    "homepage" : "",
+
+    "license" : "MIT license",
+    "authors" : [
+  {
+    "name": "Chris Eskew",
+    "email": "(sqville)"
+  }
+],
+
+    "version" : "1.0.0"
+  },
+  
+  "provides" : 
+  {
+    "namespace"   : "sqvdiagram",
+    "encoding"    : "utf-8",
+    "class"       : "source/class",
+    "resource"    : "source/resource",
+    "translation" : "source/translation",
+    "type"        : "application"
+  },
+  
+  "requires": {
+    "qooxdoo-sdk"     : "^6.0.0-alpha-20190409-f79cc78",
+    "qooxdoo-compiler": "^0.3.0"
+  }
+}
