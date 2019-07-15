@@ -40,4 +40,22 @@
 node_modules/
 npm-debug.log
 
+# osalm app idea
+/application/osalmquestionnaire/
+# builds
+/application/widgetbrowser/build/
+/application/demobrowser/
+# New apps
+# Wax
+application/wax/build/
+application/wax/node_modules/
+application/wax/phonegap_wax/
+application/wax/rn_wax/node_modules/
+application/wax/source-output/
+application/wax/build-output/
+application/wax/source/node_modules/
+application/zartan/compiled/
+application/waxserver/
+component/inspector/
+
 
