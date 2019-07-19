@@ -53,6 +53,112 @@ qx.Class.define("sqvdiagram.Application",
         qx.log.appender.Console;
       }
 
+      var windowManager = new qx.ui.window.Manager();
+
+      var desktop = new qx.ui.window.Desktop(windowManager);
+
+      // Document is the application root
+      var doc = this._docroot = this.getRoot();
+
+      doc.add(desktop, {edge : 0});
+
+      var diagramdata = 
+      {
+        "swimlanes" : [
+          {
+            "title" : "Swimlane 01",
+            "width" : 1200,
+            "height" : 500,
+            "order" : 0
+          }
+        ],
+        "shapes" : [
+          {
+            "title" : "Start",
+            "shape" : "circle",
+            "width" : 50,
+            "height" : 50,
+            "left" : 60,
+            "top" : 150
+          },
+          {
+            "title" : "Window 1",
+            "shape" : "default",
+            "width" : 130,
+            "height" : 80,
+            "left" : 200,
+            "top" : 150
+          },
+          {
+            "title" : "Window 2",
+            "shape" : "default",
+            "width" : 130,
+            "height" : 80,
+            "left" : 620,
+            "top" : 170
+          },
+          {
+            "title" : "Diamond",
+            "shape" : "default",
+            "width" : 50,
+            "height" : 53,
+            "left" : 480,
+            "top" : 75
+          },
+          {
+            "title" : "End",
+            "shape" : "circle",
+            "width" : 50,
+            "height" : 50,
+            "left" : 670,
+            "top" : 350
+          }
+        ],
+        "connections" : [
+          {
+            "elementA" : "",
+            "elementB" : "",
+            "options" : {}
+          },
+          {
+            "elementA" : "",
+            "elementB" : "",
+            "options" : {}
+          },
+          {
+            "elementA" : "",
+            "elementB" : "",
+            "options" : {}
+          },
+          {
+            "elementA" : "",
+            "elementB" : "",
+            "options" : {}
+          }
+        ]
+      }
+
+      var winDefs = [
+        [300, 200, 30, 50],
+        [250, 250, 150, 70],
+        [400, 300, 300, 60]
+      ];
+
+      for (var i=0; i<winDefs.length; i++)
+      {
+        var def = winDefs[i];
+        var win = new qx.ui.window.Window("Window #" + (i+1)).set({
+          width: def[0],
+          height: def[1],
+          showClose : false,
+          showMinimize : false
+        });
+        win.moveTo(def[2], def[3]);
+
+        //desktop.add(win);
+        //win.open();
+      }
+
       /*
       -------------------------------------------------------------------------
         Below is your sqv diagram code...
@@ -60,50 +166,31 @@ qx.Class.define("sqvdiagram.Application",
       */
       // Swimlanes
       var swimlane01 = new qx.ui.window.Window("Swimlane 01");
-      swimlane01.setLayout(new qx.ui.layout.Canvas());
-      var lbldetails = this._lbldetails = new qx.ui.basic.Label("start");
-      swimlane01.add(lbldetails, {left: 0, top: 0});
-      swimlane01.set({ width: 800, height: 400, showMaximize: false, showMinimize: false, anonymous: true });
+      swimlane01.set({ width: 1200, height: 500, showMaximize: false, showMinimize: false, anonymous: true });
 
-      // Objects
+      // Shapes/Objects
       var winstart = new qx.ui.window.Window("Start");
-      winstart.set({ width: 50, height: 50, showMaximize: false, showMinimize: false, decorator: "circle" });
+      winstart.set({ width: 50, height: 50, showMaximize: false, showMinimize: false, decorator: "circle", useMoveFrame: true });
       
       var win1 = new qx.ui.window.Window("Window 1");
-      win1.setLayout(new qx.ui.layout.VBox(10));
-      win1.set({ width: 130, height: 80, showMaximize: false, showMinimize: false });
-      win1.setUserData("connarray",[1,2,3]);
+      win1.set({ width: 130, height: 80, showMaximize: false, showMinimize: false, useMoveFrame: true });
 
       var win2 = new qx.ui.window.Window("Window 2");
-      win2.setLayout(new qx.ui.layout.VBox(10));
-      win2.set({ width: 130, height: 80, showMaximize: false, showMinimize: false });
+      win2.set({ width: 130, height: 80, showMaximize: false, showMinimize: false, useMoveFrame: true });
 
       var win3 = new qx.ui.window.Window("Diamond");
-      win3.set({ width: 50, height: 53, showMaximize: false, showMinimize: false, decorator: "diamond" });
+      win3.set({ width: 50, height: 53, showMaximize: false, showMinimize: false, decorator: "diamond", useMoveFrame: true });
 
       var winend = new qx.ui.window.Window("End");
-      winend.set({ width: 50, height: 50, showMaximize: false, showMinimize: false, decorator: "circle" });
-
-      // Connectors
-      var conn01 = new qx.ui.window.Window("Conn 01");
-      conn01.setLayout(new qx.ui.layout.Canvas());
-      conn01.set({ width: 200, height: 200, showMaximize: false, showMinimize: false }); 
-
-      var conn02 = new qx.ui.window.Window("Conn 02");
-      conn02.set({ width: 100, height: 80, showMaximize: false, showMinimize: false });
-
-      // Document is the application root
-      var doc = this._docroot = this.getRoot();
+      winend.set({ width: 50, height: 50, showMaximize: false, showMinimize: false, decorator: "circle", useMoveFrame: true });
 
       // Add windows to document at fixed coordinates
-      doc.add(swimlane01, {left: 0, top: 0});
-      doc.add(winstart, {left: 50, top: 160});
-      doc.add(win1, {left: 200, top: 150});
-      doc.add(win2, {left: 620, top: 150});
-      doc.add(win3, {left: 480, top: 155});
-      doc.add(winend, {left: 670, top: 350});
-      doc.add(conn01, {left: 100, top: 300});
-      doc.add(conn02, {left: 420, top: 400});
+      desktop.add(swimlane01, {left: 0, top: 0});
+      desktop.add(winstart, {left: 50, top: 160});
+      desktop.add(win1, {left: 200, top: 150});
+      desktop.add(win2, {left: 620, top: 170});
+      desktop.add(win3, {left: 480, top: 75});
+      desktop.add(winend, {left: 670, top: 350});
 
       // show everything
       swimlane01.open();
@@ -111,30 +198,36 @@ qx.Class.define("sqvdiagram.Application",
       win1.open();
       win2.open();
       win3.open();
-      winend.open();
-      conn01.open();
-      conn02.open();
+      winend.open();  
 
-      win1.addListener("move", this.moveshape);
-      win2.addListener("move", this.moveshape);
-      win3.addListener("move", this.moveshape);
+      // draw connectors on appear of the app
+      desktop.addListener("appear", function(e) {
+        // Add move listeners to the windows
+        var allshapes = desktop.getWindows();
+        allshapes.forEach(function(shape) {
+          shape.addListener("move", function(e) {
+            var allwins = desktop.getWindows();
+            var arrwins = [];
+            allwins.forEach(function(win) {
+              if (win.getUserData("shapetype")=="connectline") 
+              {
+                if (win.getUserData("elementAhashcode") == this.toHashCode() || win.getUserData("elementBhashcode") == this.toHashCode())
+                {
+                  arrwins.push(win);
+                }
+              }
+            }, this);
+            connobj.repositionConnections(arrwins);
+          });
+        });
+        var connobj = new sqvdiagram.Connect();
+        connobj.connect(winstart, win1, {color : "gray"}, desktop);
+        connobj.connect(win1, win2, {color : "gray"}, desktop);
+        connobj.connect(win1, win3, {color : "gray"}, desktop);
+        connobj.connect(win3, winend, {color : "gray"}, desktop);
+        connobj.connect(win2, winend, {color : "gray"}, desktop);
+      });
 
-    },
-
-    moveshape : function(e)
-    {
-      var edata = e.getData();
-      // Get all conns to move
-      // conn1.moveTo(edata.left + edata.width, edata.top);
-      if (this.getBounds()) {
-        var winbounds = this.getBounds();	     
-        //_lbldetails.setValue(this._docroot._getChildren());
-        // Set all the conn's width and heights
-        /* conn1.set({
-          width: winbounds.left - edata.left - edata.width, 
-          height: winbounds.top + winbounds.height - edata.top
-        });*/
-      }
     }
   }
 });
