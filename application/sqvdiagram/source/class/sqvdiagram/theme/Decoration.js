@@ -26,14 +26,24 @@ qx.Theme.define("sqvdiagram.theme.Decoration",
       }
     },
 
-    "diamond" :
+    "rectangle-rounded" :
     {
       include : "window",
       
       style :
       {
         width: 1,
-        radius: 0
+        radius: 25
+      }
+    },
+
+    "arrow-right" :
+    {      
+      style :
+      {
+        color : ["transparent",null,"transparent","gray"],
+        style : ["solid",null,"solid","solid"],
+        width : [8.5,0,8.5,8]
       }
     }
   }
