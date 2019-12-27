@@ -394,7 +394,7 @@ qx.Class.define("qx.ui.table.pane.Scroller",
     __top : null,
 
     __timer : null,
-		
+
 		__focusIndicatorPointerDownListener: null,
 
 
@@ -874,9 +874,25 @@ qx.Class.define("qx.ui.table.pane.Scroller",
      *
      * @param e {Map} the event.
      */
+    __inOnScrollY : false,
     _onScrollY : function(e)
     {
-      this.fireDataEvent("changeScrollY", e.getData(), e.getOldData());
+      if (this.__inOnScrollY) {
+        return;
+      }
+      var scrollbar = this.__verScrollBar;
+      this.__inOnScrollY = true;
+      // calculate delta so that one row is scrolled at an minimum
+      var rowHeight = this.getTable().getRowHeight();
+      var delta = e.getData() - e.getOldData();
+      if ((Math.abs(delta) > 1) && (Math.abs(delta) < rowHeight)) {
+        delta = e.getOldData() + Math.sign(delta) * rowHeight;
+        if (delta>=0&&delta<=scrollbar.getMaximum()) {
+          scrollbar.setPosition(delta);
+        }
+      }
+      this.__inOnScrollY = false;
+      this.fireDataEvent("changeScrollY", scrollbar.getPosition(), e.getOldData());
       this._postponedUpdateContent();
     },
 
@@ -961,8 +977,6 @@ qx.Class.define("qx.ui.table.pane.Scroller",
         var columnModel = table.getTableColumnModel();
         columnModel.setColumnWidth(this.__resizeColumn, newWidth, true);
       } else {
-        this.__header.setColumnWidth(this.__resizeColumn, newWidth, true);
-
         var paneModel = this.getTablePaneModel();
         this._showResizeLine(paneModel.getColumnLeft(this.__resizeColumn) + newWidth);
       }
