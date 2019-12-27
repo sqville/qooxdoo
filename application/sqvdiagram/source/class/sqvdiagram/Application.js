@@ -65,10 +65,10 @@ qx.Class.define("sqvdiagram.Application",
           {
             "id" : 1,
             "title" : "Swimlane 01",
-            "width" : 1200,
-            "height" : 500,
-            "left" : 0,
-            "top" : 0
+            "width" : 1000,
+            "height" : 450,
+            "left" : 50,
+            "top" : 50
           }
         ],
         "shapes" : [
@@ -102,7 +102,7 @@ qx.Class.define("sqvdiagram.Application",
           {
             "id" : 5,
             "title" : "  Window 3",
-            "shape" : "rectangle-rounded",
+            "shape" : "window",
             "width" : 120,
             "height" : 100,
             "left" : 430,
@@ -127,22 +127,22 @@ qx.Class.define("sqvdiagram.Application",
           {
             "elementA" : 3,
             "elementB" : 4,
-            "options" : {color : "green"}
+            "options" : {color : "gray"}
           },
           {
             "elementA" : 3,
             "elementB" : 5,
-            "options" : {color : "blue"}
+            "options" : {color : "gray"}
           },
           {
             "elementA" : 5,
             "elementB" : 6,
-            "options" : {color : "orange"}
+            "options" : {color : "gray"}
           },
           {
             "elementA" : 4,
             "elementB" : 6,
-            "options" : {color : "yellow"}
+            "options" : {color : "gray"}
           }
         ]
       }
@@ -229,75 +229,13 @@ qx.Class.define("sqvdiagram.Application",
             }, this);
           });*/
 
-          // TEST Add popups
-          /*var arrowdowndec = new qx.ui.decoration.Decorator().set({
-            color : ["gray","transparent",null,"transparent"],
-            style : ["solid", "solid",null,"solid"],
-            width : [8,8.5,0,8.5]
-          });
-
-          var arrowrightdec = new qx.ui.decoration.Decorator().set({
-            color : ["transparent",null,"transparent", "gray"],
-            style : ["solid",null,"solid","solid"],
-            width : [8.5,0,8.5,8]
-          });
-
-          var parrow = new qx.ui.popup.Popup().set({backgroundColor: "white", anonymous: true, width: 10, height: 10, decorator: arrowrightdec, placementModeX: "direct", placementModeY: "direct"});
-          parrow.setUserData("shapetype", "connection-point");
-          parrow.setPosition("left-middle");
-          parrow.setOffset([0,0,0,0]);
-          parrow.setAutoHide(false);
-          parrow.placeToWidget(winsh, true);
-          winsh.setUserData("connpoint", parrow);
-          parrow.show();*/
-
-          /*var parrow4 = parrow.clone();
-          parrow4.setOffset([0,4,0,0]);
-          parrow4.setPosition("right-middle");
-          parrow4.setAutoHide(false);
-          parrow4.placeToWidget(winsh, true);
-          //parrow4.show();
- 
-          var parrow7 = parrow.clone();
-          parrow7.setOffset([0,0,4,0]);
-          parrow7.setPosition("bottom-center");
-          parrow7.setAutoHide(false);
-          parrow7.placeToWidget(winsh, true);
-          //parrow7.show();
-
-          // note
-          winsh.addListener("activate", function(e) {
-            parrow.show();
-            parrow4.show();
-            parrow7.show();
-          });
-          winsh.addListener("deactivate", function(e) {
-            parrow.hide();
-            parrow4.hide();
-            parrow7.hide();
-          })*/
-
-          var connpointdec = new qx.ui.decoration.Decorator().set({
-            color : "gray",
-            style : "solid",
-            width : 2,
-            radius : 50
-          });
-
           desktop.add(winsh);
           winsh.open();
         }
       }
 
-      /*
-      -------------------------------------------------------------------------
-        Below is your sqv diagram code...
-      -------------------------------------------------------------------------
-      */
-
-      // draw connectors on appear of the app
+      // draw connectors on appear of the diagram viewer
       desktop.addListener("appear", function(e) {
-        // Add move listeners to the windows
         
         var alldsktpwins = desktop.getWindows();
 
@@ -315,14 +253,6 @@ qx.Class.define("sqvdiagram.Application",
             connobj.connect(eleA, eleB, defc.options, desktop);
           }
         }
-
-        /*
-        connobj.connect(winstart, win1, {color : "gray"}, desktop);
-        connobj.connect(win1, win2, {color : "gray"}, desktop);
-        connobj.connect(win1, win3, {color : "gray"}, desktop);
-        connobj.connect(win3, winend, {color : "gray"}, desktop);
-        connobj.connect(win2, winend, {color : "gray"}, desktop);
-        */
       });
 
     }
