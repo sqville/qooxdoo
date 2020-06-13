@@ -1,34 +1,24 @@
 {
-  "info" : 
-  {
-    "name" : "wax",
-
-    "summary" : "Wax application, Franklin configuration",
-    "description" : "This is to show how a single qooxdoo project can support multiple platforms (Web apps, mobile web apps, hybride mobile apps, and desktop apps) and use cases (Simple to large, complex app configurations).",
-    
-    "homepage" : "http://sqville.com/",
-
-    "license" : "SomeLicense",
-    "authors" : 
-    [
+  "info": {
+    "name": "wax",
+    "summary": "Wax application, Franklin configuration",
+    "description": "This is to show how a single qooxdoo project can support multiple platforms (Web apps, mobile web apps, hybride mobile apps, and desktop apps) and use cases (Simple to large, complex app configurations).",
+    "homepage": "http://sqville.com/",
+    "license": "SomeLicense",
+    "authors": [
       {
-        "name" : "Chris Eskew (sqville)",
-        "email" : "chris.eskew@sqville.com"
+        "name": "Chris Eskew (sqville)",
+        "email": "chris.eskew@sqville.com"
       }
     ],
-
-    "version" : "master",
-    "qooxdoo-versions": ["6.0.0-alpha"]
+    "version": "1.0.0"
   },
-  
-  "provides" : 
-  {
-    "namespace"   : "wax",
-    "encoding"    : "utf-8",
-    "class"       : "source/class",
-    "resource"    : "source/resource",
-    "translation" : "source/translation",
-    "type"        : "application"
-  }
+  "provides": {
+    "namespace": "wax",
+    "encoding": "utf-8",
+    "class": "source/class",
+    "resource": "source/resource",
+    "translation": "source/translation"
+  },
+  "$schema": "https://qooxdoo.org/schema/Manifest-1-0-0.json"
 }
-
