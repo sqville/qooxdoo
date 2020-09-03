@@ -12,7 +12,7 @@ function createWindow () {
   mainWindow.maximize()
 
   // and load the index.html of the app.
-  mainWindow.loadFile('source/index.html')
+  mainWindow.loadFile('source-output/index.html')
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()

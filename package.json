@@ -24,5 +24,8 @@
     "tool/data/cldr",
     "docs",
     "apps"
-  ]
+  ],
+  "dependencies": {
+    "elephant-harness": "^1.0.4"
+  }
 }
