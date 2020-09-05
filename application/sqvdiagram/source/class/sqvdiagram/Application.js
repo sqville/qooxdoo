@@ -1,6 +1,6 @@
 /* ************************************************************************
 
-   Copyright: 2019 
+   Copyright: 2020
 
    License: MIT license
 
@@ -11,10 +11,13 @@
 /**
  * This is the main application class of "sqvdiagram"
  *
- * @asset(sqvdiagram/*)
+ * @asset(resource/sqvdiagram/*)
  * 
  * https://www.beyondjava.net/how-to-connect-html-elements-with-an-arrow-using-svg
  */
+
+
+
 qx.Class.define("sqvdiagram.Application",
 {
   extend : qx.application.Standalone,
@@ -59,102 +62,18 @@ qx.Class.define("sqvdiagram.Application",
 
       doc.add(desktop, {edge:0});
 
-      var diagramdata = 
-      {
-        "swimlanes" : [
-          {
-            "id" : 1,
-            "title" : "Swimlane 01",
-            "width" : 1000,
-            "height" : 450,
-            "left" : 50,
-            "top" : 50
-          }
-        ],
-        "shapes" : [
-          {
-            "id" : 2,
-            "title" : "Start",
-            "shape" : "circle",
-            "width" : 50,
-            "height" : 50,
-            "left" : 60,
-            "top" : 150
-          },
-          {
-            "id" : 3,
-            "title" : "Window 1",
-            "shape" : "window",
-            "width" : 120,
-            "height" : 100,
-            "left" : 200,
-            "top" : 150
-          },
-          {
-            "id" : 4,
-            "title" : "Window 2",
-            "shape" : "window",
-            "width" : 120,
-            "height" : 100,
-            "left" : 640,
-            "top" : 170
-          },
-          {
-            "id" : 5,
-            "title" : "  Window 3",
-            "shape" : "window",
-            "width" : 120,
-            "height" : 100,
-            "left" : 430,
-            "top" : 75
-          },
-          {
-            "id" : 6,
-            "title" : "End",
-            "shape" : "circle",
-            "width" : 50,
-            "height" : 50,
-            "left" : 670,
-            "top" : 350
-          }
-        ],
-        "connections" : [
-          {
-            "elementA" : 2,
-            "elementB" : 3,
-            "options" : {color : "gray"}
-          },
-          {
-            "elementA" : 3,
-            "elementB" : 4,
-            "options" : {color : "gray"}
-          },
-          {
-            "elementA" : 3,
-            "elementB" : 5,
-            "options" : {color : "gray"}
-          },
-          {
-            "elementA" : 5,
-            "elementB" : 6,
-            "options" : {color : "gray"}
-          },
-          {
-            "elementA" : 4,
-            "elementB" : 6,
-            "options" : {color : "gray"}
-          }
-        ]
-      }
+      //var diagramdata = sqvdiagram.DiagramData.DIAGRAMS["diagramdata_old"];
+      //var diagramdata = sqvdiagram.DiagramData.DIAGRAMS["GovernmentStructureOfTexas"];
+      var diagramdata = sqvdiagram.DiagramData.DIAGRAMS["SuperSimple"];
+
      
       //Swimlanes
       if (diagramdata.swimlanes != undefined) {
         for (var i=0; i<diagramdata.swimlanes.length; i++)
         {
           var def = diagramdata.swimlanes[i];
-          var win = new qx.ui.window.Window(def.title).set({
-            width: def.width,
-            height: def.height,
+          var win = new qx.ui.window.Window().set(def.properties);
+          win.set({
             showMaximize : false,
             showMinimize : false,
             anonymous: true
@@ -165,20 +84,42 @@ qx.Class.define("sqvdiagram.Application",
         }
       }
 
+      //Labels
+      /*if (diagramdata.labels != undefined) {
+        for (var i=0; i<diagramdata.labels.length; i++)
+        {
+          var def = diagramdata.labels[i];
+          var label = new sqvdiagram.Label().set(def.properties);
+          var winsh = new qx.ui.window.Window();
+          winsh.set({
+            showMaximize : false,
+            showMinimize : false,
+            useMoveFrame: true
+          });
+          winsh.setLayout(new qx.ui.layout.Canvas());
+          winsh.add(label);
+          //winsh.setUserData("shapeid", def.id);
+          winsh.moveTo(def.left, def.top);
+          desktop.add(winsh);
+          winsh.open();
+        }
+      }*/
+
       //Shapes
       if (diagramdata.shapes != undefined) {
         for (var j=0; j<diagramdata.shapes.length; j++)
         {
           var defsh = diagramdata.shapes[j];
-          var winsh = new qx.ui.window.Window(defsh.title).set({
-            width: defsh.width,
-            height: defsh.height,
+          var winsh = new qx.ui.window.Window().set(defsh.properties);
+          winsh.set({
             showMaximize : false,
             showMinimize : false,
-            decorator: defsh.shape, 
             useMoveFrame: true
           });
           winsh.setLayout(new qx.ui.layout.Canvas());
+          //add text area to the window for shape content
+          var txtarea = new qx.ui.form.TextArea();
+          winsh.add(txtarea);
           winsh.setUserData("shapeid", defsh.id);
           winsh.moveTo(defsh.left, defsh.top);
 
@@ -250,7 +191,7 @@ qx.Class.define("sqvdiagram.Application",
             var eleB = alldsktpwins.find(function(elB) {
               return elB.getUserData("shapeid") == defc.elementB;
             });
-            connobj.connect(eleA, eleB, defc.options, desktop);
+            connobj.connect(eleA, eleB, defc.properties, defc.options, desktop);
           }
         }
       });

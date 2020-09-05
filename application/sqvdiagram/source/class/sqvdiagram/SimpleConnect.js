@@ -10,9 +10,8 @@
 ************************************************************************ */
 
 /**
- * 
  *
- *
+ * @asset(sqvdiagram/*)
  */
 qx.Class.define("sqvdiagram.SimpleConnect",
 {
@@ -66,16 +65,20 @@ qx.Class.define("sqvdiagram.SimpleConnect",
      * 'horizontal' or 'vertical') and 'anchorB' (the anchor type of second element).
      * @returns {string} The connection identifier or 'null' if the connection could not be draw.
      */
-    connect: function (elementA, elementB, options, appobj) {
+    connect: function (elementA, elementB, properties, options, appobj) {
         // Verify if the element's selector are ok.
         if(elementA == null || elementB == null || appobj == null) {
           return null;
         }
 
-        var connection = this._createConnectionObject(elementA, elementB, options);
+        //var connection = this._createConnectionObject(elementA, elementB, options);
+        var connection = this._createConnectionObject(elementA, elementB, properties, options);
         
         // Create line Widgets and add them to the Root
-        var wline1 = this._wline1 = new qx.ui.window.Window().set({backgroundColor: options.color, anonymous: true});
+        //var wline1 = this._wline1 = new qx.ui.window.Window().set({backgroundColor: options.color});
+        var wline1 = this._wline1 = new qx.ui.window.Window().set(properties);
+        //wline1.setAnonymous(true);
+        wline1.getChildControl("captionbar").setVisibility("hidden");
         wline1.setUserData("shapetype", "connectline");
         wline1.setUserData("connectid", connection.id);
         wline1.setUserData("segmentid", 1);
@@ -83,7 +86,11 @@ qx.Class.define("sqvdiagram.SimpleConnect",
         wline1.setUserData("elementBhashcode", elementB.toHashCode());
         wline1.setUserData("elementA", elementA);
         wline1.setUserData("elementB", elementB);
-        var wline2 = this._wline2 = new qx.ui.window.Window().set({backgroundColor: options.color, anonymous: true});
+        wline1.setUserData("options", options);
+        //var wline2 = this._wline2 = new qx.ui.window.Window().set({backgroundColor: options.color, anonymous: true});
+        var wline2 = this._wline2 = new qx.ui.window.Window().set(properties);
+        //wline2.setAnonymous(true);
+        wline2.getChildControl("captionbar").setVisibility("hidden");
         wline2.setUserData("shapetype", "connectline");
         wline2.setUserData("connectid", connection.id);
         wline2.setUserData("segmentid", 2);
@@ -91,7 +98,11 @@ qx.Class.define("sqvdiagram.SimpleConnect",
         wline2.setUserData("elementBhashcode", elementB.toHashCode());
         wline2.setUserData("elementA", elementA);
         wline2.setUserData("elementB", elementB);
-        var wline3 = this._wline3 = new qx.ui.window.Window().set({backgroundColor: options.color, anonymous: true});
+        wline2.setUserData("options", options);
+        //var wline3 = this._wline3 = new qx.ui.window.Window().set({backgroundColor: options.color, anonymous: true});
+        var wline3 = this._wline3 = new qx.ui.window.Window().set(properties);
+       // wline3.setAnonymous(true);
+        wline3.getChildControl("captionbar").setVisibility("hidden");
         wline3.setUserData("shapetype", "connectline");
         wline3.setUserData("connectid", connection.id);
         wline3.setUserData("segmentid", 3);
@@ -99,34 +110,130 @@ qx.Class.define("sqvdiagram.SimpleConnect",
         wline3.setUserData("elementBhashcode", elementB.toHashCode());
         wline3.setUserData("elementA", elementA);
         wline3.setUserData("elementB", elementB);
+        wline3.setUserData("options", options);
+
+        wline1.setUserData("wline2", wline2);
+        wline1.setUserData("wline3", wline3);
+        wline2.setUserData("wline1", wline1);
+        wline2.setUserData("wline3", wline3);
+        wline3.setUserData("wline1", wline1);
+        wline3.setUserData("wline2", wline2);
+
+        var menu = new qx.ui.menu.Menu;
+
+        var hh = new qx.ui.menu.RadioButton("horizontal-horizontal");
+        var hhimg = new qx.ui.basic.Image("sqvdiagram/horizontal-horizontal-16.png").set({anonymous : true, marginLeft : 3});
+        hh._add(hhimg, {column:2});
+        var hv = new qx.ui.menu.RadioButton("horizontal-vertical");
+        var hvimg = new qx.ui.basic.Image("sqvdiagram/horizontal-vertical-16.png").set({anonymous : true, marginLeft : 3});
+        hv._add(hvimg, {column:2});
+        var vh = new qx.ui.menu.RadioButton("vertical-horizontal");
+        var vhimg = new qx.ui.basic.Image("sqvdiagram/vertical-horizontal-16.png").set({anonymous : true, marginLeft : 3});
+        vh._add(vhimg, {column:2});
+        var vv = new qx.ui.menu.RadioButton("vertical-vertical");
+        var vvimg = new qx.ui.basic.Image("sqvdiagram/vertical-vertical-16.png").set({anonymous : true, marginLeft : 3});
+        vv._add(vvimg, {column:2});
+        var extendconn = new qx.ui.menu.Button("Extend connector");
+
+        menu.add(hh);
+        menu.add(hv);
+        menu.add(vh);
+        menu.add(vv);
+        menu.addSeparator();
+        menu.add(extendconn);
+
+        menu.setSpacingX(15);
+        
+        wline1.setContextMenu(menu);
+        wline2.setContextMenu(menu);
+        wline3.setContextMenu(menu);
+
+        var conntype = options.anchorA + "-" + options.anchorB;
+        switch (conntype) {
+          case "horizontal-horizontal" :
+            hh.setValue(true);
+            //hh.setFont("bold");
+            break;
+          case "horizontal-vertical" :
+            hv.setValue(true);
+            break;
+          case "vertical-horizontal" :
+            vh.setValue(true);
+            break;
+          case "vertical-vertical" :
+             vv.setValue(true);
+        }
+
+        // Configure and fill radio group
+        var conntypegroup = new qx.ui.form.RadioGroup();
+        conntypegroup.add(hh, hv, vh, vv);
+
+        conntypegroup.addListener("changeSelection", function (e){
+          var wline = e.getData()[0].getLayoutParent().getOpener();
+          var arroptions = e.getData()[0].getLabel().split("-");
+          var newoptions = {
+            anchorA: arroptions[0], 
+            anchorB : arroptions[1]
+          }
+          wline.setUserData("options", newoptions);
+          //console.log(wline.getUserData("wline1").getUserData("segmentid"));
+          var arrlines = [wline.getUserData("wline1"), wline.getUserData("wline2"), wline];
+          this.repositionConnections(arrlines);
+        }, this);
+/*
+        wline1.addListener("beforeContextmenuOpen", function() {
+          //console.log(this.getUserData("options").anchorA);
+          var conntype = this.getUserData("options").anchorA + "-" + this.getUserData("options").anchorB
+          switch (conntype) {
+            case "horizontal-horizontal" :
+              //conntypegroup.setSelection([hh]);
+              hh.setValue(true);
+              break;
+            case "horizontal-vertical" :
+              //conntypegroup.setSelection([hv]);
+              hv.setValue(true);
+              break;
+            case "vertical-horizontal" :
+              //conntypegroup.setSelection([vh]);
+              vh.setValue(true);
+              break;
+            case "vertical-vertical" :
+               //conntypegroup.setSelection([vv]);
+               vv.setValue(true);
+          }
+        });
+*/
 
         appobj.add(wline1);
         appobj.add(wline2);
-        appobj.add(wline3);
+        appobj.add(wline3); 
 
-        // Create line arrows and add them to the diagram
-        var wendarrow = this._wendarrow = new qx.ui.popup.Popup(new qx.ui.layout.Grow).set({backgroundColor: options.color, anonymous: true, width: 8, height: 8, placementModeX: "direct", placementModeY: "direct"});
-        wendarrow.setUserData("shapetype", "connectline-endarrow");
-        wendarrow.setUserData("connectid", connection.id);
-        wendarrow.setUserData("elementB", elementB);
-        wendarrow.setAutoHide(false);
-        wendarrow.placeToWidget(elementB, true);
-        wendarrow.show();
+        if (options != null && options.endShape != null && options.endShape != "none") {
+            // Create line end shape and add it to the diagram
+            //var wendarrow = this._wendarrow = new qx.ui.popup.Popup(new qx.ui.layout.Grow).set({backgroundColor: options.color, anonymous: true, width: 8, height: 8, placementModeX: "direct", placementModeY: "direct"});
+            var wendarrow = this._wendarrow = new qx.ui.popup.Popup(new qx.ui.layout.Grow).set({backgroundColor: properties.backgroundColor, anonymous: true, width: 8, height: 8, placementModeX: "direct", placementModeY: "direct"});
+            wendarrow.setUserData("shapetype", "connectline-endarrow");
+            wendarrow.setUserData("connectid", connection.id);
+            wendarrow.setUserData("elementB", elementB);
+            wendarrow.setAutoHide(false);
+            wendarrow.placeToWidget(elementB, true);
+            wendarrow.show();
+        }
+        
 
         // Position connection.
         this._positionConnection(connection);
 
         // Position end point
-        this._positionEndPoint();
+       // this._positionEndPoint();
 
         elementA.setAlwaysOnTop(true);
         elementB.setAlwaysOnTop(true);
-        //wline1.setAlwaysOnTop(true);
-        //wline2.setAlwaysOnTop(true);
-        //wline3.setAlwaysOnTop(true);
+        
         wline1.maximize();
         wline2.maximize();
         wline3.maximize();
+
 
         // Return result.
         return connection.id;
@@ -148,13 +255,9 @@ _positionConnection : function(connection)
   var pBleft = parseInt(posB.left, 10) + parseInt(posB.width/2, 10);
   var pBtop = parseInt(posB.top, 10) + parseInt(posB.height/2, 10);
 
-  this._wline1.setVisibility("visible");
-  this._wline2.setVisibility("visible");
-  this._wline3.setVisibility("visible");
-
   // Verify if the elements are aligned in a horizontal or vertical line.
   if(pAleft == pBleft || pAtop == pBtop) {
-    // Verify if the line must be vertical or horizonal.
+    // Verify if the line must be vertical or horizonal.;
     if(pAleft == pBleft) {
         // Vertical line.
         this._positionVerticalLine(this._wline1, pAleft, pAtop, pBleft, pBtop, connection.radius, connection.roundedCorners);
@@ -162,10 +265,12 @@ _positionConnection : function(connection)
         // Horizontal line.
         this._positionHorizontalLine(this._wline1, pAleft, pAtop, pBleft, pBtop, connection.radius, connection.roundedCorners);
     }
+    this._wline2.setUserBounds(pBleft, pBtop, 2, 2);
+    this._wline3.setUserBounds(pBleft, pBtop, 2, 2);
   } else {
     // Verify if must use two lines or three.
     if(connection.anchorA != connection.anchorB) {
-        // Check the anchors of the elements.
+      // Check the anchors of the elements.
       var corner = new Object();
       if(connection.anchorA == 'vertical') {
         // Find the corner's position.
@@ -175,7 +280,7 @@ _positionConnection : function(connection)
         // Draw lines.
         this._positionVerticalLine(this._wline1, pAleft, pAtop, corner.left, corner.top, connection.radius, connection.roundedCorners);
         this._positionHorizontalLine(this._wline2, pBleft, pBtop, corner.left, corner.top, connection.radius, connection.roundedCorners);
-      } else {
+        } else {
         // Find the corner's position.
         corner.left = pBleft;
         corner.top = pAtop;
@@ -184,6 +289,7 @@ _positionConnection : function(connection)
         this._positionVerticalLine(this._wline1, pBleft, pBtop, corner.left, corner.top, connection.radius, connection.roundedCorners);
         this._positionHorizontalLine(this._wline2, pAleft, pAtop, corner.left, corner.top, connection.radius, connection.roundedCorners);
         }
+      this._wline3.setUserBounds(pBleft, pBtop, 2, 2);
       } else {          
           // Declare connection points.
           var corner1 = new Object();
@@ -241,6 +347,7 @@ _positionConnection : function(connection)
     *@param {object} point2 An object with the properties 'left' and 'top' representing the position of the second point.
     *@param {integer} radius The line's radius.
     *@param {boolean} roundedCorners A boolean indicating if the corners are going to be round.
+    * setUserBounds(Integer left, Integer top, Integer width, Integer height)
     */
     _positionHorizontalLine : function(jqElement, point1left, point1top, point2left, point2top, radius, roundedCorners) 
     {
@@ -351,27 +458,28 @@ _positionConnection : function(connection)
         this._wline3 = arrlines[i];
 
         //set up connection
-        var conn = this._createConnectionObject(arrlines[i].getUserData("elementA"), arrlines[i].getUserData("elementB"), null);
+        var conn = this._createConnectionObject(arrlines[i].getUserData("elementA"), arrlines[i].getUserData("elementB"), null, arrlines[i].getUserData("options"));
 
         // Position connection.
         this._positionConnection(conn);
-        this._wendarrow = this._wline3.getUserData("endarrow");
-        this._positionEndPoint();
+        //this._wendarrow = this._wline3.getUserData("endarrow");
+      //  this._positionEndPoint();
       }
     },
 
-    _createConnectionObject : function(elementA, elementB, options)
+    _createConnectionObject : function(elementA, elementB, properties, options)
     {
       // Create connection object.
       var connection = new Object();
       connection.id = this._idgenerator++;
       connection.elementA = elementA;
       connection.elementB = elementB;
-      connection.color = (options != null && options.color != null)? options.color + '' : '#808080';
-      connection.radius = (options != null && options.radius != null && !isNaN(options.radius))? parseInt(options.radius, 10) : 2;
+      connection.color = (properties != null && properties.backgroundColor != null)? properties.backgroundColor + '' : '#808080';
+      //connection.radius = (options != null && options.radius != null && !isNaN(options.radius))? parseInt(options.radius, 10) : 2;
+      connection.radius = 3;
       connection.anchorA = (options != null && options.anchorA != null && (options.anchorA == 'vertical' || options.anchorA == 'horizontal'))? options.anchorA : 'horizontal';
       connection.anchorB = (options != null && options.anchorB != null && (options.anchorB == 'vertical' || options.anchorB == 'horizontal'))? options.anchorB : 'horizontal';
-      connection.roundedCorners = options != null && options.roundedCorners != null && (options.roundedCorners == true || options.roundedCorners == 'true');
+      connection.roundedCorners = true;
       return connection;
     }
   }
