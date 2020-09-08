@@ -35,6 +35,15 @@ qx.Class.define("testapp.Application",
 
     __excludeChildren : ["qx.ui.form.Button", "qx.ui.form.ComboBox", "qx.ui.form.DateField"],
 
+    __widgetPropSwap : {
+      "qx.ui.form.Button" : {"label" : "title"}
+    },
+
+    __widgetSwap : {
+      "qx.ui.container.Composite" : "View",
+      "qx.ui.form.Button" : "Button"
+    },
+
     __strimports : "",
 
     __arrImports : ["import React from 'react'"],
@@ -83,9 +92,7 @@ qx.Class.define("testapp.Application",
       var button3 = new qx.ui.form.Button("Third Button");
       var button4 = new qx.ui.form.Button("4 Button");
 
-      button2.setLabel("Click me next");
-
-      //view1.add(button1);
+      view1.add(button1);
       //view1.add(button2);
       //view1.add(button3);
       //view1.add(button4);
@@ -96,10 +103,10 @@ qx.Class.define("testapp.Application",
 
       // Add button to document at fixed coordinates
       //doc.add(view3, {left: 100, top: 350});
-     // doc.add(view1, {left: 100, top: 50});
+      doc.add(view1, {left: 100, top: 50});
       //doc.add(view2, {left: 300, top: 50});
 
-      doc.add(button1, {left: 100, top: 50});
+      //doc.add(button1, {left: 100, top: 50});
 
       // Add an event listener
       button1.addListener("execute", this.listobjects, this);
@@ -117,8 +124,7 @@ qx.Class.define("testapp.Application",
       this._fillTree(appRoot, 0, 1);
       this.__cleanupStrWidgetHier();
 
-      //console.log(allobjs);
-      var mapObj = {"qx.ui.container.Composite":"View","qx.ui.form.Button":"Button"};
+      var mapObj = this.__widgetSwap;
       var arrimports = [];
       var re = new RegExp(Object.keys(mapObj).join("|"),"gi");
       var newstr = this.__strwidgetHier.replace(re, function(matched){
@@ -128,8 +134,8 @@ qx.Class.define("testapp.Application",
       var uniqueimp = this.__arrImports.concat([...new Set(arrimports)]); 
       console.log(uniqueimp.join(";"));
       console.log(newstr);
-      console.log(this.__widgetProps);
-      console.log(this.__widgetObj);
+      //console.log(this.__widgetProps);
+      //console.log(this.__widgetObj);
     },
 
     _fillTree: function(parentWidget, position, outofnum)  {
@@ -160,12 +166,10 @@ qx.Class.define("testapp.Application",
       if (parentWidget.classname != "qx.ui.root.Application") {
         
         // add this widget to the imports string array
-        this.__widgetProps = this._getDataInherited(parentWidget);
-
-        console.log(parentWidget);
+        //this.__widgetProps = this._getDataInherited(parentWidget);
         
         // add to the widget hierarchy string
-        this.__strwidgetHier += "React.createElement(" + parentWidget.classname +", { " + parentWidget.toHashCode() + " }";
+        this.__strwidgetHier += "React.createElement(" + parentWidget.classname +", {" + this._getDataInherited(parentWidget) + "}";
 
         if (kidslength == 0)
           this.__strwidgetHier += ")";
@@ -209,12 +213,8 @@ qx.Class.define("testapp.Application",
 
       // create new properties array to store the property of a class
       var properties = [];
-      // create new classnames array to store the classnames
-      var classnames = [];
-      // create new groupNames array to store the names of the groups
-      var groupNames = [];
 
-     var propsclubbed = [];
+      var propsclubbed = [];
 
       // go threw the inheritance of the selected widget
       for (var i = 1; ; i++) {
@@ -229,45 +229,46 @@ qx.Class.define("testapp.Application",
           // ignore all objects without children (spacer e.g.)
           if (qxObject[getterName] != undefined) {
             value = qxObject[getterName]();
-          } 
+            if (value == null)
+              continue;
+          } else {
+            continue;
+          }
 
-          propsclubbed.push(key + " : " + value);
+          //var fullprop = qxObject.classname + ".";
+          var fullprop = "";
+          var ptype = properties[i][key].check;
+
+          // check to see if the qx widget property is mapped to an rn property
+          for (var qxprop in this.__widgetPropSwap[qxObject.classname]) {
+            // swap rn prop for qx prop
+            if (qxprop == key)
+             key = this.__widgetPropSwap[qxObject.classname][qxprop];
+          }
+
+          if (ptype == "String" || 
+              ptype == "Decorator" || 
+              ptype == "Color" ||
+              ptype == "Font" || 
+              ptype instanceof Array) {
+            fullprop = key + ' : "' + value + '"';
+          } else {
+            fullprop = key + ' : ' + value;
+          }
+
+          propsclubbed.push(fullprop);
         }
 
-        // sorte the classname in the groupnames array
-        groupNames[i] = superclass.classname;
-        // create an array for the classes for the property
-        classnames[i] = [];
-        // go threw all properties in the class and save the classname
-        for (var j in properties[i]) {
-          classnames[i][j] = superclass.classname;
-        }
         // go threw all classes to the qx.core.Object class
         if(iFrameWindow.qx.Class.getByName("qx.core.Object") == superclass) {
           break;
         }
 
-        //console.log(classnames[i]);
-
         // set the new class
         superclass = iFrameWindow.qx.Class.getByName(superclass.classname).superclass;
       }
-
-      /*var arrwidgetprops = [];
-
-      //this.__matchPropValues();
-      for (var prop in propsclubbed) {
-        var gname = "get" + qx.lang.String.firstUp(prop);
-        var propval = "undefined";
-        if (qxObject[gname] != undefined) {
-          propval = qxObject[gname]();
-        }
-        arrwidgetprops.push(prop + " : " + propval);
-      }*/
-
-      // return the data as an object
-      //return {names: groupNames, props: properties, classes: classnames};
-      //return {props: properties}
+console.log(qxObject);
+      // return the data as a string
       return propsclubbed.join(",")
     }
   }
