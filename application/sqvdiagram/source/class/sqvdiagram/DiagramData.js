@@ -27,9 +27,12 @@ qx.Class.define("sqvdiagram.DiagramData",
                 left : 360,
                 top : 50,
                 properties : {
-                  caption : "The Electorate",
-                  width : 120,
-                  height : 100
+                  width : 80,
+                  height : 80,
+                  decorator : "circle"
+                },
+                options : {
+                  content : "The Electorate"
                 }
               },            
               {
@@ -37,9 +40,11 @@ qx.Class.define("sqvdiagram.DiagramData",
                 left : 360,
                 top : 300,
                 properties : {
-                  caption : "Governor",
                   width : 120,
                   height : 100
+                },
+                options : {
+                  content : "Governor"
                 }
               },
               {
@@ -47,9 +52,11 @@ qx.Class.define("sqvdiagram.DiagramData",
                 left : 159,
                 top : 300,
                 properties : {
-                  caption : "Attorney General",
                   width : 120,
                   height : 100
+                },
+                options : {
+                  content : "Attorney General"
                 }
               },
               {
@@ -57,9 +64,11 @@ qx.Class.define("sqvdiagram.DiagramData",
                 left : 600,
                 top : 300,
                 properties : {
-                  caption : "Lieutenant Governor",
                   width : 120,
                   height : 100
+                },
+                options : {
+                  content : "Lieutenant Governor"
                 }
               },
               {
@@ -67,9 +76,11 @@ qx.Class.define("sqvdiagram.DiagramData",
                 left : 550,
                 top : 500,
                 properties : {
-                  caption : "Sec of State",
                   width : 120,
                   height : 100
+                },
+                options : {
+                  content : "Sec of State"
                 }
               }
             ],

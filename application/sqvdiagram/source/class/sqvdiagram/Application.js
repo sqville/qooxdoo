@@ -114,12 +114,13 @@ qx.Class.define("sqvdiagram.Application",
           winsh.set({
             showMaximize : false,
             showMinimize : false,
-            useMoveFrame: true
+            useMoveFrame : true,
+            contentPadding : 0
           });
           winsh.setLayout(new qx.ui.layout.Canvas());
           //add text area to the window for shape content
-          var txtarea = new qx.ui.form.TextArea();
-          winsh.add(txtarea);
+          var txtarea = new qx.ui.form.TextArea(defsh.options.content).set({autoSize : true});
+          winsh.add(txtarea, {edge : 0});
           winsh.setUserData("shapeid", defsh.id);
           winsh.moveTo(defsh.left, defsh.top);
 
