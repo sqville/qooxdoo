@@ -1,12 +1,16 @@
-  {
+{
+  "$schema": "https://qooxdoo.org/schema/compile-1-0-0.json",
   "targets": [
     {
       "type": "source",
-      "outputPath": "source-output"
+      "outputPath": "compiled/source",
+      "bundle": {
+        "include": "qx.*"
+      }
     },
     {
       "type": "build",
-      "outputPath": "build-output"
+      "outputPath": "compiled/build"
     },
     {
       "type": "build",
@@ -15,12 +19,12 @@
   ],
   "defaultTarget": "source",
   "locales": ["en"],
-
   "applications": [
     {
       "class": "wax.Application",
       "theme": "wax.theme.Theme",
-      "name": "wax"
+      "name": "wax",
+      "bootPath": "source/boot"
     }
   ]
 }

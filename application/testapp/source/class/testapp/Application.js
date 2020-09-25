@@ -119,7 +119,7 @@ qx.Class.define("testapp.Application",
       this.__inspectorModel.setWindow(window);
       var allobjs = this.__inspectorModel.getObjects();
       var appRoot = this.__inspectorModel.getApplication().getRoot();
-      //console.log(appRoot);
+      console.log(allobjs);
 
       this._fillTree(appRoot, 0, 1);
       this.__cleanupStrWidgetHier();
@@ -267,7 +267,7 @@ qx.Class.define("testapp.Application",
         // set the new class
         superclass = iFrameWindow.qx.Class.getByName(superclass.classname).superclass;
       }
-console.log(qxObject);
+      //console.log(qxObject);
       // return the data as a string
       return propsclubbed.join(",")
     }
