@@ -27,9 +27,8 @@ qx.Class.define("sqvdiagram.DiagramData",
                 left : 360,
                 top : 50,
                 properties : {
-                  width : 80,
-                  height : 80,
-                  decorator : "circle"
+                  width : 120,
+                  height : 100
                 },
                 options : {
                   content : "The Electorate"

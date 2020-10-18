@@ -87,5 +87,8 @@
     "class": "source/class",
     "resource": "source/resource",
     "translation": "source/translation"
+  },
+  "requires": {
+    "qooxdoo/qxl.widgetbrowser": "^1.0.0"
   }
 }

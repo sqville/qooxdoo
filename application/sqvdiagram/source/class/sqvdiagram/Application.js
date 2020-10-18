@@ -11,7 +11,7 @@
 /**
  * This is the main application class of "sqvdiagram"
  *
- * @asset(resource/sqvdiagram/*)
+ * @asset(sqvdiagram/*)
  * 
  * https://www.beyondjava.net/how-to-connect-html-elements-with-an-arrow-using-svg
  */
@@ -117,10 +117,25 @@ qx.Class.define("sqvdiagram.Application",
             useMoveFrame : true,
             contentPadding : 0
           });
-          winsh.setLayout(new qx.ui.layout.Canvas());
-          //add text area to the window for shape content
-          var txtarea = new qx.ui.form.TextArea(defsh.options.content).set({autoSize : true});
-          winsh.add(txtarea, {edge : 0});
+          winsh.setLayout(new qx.ui.layout.VBox());
+          //TODO: make the window's pane movable
+          //winsh._activateMoveHandle(winsh.getChildControl("pane"));
+
+          //test - add pure css icon - good test
+          var iconlabel = new qx.ui.basic.Label('<i class="icss-diamonds-o" style="font-size:10em; color:red;"></i>').set({rich : true});
+         // winsh.add(iconlabel);
+
+          //test #2  - image object
+          var iconimg = new qx.ui.basic.Image().set({width: 130, height: 130});
+          var elem = iconimg.getContentElement();
+          //elem.setAttribute("html", '<i class="icss-diamonds-o" style="font-size:10em; color:red;"></i>');
+          elem.useMarkup("<i></i>");
+          elem.setAttribute("class", "icss-diamonds-o");
+          elem.setAttribute("style", "font-size:8em; color:red;");
+          winsh.add(iconimg);
+
+          var txtarea = new qx.ui.form.TextArea(defsh.options.content);
+          winsh.add(txtarea);
           winsh.setUserData("shapeid", defsh.id);
           winsh.moveTo(defsh.left, defsh.top);
 
@@ -196,6 +211,9 @@ qx.Class.define("sqvdiagram.Application",
           }
         }
       });
+
+      //var rmtest = qx.util.ResourceManager.getInstance();
+      //console.log(rmtest.getIds());
 
     }
   }
