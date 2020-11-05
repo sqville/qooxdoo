@@ -115,9 +115,9 @@ qx.Theme.define("ville.theme.clean.Color",
     "tertiary-button-inset-shadow" : "rgba(39, 41, 43, 0.15)",
     "tertiary-button-text" : "primary-button-text",
     
-    "sqv-black" : qx.core.Environment.get("css.rgba") ? "rgba(0, 0, 0, 1)" : "#000000",
-    "sqv-arrow-gray" : qx.core.Environment.get("css.rgba") ? "rgba(0, 0, 0, 0.6)" : "#444444",
-    "sqv-arrow-med-gray" : qx.core.Environment.get("css.rgba") ? "rgba(0, 0, 0, 0.4)" : "#444444",
+    "ville-black" : qx.core.Environment.get("css.rgba") ? "rgba(0, 0, 0, 1)" : "#000000",
+    "ville-arrow-gray" : qx.core.Environment.get("css.rgba") ? "rgba(0, 0, 0, 0.6)" : "#444444",
+    "ville-arrow-med-gray" : qx.core.Environment.get("css.rgba") ? "rgba(0, 0, 0, 0.4)" : "#444444",
 
     // icons
     "icon-fill-hovered" : "#000000",

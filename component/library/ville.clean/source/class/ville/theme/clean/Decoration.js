@@ -1,8 +1,6 @@
 /* ************************************************************************
 
-   SQville Software
-
-   http://sqville.com
+   Ville Software
 
    Copyright:
      None
@@ -23,21 +21,12 @@ qx.Theme.define("ville.theme.clean.Decoration",
 {
  
   aliases : {
-    decoration : "qx/decoration/Clean"
+    decoration : "ville/theme/clean/decoration"
   },
    
 
   decorations :
-  {
-    
-    /*
-    ---------------------------------------------------------------------------
-      ROOT
-    ---------------------------------------------------------------------------
-    */
-    
-    
-    
+  {   
     /*
     ---------------------------------------------------------------------------
       CORE
@@ -73,13 +62,11 @@ qx.Theme.define("ville.theme.clean.Decoration",
       }
     },
 
-
     "popup" :
     {
       style :
       {
         width: 1,
-        //color: "window-border",
         color : "border-light",
         shadowLength : 1,
         shadowBlurRadius : 5,
@@ -87,7 +74,6 @@ qx.Theme.define("ville.theme.clean.Decoration",
       }
     },
     
-
     "dragover" :
     {
       style : {
@@ -99,7 +85,7 @@ qx.Theme.define("ville.theme.clean.Decoration",
     {
       style : {
         width: [2,2,2,2],
-        color : "gray",
+        color : "black",
         style : "dotted"
       }
     },
@@ -107,8 +93,7 @@ qx.Theme.define("ville.theme.clean.Decoration",
     "cursor-nodrop" :
     {
       style : {
-        //VILLE freestyleCss : "cursor-nodrop-slash",
-        color : "red",
+        color : "black",
         radius : 10,
         width : 2
       }
@@ -118,7 +103,7 @@ qx.Theme.define("ville.theme.clean.Decoration",
     {
       style : {
         width: [2,3,3,2],
-        color : "gray",
+        color : "black",
         style : ["dotted","inset","inset","dotted"]
       }
     },
@@ -127,127 +112,14 @@ qx.Theme.define("ville.theme.clean.Decoration",
     {
       style : {
         width: [2,3,3,2],
-        color : "gray",
+        color : "black",
         style : ["dotted","double","double","dotted"]
       }
     },
     
     /*
     ---------------------------------------------------------------------------
-      SQv
-      
-      IMAGES
-    ---------------------------------------------------------------------------
-    */
-    "sqv-image-tree-minus" :
-    {
-      style :
-      {
-        //backgroundImage : qx.theme.clean.Image.URLS["tree-minus"]
-        //backgroundImage : qx.theme.simple.Image.URLS["tree-minus"]  
-      }
-    },
-    
-    "sqv-image-tree-plus" :
-    {
-      style :
-      {
-        backgroundImage  : "decoration/toolbar/toolbar-part.gif",
-        backgroundRepeat : "repeat-y"
-      }
-    },
-    
-    "icss-bars" : 
-    {
-      style :
-      {
-        freestyleCss : "icss-bars"
-      }
-    },
-    
-    "icss-file-image" :
-    {
-      style :
-      {
-        freestyleCss : "icss-file-image"
-      }
-    },
-    
-    "icss-test" :
-    {
-      style :
-      {
-        freestyleCss : "icss-test"
-      }
-    },
-    
-    "icss-folder-o" :
-    {
-      style :
-      {
-        freestyleCss : "icss-folder-o",
-        radius : 2,
-        backgroundColor : "transparent",
-        color : "yellow",
-        width : 2,
-        style : "solid",
-        colorTop: "transparent",
-        widthTop: 0
-      }
-    },
-    
-    "icss-file" :
-    {
-      style :
-      {
-        freestyleCss : "icss-file",
-        radius : [2,8,2,2],
-        backgroundColor : "transparent",
-        color : "black",
-        width : 3
-      }
-    },
-    
-    "icss-credit-card" :
-    {
-      style :
-      {
-        freestyleCss : "icss-credit-card"
-      }
-    },
-    
-    "fileicon-dy" :
-    {
-      
-      style :
-      {
-        freestyleCss : "fileicon-dy"
-      }
-    }, 
-    
-    "fileicon-lg" :
-    {
-      
-      style :
-      {
-        freestyleCss : "fileicon-lg",
-        radius : 3
-      }
-    },
-    
-    "fileicon-sm" :
-    {
-      
-      style :
-      {
-        freestyleCss : "fileicon-sm",
-        radius : 2
-      }
-    },    
-    
-    /*
-    ---------------------------------------------------------------------------
-      SQv
+      ville.Clean
       
       PRIMARY, SECONDARY and TERTIARY BUTTONS 
     ---------------------------------------------------------------------------
@@ -351,7 +223,7 @@ qx.Theme.define("ville.theme.clean.Decoration",
 
 	/*
     ---------------------------------------------------------------------------
-      ville icons using only Qx
+      ville.Clean icons using only Qx
       
       ICONS
     ---------------------------------------------------------------------------
@@ -360,7 +232,7 @@ qx.Theme.define("ville.theme.clean.Decoration",
    {
    	  style :
       {
-        color : [null,"transparent","sqv-black","transparent"],
+        color : [null,"transparent","ville-black","transparent"],
         style : [null, "solid","solid","solid"],
         width : [0,4.5,4,4.5]
       }
@@ -372,7 +244,7 @@ qx.Theme.define("ville.theme.clean.Decoration",
    	  
    	  style :
       {
-        color : [null,"transparent","sqv-arrow-med-gray","transparent"]
+        color : [null,"transparent","ville-arrow-med-gray","transparent"]
       }
    },
    
@@ -390,7 +262,7 @@ qx.Theme.define("ville.theme.clean.Decoration",
    {
    	  style :
       {
-        color : [null,"transparent","sqv-black","transparent"],
+        color : [null,"transparent","ville-black","transparent"],
         style : [null, "solid","solid","solid"],
         width : [0,3.5,3,3.5]
       }
@@ -400,7 +272,7 @@ qx.Theme.define("ville.theme.clean.Decoration",
    {
    	  style :
       {
-        color : ["sqv-black","transparent",null,"transparent"],
+        color : ["ville-black","transparent",null,"transparent"],
         style : ["solid", "solid",null,"solid"],
         width : [4,4.5,0,4.5]
       }
@@ -412,7 +284,7 @@ qx.Theme.define("ville.theme.clean.Decoration",
    	  
    	  style :
       {
-        color : ["sqv-arrow-med-gray","transparent",null,"transparent"]
+        color : ["ville-arrow-med-gray","transparent",null,"transparent"]
       }
    },
    
@@ -430,21 +302,9 @@ qx.Theme.define("ville.theme.clean.Decoration",
    {
    	  style :
       {
-        color : ["sqv-black","transparent",null,"transparent"],
+        color : ["ville-black","transparent",null,"transparent"],
         style : ["solid", "solid",null,"solid"],
         width : [3,3.5,0,3.5]
-      }
-   },
-   
-   "sqv-css-art" :
-   {
-   	  style :
-      {
-        color : ["transparent","transparent","sqv-black","transparent"],
-        style : [null, "solid","solid","solid"],
-        width : [0,20,14,20],
-        innerColor : ["transparent","transparent","red","transparent"],
-        innerWidth : [0,6,16,6]
       }
    },
    
@@ -452,7 +312,7 @@ qx.Theme.define("ville.theme.clean.Decoration",
    {
    	  style :
       {
-        color : ["transparent",null,"transparent","sqv-arrow-gray"],
+        color : ["transparent",null,"transparent","ville-arrow-gray"],
         style : ["solid",null,"solid","solid"],
         width : [4.5,0,4.5,4]
       }
@@ -472,7 +332,7 @@ qx.Theme.define("ville.theme.clean.Decoration",
    {
    	  style :
       {
-        color : ["transparent",null,"transparent","sqv-black"],
+        color : ["transparent",null,"transparent","ville-black"],
         style : ["solid",null,"solid","solid"],
         width : [3.5,0,3.5,4]
       }
@@ -482,12 +342,10 @@ qx.Theme.define("ville.theme.clean.Decoration",
    {
    	  style :
       {
-        color : ["transparent",null,"transparent","sqv-black"],
+        color : ["transparent",null,"transparent","ville-black"],
         style : ["solid",null,"solid","solid"],
         width : [3.5,0,3.5,4],
-        //innerWidth : [0,4,0,0],
-        //innerColor : "red"
-        shadowColor : "sqv-black",
+        shadowColor : "ville-black",
         shadowLength : [0, 2],
         shadowBlurRadius : 0,
         shadowSpreadRadius : 0
@@ -500,7 +358,7 @@ qx.Theme.define("ville.theme.clean.Decoration",
     
     style :
    	  {
-        shadowColor : "sqv-black",
+        shadowColor : "ville-black",
         shadowLength : [0, 2],
         shadowBlurRadius : 0,
         shadowSpreadRadius : 0
@@ -511,7 +369,7 @@ qx.Theme.define("ville.theme.clean.Decoration",
    {
    	  style :
    	  {
-   	  	color : ["transparent","sqv-arrow-gray","transparent",null],
+   	  	color : ["transparent","ville-arrow-gray","transparent",null],
         style : ["solid","solid","solid",null],
         width : [4.5,4,4.5,0]
    	  }
@@ -521,7 +379,7 @@ qx.Theme.define("ville.theme.clean.Decoration",
    {
    	  style :
       {
-        color : ["transparent","sqv-black","transparent",null],
+        color : ["transparent","ville-black","transparent",null],
         style : ["solid", "solid","solid",null],
         width : [3.5,4,3.5,0]
       }
@@ -531,7 +389,7 @@ qx.Theme.define("ville.theme.clean.Decoration",
    {
    	style :
       {
-        color : [null,null,"sqv-arrow-gray","transparent"],
+        color : [null,null,"ville-arrow-gray","transparent"],
         style : [null,null,"solid","solid"],
         width : [0,0,6,6]
       }
@@ -543,7 +401,7 @@ qx.Theme.define("ville.theme.clean.Decoration",
       {
         radius : 10,
         width : 1,
-        color : "sqv-black",
+        color : "ville-black",
         innerColor: "white",
         innerWidth: 3
       }
@@ -602,8 +460,6 @@ qx.Theme.define("ville.theme.clean.Decoration",
 
       style :
       {
-        //color : "button-border-hovered",
-        //SQ New
         backgroundColor : "button-box-bright-hovered"
       }
     },
@@ -1319,51 +1175,8 @@ qx.Theme.define("ville.theme.clean.Decoration",
         radius : 3
       }
     },
+  
     
-    /*
-    ---------------------------------------------------------------------------
-      UPLOAD
-    ---------------------------------------------------------------------------
-    */
-    "upload-area" :
-    {
-      style :
-      {
-        width : 1,
-        radius : 3,
-        style : "dashed",
-        color : "gray"
-      }
-    },
-    
-    "upload-area-dragover" :
-    {
-     include: "upload-area",
-      
-      style :
-      {
-        style : "solid",
-        color : "orange"
-      }
-    },
-    
-    /*
-    ---------------------------------------------------------------------------
-      DIAGRAM
-    ---------------------------------------------------------------------------
-    */
-   
-   "connector-active" :
-   {
-   	style :
-   	{
-   		width : 1,
-        color : "textfield-selected",
-        radius : 0
-   	}
-   },
-
-
     /*
     ---------------------------------------------------------------------------
       WINDOW
@@ -1393,7 +1206,6 @@ qx.Theme.define("ville.theme.clean.Decoration",
       {
         shadowLength : [1,2],
         shadowBlurRadius : 2
-        //shadowColor : "#FFF8DD"
       }
     },
 
@@ -1402,7 +1214,6 @@ qx.Theme.define("ville.theme.clean.Decoration",
       style :
       {
         width : [0, 0, 2, 0],
-        //color : "window-border-inner"
         color : "background"
       }
     },
@@ -1459,7 +1270,6 @@ qx.Theme.define("ville.theme.clean.Decoration",
     {
       style :
       {
-        //VILLE freestyleCss : "window-button-close-icon",
         color : "gray"
       }
     },
@@ -1468,7 +1278,6 @@ qx.Theme.define("ville.theme.clean.Decoration",
     {     
       style :
       {
-        //VILLE freestyleCss : "window-button-close-icon-hover",
         color : "black"
       }
     },
@@ -1592,18 +1401,19 @@ qx.Theme.define("ville.theme.clean.Decoration",
     {
       style :
       {
-        width : 0
-        //VILLE freestyleCss : "slider-line"
+        backgroundImage: "ville/theme/clean/decoration/slider/line.png",
+        backgroundRepeat: 'repeat',
+        backgroundPositionX: "center",
+        backgroundPositionY: "center"
       }
     },
 
     "focused-inset" :
     {
+      include : "inset",
       style :
       {
-        width : 1,
-        color : "textfield-selected",
-        radius : 3
+        color : "textfield-selected"
       }
     },
 
@@ -1612,7 +1422,7 @@ qx.Theme.define("ville.theme.clean.Decoration",
       include : "inset-line",
       style :
       {
-        //VILLE freestyleCss : "slider-line-focused"
+        backgroundImage: "ville/theme/clean/decoration/slider/line-selected.png"
       }
     },
     
@@ -1628,9 +1438,9 @@ qx.Theme.define("ville.theme.clean.Decoration",
 
     "border-invalid" :
     {
+      include : "inset",
       style :
       {
-        width : 1,
         color : "#dbb1b1"
       }
     },
@@ -1640,7 +1450,7 @@ qx.Theme.define("ville.theme.clean.Decoration",
       include : "inset-line",
       style :
       {
-        //VILLE freestyleCss : "slider-line-invalid"
+        backgroundImage: "ville/theme/clean/decoration/slider/line-invalid.png"
       }
     },
     
@@ -1665,34 +1475,24 @@ qx.Theme.define("ville.theme.clean.Decoration",
         radius : [3,0,0,3]
       }
     },
-    
-    "selectbox-popup-bottom" :
+
+    "combobox-border-invalid" :
     {
-    	include : "popup",
-    	
-    	style :
-    	{
-    	  width : [0,1,1,1],
-        color : ["transparent","textfield-selected","textfield-selected","textfield-selected"],
-        radius : [0,0,3,3],
-        shadowLength : [0,1],
-        shadowColor : "shadow",
-        shadowBlurRadius : 0
-    	}
+      include : "combobox-inset",
+      
+      style :
+      {
+        color : "#dbb1b1"
+      }
     },
     
-    "selectbox-popup-top" :
+    "selectbox-popup" :
     {
     	include : "popup",
     	
     	style :
     	{
-        width : [1,1,0,1],  
-        color : ["textfield-selected","textfield-selected","transparent","textfield-selected"],
-        radius : [3,3,0,0],
-        shadowLength : [0,-1],
-        shadowColor : "shadow",
-        shadowBlurRadius : 0
+        color : "textfield-selected"
     	}
     },
     
@@ -1909,7 +1709,6 @@ qx.Theme.define("ville.theme.clean.Decoration",
       style :
       {
         width : [1, 1, 0, 1],
-        //width : 1,
         backgroundColor: "background",
         color : "white-box-border",
         //color : ["white-box-border", "white-box-border", "white", "white-box-border"],
@@ -1952,7 +1751,7 @@ qx.Theme.define("ville.theme.clean.Decoration",
     
     /*
     ---------------------------------------------------------------------------
-      SQV
+      ville.Clean
       
       TAB VIEW SPACEBAR
     ---------------------------------------------------------------------------
@@ -2005,7 +1804,7 @@ qx.Theme.define("ville.theme.clean.Decoration",
     
     /*
     ---------------------------------------------------------------------------
-      SQV
+      ville.Clean
       
       TAB VIEW SPOT
     ---------------------------------------------------------------------------
@@ -2086,8 +1885,6 @@ qx.Theme.define("ville.theme.clean.Decoration",
 
     "table-header" :
     {
-      //include : "button-box",
-
       style :
       {
         radius : [3,0,0,0],
@@ -2106,20 +1903,65 @@ qx.Theme.define("ville.theme.clean.Decoration",
         color : "table-border"
       }
     },
+
+    "select-column-order-vert" :
+    {
+    	style : {
+    		radius : 1,
+        widthLeft : 2,
+        widthRight : 2,
+        widthTop : 3,
+        widthBottom : 2,
+	      innerWidthTop: 0,
+	      innerWidthLeft: 3,
+	      innerWidthRight: 3,
+	      innerWidthBottom: 0,
+        colorTop : "gray",
+        colorBottom : "gray",
+        colorLeft : "gray",
+        innerColorLeft: "table-header",
+        innerColorRight: "table-header",
+        colorRight : "gray"
+    	}
+    },
+
+    "select-column-order-hovered-vert" :
+    {
+    	style : {
+    		radius : 1,
+        widthLeft : 2,
+        widthRight : 2,
+        widthTop : 3,
+        widthBottom : 2,
+	      innerWidthTop: 0,
+	      innerWidthLeft: 3,
+	      innerWidthRight: 3,
+	      innerWidthBottom: 0,
+        colorTop : "black",
+        colorBottom : "black",
+        colorLeft : "black",
+        innerColorLeft: "table-header",
+        innerColorRight: "table-header",
+        colorRight : "black"
+    	}
+    },
     
     "select-column-order" :
     {
     	style : {
-    		//VILLE freestyleCss : "select-column-order",
     		radius : 1,
-	        width : 1,
-	        widthTop : 2,
-	        innerWidthTop: 1,
-	        innerWidthLeft: 1,
-	        innerWidthRight: 1,
-	        innerWidthBottom: 1,
-	        color : "gray",
-	        innerColor: "gray"
+        widthLeft : 0,
+        widthRight : 0,
+        widthTop : 2,
+        widthBottom : 2,
+	      innerWidthTop: 2,
+	      innerWidthLeft: 0,
+	      innerWidthRight: 0,
+	      innerWidthBottom: 2,
+	      colorTop : "gray",
+        innerColorTop: "table-header",
+        innerColorBottom: "table-header",
+        colorBottom : "gray"
     	}
     },
     
@@ -2127,7 +1969,6 @@ qx.Theme.define("ville.theme.clean.Decoration",
     {
     	include: "select-column-order",
     	style : {
-	        //VILLE  : "select-column-order-hover",
 	        color : "black",
 	        innerColor: "black"
     	}
@@ -2202,17 +2043,7 @@ qx.Theme.define("ville.theme.clean.Decoration",
       RADIO BUTTON
     ---------------------------------------------------------------------------
     */
-    /*"radiobutton" :
-    {
-      style :
-      {
-        radius : 10,
-        width : 1,
-        color : "button-border",
-        innerColor: "background",
-        innerWidth: 2
-      }
-    },*/
+
     "radiobutton" :
     {
       style :
@@ -2251,14 +2082,6 @@ qx.Theme.define("ville.theme.clean.Decoration",
     ---------------------------------------------------------------------------
     */
 
-    /*"checkbox" :
-    {
-      style :
-      {
-        width : 1,
-        color : "button-border"
-      }
-    },*/
    "checkbox" :
     {
       include : "radiobutton",
@@ -2276,22 +2099,11 @@ qx.Theme.define("ville.theme.clean.Decoration",
     	
     	style :
     	{
-    		//freestyleCss : "checkbox-checked",
     		innerWidth : 0
     	}
     },
 
-    "checkbox-checked-disabled" :
-    {
-    	include : "checkbox-checked",
-    	
-    	style :
-    	{
-    		//freestyleCss : "checkbox-checked-disabled",
-    		innerWidth : 0
-    	}
-    },
-   
+    "checkbox-checked-disabled" : "checkbox-checked",   
 
     "checkbox-focused" :
     {
