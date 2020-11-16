@@ -15,11 +15,10 @@
 
 /**
  * The simple qooxdoo decoration theme.
- * 
  */
 qx.Theme.define("ville.theme.clean.Decoration",
 {
- 
+  
   aliases : {
     decoration : "ville/theme/clean/decoration"
   },
@@ -91,29 +90,23 @@ qx.Theme.define("ville.theme.clean.Decoration",
     },
 
     "cursor-nodrop" :
-    {
+    {  
       style : {
-        color : "black",
-        radius : 10,
-        width : 2
+        width : 0
       }
     },
 
     "cursor-copy" :
     {
       style : {
-        width: [2,3,3,2],
-        color : "black",
-        style : ["dotted","inset","inset","dotted"]
+        width: 0
       }
     },
 
     "cursor-alias" :
     {
       style : {
-        width: [2,3,3,2],
-        color : "black",
-        style : ["dotted","double","double","dotted"]
+        width: 0
       }
     },
     

@@ -30,6 +30,7 @@
  * @asset(decoration/tabview/*)
  * @asset(decoration/colorselector/*)
  * @asset(decoration/treevirtual/*)
+ * @asset(decoration/cursor/*)
  */
 qx.Class.define("ville.theme.clean.Image",
 {
@@ -51,16 +52,16 @@ qx.Class.define("ville.theme.clean.Image",
       "checkbox-checked-disabled" : "decoration/checkbox/checkbox-check-disabled.svg",
 
       // window
-      "window-minimize" : "decoration/window/minimize.gif", //Replaced with -- pure Qx -- Decoration entry:: window-button-minimize-icon
-      "window-maximize" : "decoration/window/maximize.gif", //Replaced with -- pure Qx -- Decoration entry:: window-button-maximize-icon
-      "window-restore" : "decoration/window/restore.gif", //Replaced with -- pure Qx -- Decoration entry:: window-button-restore
-      "window-close" : "decoration/window/close.gif", //Replaced with Decoration entries:: window-button-close-icon and window-button-close-icon-hover - Qx + CSS
+      //"window-minimize" : "decoration/window/minimize.gif", //Replaced with -- pure Qx -- Decoration entry:: window-button-minimize-icon
+      //"window-maximize" : "decoration/window/maximize.gif", //Replaced with -- pure Qx -- Decoration entry:: window-button-maximize-icon
+      //"window-restore" : "decoration/window/restore.gif", //Replaced with -- pure Qx -- Decoration entry:: window-button-restore
+      //"window-close" : "decoration/window/close.gif",
 
       // cursor
-      "cursor-copy" : "decoration/cursors/copy.gif", //Dotted box with plus
-      "cursor-move" : "decoration/cursors/move.gif", //Replaced with -- pure Qx --
-      "cursor-alias" : "decoration/cursors/alias.gif", //Dotted box with arrow
-      "cursor-nodrop" : "decoration/cursors/nodrop.gif", //Replaced with Qx (circle) + CSS (slash)
+      "cursor-copy" : "decoration/cursor/circle-add.svg",
+      //"cursor-move" : "decoration/cursors/move.gif", //Replaced with -- pure Qx --
+      "cursor-alias" : "decoration/cursor/alias.svg",
+      "cursor-nodrop" : "decoration/cursor/nodrop.svg",
 
       // arrows
       "arrow-right" : "decoration/arrows/right.gif", //Replaced with -- pure Qx -- Decoration entry:: sqv-css-icon-arrow-right
@@ -81,8 +82,8 @@ qx.Class.define("ville.theme.clean.Image",
       "line-invalid" : "decoration/slider/line-invalid.png",
       
       // split pane
-      "knob-horizontal" : "decoration/splitpane/knob-horizontal.png", //Replaced by pure Qx
-      "knob-vertical" : "decoration/splitpane/knob-vertical.png", // Replaced by pure Qx
+      //"knob-horizontal" : "decoration/splitpane/knob-horizontal.png", //Replaced by pure Qx
+      //"knob-vertical" : "decoration/splitpane/knob-vertical.png", // Replaced by pure Qx
 
       // tree
       "tree-folder" : "decoration/tree/folder.svg",
@@ -92,9 +93,9 @@ qx.Class.define("ville.theme.clean.Image",
       //"tree-plus" : "decoration/tree/plus.gif", //Replaced
 
       // table
-      "select-column-order" : "decoration/table/select-column-order.png", //Replaced by pure Qx
-      "table-ascending" : "decoration/table/ascending.png",  //Not used
-      "table-descending" : "decoration/table/descending.png", //Not used
+      //"select-column-order" : "decoration/table/select-column-order.png", //Replaced by pure Qx
+      //"table-ascending" : "decoration/table/ascending.png",  //Not used
+      //"table-descending" : "decoration/table/descending.png", //Not used
 
 	    // tree virtual
 	    "tree-minus" : "decoration/treevirtual/minus.gif",
@@ -112,23 +113,14 @@ qx.Class.define("ville.theme.clean.Image",
       "treevirtual-cross" : "decoration/treevirtual/cross.gif",
 
       // menu
-      "menu-checkbox" : "decoration/menu/checkbox.gif", //Replaced with Qx + CSS
-      "menu-checkbox-invert" : "decoration/menu/checkbox-invert.gif", //Replaced with Qx + CSS
-      "menu-radiobutton-invert" : "decoration/menu/radiobutton-invert.gif", //Replaced with Qx + CSS
-      "menu-radiobutton" : "decoration/menu/radiobutton.gif", //Replaced with pure Qx
+      //"menu-checkbox" : "decoration/menu/checkbox.gif", //Replaced with Qx + CSS
+      //"menu-checkbox-invert" : "decoration/menu/checkbox-invert.gif", //Replaced with Qx + CSS
+      //"menu-radiobutton-invert" : "decoration/menu/radiobutton-invert.gif", //Replaced with Qx + CSS
+      //"menu-radiobutton" : "decoration/menu/radiobutton.gif", //Replaced with pure Qx
 
       // tabview
-      "tabview-close" : "decoration/tabview/close.svg", //Svg
-      "tabview-close-hovered" : "decoration/tabview/close-hovered.svg" //Svg
-    },
-
-    /**
-     * Holds a map containig all the CSS that builds decoration images.
-     * @internal
-     */
-    CSS :
-    {
-      "cursor-nodrop-slash" : "width : 2px; height : 13px; left : 5px; transform : rotate(-45deg); position : absolute; top : 0px; background-color : black; content : ''"
+      "tabview-close" : "decoration/tabview/close.svg",
+      "tabview-close-hovered" : "decoration/tabview/close-hovered.svg"
     }
   }
 });

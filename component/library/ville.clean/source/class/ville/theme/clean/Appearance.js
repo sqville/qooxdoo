@@ -111,7 +111,7 @@ qx.Theme.define("ville.theme.clean.Appearance",
           showTimeout: 100,
           hideTimeout: 10000,
           decorator: "tooltip-error",
-          font: "bold",
+          font: "default",
           backgroundColor: undefined
         };
       }
@@ -146,27 +146,46 @@ qx.Theme.define("ville.theme.clean.Appearance",
     {
       style : function(states)
       {
-        var icon = "nodrop";
+        var icon = "";
+        var retval = {};
 
         if (states.copy) {
           icon = "copy";
+          retval = {
+            source : ville.theme.clean.Image.URLS["cursor-" + icon],
+            decorator : "cursor-" + icon,
+            position : "right-top",
+            offset : [ 2, 16, 2, 6 ]
+          };
         } else if (states.move) {
           icon = "move";
+          retval = {
+            source : "",
+            decorator : "cursor-" + icon,
+            position : "right-top",
+            offset : [ 2, 16, 2, 6 ],
+            width : 15,
+            height : 15
+          };
         } else if (states.alias) {
           icon = "alias";
+          retval = {
+            source : ville.theme.clean.Image.URLS["cursor-" + icon],
+            decorator : "cursor-" + icon,
+            position : "right-top",
+            offset : [ 2, 16, 2, 6 ]
+          };
+        } else {
+          icon = "nodrop";
+          retval = {
+            source : ville.theme.clean.Image.URLS["cursor-" + icon],
+            position : "right-top",
+            offset : [ 2, 16, 2, 6 ],
+            decorator : "cursor-" + icon
+          };
         }
 
-        qx.ui.style.Stylesheet.getInstance().addRule(".qx-cursor-nodrop::after", ville.theme.clean.Image.CSS["cursor-nodrop-slash"]);
-
-        return {
-          source : "",
-          decorator : "cursor-" + icon,
-          position : "right-top",
-          offset : [ 2, 16, 2, 6 ],
-          width : 15,
-          height : 15,
-          backgroundColor: "background"
-        };
+        return retval;
       }
     },
 
@@ -1011,7 +1030,8 @@ qx.Theme.define("ville.theme.clean.Appearance",
         }
 
         return {
-          decorator : decorator
+          decorator : decorator,
+          font : "button"
         };
       }
     },
@@ -1236,6 +1256,7 @@ qx.Theme.define("ville.theme.clean.Appearance",
         return {
           decorator : decorator,
           padding   : [9, 14],
+          font : "default",
           textColor : textColor,
           backgroundColor : backgroundcolor
         };
@@ -1854,7 +1875,6 @@ qx.Theme.define("ville.theme.clean.Appearance",
       style : function(states)
       {
         var decorator = "button-box";
-        //SQ New
         var textcolor = "button-text";
 
         if (!states.disabled) {
@@ -2109,8 +2129,8 @@ qx.Theme.define("ville.theme.clean.Appearance",
     "splitbutton/button" :
     {
       include : "button",
+      alias : "button",
       
-
       style : function(states)
       {
         var decorator = "splitbutton-box";
@@ -2473,7 +2493,6 @@ qx.Theme.define("ville.theme.clean.Appearance",
         return {
           backgroundColor : "background",
           padding : 8,
-          font: "bold",
           decorator : "window-caption"
         };
       }
@@ -2484,7 +2503,8 @@ qx.Theme.define("ville.theme.clean.Appearance",
       style : function(states)
       {
         return {
-          marginRight : 4
+          marginRight : 4,
+          alignY: "middle"
         };
       }
     },
@@ -2496,7 +2516,6 @@ qx.Theme.define("ville.theme.clean.Appearance",
         return {
           cursor : "default",
           font : "window-header",
-          marginRight : 20,
           alignY: "middle"
         };
       }
@@ -2671,7 +2690,9 @@ qx.Theme.define("ville.theme.clean.Appearance",
     	style : function()
     	{
     		return {
-    			decorator : "ville-icon-arrow-left-small"
+    			decorator : "ville-icon-arrow-left-small",
+          width : 0,
+          height : 0
     		};
     	}
     },
@@ -2683,7 +2704,9 @@ qx.Theme.define("ville.theme.clean.Appearance",
     	style : function()
     	{
     		return {
-    			decorator : "ville-icon-arrow-rewind"
+    			decorator : "ville-icon-arrow-rewind",
+          width : 0,
+          height : 0
     		};
     	}
     },
@@ -2709,7 +2732,9 @@ qx.Theme.define("ville.theme.clean.Appearance",
     	style : function()
     	{
     		return {
-    			decorator : "ville-icon-arrow-forward"
+          decorator : "ville-icon-arrow-forward",
+          width : 0,
+          height : 0
     		};
     	}
     },
@@ -2749,7 +2774,7 @@ qx.Theme.define("ville.theme.clean.Appearance",
       style : function(states)
       {
         return {
-          font          : "bold",
+          font          : "datechooser-bold",
           textAlign     : "center"
         };
       }
@@ -2772,7 +2797,7 @@ qx.Theme.define("ville.theme.clean.Appearance",
       {
         return {
           decorator       : "datechooser-weekday",
-          font            : "bold",
+          font            : "datechooser-bold",
           textAlign       : "center",
           textColor       : states.disabled ? "text-disabled" : states.weekend ? "text" : "background",
           backgroundColor : states.weekend ? "background" : "primary",
@@ -2788,7 +2813,8 @@ qx.Theme.define("ville.theme.clean.Appearance",
         return {
           textAlign       : "center",
           decorator       : states.today ? "main" : undefined,
-          textColor       : states.disabled ? "text-disabled" : states.selected ? "text-selected" : states.otherMonth ? "text-disabled" : undefined,
+          textColor       : states.disabled ? "text-disabled" : states.selected ? "white" : states.otherMonth ? "text-disabled" : undefined,
+          font : "datechooser",
           backgroundColor : states.disabled ? undefined : states.selected ? "primary" : undefined,
           padding         : states.today ? [ 1, 3 ] : [2, 4]
         };
@@ -2802,6 +2828,7 @@ qx.Theme.define("ville.theme.clean.Appearance",
         return {
           textAlign : "center",
           textColor : "text",
+          font : "datechooser-bold",
           padding   : [ 2, 4 ],
           decorator : states.header ? "datechooser-week-header" : "datechooser-week"
         };
@@ -2900,6 +2927,7 @@ qx.Theme.define("ville.theme.clean.Appearance",
       style : function(states)
       {
         var decorator = "button-box";
+        var textcolor = "button-text";
 
         if (states.disabled) {
           decorator = "button-box";
@@ -2911,7 +2939,7 @@ qx.Theme.define("ville.theme.clean.Appearance",
           decorator = "button-box-pressed";
         }
 
-        // set the right left and right decoratos
+        // set the right left and right decorators
         if (states.left) {
           decorator += "-left";
         } else if (states.right) {
@@ -2929,6 +2957,8 @@ qx.Theme.define("ville.theme.clean.Appearance",
         return {
           cursor  : states.disabled ? undefined : "pointer",
           decorator : decorator,
+          textColor : textcolor,
+          font : "button",
           margin : margin,
           center : true,
           padding : [10, 18],

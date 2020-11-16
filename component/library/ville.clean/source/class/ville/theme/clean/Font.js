@@ -16,8 +16,8 @@
 ************************************************************************ */
 
 /**
- * The simple qooxdoo font theme.
- * 
+ * The ville.Clean font theme.
+ * @asset(ville/theme/clean/font/Lato/*.ttf)
  * 
  */
 qx.Theme.define("ville.theme.clean.Font",
@@ -27,37 +27,54 @@ qx.Theme.define("ville.theme.clean.Font",
   {
     "default" :
     {
-      size : 14,
-      family : ["Lato", "Helvetica Neue", "arial", "Helvetica", "sans-serif"],
+      family : ["sans-serif"],
       color : "text",
-      lineHeight: 1.33
-    },
-    
-    "default-bold" :
-    {
+      weight : "400",
       size : 14,
-      family : ["Lato", "Helvetica Neue", "arial", "Helvetica", "sans-serif"],
-      color : "text",
-      bold: true,
-      lineHeight: 1.33
+      sources: [
+        {
+          family: "Lato",
+          source: [
+            "ville/theme/clean/font/Lato/Lato-Regular.ttf"
+          ]
+        }
+      ]
     },
-    
-    "window-header" :
+
+    "bold" :
     {
-      size : 20,
-      family : ["Lato", "Helvetica Neue", "arial", "Helvetica", "sans-serif"],
-      bold : false,
-      lineHeight: 1.5
+      include : "default",
+      weight : "700"
+    },
+
+    "datechooser" :
+    {
+      include : "default",
+      size : 13
+    },
+
+    "datechooser-bold" :
+    {
+      include : "bold",
+      size : 13
+    },
+
+    "button" : 
+    {
+      include : "bold",
+      size : 14
     },
 
     "groupbox-legend" :
     {
-      size : 14,
-      family : ["Lato", "Helvetica Neue", "arial", "Helvetica", "sans-serif"],
-      color : "text",
-      bold : true,
-      lineHeight: 1.5
+      include : "bold"
     },
+
+    "window-header" :
+    {
+      include : "default",
+      size : 20
+    },    
     
     "unicode-icons-sm" :
     {
@@ -65,58 +82,23 @@ qx.Theme.define("ville.theme.clean.Font",
     	family : ["arial", "helvetica", "Segoe UI Symbol"]
     },
     
-    "lbicon" :
-    {
-      size : 5,
-      family : ["arial", "sans-serif"]
-    },
-    
-    "odicon" :
-    {
-      size : 9
-    },
-    
-    "icono" :
-    {
-      family : ["arial", "sans-serif"],
-      size : 19
-    },
-
-    "bold" :
-    {
-      size : 13,
-      family : ["Lato", "Helvetica Neue", "arial", "Helvetica", "sans-serif"],
-      bold : true,
-      lineHeight: 1.33
-    },
-    
-    "button" :
-    {
-      size : 13,
-      family : ["Lato", "Helvetica Neue", "arial", "Helvetica", "sans-serif"],
-      bold : true,
-      lineHeight: 1.33
-    },
-    
     "input" :
     {
-      size : 14,
-      family : ["Lato", "Helvetica Neue", "arial", "Helvetica", "sans-serif"],
-      color : "text",
-      lineHeight: 1.33
+      include : "default",
+      size : 14
     },
    
 
     "headline" :
     {
-      size : 24,
-      family : ["sans-serif", "arial"]
+      include : "default",
+      size : 24
     },
 
     "small" :
     {
-      size : 11,
-      family : ["Lato", "Helvetica Neue", "arial", "Helvetica", "sans-serif"]
+      include : "default",
+      size : 11
     },
 
     "monospace" :
@@ -124,13 +106,7 @@ qx.Theme.define("ville.theme.clean.Font",
       size : 11,
       family : [ "DejaVu Sans Mono", "Courier New", "monospace" ]
     },
-    
-    "icssicon" :
-    {
-      size : 100,
-      family : ["Lato", "Helvetica Neue", "arial", "Helvetica", "sans-serif"]
-    },
-    
+        
     // Theme Browser Content Formatting
     "control-header" :
     {

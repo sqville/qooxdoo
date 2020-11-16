@@ -24,7 +24,6 @@ qx.Theme.define("ville.theme.clean.Color",
   {
     // main
     "background" : "#ffffff",
-    "dark-blue" : "#5685D6",
     "light-background" : "#E0ECFF",
 
     // backgrounds
@@ -47,7 +46,7 @@ qx.Theme.define("ville.theme.clean.Color",
     "tabviewspot-button-hovered" : "#F7F7F7",
     
     // combobox
-    "combobox-hovered" : "#F3F3F3",
+    "combobox-hovered" : "#F2F2F2",
     "combobox-item-selected" : "#F7F7F7",
 
     // list
@@ -62,7 +61,7 @@ qx.Theme.define("ville.theme.clean.Color",
     "scrollbar-dark" : "#EBEBEB",
 
     // form
-    "button" : qx.core.Environment.get("css.rgba") ? "rgba(0, 0, 0, 0.6)" : "#444444",
+    "button" : "rgba(0, 0, 0, 0.6)",
     "button-border" : "#BBB",
     "button-border-hovered" : "#939393",
     "invalid" : "#FF0000",
@@ -72,8 +71,8 @@ qx.Theme.define("ville.theme.clean.Color",
     "button-box-bright-pressed" : "#cccccc",
     "button-box-dark-pressed" : "#F5F5F5",
     "border-lead" : "#888888",
-    "button-text" : qx.core.Environment.get("css.rgba") ? "rgba(0, 0, 0, 0.6)" : "#444444",   //SQv New
-    "button-text-hovered" : qx.core.Environment.get("css.rgba") ? "rgba(0, 0, 0, 0.8)" : "#282828",
+    "button-text" : "rgba(0, 0, 0, 0.6)",
+    "button-text-hovered" : "rgba(0, 0, 0, 0.8)",
     "button-focus-shadow" : qx.core.Environment.get("css.rgba") ? "rgba(81, 167, 232, 0.8)" : "#51A7E8",   //SQv New
     
     //SQ New
@@ -119,10 +118,6 @@ qx.Theme.define("ville.theme.clean.Color",
     "ville-arrow-gray" : qx.core.Environment.get("css.rgba") ? "rgba(0, 0, 0, 0.6)" : "#444444",
     "ville-arrow-med-gray" : qx.core.Environment.get("css.rgba") ? "rgba(0, 0, 0, 0.4)" : "#444444",
 
-    // icons
-    "icon-fill-hovered" : "#000000",
-    "icon-fill" : "gray",
-
     // window
     "window-border" : "#2E3A46",
     "window-border-inner" : "white",
@@ -149,13 +144,12 @@ qx.Theme.define("ville.theme.clean.Color",
     "border-separator" : "#808080",
 
     // text
-    "text-combobox-listitem" : qx.core.Environment.get("css.rgba") ? "rgba(0, 0, 0, 0.6)" : "#444444",
-    "text-old" : qx.core.Environment.get("css.rgba") ? "rgba(0, 0, 0, 0.8)" : "#333333",
-    "text" : qx.core.Environment.get("css.rgba") ? "rgba(0, 0, 0, 0.82)" : "#2E2E2E",
-    "text-darker" : qx.core.Environment.get("css.rgba") ? "rgba(0, 0, 0, 0.9)" : "#191919",
-    "text-disabled" : "#A7A6AA",
+    "text-combobox-listitem" : "rgba(0, 0, 0, 0.6)", //NOT USED
+    "text" : "rgba(0, 0, 0, 0.87)",
+    "text-darker" : "rgba(0, 0, 0, 0.9)",
+    "text-disabled" : "rgba(0, 0, 0, 0.4)",
     "text-selected" : "#000000",
-    "text-placeholder" : "#CBC8CD",
+    "text-placeholder" : "rgba(0, 0, 0, 0.4)",
 
     // tooltip
     "tooltip" : "#FFFFE1",
