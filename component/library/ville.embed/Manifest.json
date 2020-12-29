@@ -1,0 +1,40 @@
+{
+ "$schema": "https://qooxdoo.org/schema/Manifest-1-0-0.json",
+  "info" :
+  {
+    "name" : "ville.Embed",
+
+    "summary" : "",
+    "description" : "",
+
+    "homepage" : "",
+
+    "license" : "MIT license",
+    "authors" : [
+  {
+    "name": "Chris Eskew(sqville)",
+    "email": "chris.eskew@sqville.com"
+  }
+],
+
+    "version" : "1.0.0"
+  },
+
+  "provides" :
+  {
+    "namespace"   : "ville.embed",
+    "encoding"    : "utf-8",
+    "class"       : "source/class",
+    "resource"    : "source/resource",
+    "translation" : "source/translation"
+  },
+  "externalResources": {
+    "css": [
+      "ville/embed/iconicss.min.css"
+    ]
+  },
+  "requires": {
+    "@qooxdoo/framework": "^6.0.0-beta-20201119-2000",
+    "@qooxdoo/compiler" : "^1.0.0-beta-20201119-2000"
+  }
+}

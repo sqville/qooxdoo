@@ -20,8 +20,19 @@
  */
 qx.Theme.define("ville.theme.clean.Color",
 {
+  aliases : {
+    primarycolor : "#3b83c0"
+  },
+  
   colors :
   {
+    //************************
+    //*** Color Pallette 1 ***
+    //************************
+    "primary" : [33, 133, 208], //#2185D0
+    "secondary" : "#1b1c1d",
+    "tertiary" : "#5bbd72",
+    
     // main
     "background" : "#ffffff",
     "light-background" : "#E0ECFF",
@@ -65,8 +76,9 @@ qx.Theme.define("ville.theme.clean.Color",
     "button-border" : "#BBB",
     "button-border-hovered" : "#939393",
     "invalid" : "#FF0000",
+
     "button-box-bright" : "#e0e0e0",
-    "button-box-bright-hovered" : "#e8e8e8",   //SQv New
+    "button-box-bright-hovered" : "#e8e8e8",
     "button-box-dark" : "#E3E3E3",
     "button-box-bright-pressed" : "#cccccc",
     "button-box-dark-pressed" : "#F5F5F5",
@@ -84,30 +96,22 @@ qx.Theme.define("ville.theme.clean.Color",
     "progressbar-gray" : qx.core.Environment.get("css.rgba") ? "rgba(136, 136, 136, 1)" : "#888888",
     "progressbar-complete" : qx.core.Environment.get("css.rgba") ? "rgba(33, 186, 69, 1)" : "#21BA45",
     "progressbar-warning" : qx.core.Environment.get("css.rgba") ? "rgba(242, 192, 55, 1)" : "#F2C037",
-    "progressbar-error" : qx.core.Environment.get("css.rgba") ? "rgba(219, 40, 40, 1)" : "#DB2828",
-    
-    //************************
-    //*** Color Pallette 1 ***
-    //************************
-    "primary" : "#3b83c0",
-    "secondary" : "#1b1c1d",
-    "tertiary" : "#5bbd72",
+    "progressbar-error" : qx.core.Environment.get("css.rgba") ? "rgba(219, 40, 40, 1)" : "#DB2828",	
 	
-	
-    //*** SQv Primary Button colors
+    //*** Primary Button colors
     "primary-button-box" : "#3b83c0",
     "primary-button-box-hovered" : "#458ac6",
     "primary-button-box-pressed" : "#3576ac",
     "primary-button-text" : "#ffffff",
     
-    //*** SQv Secondary Button colors
+    //*** Secondary Button colors
     "secondary-button-box" : "#1b1c1d",
     "secondary-button-box-hovered" : "#222425",
     "secondary-button-box-pressed" : "#0a0a0b",
     "secondary-button-inset-shadow" : "rgba(39, 41, 43, 0.15)",
     "secondary-button-text" : "primary-button-text",
     
-    //*** SQv Tertiary Button colors
+    //*** Tertiary Button colors
     "tertiary-button-box" : "#5bbd72",
     "tertiary-button-box-hovered" : "#66C17B",
     "tertiary-button-box-pressed" : "#46AE5F",
