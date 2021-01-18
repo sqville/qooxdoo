@@ -32,6 +32,16 @@ qx.Theme.define("sqvdiagram.theme.Appearance",
          decorator : states.maximized ? undefined : states.active ? "window-active" : "window"
        };
      }
-   }
+   },
+
+   "shape/captionbar" :
+    {
+      style : function(states)
+      {
+        return {
+          cursor : "move"
+        };
+      }
+    }
   }
 });

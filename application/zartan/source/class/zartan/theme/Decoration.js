@@ -227,7 +227,7 @@ qx.Theme.define("zartan.theme.Decoration",
    {
      style :
      {
-       width : 1,
+       width : 2,
        radius : 3,
        style : "dashed",
        color : "gray"

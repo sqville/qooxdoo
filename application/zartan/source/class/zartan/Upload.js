@@ -219,11 +219,11 @@ qx.Class.define("zartan.Upload",
           var inputctrl = new qx.html.Input("file", {display: "none"} , {id: "sqvinputupload1727", name:"uploadfiles", multiple: true});
           inputctrl.addListener("change", function(e) {
            	var filesizemax = 10;
-			var filesizetotalmax = 10;
+			      var filesizetotalmax = 10;
             var value = "";
             var filesize = 0;
-			var filesizerunningsum = 0;
-			var triggerupload = true;
+			      var filesizerunningsum = 0;
+			      var triggerupload = true;
             var targetobj = e.getTarget();
             var files = targetobj.files;
             for (var k = 0; k < files.length; k++) {
@@ -259,9 +259,9 @@ qx.Class.define("zartan.Upload",
           }, this);
           control.getContentElement().add(inputctrl);
           control.addListener("click", function(e) {
-	        var browse = document.getElementById("sqvinputupload1727");
-	        browse.click();
-	      }, this);
+	          var browse = document.getElementById("sqvinputupload1727");
+            browse.click();
+          }, this);
           this._add(control);
           break;
           
@@ -284,15 +284,17 @@ qx.Class.define("zartan.Upload",
 	     	}
 	      }, this);
 	      control.addListener("complete", function(e) {
-			percent.setValue(control.getValue() + "%");
-			animalayer.set({visibility: "hidden"});
-			progress.set({backgroundColor: "green"});
-		  }, this);
-          progress._add(percent, {right: 2});
-          progress._add(animalayer, {height: "100%", width: "100%"});
-          animalayer.addListener("appear", function(e) {
-	     	var domtable = animalayer.getContentElement().getDomElement();
-	     	qx.bom.element.Animation.animate(domtable, this.__progressanimation, 2000);
+          percent.setValue(control.getValue() + "%");
+          animalayer.set({visibility: "hidden"});
+          progress.set({backgroundColor: "green"});
+        }, this);
+        
+        progress._add(percent, {right: 2});
+        progress._add(animalayer, {height: "100%", width: "100%"});
+
+        animalayer.addListener("appear", function(e) {
+	     	  var domtable = animalayer.getContentElement().getDomElement();
+	     	  qx.bom.element.Animation.animate(domtable, this.__progressanimation, 2000);
 	      }, this);
           
           this._add(control);
@@ -409,7 +411,7 @@ qx.Class.define("zartan.Upload",
     		var rulename = ".sqvdocumentdndenter1727";
     		//var css = "opacity: .7;" +
     			//"background-color: #F0F8FF;";
-    		var css = "opacity: .7; border: 1px solid orange !important;";
+    		var css = "opacity: .7; border: 2px solid orange !important;";
     		
     		dsktopstylsheet.addRule(rulename, css);
     		

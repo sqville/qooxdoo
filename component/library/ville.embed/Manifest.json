@@ -28,11 +28,6 @@
     "resource"    : "source/resource",
     "translation" : "source/translation"
   },
-  "externalResources": {
-    "css": [
-      "ville/embed/iconicss.min.css"
-    ]
-  },
   "requires": {
     "@qooxdoo/framework": "^6.0.0-beta-20201119-2000",
     "@qooxdoo/compiler" : "^1.0.0-beta-20201119-2000"

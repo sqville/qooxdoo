@@ -117,25 +117,69 @@ qx.Class.define("sqvdiagram.Application",
             useMoveFrame : true,
             contentPadding : 0
           });
-          winsh.setLayout(new qx.ui.layout.VBox());
+          winsh.setLayout(new qx.ui.layout.Grow());
+          winsh.getChildControl("captionbar").set({cursor:"move"});
           //TODO: make the window's pane movable
           //winsh._activateMoveHandle(winsh.getChildControl("pane"));
 
           //test - add pure css icon - good test
-          var iconlabel = new qx.ui.basic.Label('<i class="icss-diamonds-o" style="font-size:10em; color:red;"></i>').set({rich : true});
+          var iconlabel = new qx.ui.basic.Label('<i class="icss-diamonds-o" style="font-size:10em; color:black;"></i>').set({rich : true, allowGrowX:true, allowGrowY:true});
          // winsh.add(iconlabel);
 
           //test #2  - image object
-          var iconimg = new qx.ui.basic.Image().set({width: 130, height: 130});
+          /*var iconimg = new qx.ui.basic.Image();
           var elem = iconimg.getContentElement();
-          //elem.setAttribute("html", '<i class="icss-diamonds-o" style="font-size:10em; color:red;"></i>');
+          elem.setAttribute("html", '<i class="icss-diamonds-o" style="font-size:10em; color:red;"></i>');
           elem.useMarkup("<i></i>");
           elem.setAttribute("class", "icss-diamonds-o");
-          elem.setAttribute("style", "font-size:8em; color:red;");
-          winsh.add(iconimg);
+          elem.setAttribute("style", "font-size:4em; color:red;");
+          */
+         
 
-          var txtarea = new qx.ui.form.TextArea(defsh.options.content);
-          winsh.add(txtarea);
+          var svgtest = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048"><path d="M1920 128v1792H128V128h1792zm-128 128H256v1536h1536V256z"></path></svg>';
+          //iconlabel.setValue(svgtest);
+          //var txtarea = new qx.ui.form.TextArea(defsh.options.content).set({textAlign:"center", backgroundColor: "transparent", allowStretchX:[true,true], allowStretchY:[true,true]});
+         //GROW:: var txtlabel = new qx.ui.basic.Label(defsh.options.content).set({backgroundColor: "yellow", rich:true, textAlign:"center", padding:4, alignX:"center", alignY:"middle",allowGrowX:true, allowGrowY: true});
+         
+         //CANVAS:: var txtlabel = new qx.ui.basic.Label(defsh.options.content).set({backgroundColor: "yellow", padding:4, rich:true, textAlign:"center"});
+          //var txtnew = new qx.ui.basic.Label(defsh.options.content);
+          var lblatom = new qx.ui.basic.Atom(defsh.options.content).set({backgroundColor: "transparent", rich:true, center:true, padding:4, allowGrowX:true, allowGrowY:true});
+          lblatom.getChildControl('label').set({textAlign:"center"});
+
+          if (defsh.options.shape) {
+            var shape = new qx.ui.core.Widget().set({
+              backgroundColor: "transparent",
+              decorator: defsh.options.shape
+            });
+            /*var shape = new qx.ui.container.Resizer(new qx.ui.layout.Grow()).set({
+              backgroundColor: "transparent",
+              decorator: defsh.options.shape
+            })*/
+            if (defsh.options.shape == "diamond"){
+              //winsh.add(iconlabel);
+              shape.getContentElement().setStyles({"transform" : "rotate(45deg)"});
+              shape.setMargin(30);
+              winsh.add(shape);
+            } else {
+              //GROW:: 
+              winsh.add(shape);
+              //CANVAS:: winsh.add(shape, {top: 0, left: 0, bottom: 0, right: 0});
+            }
+              
+          }
+
+          //create Vbox container for the label
+          //var lblcontainer = new qx.ui.container.Composite(new qx.ui.layout.Canvas()).set({backgroundColor: "green", allowGrowX:true, allowGrowY: true});
+          //lblcontainer.add(txtlabel);
+          //winsh.add(lblcontainer);
+
+          winsh.add(lblatom);
+          //winsh.add(txtarea);
+          //winsh.add(txtlabel);
+
+
+          //winsh.add(iconlabel);
+          
           winsh.setUserData("shapeid", defsh.id);
           winsh.moveTo(defsh.left, defsh.top);
 
@@ -171,6 +215,11 @@ qx.Class.define("sqvdiagram.Application",
             }, this);
             connobj.repositionConnections(arrwins);
           });
+
+          winsh.getContentElement().setStyles({"overflowX": "visible", "overflowY": "visible"});
+          winsh.getChildControl("pane").getContentElement().setStyles({"overflowX": "visible", "overflowY": "visible"});
+          lblatom.getContentElement().setStyles({"overflowX": "visible", "overflowY": "visible"});
+          //txtlabel.getContentElement().setStyles({"overflowX": "visible", "overflowY": "visible"});
 
           // add close listner to each shape. This will also close the shape's related connections
           /*winsh.addListener("close", function(e) {

@@ -1,15 +1,20 @@
 /* ************************************************************************
 
-   Ville Software (SQville)
+   qooxdoo - the new era of web development
+
+   http://qooxdoo.org
 
    Copyright:
+     2004-2008 1&1 Internet AG, Germany, http://www.1und1.de
 
    License:
      MIT: https://opensource.org/licenses/MIT
      See the LICENSE file in the project's top-level directory for details.
 
    Authors:
-     * Chris Eskew (sqville)
+     * Sebastian Werner (wpbasti)
+     * Fabian Jakobs (fjakobs)
+     * Martin Wittemann (martinwittemann)
 
 ************************************************************************ */
 
@@ -65,7 +70,7 @@ qx.Class.define("ville.embed.Image",
   */
 
   /**
-   * @param value {String} HTML, SVG or JSON content to use
+   * @param value {String} HTML or Map content to use
    * 
    */
   construct : function(value)
@@ -86,29 +91,23 @@ qx.Class.define("ville.embed.Image",
             // TODO: map API json to object properties
             this.set(mapsrc);
             //render value
-            this.render(mapsrc);
+            this.render(this.__embedmanager.templates[this.getTemplateName()], mapsrc);
           } else {
             this.setValue(value.substr(value.indexOf(";")+1));
           }
       } 
         else if (qx.lang.String.startsWith(value, "{") && qx.lang.String.endsWith(value, "}")) {
             var mapsrc = qx.lang.Json.parse(value);
-            // TODO:: map API json to object properties
+            // TODO: map API json to object properties
             this.set(mapsrc);
         } else {
             this.setValue(value);
         }
       } else {
-        // TODO:: map API json to object properties  
+        // TODO: map API json to object properties  
         this.set(value);
         //render value
-        this.render(value);
-      }
-      // Apply any starter animation
-      if (this.getAnimation()) {
-        this.addListener("appear", function(e) {
-          qx.bom.element.AnimationCss.animate(this.getContentElement().getDomElement(), this.__embedmanager.animations[this.getAnimation()], undefined);
-        }, this);
+        this.render(this.__embedmanager.templates[this.getTemplateName()], value);
       }
     }
   },
@@ -131,7 +130,7 @@ qx.Class.define("ville.embed.Image",
       themeable : true
     },
     
-    /** Name of icon or graphic to use
+    /** Name of icon or graphic to use; setting other properties will overwrite  
      * 
      */
     name :
@@ -144,7 +143,7 @@ qx.Class.define("ville.embed.Image",
       themeable : true
     },
 
-    /** Name of template used by named embed  
+    /** Name of icon or graphic to use; setting other properties will overwrite  
      * 
      */
     templateName :
@@ -153,6 +152,16 @@ qx.Class.define("ville.embed.Image",
       init : null,
       nullable : true,
       themeable : true
+    },
+
+    /** Name of icon or graphic to use; setting other properties will overwrite  
+     * 
+     */
+    topElementid :
+    {
+      check : "String",
+      init : null,
+      nullable : true
     },
     
     /**
@@ -184,10 +193,21 @@ qx.Class.define("ville.embed.Image",
       themeable : true
     },
 
+    /** Control the text alignment 
+    textAlign :
+    {
+      check : ["left", "center", "right", "justify"],
+      nullable : true,
+      themeable : true,
+      apply : "_applyTextAlign",
+      event : "changeTextAlign"
+    },
+    */
+
     /** Font size of the widget */
     size :
     {
-        check : "Integer",
+        check : "String",
         init : null,
         nullable : true
     },
@@ -218,6 +238,16 @@ qx.Class.define("ville.embed.Image",
         inheritable : true
     },
 
+
+    /*
+    // overridden
+    appearance :
+    {
+      refine: true,
+      init: "label"
+    },
+    */
+
     /** Color of the svg fill property */
     fill :
     {
@@ -247,43 +277,43 @@ qx.Class.define("ville.embed.Image",
     __css : {},
 
 
-    // overridden
-    _getContentHint : function()
-    {
-      if (this.__invalidContentSize)
-      {
-        this.__contentSize = this.__computeContentSize();
-        delete this.__invalidContentSize;
-      }
-
-      return {
-        width : this.__contentSize.width,
-        height : this.__contentSize.height
-      };
-    },
-
-
-    // overridden
-    _hasHeightForWidth : function() {
-      return this.getRich();
-    },
-
-    // overridden
-    _getContentHeightForWidth : function(width)
-    {
-      if (!this.getRich()) {
-        return null;
-      }
-      return this.__computeContentSize(width).height;
-    },
-
-
-    // overridden
-    _createContentElement : function() {
-        var element = new qx.html.Label;
-        element.setRich(true);
-        return element;
-    },
+        // overridden
+        _getContentHint : function()
+        {
+          if (this.__invalidContentSize)
+          {
+            this.__contentSize = this.__computeContentSize();
+            delete this.__invalidContentSize;
+          }
+    
+          return {
+            width : this.__contentSize.width,
+            height : this.__contentSize.height
+          };
+        },
+    
+    
+        // overridden
+        _hasHeightForWidth : function() {
+          return this.getRich();
+        },
+    
+        // overridden
+        _getContentHeightForWidth : function(width)
+        {
+          if (!this.getRich()) {
+            return null;
+          }
+          return this.__computeContentSize(width).height;
+        },
+    
+    
+        // overridden
+        _createContentElement : function() {
+            var element = new qx.html.Label;
+            element.setRich(true);
+            return element;
+        },
 
     /*
     ---------------------------------------------------------------------------
@@ -291,36 +321,49 @@ qx.Class.define("ville.embed.Image",
     ---------------------------------------------------------------------------
     */
 
-    render : function(usercontent)
-    {
-      var contenttype = typeof usercontent;
-      var name = this.getName();
-      var templatename = this.getTemplateName();
-      var embeddedcontent = this.__embedmanager.embeds[name];
-      var template = this.__embedmanager.templates[templatename];
-      //if the embed indicates a content entry then merge the content with the embed entries; content overrides matching fields
-      if (this.__embedmanager.embeds[this.getName()].content)
-        embeddedcontent = qx.lang.Object.mergeWith(embeddedcontent, this.__embedmanager.content[this.__embedmanager.embeds[this.getName()].content]);
-      if (contenttype == "string")
-        embeddedcontent = qx.lang.Object.mergeWith(embeddedcontent, this.__embedmanager.content[content]);
-      else
-        embeddedcontent = qx.lang.Object.mergeWith(usercontent, embeddedcontent);
-      
-        //check document for template tags
-      if (name && templatename && !template) {
-        var tempelement = document.getElementById(templatename);
-        if (tempelement) {
-          template = tempelement.innerHTML;
-        }
-        else {
-          //template = "<small>" + templatename + " is missing a template entry</small>";
-          //throw new Error(templatename + " is missing a TEMPLATE entry in its package class, or a <template id='"+templatename+"'></template> tag in your projects index.html file.");
-          console.log(templatename + " is missing a TEMPLATE entry in its package class, or a <template id='"+templatename+"'></template> tag in your projects index.html file.");
-          template = "";
-        }
-      }
-      this.setValue(qx.bom.Template.render(template, embeddedcontent));
-    },
+   render : function(template, content, returnval)
+   {
+    var contenttype = typeof content;
+    var returnedTarget = this.__embedmanager.embeds[this.getName()];
+
+    //if the embed indicates a content entry then merge the content with the embed entries; content overrides matching fields
+    if (this.__embedmanager.embeds[this.getName()].content)
+      returnedTarget = qx.lang.Object.mergeWith(returnedTarget, this.__embedmanager.content[this.__embedmanager.embeds[this.getName()].content]);
+    if (contenttype == "string")
+      returnedTarget = qx.lang.Object.mergeWith(returnedTarget, this.__embedmanager.content[content]);
+    else
+      returnedTarget = qx.lang.Object.mergeWith(content, returnedTarget);
+    
+    this.setValue(qx.bom.Template.render(template, returnedTarget));
+        
+    if (returnval) {
+      return this.getValue();
+    }
+   },
+
+   __render : function(template, content, returnval)
+   {
+    var contenttype = typeof content;
+    var results = null;
+    if (contenttype == "string") {
+       // this.setValue(qx.bom.Template.render(ville.embed.Image.TEMPLATES[template], ville.embed.Image.CONTENT[content]));
+        results = qx.bom.Template.render(ville.embed.Image.TEMPLATES[template], ville.embed.Image.CONTENT[content]);
+    } else {
+       // this.setValue(qx.bom.Template.render(ville.embed.Image.TEMPLATES[template], content));
+        results = qx.bom.Template.render(ville.embed.Image.TEMPLATES[template], content);
+    }
+        
+    if (results) {
+      var internaltag = new qx.html.Element();
+      internaltag.useMarkup(results);
+      this.getContentElement().add(internaltag);
+      //this.__invalidContentSize = true;
+      // Update layout
+      //qx.ui.core.queue.Layout.add(this);
+    }
+    //return results;
+   },
+
 
      /*
     ---------------------------------------------------------------------------
@@ -328,19 +371,44 @@ qx.Class.define("ville.embed.Image",
     ---------------------------------------------------------------------------
     */
 
+     /*
+    // property apply
+    _applyHtml : function(value, old)
+    {
+      this.getContentElement().setAttribute("html", value||"");
+    },
+
+
+    // property apply
+    _applyTextAlign : function(value, old) {
+      this.getContentElement().setStyle("textAlign", value);
+    },
+    
+
+
+    // overridden
+    _applyTextColor : function(value, old)
+    {
+      if (value) {
+        this.getContentElement().setStyle("color", qx.theme.manager.Color.getInstance().resolve(value));
+      } else {
+        this.getContentElement().removeStyle("color");
+      }
+    },
+    */
+
     // property apply
     _applyAnimation : function(value, old)
     {
+      //identify template and content for rendering of objects value
       if (value) {
-        if (this.getContentElement().getDomElement())
-          qx.bom.element.AnimationCss.animate(this.getContentElement().getDomElement(), this.__embedmanager.animations[value], undefined);
+        qx.bom.element.AnimationCss.animate(this.getContentElement().getDomElement(), this.__embedmanager.animations[value], undefined);
       }
     },
 
     // property apply
     _applyName : function(value, old)
     {
-      //console.log(value);
       this.setTemplateName(this.__embedmanager.embeds[value].template);
     },
 
@@ -380,10 +448,21 @@ qx.Class.define("ville.embed.Image",
       }
     },
     
+    /*
+    _applyTextSize : function(value, old)
+    {
+      if (value) {
+        this.getContentElement().setStyle("font-size", value);
+      }
+    },
+    */
+    
     // property apply
     _applyCssClass : function (value, old) {
       this.getContentElement().removeClass(old);
       this.getContentElement().addClass(value);
+      //var topelem = document.getElementById(this.getTopElementid());
+      //topelem.className = value;
     },
 
     // property apply

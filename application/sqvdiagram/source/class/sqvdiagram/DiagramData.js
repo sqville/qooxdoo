@@ -16,7 +16,7 @@ qx.Class.define("sqvdiagram.DiagramData",
                   icon : "sqvdiagram/horizontal-horizontal.png",
                   rich : true,
                   width : 180,
-                  height : 40
+                  height : 100
                 }
               }
             ],
@@ -24,14 +24,15 @@ qx.Class.define("sqvdiagram.DiagramData",
             "shapes" : [
               {
                 id : 1,
-                left : 360,
-                top : 50,
+                left : 680,
+                top : 70,
                 properties : {
                   width : 120,
-                  height : 100
+                  height : 110
                 },
                 options : {
-                  content : "The Electorate"
+                  content : '<span style="font-size:16px;"><b>The Electorate</b></span>',
+                  shape : "square-rectangle-sharp"
                 }
               },            
               {
@@ -43,7 +44,8 @@ qx.Class.define("sqvdiagram.DiagramData",
                   height : 100
                 },
                 options : {
-                  content : "Governor"
+                  content : "Governor",
+                  shape : "square-rectangle-sharp"
                 }
               },
               {
@@ -55,7 +57,8 @@ qx.Class.define("sqvdiagram.DiagramData",
                   height : 100
                 },
                 options : {
-                  content : "Attorney General"
+                  content : "Attorney General",
+                  shape : "square-rectangle-sharp"
                 }
               },
               {
@@ -67,7 +70,8 @@ qx.Class.define("sqvdiagram.DiagramData",
                   height : 100
                 },
                 options : {
-                  content : "Lieutenant Governor"
+                  content : "Lieutenant Governor",
+                  shape : "square-rectangle-sharp"
                 }
               },
               {
@@ -79,27 +83,42 @@ qx.Class.define("sqvdiagram.DiagramData",
                   height : 100
                 },
                 options : {
-                  content : "Sec of State"
+                  content : "Sec of State",
+                  shape : "square-rectangle-sharp"
+                }
+              },
+              {
+                id : 6,
+                left : 659,
+                top : 214,
+                properties : {
+                  width : 110,
+                  height : 50
+                },
+                options : {
+                  content : "This is a text object <br> that can be linked to any object by a <br>straight line"
                 }
               }
             ],
             "connections" : [
                 {
-                    elementA : 1,
-                    elementB : 2,
-                    properties : {backgroundColor : "gray"},
-                    options : {
-                        anchorA: "horizontal", 
-                        anchorB : "vertical"
-                    }
+                  elementA : 1,
+                  elementB : 2,
+                  properties : {backgroundColor : "gray"},
+                  options : {
+                    anchorA: "horizontal", 
+                    anchorB : "vertical",
+                    endShape : "arrow"
+                  }
                 },
                 {
                   elementA : 1,
                   elementB : 3,
                   properties : {backgroundColor : "gray"},
                   options : {
-                      anchorA: "vertical", 
-                      anchorB : "vertical"
+                    anchorA: "vertical", 
+                    anchorB : "vertical",
+                    endShape : "arrow"
                   }
                 },
                 {
@@ -107,8 +126,9 @@ qx.Class.define("sqvdiagram.DiagramData",
                   elementB : 4,
                   properties : {backgroundColor : "gray"},
                   options : {
-                      anchorA: "horizontal", 
-                      anchorB : "horizontal"
+                    anchorA: "horizontal", 
+                    anchorB : "horizontal",
+                    endShape : "arrow"
                   }
                 },
                 {
@@ -116,8 +136,9 @@ qx.Class.define("sqvdiagram.DiagramData",
                   elementB : 5,
                   properties : {backgroundColor : "gray"},
                   options : {
-                      anchorA: "vertical", 
-                      anchorB : "vertical"
+                    anchorA: "vertical", 
+                    anchorB : "vertical",
+                    endShape : "arrow"
                   }
                 }
             ]

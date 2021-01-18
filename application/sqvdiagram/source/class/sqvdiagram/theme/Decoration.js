@@ -14,26 +14,43 @@ qx.Theme.define("sqvdiagram.theme.Decoration",
 
   decorations :
   {
-    "circle" :
+    "circle-pill" :
     {
-      
-      include : "window",
-
       style :
       {
-        width: 1,
-        radius: 50
+        color : "black",
+        width: 2,
+        radius: 1550
       }
     },
 
-    "rectangle-rounded" :
-    {
-      include : "window",
-      
+    "square-rectangle-sharp" :
+    { 
       style :
       {
-        width: 1,
-        radius: 25
+        color : "black",
+        width: 2,
+        radius: 0
+      }
+    },
+
+    "square-rectangle-rounded" :
+    { 
+      style :
+      {
+        color : "black",
+        width: 2,
+        radius: 12
+      }
+    },
+
+    "diamond" :
+    { 
+      style :
+      {
+        color : "black",
+        width: 2,
+        radius: 0
       }
     },
 

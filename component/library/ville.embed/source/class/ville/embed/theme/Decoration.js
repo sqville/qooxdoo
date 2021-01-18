@@ -14,5 +14,12 @@ qx.Theme.define("ville.embed.theme.Decoration",
 
   decorations :
   {
+    "icss-credit-card" :
+    {
+      style :
+      {
+        freestyleCss : "icss-credit-card"
+      }
+    }
   }
 });

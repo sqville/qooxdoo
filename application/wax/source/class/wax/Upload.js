@@ -249,49 +249,48 @@ qx.Class.define("wax.Upload",
           var inputctrl = new qx.html.Input("file", {display: "none"} , {id: "sqvinputupload1727", name:"uploadfiles", multiple: true});
           inputctrl.addListener("change", function(e) {
            	var filesizemax = 10;
-			var filesizetotalmax = 10;
+			      var filesizetotalmax = 10;
             var value = "";
             var filesize = 0;
-			var filesizerunningsum = 0;
-			var triggerupload = true;
+			      var filesizerunningsum = 0;
+			      var triggerupload = true;
             var targetobj = e.getTarget();
             var files = targetobj.files;
             for (var k = 0; k < files.length; k++) {
             	//value = value + files[k].name + ";;;";
-				filesize = ((files[k].size/1024)/1024).toFixed(4); // MB
-				if (filesize >= filesizemax){
-				    //end loop and send error message to user
-				    triggerupload = false;			    
-				    break;
-				}
-				else {
-				    filesizerunningsum += filesize; 
-				    // add file to json string
-				    value += qx.lang.Json.stringify([files[k]]);
-				}
-				if (filesizerunningsum >= filesizetotalmax) {
-				    //end loop and send error message to user
-				    triggerupload = false;
-				    break;
-				}
-			}
-			if (triggerupload){                
-			    //value = qx.lang.Json.stringify([files]);
-			    //this.setFileName(value);
-			    //this.fireDataEvent('changeFileName', value);
-			    var progressbar = this.getChildControl("progressbar", true);
-			    progressbar.setBackgroundColor("progressbar-base");
-			    
-			    if (this.getDemo())
-			    	progressbar.setValue(20);  
- 
-			}
+				      filesize = ((files[k].size/1024)/1024).toFixed(4); // MB
+              if (filesize >= filesizemax){
+                  //end loop and send error message to user
+                  triggerupload = false;			    
+                  break;
+              }
+              else {
+                  filesizerunningsum += filesize; 
+                  // add file to json string
+                  value += qx.lang.Json.stringify([files[k]]);
+              }
+              if (filesizerunningsum >= filesizetotalmax) {
+                  //end loop and send error message to user
+                  triggerupload = false;
+                  break;
+              }
+			      }
+            if (triggerupload){                
+              //value = qx.lang.Json.stringify([files]);
+              //this.setFileName(value);
+              //this.fireDataEvent('changeFileName', value);
+              var progressbar = this.getChildControl("progressbar", true);
+              progressbar.setBackgroundColor("progressbar-base");
+              
+              if (this.getDemo())
+                progressbar.setValue(20);  
+            }
           }, this);
           control.getContentElement().add(inputctrl);
           control.addListener("click", function(e) {
-	        var browse = document.getElementById("sqvinputupload1727");
-	        browse.click();
-	      }, this);
+            var browse = document.getElementById("sqvinputupload1727");
+            browse.click();
+          }, this);
           this._add(control);
           break;
           
@@ -303,27 +302,27 @@ qx.Class.define("wax.Upload",
           var percent = new qx.ui.basic.Label("0%").set({textColor:"white", alignX: "right", allowGrowX: true});
           var progress = control.getChildControl("progress");
           control.addListener("change", function(e) {
-	     	if (control.getValue() > 0) {
-	     		percent.setValue(control.getValue() + "%");
-	     		control.setVisibility("visible");
-	     		animalayer.set({visibility: "visible"});
-	     		progress.set({backgroundColor: "gray"});
-	     	}
-	     	else {
-	     		control.setVisibility("hidden");
-	     	}
-	      }, this);
-	      control.addListener("complete", function(e) {
-			percent.setValue(control.getValue() + "%");
-			animalayer.set({visibility: "hidden"});
-			progress.set({backgroundColor: "green"});
-		  }, this);
+            if (control.getValue() > 0) {
+              percent.setValue(control.getValue() + "%");
+              control.setVisibility("visible");
+              animalayer.set({visibility: "visible"});
+              progress.set({backgroundColor: "gray"});
+            }
+            else {
+              control.setVisibility("hidden");
+            }
+	        }, this);
+	        control.addListener("complete", function(e) {
+            percent.setValue(control.getValue() + "%");
+            animalayer.set({visibility: "hidden"});
+            progress.set({backgroundColor: "green"});
+          }, this);
           progress._add(percent, {right: 2});
           progress._add(animalayer, {height: "100%", width: "100%"});
           animalayer.addListener("appear", function(e) {
-	     	var domtable = animalayer.getContentElement().getDomElement();
-	     	qx.bom.element.Animation.animate(domtable, this.__progressanimation, 2000);
-	      }, this);
+            var domtable = animalayer.getContentElement().getDomElement();
+            qx.bom.element.Animation.animate(domtable, this.__progressanimation, 2000);
+          }, this);
           
           this._add(control);
           
@@ -376,7 +375,7 @@ qx.Class.define("wax.Upload",
 	    			e.dataTransfer.dropEffect = 'copy';
 	    			qx.bom.Event.preventDefault(e);
 	    			qx.bom.Event.stopPropagation(e);
-	    			//qx.bom.element.Class.add(this,"plaiddocumentdndenter");
+	    			//qx.bom.element.Class.add(this,"documentdndenter");
 	    			//console.log("dragenter");
 	    		}
 	    	}, this);

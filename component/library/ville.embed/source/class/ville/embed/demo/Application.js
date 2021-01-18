@@ -57,34 +57,58 @@ qx.Class.define("ville.embed.demo.Application",
 	   // qx.Class.patch(qx.ui.basic.Image, ville.embed.MImage);
 	  
 	    // Prep Atoms to have image property handling abilities
-	    qx.Class.patch(qx.ui.basic.Atom, ville.embed.MAtom);
+      //qx.Class.include(qx.ui.basic.Atom, ville.embed.MAtom);
+      
+      // Prep the Image widget to have font and SVG handling abilities
+	   //qx.Class.include(qx.ui.basic.Image, ville.embed.MImage);
+	  
+	    // Enables adding CSS to tag and psudo classes (after and before) to the Decorator class
+      //qx.Class.include(qx.ui.decoration.Decorator, ville.embed.MFreestyleCss);
+
+      qx.Class.patch(qx.ui.basic.Atom, ville.embed.MAtomPatch);
 
       //test - add pure css icon - good test
-      var teststr = '<div class="icss-airplane" style="font-size:6em; color:inherit;"></div>';
-      var iconlabel = new qx.ui.basic.Label("Label - Open spot").set({rich : true});
-      // winsh.add(iconlabel);
+      var teststr = '<div class="icss-cube-o" style="font-size:4em; color:inherit;"></div>';
 
-      
-     // var iconcode = 'data:image/png;utf8,' + encodeURI('<svg height="100" width="100"><circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" /></svg>');
-       var iconcode = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
-      //var iconcode = "data:text/icon;icss-diamonds-o";
-
-      var testsvg = "";//'<svg><circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill=currentColor /></svg>';
-      var testmapstr = 'data:text/map;{"value":"<div class=\'icss-airplane\' style=\'font-size:6em; color:inherit;\'></div>"}';
-      var testmap = {value : testsvg};
+      var testsvg = '<svg width=100 height=100><circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill=currentColor /></svg>';
+      var testmapstr = 'data:text/json;{"value":"<div class=\'icss-airplane\' style=\'font-size:4em; color:inherit;\'></div>"}';
+      var testmap = {value : testsvg, fill : "red"};
       //console.log(testmapstr);
 
-      var loneembedImage = new ville.embed.Image();
+     // var loneembedImage = new ville.embed.Image({name:"icss-cube-o", size:4, color:"blue", animation : "tada"});
+     //var loneembedImage = new ville.embed.Image({name:"fui-accesslogoicon", color:"blue", width:130, height:130, animation : "tada"});
+     // var loneembedImage = new ville.embed.Image(testmap);
 
-      testsvg = loneembedImage.render("svgcircle", "svgblackcircle", true);
-      //console.log(testsvg);
+     // var loneembedImage = new ville.embed.Image("data:text/html;" + teststr);
 
-      // Create a button
-      //var button1 = new qx.ui.form.Button('<b>Click Me</b>',"data:text/svg+xml;" + testsvg).set({rich: true, appearance: "testbutton"});
-      //var button1 = new qx.ui.form.Button("Click me","ville/embed/test.png");
-      var button1 = new qx.ui.form.Button('<b>Click Me</b>',"data:text/html;" + teststr).set({rich: true, appearance: "testbutton"});
+      //testsvg = loneembedImage.render("icss-cube-o", {name:"icss-cube-o",textSize:"4em",iconColor:"blue"}, true);
 
+      var funtime = '<label for="fname">First name:</label><input type="text" id="fname" name="fname"></input>';
 
+      // Create a button - Examples
+     //var button1 = new qx.ui.form.Button('<b>Click Me</b>',"data:text/svg+xml;" + testsvg).set({rich: true, appearance: "testbutton"});
+    //  var button1 = new qx.ui.form.Button("Click me").set({appearance: "testbutton"});
+     // var button1 = new qx.ui.form.Button('<b>Click Me</b>',"data:text/html;" + funtime).set({rich: true, appearance: "testbutton"});
+      var button1 = new qx.ui.form.Button('Click Me','data:text/json;{"name":"cube-o","size":3,"color":"green","animation":"tada"}').set({appearance: "testbutton"});
+    //  var button1 = new qx.ui.form.Button('Click Me',testmapstr).set({appearance: "testbutton"});
+
+    // var button1 = new qx.ui.form.Button('Click Me for a song',"data:text/html;&#9835;");
+
+    var MSAccess = new ville.embed.Image({name:"fui-access", color:"#AB2325", width:60, height:60});
+    var MSWord = new ville.embed.Image({name:"fui-word", color:"#1748A4", width:60, height:60});
+    var MSExcel = new ville.embed.Image({name:"fui-excel", color:"#12743B", width:60, height:60, animation : "tada"});
+    var MSPowerPoint = new ville.embed.Image({name:"fui-ppt", color:"#EE3111", width:60, height:60});
+    var MSPublisher = new ville.embed.Image({name:"fui-pub", color:"#007462", width:60, height:60, animation : "tada"}); 
+    var MSOnenote= new ville.embed.Image({name:"fui-onenote", color:"#420F6F", width:60, height:60}); 
+
+    var logocontainer = new qx.ui.container.Composite(new qx.ui.layout.HBox(40));
+
+    logocontainer.add(MSAccess);
+    logocontainer.add(MSWord);
+    logocontainer.add(MSExcel);
+    logocontainer.add(MSPowerPoint);
+    logocontainer.add(MSPublisher);
+    logocontainer.add(MSOnenote);
       
 
       // Document is the application root
@@ -92,8 +116,11 @@ qx.Class.define("ville.embed.demo.Application",
 
       // Add button to document at fixed coordinates
       doc.add(button1, {left: 100, top: 50});
-      doc.add(iconlabel, {left: 100, top: 200});
-      doc.add(loneembedImage, {left: 330, top: 200});
+      //doc.add(loneembedImage, {left: 330, top: 200});
+      doc.add(logocontainer, {left: 100, top: 250});
+
+      // Make dancing app icons
+
 
 
       //test #2  - image object
@@ -111,8 +138,15 @@ qx.Class.define("ville.embed.demo.Application",
 
       // Add an event listener
       button1.addListener("execute", function() {
-        /* eslint no-alert: "off" */
-        //alert("Hello World!");
+        var dsktpstylesheet = qx.ui.style.Stylesheet.getInstance();
+        //console.log(dsktpstylesheet.__rules);
+        var onesheet = document.styleSheets[1];
+        //var allrules = document.styleSheets[1].cssRules;
+        var firstrule = onesheet.cssRules[0].selectorText;
+        var len = onesheet.cssRules.length;
+        for (var i=len-1; i>=0; i--) {
+          console.log(onesheet.cssRules[i].cssText)
+        }
       });
     }
   }

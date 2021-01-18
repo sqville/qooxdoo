@@ -225,7 +225,7 @@ qx.Class.define("sqvdiagram.SimpleConnect",
         this._positionConnection(connection);
 
         // Position end point
-       // this._positionEndPoint();
+        this._positionEndPoint();
 
         elementA.setAlwaysOnTop(true);
         elementB.setAlwaysOnTop(true);
@@ -246,6 +246,8 @@ qx.Class.define("sqvdiagram.SimpleConnect",
  */
 _positionConnection : function(connection) 
 {
+  //console.log(connection.elementB.getBounds());
+  
   // Calculate the positions of the element's center.
   var posA = this._posA = connection.elementA.getBounds();
   var pAleft = parseInt(posA.left, 10) + parseInt(posA.width/2, 10);
@@ -462,8 +464,8 @@ _positionConnection : function(connection)
 
         // Position connection.
         this._positionConnection(conn);
-        //this._wendarrow = this._wline3.getUserData("endarrow");
-      //  this._positionEndPoint();
+        this._wendarrow = this._wline3.getUserData("endarrow");
+        this._positionEndPoint();
       }
     },
 

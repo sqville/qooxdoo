@@ -34,9 +34,13 @@ qx.Theme.define("ville.embed.theme.Appearance",
       style : function(states)
       {
         return {
-          iconProps : states.hovered ? {iconColor : "green"} : {iconColor : "red"}
+          padding : 16,
+          gap : 16,
+          iconProps : states.hovered ? {animation:"grow"} : {animation:"shrink"}
         }
       }
-    }
+    },
+
+    "label-button" : "button-frame"
   }
 });
