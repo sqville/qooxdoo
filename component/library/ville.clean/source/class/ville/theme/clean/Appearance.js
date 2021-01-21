@@ -769,7 +769,9 @@ qx.Theme.define("ville.theme.clean.Appearance",
       style : function(states)
       {
         return {
-          decorator : "ville-icon-arrow-up"
+          decorator : "ville-icon-arrow-up",
+          width : 0,
+          height : 0
         };
       }
     },
@@ -793,7 +795,9 @@ qx.Theme.define("ville.theme.clean.Appearance",
       style : function(states)
       {
         return {
-          decorator : "ville-icon-arrow-down"
+          decorator : "ville-icon-arrow-down",
+          width : 0,
+          height : 0
         };
       }
     },
@@ -2006,20 +2010,7 @@ qx.Theme.define("ville.theme.clean.Appearance",
         };
       }
     },
-    
-    "primary-button/icon" :
-    {
-    	include : "image",
-    	
-    	style : function(states)
-    	{
-    		return {
-    			scale : true,
-    			width : 18,
-    			height : 18
-    		};
-    	}
-    },
+
     
     /*
     ---------------------------------------------------------------------------
@@ -2065,7 +2056,6 @@ qx.Theme.define("ville.theme.clean.Appearance",
       }
     },
     
-    "secondary-button/icon" : "primary-button/icon",
     
     /*
     ---------------------------------------------------------------------------
@@ -2110,8 +2100,6 @@ qx.Theme.define("ville.theme.clean.Appearance",
         };
       }
     },
-    
-    "tertiary-button/icon" : "primary-button/icon",
     
 
     /*
@@ -2404,8 +2392,7 @@ qx.Theme.define("ville.theme.clean.Appearance",
         return {
           marginLeft: 6,
           width : 18,
-          height : 18,
-          scale : true
+          height : 18
         };
       }
     },
