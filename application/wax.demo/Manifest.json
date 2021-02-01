@@ -1,0 +1,36 @@
+{
+ "$schema": "https://qooxdoo.org/schema/Manifest-1-0-0.json",
+  "info" :
+  {
+    "name" : "wax.demo",
+
+    "summary" : "Demo application to show application and control features",
+    "description" : "",
+
+    "homepage" : "",
+
+    "license" : "MIT license",
+    "authors" : [
+  {
+    "name": "Chris Eskew (sqville)",
+    "email": "chris.eskew@sqville.com"
+  }
+],
+
+    "version" : "1.0.0"
+  },
+
+  "provides" :
+  {
+    "namespace"   : "wax.demo",
+    "encoding"    : "utf-8",
+    "class"       : "source/class",
+    "resource"    : "source/resource",
+    "translation" : "source/translation"
+  },
+
+  "requires": {
+    "@qooxdoo/framework": "^6.0.0-beta-20210121-1516",
+    "@qooxdoo/compiler" : "^1.0.0-beta-20210121-1516"
+  }
+}

@@ -26,7 +26,7 @@
     "apps"
   ],
   "dependencies": {
-    "@qooxdoo/compiler": "^1.0.0-beta-20201223-1121",
+    "@qooxdoo/compiler": "^1.0.0-beta-20210121-1516",
     "elephant-harness": "^1.0.4",
     "react": "^16.13.1",
     "react-native": "^0.63.2"
