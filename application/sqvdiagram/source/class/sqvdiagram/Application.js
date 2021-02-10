@@ -64,7 +64,7 @@ qx.Class.define("sqvdiagram.Application",
 
       //var diagramdata = sqvdiagram.DiagramData.DIAGRAMS["diagramdata_old"];
       //var diagramdata = sqvdiagram.DiagramData.DIAGRAMS["GovernmentStructureOfTexas"];
-      var diagramdata = sqvdiagram.DiagramData.DIAGRAMS["SuperSimple"];
+      var diagramdata = sqvdiagram.DiagramData.DIAGRAMS["NetworkDiagram"];
 
      
       //Swimlanes
@@ -110,17 +110,33 @@ qx.Class.define("sqvdiagram.Application",
         for (var j=0; j<diagramdata.shapes.length; j++)
         {
           var defsh = diagramdata.shapes[j];
-          var winsh = new qx.ui.window.Window().set(defsh.properties);
+          var winsh = new qx.ui.window.Window();
           winsh.set({
             showMaximize : false,
             showMinimize : false,
+            showClose : false,
             useMoveFrame : true,
-            contentPadding : 0
+            contentPadding : 0,
+            padding: 0,
+            margin: 0
           });
           winsh.setLayout(new qx.ui.layout.Grow());
-          winsh.getChildControl("captionbar").set({cursor:"move"});
+          var winshcb = winsh.getChildControl("captionbar");
+          winshcb.set({cursor:"move", minHeight: 30});
+          //winshcb.setVisibility("hidden");
+          winsh.setAppearance("shape");
           //TODO: make the window's pane movable
-          //winsh._activateMoveHandle(winsh.getChildControl("pane"));
+          //var winpane = winsh.getChildControl("pane");
+          //winpane.set({cursor:"move"});
+          //winsh._activateMoveHandle(winpane);
+
+          winsh.addListener("activate", function(){
+            winshcb.setVisibility("visible");
+          });
+          winsh.addListener("deactivate", function(){
+            winshcb.setVisibility("hidden");
+          });
+
 
           //test - add pure css icon - good test
           var iconlabel = new qx.ui.basic.Label('<i class="icss-diamonds-o" style="font-size:10em; color:black;"></i>').set({rich : true, allowGrowX:true, allowGrowY:true});
@@ -143,7 +159,13 @@ qx.Class.define("sqvdiagram.Application",
          
          //CANVAS:: var txtlabel = new qx.ui.basic.Label(defsh.options.content).set({backgroundColor: "yellow", padding:4, rich:true, textAlign:"center"});
           //var txtnew = new qx.ui.basic.Label(defsh.options.content);
-          var lblatom = new qx.ui.basic.Atom(defsh.options.content).set({backgroundColor: "transparent", rich:true, center:true, padding:4, allowGrowX:true, allowGrowY:true});
+          if (defsh.options.image){
+            var lblatom = new qx.ui.basic.Atom(defsh.options.content, defsh.options.image).set({iconPosition: "top"});
+          }
+          else {
+            var lblatom = new qx.ui.basic.Atom(defsh.options.content);  
+          }
+          lblatom.set({anonymous: true, backgroundColor: "transparent", rich:true, center:true, padding:4, allowGrowX:true, allowGrowY:true});
           lblatom.getChildControl('label').set({textAlign:"center"});
 
           if (defsh.options.shape) {
@@ -259,6 +281,14 @@ qx.Class.define("sqvdiagram.Application",
             connobj.connect(eleA, eleB, defc.properties, defc.options, desktop);
           }
         }
+
+        //straight line test
+        var svgtext = '<svg overflow="visible"><line stroke-width="3px" stroke="blue" x1="300" y1="600" x2="500" y2="100" id="mySVG"/></svg>';      
+        var labelline = new qx.ui.basic.Label(svgtext).set({rich: true});
+        var lblelem = labelline.getContentElement();
+        lblelem.setAttribute("overflow", "visible");
+        lblelem.setStyle("overflow", "visible");
+        //desktop.add(labelline);
       });
 
       //var rmtest = qx.util.ResourceManager.getInstance();

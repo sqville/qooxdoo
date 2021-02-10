@@ -14,6 +14,49 @@ qx.Theme.define("sqvdiagram.theme.Decoration",
 
   decorations :
   {
+    "shape" :
+    {
+      style :
+      {
+        width : 0,
+        color : "transparent",
+        shadowLength : 0,
+        shadowBlurRadius : 0,
+        shadowColor : "transparent",
+        backgroundColor : "background",
+        radius: 0
+      }
+    },
+
+    "shape-active" :
+    {
+      style :
+      {
+        width : 1,
+        color : "window-border",
+        backgroundColor : "background",
+        radius: 3
+      }
+    },
+
+    "shape-caption" : {
+      style :
+      {
+        radius: 0,
+        color: "transparent",
+        widthBottom: 0
+      }
+    },
+
+    "shape-caption-active" : {
+      style :
+      {
+        radius: [3, 3, 0, 0],
+        color: "window-border",
+        widthBottom: 1
+      }
+    },
+    
     "circle-pill" :
     {
       style :

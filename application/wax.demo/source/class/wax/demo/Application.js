@@ -6,8 +6,6 @@
 
    Authors: Chris Eskew (sqville) chris.eskew@sqville.com
 
-   Attribution: noun_honey_2576471.svg - Created by styleku, from the Noun Project
-
 ************************************************************************ */
 
 /**
@@ -30,8 +28,7 @@ qx.Class.define("wax.demo.Application",
     demoMode :
     {
       check : ["desktop", "mobile"],
-      init : "desktop",
-      apply : "_applyDemoMode"
+      init : "desktop"
     }
   },
 
@@ -69,9 +66,9 @@ qx.Class.define("wax.demo.Application",
         qx.log.appender.Console;
       }
       
-      // >>> START of Base Scaffolding >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-      // >>> Base Scaffolding are objects common to all Wax - Franklin based apps  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-      // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+      // *** START of Base Scaffolding **************************************************************************
+      // *** Base Scaffolding are objects common to all Wax - Franklin based apps  ******************************
+      // ********************************************************************************************************
 
       // App's Root
       var approot = this.getRoot();
@@ -170,8 +167,9 @@ qx.Class.define("wax.demo.Application",
       profilemenu.add(logoutmenubutton);
       profilemenubutton.setMenu(profilemenu);
   
-      var atmlogocurrentpage = new qx.ui.basic.Atom("wax","wax/demo/noun_honey_2576471.svg").set({font: "hym-app-header", gap: 0, padding: 0, visibility: "hidden"}); // paddingLeft: 35
-      atmlogocurrentpage.getChildControl("icon").set({ width: 48, height: 48 });
+      //noun_honey_2576471.svg 48x48
+      var atmlogocurrentpage = new qx.ui.basic.Atom("wax","wax/demo/Wax_demo_logo.png").set({font: "hym-app-header", gap: 10, padding: 0, visibility: "hidden"}); // paddingLeft: 35
+      atmlogocurrentpage.getChildControl("icon").set({ scale: true, width: 48, height: 38 });
 
       mainmenupart.add(mainmenubtnbutton);
       profilepart.add(profilemenubutton);
@@ -187,7 +185,7 @@ qx.Class.define("wax.demo.Application",
       // mobile demo mode
       appcompdock.add(southbox, {edge: "south"});
 
-      // *** END of Base Scaffolding ************************************************************************************************
+      // *** END of Base Scaffolding **********************************************************************
 
       // Add some simple ease in animation to the app's blocker
       var fadeinb = {duration: 300, timing: "ease", keyFrames : {
@@ -204,12 +202,12 @@ qx.Class.define("wax.demo.Application",
 
 
 
-      // >>> Populate THE STACK >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+      // *** Populate THE STACK *********************************************************************************
       // Four page stack EXAMPLE
        // Dashboard Page with Flow layout
        // Overview Page with links to a Detail Page
        // Table to List Page - shows how the Table Widget converts to a List Widget for smaller screens
-      // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+      // ********************************************************************************************************
       var dashboardpage = new qx.ui.container.Composite().set({padding: 20});
       var overviewpage = new qx.ui.container.Composite(new qx.ui.layout.VBox(20)).set({padding: 20});
       var gallerypage = new qx.ui.container.Composite(new qx.ui.layout.VBox(20)).set({padding: 20});
@@ -490,16 +488,33 @@ qx.Class.define("wax.demo.Application",
       //create About Wax popup window
       var winAboutWax = this.__createDetailWindow();
 
-      winAboutWax.set({caption: "About Wax"});
-      winAboutWax.add(new qx.ui.basic.Atom("This is what i will say about wax.","wax/demo/ville_Wax.png").set({iconPosition: "top"}));
-      var btnClosewinAbout = new qx.ui.form.Button("Close Window");
-      winAboutWax.add(new qx.ui.core.Spacer(30, 20), {flex: 1});
+      winAboutWax.getLayout().set({spacing: 20});
+      winAboutWax.set({caption: "About Wax", contentPadding: 24, status: "Github repo coming soon"});
+      var txtaboutwax = "Wax aims to be a rapid application development and prototyping tool/system. There's a spectrum of rapid-app-dev tools (or low-code tools) - Outsystems, Appian and Ionic on the high-end, Foundation, Gatsbyjs and SemanticUI on the other. Wax is currently not yet on this spectrum, but it does have an approach and supporting assets to begin the process of becoming a highly effective and useful app-dev/app-prototyping asset.<br><br><br>";
+      txtaboutwax += "<span style='font-size: 16px;'>THE APPROACH (so far):</span><br><br>";
+      txtaboutwax += "<b>Build Qooxdoo skeletons (and lots of them) that function on multiple devices or use case scenarios.</b> A typical use case - After meeting with the client and gathering initial requirements, the prototype developer generates an application using a skeleton (chosen from a long list of skeletons) that best meets the initial requirements. Just like website templates found on the web, Qooxdoo skeletons would encompass enough functionality to help produce a high fidelity prototype in a matter of a few days. There is the potential that a skeleton could also include mock data (json) and non-Qooxdoo scripts to set up a cloud backend (not yet proven out). Skeletons could even include non-Qooxdoo templates for native mobile frameworks such as React Native, Flutter and Felgo (easy to do since skeleton templates are just static files with mustache-like tags).<br><br>";
+      txtaboutwax += "<b>Cut and paste components from a well-stocked and possibly specially-tailored demo browser application.</b> Just as we do today, we cut and paste code from examples into our apps. Properly constructed skeletons and documented demos could facilitate the rapid integration of components into any application (not yet proven out). Wax skeletons, and resulting applications would be divided out logically into three areas: Scaffolding, Wiring and Appearance. Scaffolding includes object creation, placement and initial configuration. Wiring involves application flow (mostly via event listener creation and assignment). Appearance is simple look and feel via theming and animations. Skeletons would include an appropriate amount of Appearance and animation code, but when the goal is to rapidly produce a high fidelity prototype Scaffolding and Wiring would be the top focus.<br><br>";
+      txtaboutwax += "<b>Use other frameworks for native mobile applications, and sync changes made in the main Qooxdoo app with the produced (from a skeleton) native mobile framework project.</b> Converting Qooxdoo produced code to React Native code, for example, is relatively easy. Object hierarchy is taken from getObjectRegistry method of the Application (taken from Inspector application). UI objects and their properties can be easily mapped and organized (proven out to a small degree). The difficult part is how to best get the changes to (and from) the native mobile project. Using qooxdoo compiler would be ideal, but the compiler does not have access to the apps object hierarchy. The approach Wax would take is to mimic the manual means of producing code. The manual means goes something like this: Include InspectorModel.js file in a project. Add a control (Button) to execute the reading of the ObjectRegistry and translation to the target framework. Write the translation to the console (or a TextArea object). Cut and paste resulting code to the other project.  A more automated approach would be to include an Electronjs project/app in the skeleton for the user to run at any given time. Electronjs would then sync the resulting translation to the target native mobile project. This Electronjs, automated approach has not yet been proven out.<br><br><br>";
+      txtaboutwax += "<span style='font-size: 16px;'>CONCLUSION:</span><br><br>";
+      txtaboutwax += "Is Wax, or even the concept of Wax, a worthwhile endeavor? Can the needed productivity gains be met in order to call itself a rapid app-dev tool? Is the noted approach the right way forward? It completely leaves out any type of changes being made, or needed, to qooxdoo compiler. Red flag, or just using the simplest approach is the best approach, approach? This is all a head-scratcher for sure. Too many unknowns without enough time. Welcome to software solution development :-)<br><br><br>";
+      txtaboutwax += "<span style='font-size: 16px;'>SPECIAL NOTE:</span><br><br>";
+      txtaboutwax += "Skeletons and the demo browser are not new concepts to Qooxdoo. These features have been around since the beginning. The purpose of this writeup is to convey good-intent, thoughts and ideas on how to improve peoples work lives, and not meant to be critical or take credit for anything in anyway. The past and current qooxdoo core team have done, and are doing, phenomenal work. My thanks go out to them for making me look better than I really am - Cheers.";
+      //var aboutbox = new qx.ui.container.Composite(new qx.ui.layout.VBox(10));
+      var aboutscroll = new qx.ui.container.Scroll().set({ allowStretchY: true, padding: 0, margin: 0, contentPadding: [0,0,0,0]});
+      var waxatom = new qx.ui.basic.Atom(txtaboutwax,"wax/demo/ville_Wax.png").set({rich: true, iconPosition: "top", gap: 30, paddingTop: 30});
+      waxatom.getChildControl("icon").set({scale: true, width: 300, height: 106});
+      waxatom.getChildControl("label").set({wrap: true});
+      aboutscroll.add(waxatom);
+
+      winAboutWax.add(aboutscroll, {flex:1});
+      var btnClosewinAbout = new qx.ui.form.Button("Close Window").set({maxWidth: 300, alignX: "center"});
+      //winAboutWax.add(new qx.ui.core.Spacer(30, 20), {flex: 1});
       winAboutWax.add(btnClosewinAbout);
-      winAboutWax.addListener("execute", function(e) {
+      /*winAboutWax.addListener("execute", function(e) {
         winAboutWax.restore();
         winAboutWax.center();
         winAboutWax.show();
-      }, this);
+      }, this);*/
       btnClosewinAbout.addListener("execute", function(e) {
         winAboutWax.close();
       }, this);
@@ -512,12 +527,14 @@ qx.Class.define("wax.demo.Application",
 
       btnAbout.addListener("execute", function(e) {
         winAboutWax.restore();
+        winAboutWax.maximize();
         winAboutWax.center();
         winAboutWax.show();
       }, this);
 
       aboutmenubutton1.addListener("execute", function(e) {
         winAboutWax.restore();
+        winAboutWax.maximize();
         winAboutWax.center();
         winAboutWax.show();
       }, this);
@@ -537,9 +554,9 @@ qx.Class.define("wax.demo.Application",
       // *** END of THE STACK ****************************************************************************************
 
       
-      // >>> Populate the Main Menu and Popup Main Menu with content >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+      // *** Populate the Main Menu and Popup Main Menu with content *************************************************
       // Create Menu Buttons that will navigate the user through THE STACK Pages 
-      // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    
       // Populate westBox with content
       var atmleftnavheader = new qx.ui.basic.Atom("Wax Demo", "wax/demo/Wax_demo_logo.png").set({appearance: "header-atom", anonymous: true, focusable: false, selectable: false });
       atmleftnavheader.getChildControl("icon").set({ scale : true });
@@ -912,22 +929,7 @@ qx.Class.define("wax.demo.Application",
     /***********************************************************
       PROPERTY APPLIES
     ************************************************************/
-    _applyDemoMode : function(value, old)
-    {
-      if (value === "mobile") {
-        /*
-        show:
-        - southbar
-        - header atom
-        hide
-        - top left menu button
-        - top right menu button
-        */
-       
-      } else {
-        //show desktop stuff
-      }
-    },
+   //none
 
     /**********************************************************
       INTERNAL METHODS

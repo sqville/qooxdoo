@@ -22,26 +22,51 @@ qx.Theme.define("sqvdiagram.theme.Appearance",
 
    "shape" :
    {
-    alias : "window", 
-    
-    style : function(states)
+     style : function(states)
+     {
+      //console.log(states); 
+      return {
+         backgroundColor: "transparent",
+         contentPadding: 0,
+         decorator : states.maximized ? undefined : states.active ? "shape-active" : "shape",
+         icon : states.active ? "sqvdiagram/mouse_drag.svg" : undefined
+       };
+     }
+   },
+
+   "shape/icon" :
+   {
+     style : function(states)
      {
        return {
-         contentPadding : [ 10, 10, 10, 10 ],
-         backgroundColor : "background",
-         decorator : states.maximized ? undefined : states.active ? "window-active" : "window"
+         padding: [5,0,0,5] 
        };
      }
    },
 
    "shape/captionbar" :
+   {
+     style : function(states)
+     {
+      //console.log(states); 
+      var active = states.active && !states.disabled;
+       return {
+        backgroundColor: active ? "background" : "transparent",
+        decorator: active ? "shape-caption-active" : "shape-caption"
+       };
+     }
+   },
+
+   "shape/pane" :
+   {
+    style : function(states)
     {
-      style : function(states)
-      {
-        return {
-          cursor : "move"
-        };
-      }
+      return {
+        backgroundColor: "background",
+        padding: 0
+      };
     }
+   }
+
   }
 });

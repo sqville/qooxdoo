@@ -225,7 +225,7 @@ qx.Class.define("sqvdiagram.SimpleConnect",
         this._positionConnection(connection);
 
         // Position end point
-        this._positionEndPoint();
+        //this._positionEndPoint();
 
         elementA.setAlwaysOnTop(true);
         elementB.setAlwaysOnTop(true);
@@ -464,8 +464,8 @@ _positionConnection : function(connection)
 
         // Position connection.
         this._positionConnection(conn);
-        this._wendarrow = this._wline3.getUserData("endarrow");
-        this._positionEndPoint();
+        //this._wendarrow = this._wline3.getUserData("endarrow");
+        //this._positionEndPoint();
       }
     },
 
