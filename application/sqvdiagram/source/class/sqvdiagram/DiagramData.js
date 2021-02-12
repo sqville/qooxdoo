@@ -5,12 +5,127 @@ qx.Class.define("sqvdiagram.DiagramData",
   statics :
   {
     DIAGRAMS : {
-        NetworkDiagram : {
+      BasicFlowchart : {
+        "shapes" : [
+          {
+            id : 1,
+            left : 400,
+            top : 100,
+            properties : {},
+            options : {
+              content : 'Start',
+              shape : "circle-pill"
+            }
+          },
+          {
+            id : 2,
+            left : 400,
+            top : 250,
+            properties : {},
+            options : {
+              content : 'Step 1',
+              shape : "square-rectangle-sharp"
+            }
+          },
+          {
+            id : 3,
+            left : 400,
+            top : 420,
+            properties : {},
+            options : {
+              content : 'Decision',
+              shape : "diamond"
+            }
+          },
+          {
+            id : 4,
+            left : 600,
+            top : 420,
+            properties : {},
+            options : {
+              content : 'Step 2',
+              shape : "square-rectangle-sharp"
+            }
+          },
+          {
+            id : 5,
+            left : 400,
+            top : 600,
+            properties : {},
+            options : {
+              content : 'End',
+              shape : "circle-pill"
+            }
+          },
+          {
+            id : 6,
+            left : 800,
+            top : 500,
+            properties : {visibility: "hidden"},
+            options : {
+              content : 'label'
+            }
+          }
+        ],
+        "connections" : [
+          {
+            elementA : 1,
+            elementB : 2,
+            properties : {backgroundColor : "gray"},
+            options : {
+              anchorA: "vertical", 
+              anchorB : "vertical",
+              direction : "AtoB"
+            }
+          },
+          {
+            elementA : 2,
+            elementB : 3,
+            properties : {backgroundColor : "gray"},
+            options : {
+              anchorA: "vertical", 
+              anchorB : "vertical",
+              direction : "AtoB"
+            }
+          },
+          {
+            elementA : 3,
+            elementB : 4,
+            properties : {backgroundColor : "gray"},
+            options : {
+              anchorA: "horizontal", 
+              anchorB : "horizontal",
+              direction : "AtoB"
+            }
+          },
+          {
+            elementA : 4,
+            elementB : 2,
+            properties : {backgroundColor : "gray"},
+            options : {
+              anchorA: "vertical", 
+              anchorB : "horizontal",
+              direction : "AtoB"
+            }
+          },
+          {
+            elementA : 3,
+            elementB : 5,
+            properties : {backgroundColor : "gray"},
+            options : {
+              anchorA: "vertical", 
+              anchorB : "vertical",
+              direction : "AtoB"
+            }
+          }
+        ]
+      },
+      NetworkDiagram : {
             "shapes" : [
               {
                 id : 1,
                 left : 70,
-                top : 64,
+                top : 100,
                 properties : {},
                 options : {
                   content : 'Server',
@@ -39,8 +154,8 @@ qx.Class.define("sqvdiagram.DiagramData",
               },
               {
                 id : 4,
-                left : 710,
-                top : 100,
+                left : 690,
+                top : 130,
                 properties : {},
                 options : {
                   content : "ISP",
@@ -93,7 +208,7 @@ qx.Class.define("sqvdiagram.DiagramData",
                 top : 400,
                 properties : {},
                 options : {
-                  content : "This is a free floating label"
+                  content : "<b>A simple network diagram</b>"
                 }
               }
             ],

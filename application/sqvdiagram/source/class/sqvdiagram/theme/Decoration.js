@@ -18,11 +18,8 @@ qx.Theme.define("sqvdiagram.theme.Decoration",
     {
       style :
       {
-        width : 0,
+        width : 1,
         color : "transparent",
-        shadowLength : 0,
-        shadowBlurRadius : 0,
-        shadowColor : "transparent",
         backgroundColor : "background",
         radius: 0
       }
@@ -52,8 +49,7 @@ qx.Theme.define("sqvdiagram.theme.Decoration",
       style :
       {
         radius: [3, 3, 0, 0],
-        color: "window-border",
-        widthBottom: 1
+        color: "window-border"
       }
     },
     
@@ -105,6 +101,47 @@ qx.Theme.define("sqvdiagram.theme.Decoration",
         style : ["solid",null,"solid","solid"],
         width : [8.5,0,8.5,8]
       }
+    },
+
+    "dark-arrow-right" :
+    {
+      style :
+      {
+        color : ["transparent",null,"transparent", "black"],
+        style : ["solid",null,"solid","solid"],
+        width : [10.5,0,10.5,24]
+      }
+    },
+
+    "dark-arrow-up" :
+    {
+      style :
+      {
+        color : [null,"transparent","black","transparent"],
+        style : [null,"solid","solid","solid"],
+        width : [0,10.5,24,10.5]
+      }
+    },
+
+    "dark-arrow-down" :
+    {
+      style :
+      {
+        color : ["black","transparent",null,"transparent"],
+        style : ["solid", "solid",null,"solid"],
+        width : [24,10.5,0,10.5]
+      }
+    },
+
+    "dark-arrow-left" :
+    {
+      style :
+      {
+        color : ["transparent","black","transparent",null],
+        style : ["solid","solid","solid",null],
+        width : [10.5,24,10.5,0]
+      }
     }
+    
   }
 });

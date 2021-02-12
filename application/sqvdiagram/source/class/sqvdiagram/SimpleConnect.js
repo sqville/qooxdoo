@@ -234,6 +234,25 @@ qx.Class.define("sqvdiagram.SimpleConnect",
         wline2.maximize();
         wline3.maximize();
 
+        //direction arrow test
+        /*var directionarrow = new qx.ui.popup.Popup(new qx.ui.layout.Grow).set({backgroundColor: properties.backgroundColor, anonymous: true, width: 8, height: 8, placementModeX: "direct", placementModeY: "direct"});
+        directionarrow.setDecorator("dark-arrow-right");
+        //this._wendarrow.setOffsetLeft(-3);
+        directionarrow.setPosition("left-middle");
+        directionarrow.setAutoHide(false);
+        directionarrow.placeToWidget(wline1, true);
+        directionarrow.show();*/
+
+        //wline1.setBackgroundColor("red");
+        //wline2.setBackgroundColor("blue");
+        //wline3.setBackgroundColor("green");
+
+        //var arrowimage = new qx.ui.basic.Image("sqvdiagram/arrow_right.svg");
+        //wline3.getContentElement().setStyles({"overflowX": "visible", "overflowY": "visible"});
+        //wline3.getChildControl("pane").getContentElement().setStyles({"overflowX": "visible", "overflowY": "visible"});
+        //arrowimage.getContentElement().setStyles({"overflowX": "visible", "overflowY": "visible"});
+        //wline3.setLayout(new qx.ui.layout.VBox());
+        //wline3.add(arrowimage);
 
         // Return result.
         return connection.id;
@@ -248,24 +267,75 @@ _positionConnection : function(connection)
 {
   //console.log(connection.elementB.getBounds());
   
-  // Calculate the positions of the element's center.
+  // Calculate the positions of the element's center. 
+  //*** REMOVE LATER the 30 offset for the window captionbar height (+30) ****
+
   var posA = this._posA = connection.elementA.getBounds();
   var pAleft = parseInt(posA.left, 10) + parseInt(posA.width/2, 10);
-  var pAtop = parseInt(posA.top, 10) + parseInt(posA.height/2, 10);
+  var pAtop = parseInt(posA.top, 10) + parseInt((posA.height+30)/2, 10);
 
   var posB = this._posB = connection.elementB.getBounds();
   var pBleft = parseInt(posB.left, 10) + parseInt(posB.width/2, 10);
-  var pBtop = parseInt(posB.top, 10) + parseInt(posB.height/2, 10);
+  var pBtop = parseInt(posB.top, 10) + parseInt((posB.height+30)/2, 10);
 
   // Verify if the elements are aligned in a horizontal or vertical line.
   if(pAleft == pBleft || pAtop == pBtop) {
     // Verify if the line must be vertical or horizonal.;
     if(pAleft == pBleft) {
-        // Vertical line.
+        // VERTICAL LINE
         this._positionVerticalLine(this._wline1, pAleft, pAtop, pBleft, pBtop, connection.radius, connection.roundedCorners);
-    } else {
-        // Horizontal line.
+        //console.log(connection);
+        //direction arrow (UP or DOWN)
+        if (connection.options.direction) {
+          var direction = connection.options.direction;
+          var directionarrow = new qx.ui.popup.Popup(new qx.ui.layout.Grow()).set({anonymous: true, width: 8, height: 8, placementModeX: "direct", placementModeY: "direct"});
+          if (pAtop < pBtop && direction == "AtoB")
+            directionarrow.setDecorator("dark-arrow-down");
+          else if (pAtop < pBtop && direction == "BtoA")
+            directionarrow.setDecorator("dark-arrow-up");
+          else if (pAtop > pBtop && direction == "AtoB")
+            directionarrow.setDecorator("dark-arrow-up");
+          else if (pAtop > pBtop && direction == "BtoA")
+            directionarrow.setDecorator("dark-arrow-down");
+        
+          //directionarrow.resetOffset();
+          directionarrow.setOffsetLeft(-12);
+          directionarrow.setPosition("right-middle");
+          directionarrow.setAutoHide(false);
+          directionarrow.placeToWidget(this._wline1, true);
+          directionarrow.show();
+          // if direction = "both" then UPDOWN ARROW
+          // else if pAtop < pBtop and direction = "AtoB" then DOWN ARROW (left-middle with offset)
+          // else if pAtop > pBtop and direction = "AtoB" then UP ARROW
+          // else if pAtop < pBtop and direction = "BtoA" then UP ARROW
+          // else if pAtop > pBtop and direction = "BtoA" then DOWN ARROW
+        }
+        
+      } else {
+        // HORIZONTAL LINE
         this._positionHorizontalLine(this._wline1, pAleft, pAtop, pBleft, pBtop, connection.radius, connection.roundedCorners);
+
+        //direction arrow (LEFT or RIGHT)
+        if (connection.options.direction) {
+          var direction = connection.options.direction;
+          var directionarrow = new qx.ui.popup.Popup(new qx.ui.layout.Grow()).set({anonymous: true, width: 8, height: 8, placementModeX: "direct", placementModeY: "direct"});
+          if (pAleft < pBleft && direction == "AtoB")
+            directionarrow.setDecorator("dark-arrow-right");
+          else if (pAleft < pBleft && direction == "BtoA")
+            directionarrow.setDecorator("dark-arrow-left");
+          else if (pAleft > pBleft && direction == "AtoB")
+            directionarrow.setDecorator("dark-arrow-left");
+          else if (pAleft > pBleft && direction == "BtoA")
+            directionarrow.setDecorator("dark-arrow-right");
+
+          directionarrow.resetOffset();
+          directionarrow.setOffsetTop(-12);
+          directionarrow.setPosition("bottom-center");
+          directionarrow.setAutoHide(false);
+          directionarrow.placeToWidget(this._wline1, true);
+          directionarrow.show();
+        }
+        
     }
     this._wline2.setUserBounds(pBleft, pBtop, 2, 2);
     this._wline3.setUserBounds(pBleft, pBtop, 2, 2);
@@ -481,6 +551,7 @@ _positionConnection : function(connection)
       connection.radius = 3;
       connection.anchorA = (options != null && options.anchorA != null && (options.anchorA == 'vertical' || options.anchorA == 'horizontal'))? options.anchorA : 'horizontal';
       connection.anchorB = (options != null && options.anchorB != null && (options.anchorB == 'vertical' || options.anchorB == 'horizontal'))? options.anchorB : 'horizontal';
+      connection.options = options;
       connection.roundedCorners = true;
       return connection;
     }

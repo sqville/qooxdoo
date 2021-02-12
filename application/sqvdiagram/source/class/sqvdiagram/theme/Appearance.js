@@ -28,8 +28,8 @@ qx.Theme.define("sqvdiagram.theme.Appearance",
       return {
          backgroundColor: "transparent",
          contentPadding: 0,
-         decorator : states.maximized ? undefined : states.active ? "shape-active" : "shape",
-         icon : states.active ? "sqvdiagram/mouse_drag.svg" : undefined
+         decorator : states.active && states.focused ? "shape-active" : "shape",
+         icon : states.active && states.focused ? "sqvdiagram/mouse_drag.svg" : undefined
        };
      }
    },
@@ -49,7 +49,7 @@ qx.Theme.define("sqvdiagram.theme.Appearance",
      style : function(states)
      {
       //console.log(states); 
-      var active = states.active && !states.disabled;
+      var active = states.active && states.focused && !states.disabled;
        return {
         backgroundColor: active ? "background" : "transparent",
         decorator: active ? "shape-caption-active" : "shape-caption"

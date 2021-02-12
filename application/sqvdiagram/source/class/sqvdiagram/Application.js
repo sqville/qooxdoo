@@ -62,8 +62,9 @@ qx.Class.define("sqvdiagram.Application",
 
       doc.add(desktop, {edge:0});
 
-      //var diagramdata = sqvdiagram.DiagramData.DIAGRAMS["diagramdata_old"];
-      //var diagramdata = sqvdiagram.DiagramData.DIAGRAMS["GovernmentStructureOfTexas"];
+      //Diagram data 
+      // BasicFlowchart
+      // NetworkDiagram
       var diagramdata = sqvdiagram.DiagramData.DIAGRAMS["NetworkDiagram"];
 
      
@@ -81,6 +82,7 @@ qx.Class.define("sqvdiagram.Application",
           win.moveTo(def.left, def.top);
           desktop.add(win);
           win.open();
+          
         }
       }
 
@@ -179,15 +181,25 @@ qx.Class.define("sqvdiagram.Application",
             })*/
             if (defsh.options.shape == "diamond"){
               //winsh.add(iconlabel);
+              winsh.setLayout(new qx.ui.layout.Canvas());
+              winsh.set({width: 120, height: 146});
+              //shape.set({allowGrowX: false, allowGrowY: false, width: 40, height: 40});
               shape.getContentElement().setStyles({"transform" : "rotate(45deg)"});
-              shape.setMargin(30);
-              winsh.add(shape);
+              //shape.setMargin(30);
+              //winsh.add(shape);
+              //winsh.add(shape, {width: "70%", height: "70%"});
+              //winsh.add(shape, {top: 20, left: 20, bottom: 20, right: 20});
+              winsh.add(shape, {top: "15%", left: "15%", bottom: "15%", right: "15%"});
+              winsh.add(lblatom, {width: "100%", height: "100%"});
             } else {
               //GROW:: 
               winsh.add(shape);
+              winsh.add(lblatom);
               //CANVAS:: winsh.add(shape, {top: 0, left: 0, bottom: 0, right: 0});
             }
               
+          } else {
+            winsh.add(lblatom);
           }
 
           //create Vbox container for the label
@@ -195,7 +207,7 @@ qx.Class.define("sqvdiagram.Application",
           //lblcontainer.add(txtlabel);
           //winsh.add(lblcontainer);
 
-          winsh.add(lblatom);
+          // winsh.add(lblatom);
           //winsh.add(txtarea);
           //winsh.add(txtlabel);
 
@@ -259,6 +271,7 @@ qx.Class.define("sqvdiagram.Application",
 
           desktop.add(winsh);
           winsh.open();
+          winsh.set(defsh.properties);
         }
       }
 
