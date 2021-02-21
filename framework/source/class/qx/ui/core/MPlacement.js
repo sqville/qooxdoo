@@ -566,11 +566,7 @@ qx.Mixin.define("qx.ui.core.MPlacement",
         // state handling for tooltips e.g.
         this.removeState("placementLeft");
         this.removeState("placementRight");
-        //this.removeState("placementBottom"); //SQ
-        //this.removeState("placementTop"); //SQ
         this.addState(coords.left < result.left ? "placementRight" : "placementLeft");
-
-        //this.addState(coords.top < result.top ? "placementBottom" : "placementTop"); //SQ
 
         this.moveTo(result.left, result.top);
       });
